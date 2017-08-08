@@ -24,10 +24,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //       type: 'restaurant',
 //       key:'AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI'
 //     }
+app.post('/attraction', function(req,res){
+  
+  var searchCity = '';
+
+  req.on('data', function(chunk){
+    searchCity += chunk;
+  })
+
+  req.on('end', function(searchCity){
+
+  })
+
+})
 
 app.get('/search', (req, res) => {
 	console.log(req.query.city);
   // var city = req.query.city;
+
 
   hotel.hotel(req.query, (data) => {
     res.end(JSON.stringify(data))
