@@ -12,6 +12,22 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // UNCOMMENT FOR ANGULAR
 // app.use(express.static(__dirname + '/../angular-client'));
 // app.use(express.static(__dirname + '/../node_modules'));
+app.post('/attraction', function(req,res){
+  
+  var searchCity = '';
+
+  req.on('data', function(chunk){
+    searchCity += chunk;
+  })
+
+  req.on('end', function(searchCity){
+
+
+
+  })
+
+
+})
 
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {
