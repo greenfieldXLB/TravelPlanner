@@ -1,10 +1,11 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
-var items = require('../database-mongo');
+const items = require('../database-mongo');
+const yelp = require('./yelp')
 
-var app = express();
+const app = express();
 
 // UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -13,7 +14,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // app.use(express.static(__dirname + '/../angular-client'));
 // app.use(express.static(__dirname + '/../node_modules'));
 app.post('/attraction', function(req,res){
-  
+
   var searchCity = '';
 
   req.on('data', function(chunk){

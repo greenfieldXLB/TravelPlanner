@@ -19,6 +19,9 @@ class Attraction extends React.Component {
       data: 'San Francisco',
       success: (res) => {
         console.log('city being searched!');
+        //this.setState{
+        //  items: res;
+        //}
       },
       error: function(data) {    
       }
@@ -32,7 +35,7 @@ class Attraction extends React.Component {
       <div>
         <h4> Attraction List </h4>
         There are { props.items.length } items.
-        {props.items.map(item => <Attraction item = {item}/>)}
+        {props.items.map(item => <AttractionItem item = {item}/>)}
       </div>
     )
   }
