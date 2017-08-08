@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+//import Attraction from './components/Attraction';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,9 @@ class App extends React.Component {
     }
   }
 
-
+  componentDidMount(){
+    this.yelpAttrSearch();
+  }
   // componentDidMount() {
   //   $.ajax({
   //     url: '/items',
@@ -43,6 +46,29 @@ class App extends React.Component {
   //     }
   //   });
   // }
+
+  yelpAttrSearch(){
+
+    $.ajax({
+
+      url: '/attraction',
+      type: 'POST',
+      data: 'san francisco, ca',
+      success: (res) => {
+        console.log(res);
+        //write an ajax get request
+
+        console.log('city being searched!');
+        //this.setState{
+        //  items: res;
+        //}
+      },
+      error: function(data) {    
+      }
+
+    })
+  }
+
 
   render () {
     return (

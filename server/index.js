@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
 const items = require('../database-mongo');
-const yelp = require('./yelp')
+const yelp = require('./yelp/yelp')
 
 const app = express();
 
@@ -20,17 +20,20 @@ app.post('/attraction', function(req,res){
   req.on('data', function(chunk){
     searchCity += chunk;
   })
-
-  req.on('end', function(searchCity){
-
-
+  
+  req.on('end', function(){
+    
+    yelp.searchAttr(searchCity, function(){
+      res.sendStatus(200);
+      res.end();
+      console.log('GOT STH for POST!!!')
+    })
 
   })
 
-
 })
 
-app.get('/items', function (req, res) {
+app.get('/attraction', function (req, res) {
   items.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
