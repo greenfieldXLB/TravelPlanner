@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import Attraction from './components/Attraction.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,11 +26,14 @@ class App extends React.Component {
         {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
         {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
-      ]
+      ],
+      attrItems: []
     }
   }
 
-
+  componentDidMount(){
+    this.yelpAttrSearch();
+  }
   // componentDidMount() {
   //   $.ajax({
   //     url: '/items',
@@ -44,10 +48,37 @@ class App extends React.Component {
   //   });
   // }
 
+  yelpAttrSearch(){
+
+    $.ajax({
+
+      url: '/attraction',
+      type: 'POST',
+      data: 'san francisco, ca',
+        success: (res) => {
+          //console.log('RESPONSE: ', res); --Y
+          //console.log(typeof JSON.parse(res));--Y
+          //console.log(Array.isArray(JSON.parse(res))); --Y
+          this.setState({
+            attrItems: JSON.parse(res)
+          });
+        
+        console.log('city being searched!');
+        //console.log(this.state.attrItems);
+      
+      },
+      error: function(data) {    
+      }
+
+    })
+  }
+
+
   render () {
     return (
       <div>
         <h1>Trip Planner</h1>
+        <Attraction attrItems = {this.state.attrItems}/>
       </div>
     )
   }
