@@ -13,6 +13,8 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // UNCOMMENT FOR ANGULAR
 // app.use(express.static(__dirname + '/../angular-client'));
 // app.use(express.static(__dirname + '/../node_modules'));
+var attrResultFromSearch;
+
 app.post('/attraction', function(req,res){
 
   var searchCity = '';
@@ -23,10 +25,13 @@ app.post('/attraction', function(req,res){
   
   req.on('end', function(){
     
-    yelp.searchAttr(searchCity, function(){
-      res.sendStatus(200);
-      res.end();
-      console.log('GOT STH for POST!!!')
+    yelp.searchAttr(searchCity, function(attrResult){
+      //res.sendStatus(200);
+      res.send(200, JSON.stringify(attrResult));
+      //console.log('STRING RESULT: ',JSON.stringify(attrResult)) --Y;
+      //console.log('RESULT DATA: ', attrResult) -- Y;
+      //console.log(Array.isArray(attrResult)) --Y;
+      //console.log('GOT STH for POST!!!') -- Y
     })
 
   })
@@ -34,13 +39,7 @@ app.post('/attraction', function(req,res){
 })
 
 app.get('/attraction', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
+  
 });
 
 app.listen(3000, function() {
