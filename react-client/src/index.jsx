@@ -177,7 +177,6 @@ class App extends React.Component {
   }
 
   handleFlightClick(flight) {
-    console.log(flight);
     var saved = {
       saletotal: flight.saleTotal,
       goingDuration: flight.slice[0].duration,
@@ -192,7 +191,6 @@ class App extends React.Component {
       returnCarrier: flight.slice[1].segment[0].flight.carrier
     };
     this.state.savedChoices[0] = saved;
-    console.log(this.state.savedChoices);
   }
 
 

@@ -1,5 +1,8 @@
-
 bundle.js
+node_modules/
+
+
+>>>>>>> update departure/arrival times and duration
 
 # Logs
 logs
@@ -26,5 +29,3 @@ build/
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
-node_modules/
-bower_components/
