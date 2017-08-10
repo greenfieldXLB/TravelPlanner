@@ -34,9 +34,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/search', (req, res) => {
 	console.log(req.query.city);
-  var city = req.query.city;
-  hotel.hotel(city, (data) => {
-    console.log(data)
+  // var city = req.query.city;
+
+  hotel.hotel(req.query, (data) => {
+    res.end(JSON.stringify(data))
   })
 	// var query = req.query;
 	// request(req.query, (err, res, body) => {
@@ -44,7 +45,6 @@ app.get('/search', (req, res) => {
  //      // console.log(result.results[0].photos)
  //      console.log(body);
 	// })
-	res.end('send from server');
 })
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {

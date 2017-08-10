@@ -1,8 +1,8 @@
 const yelp = require('yelp-fusion');
 const request = require('request');
 
-var hotel = function (city, callback){
-  var attrResult = {};
+var hotel = function (info, callback){
+  var hotels = [];
 
   const clientId = '3u_Cx8hQVNRMC9FqysUUZw';
 
@@ -10,27 +10,28 @@ var hotel = function (city, callback){
 
   const token = yelp.accessToken(clientId, clientSecret)
   .then(response => {
-    //return response.jsonBody.access_token;
-    // console.log('TOKEN ', response.jsonBody.access_token);
     return response.jsonBody.access_token;
   })
   .then((data) => {
-  	// console.log(2222, data)
-  	return yelp.client(data) //object of yelp, string, number
+  	return yelp.client(data) 
   })
   .then(data => {
   	// console.log(data);
    return data.search({
    	term:'hotel',
-    location: city,
-    limit: 1	
+    location: info.city,
+    price: info.price,
+    limit: 4	
   	})
   })
   .then(response => {
-  	console.log(response.jsonBody.businesses[0])
+    callback(response.jsonBody.businesses)
+  })
+  .then(data =>{
+    console.log(1111, data)
   })
   .catch(e => {
-    console.log('ERROR ', e);
+    console.log(e);
   });
 }
 

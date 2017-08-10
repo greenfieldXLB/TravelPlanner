@@ -10,9 +10,22 @@ class Lodging extends React.Component {
   
 
   render () {
+
     return (
       <div>
         <button onClick = {this.props.handleClick}>click me</button>
+        <ul>
+
+        {this.props.hotels.map(hotel => {
+           return (<ul>
+
+                    <li>{hotel.location.address1 + "       " + hotel.price}</li>
+              
+
+
+                  </ul>)
+        })}
+        </ul>
       </div>
     )
   }
