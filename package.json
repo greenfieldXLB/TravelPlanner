@@ -11,10 +11,17 @@
   },
   "scripts": {
     "react-dev": "webpack -d --watch",
+<<<<<<< HEAD
     "server-dev": "nodemon server/index.js",
     "start": "npm run react-dev & npm run server-dev",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register **/*Spec.jsx"
 
+||||||| merged common ancestors
+    "server-dev": "nodemon server/index.js"
+=======
+    "server-dev": "nodemon server/index.js",
+    "start": "npm run react-dev & npm run server-dev" 
+>>>>>>> updating files for heroku
   },
   "dependencies": {
     "body-parser": "^1.17.2",

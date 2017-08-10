@@ -25,7 +25,13 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
+<<<<<<< HEAD:.gitignore
 
+||||||| merged common ancestors
+dist/
+=======
+dist/bundle.js
+>>>>>>> updating files for heroku:.gitignore
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
