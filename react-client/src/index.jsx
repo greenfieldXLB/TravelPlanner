@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import Lodging from './components/Lodging.jsx'
+import Hotel from './components/hotel.jsx'
 // import ListItem from './ListItem.jsx';
 
 
@@ -148,7 +148,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Trip Planner</h1>
-        <Lodging  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
       </div>
     )
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Lodging extends React.Component {
+class Hotel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -33,7 +33,7 @@ class Lodging extends React.Component {
 
           
 
-export default Lodging;
+export default Hotel;
 
 
 

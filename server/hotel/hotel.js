@@ -25,6 +25,7 @@ var hotel = function (info, callback){
   	})
   })
   .then(response => {
+    console.log(response.jsonBody.businesses)
     callback(response.jsonBody.businesses)
   })
   .then(data =>{
