@@ -131,7 +131,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.retrieveFlights();
+    this.retrieveFlights('2017-12-04', '2017-12-06', 'SFO', 'HKG');
 
     // $.ajax({
     //   url: '/items',
@@ -146,8 +146,7 @@ class App extends React.Component {
     // });
   }
 
-  //departureDate, returnDate, depLocation, arrLocation
-  retrieveFlights() {
+  retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
     var apiKey = 'AIzaSyCDCZbj7Ath3p-jwi-ZmpAAEdWBmftH3r8';
     var qpx = new FlightAPI(apiKey);
 
@@ -155,14 +154,14 @@ class App extends React.Component {
         "request": {
             "passengers": { "adultCount": 1 },
             "slice": [{
-                "origin": 'SFO', //airport code
-                "destination": 'HKG', //airport code
-                "date": '2017-12-04' // YYYY-MM-DD
+                "origin": depLocation, //airport code need to translate to this
+                "destination": arrLocation, //airport code
+                "date": departureDate // YYYY-MM-DD
               },
               {
-                "origin": 'HKG',
-                "destination": 'SFO',
-                "date": '2017-12-06' // YYYY-MM-DD
+                "origin": arrLocation,
+                "destination": depLocation,
+                "date": returnDate // YYYY-MM-DD
               }
             ],
             "solutions": 10,
@@ -177,20 +176,22 @@ class App extends React.Component {
   }
 
   handleFlightClick(flight) {
+    var flight1 = flight.slice[0];
+    var flight2 = flight.slice[1];
     var saved = {
       saletotal: flight.saleTotal,
-      goingDuration: flight.slice[0].duration,
-      goingOrigin: flight.slice[0].segment[0].leg[0].origin,
-      goingDestination: flight.slice[0].segment[0].leg[0].destination,
-      goingArrivalTime: flight.slice[0].segment[0].leg[0].arrivalTime,
-      goingCarrier: flight.slice[0].segment[0].flight.carrier,
-      returnDuration: flight.slice[1].duration,
-      returnOrigin: flight.slice[1].segment[0].leg[0].origin,
-      returnDestination: flight.slice[1].segment[0].leg[0].destination,
-      returnArrivalTime: flight.slice[1].segment[0].leg[0].arrivalTime,
-      returnCarrier: flight.slice[1].segment[0].flight.carrier
+      goingDuration: flight1.duration,
+      goingOrigin: flight1.segment[0].leg[0].origin,
+      goingDestination: flight1.segment[0].leg[0].destination,
+      goingArrivalTime: flight1.segment[0].leg[0].arrivalTime,
+      goingCarrier: flight1.segment[0].flight.carrier,
+      returnDuration: flight2.duration,
+      returnOrigin: flight2.segment[0].leg[0].origin,
+      returnDestination: flight2.segment[0].leg[0].destination,
+      returnArrivalTime: flight2.segment[0].leg[0].arrivalTime,
+      returnCarrier: flight2.segment[0].flight.carrier
     };
-    this.state.savedChoices[0] = saved;
+    this.state.savedChoices.push(saved);
   }
 
 
