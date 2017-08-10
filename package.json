@@ -18,8 +18,10 @@
     "express": "^4.15.0",
     "jquery": "^3.1.1",
     "mongoose": "^4.8.6",
+    "nodemon": "^1.11.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "webpack": "^2.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
