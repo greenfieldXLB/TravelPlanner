@@ -19,8 +19,5 @@ module.exports = {
        }
       }
     ]
-  },
-  resolveLoader: {
-        fallback: '/usr/local/lib/node_modules'
   }
 };
