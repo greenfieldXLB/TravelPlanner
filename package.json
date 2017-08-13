@@ -32,10 +32,6 @@
     "react-test-renderer": "^15.6.1",
     "react-test-utils": "0.0.1",
     "request": "^2.81.0",
-<<<<<<< HEAD
-=======
-    "yelp-fusion": "^1.0.3",
->>>>>>> update for heroku
     "babel-cli": "^6.7.5",
     "babel-register": "^6.7.2",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
