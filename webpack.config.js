@@ -8,9 +8,6 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
-  resolveLoader: {
-        fallback: '/usr/local/lib/node_modules'
-  },
   module : {
     loaders : [
       {
