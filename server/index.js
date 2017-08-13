@@ -58,5 +58,5 @@ app.get('/items', function (req, res) {
 
 var port = process.env.PORT;
 app.listen(port, function() {
-  console.log('listening on port 3000!');
+  console.log(`listening on port ${port}`);
 });
