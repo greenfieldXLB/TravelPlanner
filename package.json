@@ -6,7 +6,7 @@
   "main": "index.js",
   "license": "",
   "engines": {
-    "node": "7.10.0",
+    "node": "6.9.5",
     "npm": "5.3.0"
   },
   "scripts": {
