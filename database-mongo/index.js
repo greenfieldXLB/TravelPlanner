@@ -10,6 +10,3 @@ var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:
   });
 var itemSchema = mongoose.Schema({
 });
-
-
-module.exports.selectAll = selectAll;
