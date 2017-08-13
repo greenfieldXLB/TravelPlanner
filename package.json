@@ -12,7 +12,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "npm run server-dev",
+    "start": "npm run server-dev & npm run react-dev",
     "test": "mocha"
   },
   "dependencies": {
@@ -37,7 +37,9 @@
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
-    "webpack": "^2.7.0"
+    "webpack": "^2.7.0",
+    "nodemon": "^1.11.0"
+
   },
   "babel": {
     "presets": [
