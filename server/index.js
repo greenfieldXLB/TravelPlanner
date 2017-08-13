@@ -19,10 +19,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // var places = new GooglePlaces('AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI');
 // places.search({keyword: 'Vermonster'}, function(err, response) {
 //   console.log("search: ", response.results);
- 
+
 //   places.details({reference: response.results[0].reference}, function(err, response) {
 //     console.log("search details: ", response.result.website);
-//     // search details:  http://www.vermonster.com/ 
+//     // search details:  http://www.vermonster.com/
 //   });
 // });
 // var parameters = {
@@ -56,7 +56,7 @@ app.get('/items', function (req, res) {
   });
 });
 
-app.listen(3000, function() {
+var port = process.env.PORT;
+app.listen(port, function() {
   console.log('listening on port 3000!');
 });
- 
