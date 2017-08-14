@@ -8,5 +8,3 @@ var expect = chai.expect;
 //     });
 //   });
 // });
-describe
-expect(this.state.flights.length).to.equal(10);
