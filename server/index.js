@@ -9,7 +9,6 @@ var hotel = require('./hotel/hotel')
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 // var places = new GooglePlaces('AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI');
 // places.search({keyword: 'Vermonster'}, function(err, response) {
 //   console.log("search: ", response.results);

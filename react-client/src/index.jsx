@@ -30,7 +30,8 @@ class App extends React.Component {
         {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
       ],
-      hotels: []
+      hotels: [],
+      airportCodes: {}
     }
   }
 
@@ -109,6 +110,7 @@ class App extends React.Component {
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
+    console.log(depLocation, arrLocation);
     var apiKey = 'AIzaSyCDCZbj7Ath3p-jwi-ZmpAAEdWBmftH3r8';
     var qpx = new FlightAPI(apiKey);
 
@@ -138,7 +140,7 @@ class App extends React.Component {
   }
 
   getAirportCodes(departLoc, arrivalLoc) {
-    var term = 'San Francisco';
+    var context = this;
     var codes = {};
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
@@ -150,21 +152,38 @@ class App extends React.Component {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      codes.departLoc = data.airports[0].iata;
-    });
-    fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
-      headers: {
-        Accept: "application/json",
-        "APC-Auth": "ea0eb61a9e",
-        "APC-Auth-Secret": "4b35787cfc26306"
-      },
-      method: "POST"
+      if (data.airports[0].name.includes('All Airports')) {
+        codes.departLoc = data.airports[1].iata;
+      } else {
+        codes.departLoc = data.airports[0].iata;
+      }
     })
-    .then((resp) => resp.json())
-    .then(function(data) {
-      codes.arrivalLoc = data.airports[0].iata;
+    .then(() => {
+      fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
+        headers: {
+          Accept: "application/json",
+          "APC-Auth": "ea0eb61a9e",
+          "APC-Auth-Secret": "4b35787cfc26306"
+        },
+        method: "POST"
+      })
+      .then((resp) => resp.json())
+      .then(function(data) {
+        if (data.airports[0].name.includes('All Airports')) {
+          codes.arrivalLoc = data.airports[1].iata;
+        } else {
+          codes.arrivalLoc = data.airports[0].iata;
+        }
+      })
+      .then((codes) => {
+        context.setState({
+          airportCodes: codes
+        });
+      })
+      .then(() => {
+        context.retrieveFlights('2017-12-04', '2017-12-06', context.state.airportCodes.departLoc, context.state.airportCodes.arrivalLoc);
+      });
     });
-    return codes;
   }
 
   handleFlightClick(flight) {
