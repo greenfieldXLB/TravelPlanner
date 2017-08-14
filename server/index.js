@@ -1,10 +1,10 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 // var GooglePlaces = require('google-places');
-var items = require('../database-mongo');
-var request = require('request');
-var app = express();
-var hotel = require('./hotel/hotel')
+const items = require('../database-mongo');
+const request = require('request');
+const app = express();
+const hotel = require('./hotel/hotel')
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));

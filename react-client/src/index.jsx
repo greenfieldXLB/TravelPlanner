@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
-var FlightAPI = require('qpx-express');
+import config from '../../config.js';
+const FlightAPI = require('qpx-express');
+
 
 class App extends React.Component {
   constructor(props) {
@@ -21,21 +23,25 @@ class App extends React.Component {
         {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK'},
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK'}
       ],
-      flights: ['flight1', 'flight2', 'flight3', 'flight4', 'flight5'],
-      savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
-        {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
-        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
-        {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
-        {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
-      ],
+      flights: [],
+      savedChoices: [{
+          flights: {},
+          hotel: {},
+          attractions: [],
+          food: [],
+          weather: {}
+      }],
       hotels: [],
       airportCodes: {}
     }
   }
 
-
+  // {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
+  // {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
+  // {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
+  // {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
+  // {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
+  // {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
   handleClick() {
     // console.log('I got clicked')
     // var logResults = (json) => { console.log(11111,json)
@@ -105,13 +111,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getAirportCodes('San Francisco', 'Hong Kong');
-    // this.retrieveFlights('2017-12-04', '2017-12-06', 'SFO', 'HKG');
+    // this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
-    console.log(depLocation, arrLocation);
-    var apiKey = 'AIzaSyCDCZbj7Ath3p-jwi-ZmpAAEdWBmftH3r8';
+    var apiKey = config.flights;
     var qpx = new FlightAPI(apiKey);
 
     var body = {
@@ -121,13 +125,13 @@ class App extends React.Component {
                 "origin": depLocation,
                 "destination": arrLocation,
                 "date": departureDate,
-                "maxStops": 0 // YYYY-MM-DD
+                "maxStops": 0
               },
               {
                 "origin": arrLocation,
                 "destination": depLocation,
-                "date": returnDate,
-                "maxStops": 0 // YYYY-MM-DD
+                "date": returnDate, // YYYY-MM-DD
+                "maxStops": 0
               }
             ],
             "solutions": 10,
@@ -135,7 +139,6 @@ class App extends React.Component {
         };
     var context = this;
     qpx.getInfo(body, function(error, data){
-      console.log(data.trips.tripOption);
       context.setState({
         flights: data.trips.tripOption
       })
@@ -207,7 +210,7 @@ class App extends React.Component {
       returnArrivalTime: flight2.segment[0].leg[0].arrivalTime,
       returnCarrier: flight2.segment[0].flight.carrier
     };
-    this.state.savedChoices.push(saved);
+    this.state.savedChoices[0].flights = saved;
   }
 
   render () {
