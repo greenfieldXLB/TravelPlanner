@@ -105,7 +105,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
+    // this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
