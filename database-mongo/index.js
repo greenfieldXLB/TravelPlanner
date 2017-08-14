@@ -10,3 +10,13 @@ var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:
   });
 var itemSchema = mongoose.Schema({
 });
+
+var db = mongoose.connection;
+
+db.on('error', function() {
+  console.log('mongoose connection error');
+});
+
+db.once('open', function() {
+  console.log('mongoose connected successfully');
+});
