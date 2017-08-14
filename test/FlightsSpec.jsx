@@ -7,12 +7,6 @@ var Flights = require('../react-client/src/components/Flights.jsx');
 
 describe('Flights', function() {
   // var { createRenderer } = React.addons.TestUtils;
-
-  // When testing a React component that renders other nested components,
-  // it's a common practice to "shallow render" the component, or render
-  // only a single level deep. This isolates the component from it's children
-  // See more: https://facebook.github.io/react/docs/test-utils.html#shallow-rendering
-
   it('should be a stateless functional component', function() {
     expect(React.Component.isPrototypeOf(Flights)).to.be.false;
   });

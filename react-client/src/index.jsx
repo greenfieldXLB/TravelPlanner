@@ -101,49 +101,11 @@ class App extends React.Component {
         console.log('error !')
       }
      })
-     // $.ajax({
-     //  url: '/search',
-     //  method: 'GET',
-     //  data: {city: 'San Francisco', price:2 },
-     //  success: (data) => {
-     //     this.setState({
-     //        hotels: this.state.hotels.concat(JSON.parse(data))
-     //      });
-     //  },
-     //  error: (err) => {
-     //    console.log('error !')
-     //  }
-     // })
-     //   $.ajax({
-     //  url: '/search',
-     //  method: 'GET',
-     //  data: {city: 'San Francisco', price:3 },
-     //  success: (data) => {
-     //     this.setState({
-     //        hotels: this.state.hotels.concat(JSON.parse(data))
-     //      });
-     //  },
-     //  error: (err) => {
-     //    console.log('error !')
-     //  }
-     // })
-
   }
 
   componentDidMount() {
-    this.retrieveFlights('2017-12-04', '2017-12-06', 'SFO', 'HKG');
-
-    // $.ajax({
-    //   url: '/items',
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
+    this.getAirportCodes('San Francisco', 'Hong Kong');
+    // this.retrieveFlights('2017-12-04', '2017-12-06', 'SFO', 'HKG');
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
@@ -175,6 +137,34 @@ class App extends React.Component {
     });
   }
 
+  getAirportCodes(departLoc, arrivalLoc) {
+    var term = 'San Francisco';
+    fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
+      headers: {
+        Accept: "application/json",
+        "APC-Auth": "ea0eb61a9e",
+        "APC-Auth-Secret": "4b35787cfc26306"
+      },
+      method: "POST"
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log(data);
+    });
+    fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
+      headers: {
+        Accept: "application/json",
+        "APC-Auth": "ea0eb61a9e",
+        "APC-Auth-Secret": "4b35787cfc26306"
+      },
+      method: "POST"
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log(data);
+    });
+  }
+
   handleFlightClick(flight) {
     var flight1 = flight.slice[0];
     var flight2 = flight.slice[1];
@@ -193,7 +183,6 @@ class App extends React.Component {
     };
     this.state.savedChoices.push(saved);
   }
-
 
   render () {
     return (
