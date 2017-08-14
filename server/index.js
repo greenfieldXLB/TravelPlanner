@@ -1,28 +1,22 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 // var GooglePlaces = require('google-places');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
 var items = require('../database-mongo');
 var request = require('request');
 var app = express();
 var hotel = require('./hotel/hotel')
 
-// UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
 // var places = new GooglePlaces('AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI');
 // places.search({keyword: 'Vermonster'}, function(err, response) {
 //   console.log("search: ", response.results);
- 
+
 //   places.details({reference: response.results[0].reference}, function(err, response) {
 //     console.log("search details: ", response.result.website);
-//     // search details:  http://www.vermonster.com/ 
+//     // search details:  http://www.vermonster.com/
 //   });
 // });
 // var parameters = {
@@ -56,7 +50,7 @@ app.get('/items', function (req, res) {
   });
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+var port = process.env.PORT;
+app.listen(port, function() {
+  console.log(`listening on port ${port}`);
 });
- 

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
-// import ListItem from './ListItem.jsx';
 
 
 class App extends React.Component {
@@ -32,8 +31,8 @@ class App extends React.Component {
       hotels: []
     }
   }
-  
-  
+
+
   handleClick() {
     // console.log('I got clicked')
     // var logResults = (json) => { console.log(11111,json)
