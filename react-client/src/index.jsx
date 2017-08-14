@@ -139,6 +139,7 @@ class App extends React.Component {
 
   getAirportCodes(departLoc, arrivalLoc) {
     var term = 'San Francisco';
+    var codes = {};
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
@@ -149,7 +150,7 @@ class App extends React.Component {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log(data);
+      codes.departLoc = data.airports[0].iata;
     });
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
       headers: {
@@ -161,8 +162,9 @@ class App extends React.Component {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log(data);
+      codes.arrivalLoc = data.airports[0].iata;
     });
+    return codes;
   }
 
   handleFlightClick(flight) {
