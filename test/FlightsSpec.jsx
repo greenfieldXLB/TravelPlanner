@@ -3,50 +3,28 @@ var assert = require('assert');
 var chai = require('chai');
 var expect = chai.expect;
 var ReactTestUtils = require('react-dom/test-utils');
+import TestUtils from "react-addons-test-utils";
+var ShallowRenderer = require('react-test-renderer/shallow');
 var Flights = require('../react-client/src/components/Flights.jsx');
+var Flight = require('../react-client/src/components/Flight.jsx');
+var fakeFlights = require('./fakeData.js');
+
 
 describe('Flights', function() {
-  // var { createRenderer } = React.addons.TestUtils;
   it('should be a stateless functional component', function() {
     expect(React.Component.isPrototypeOf(Flights)).to.be.false;
   });
-
-//   it('should render one `VideoListEntry` when given one video', function() {
-//     var shallowRenderer = createRenderer();
-//
-//     var oneFakeVideo = window.fakeVideoData.slice(-1);
-//     shallowRenderer.render(
-//       <VideoList videos={oneFakeVideo} />
-//     );
-//
-//     var videoList = shallowRenderer.getRenderOutput();
-//     expect(videoList.props.children).to.have.length(1);
-//     videoList.props.children.forEach(child => expect(child.type).to.equal(VideoListEntry));
-//   });
-//
-//   it('should render three `VideoListEntry` when given three videos', function() {
-//     var shallowRenderer = createRenderer();
-//
-//     var threeFakeVideos = window.fakeVideoData.slice(-3);
-//     shallowRenderer.render(
-//       <VideoList videos={threeFakeVideos} />
-//     );
-//
-//     var videoList = shallowRenderer.getRenderOutput();
-//     expect(videoList.props.children).to.have.length(3);
-//     videoList.props.children.forEach(child => expect(child.type).to.equal(VideoListEntry));
-//   });
-//
-//   it('should render five `VideoListEntry` when given five videos', function() {
-//     var shallowRenderer = createRenderer();
-//
-//     var fiveFakeVideos = window.fakeVideoData.slice(-5);
-//     shallowRenderer.render(
-//       <VideoList videos={fiveFakeVideos} />
-//     );
-//
-//     var videoList = shallowRenderer.getRenderOutput();
-//     expect(videoList.props.children).to.have.length(5);
-//     videoList.props.children.forEach(child => expect(child.type).to.equal(VideoListEntry));
-//   });
+  // it('should render one `Flight` when given one flight', function() {
+  //   var renderer = TestUtils.createRenderer();
+  //
+  //   var oneFakeFlight = fakeFlights.fakeFlight;
+  //   var shallow = new ShallowRenderer();
+  //   shallow.render(
+  //     <Flight flight={oneFakeFlight} />
+  //   );
+  //
+  //   var flights = shallow.getRenderOutput();
+  //   expect(flights.props.children).to.have.length(1);
+  //   flights.props.children.forEach(child => expect(child.type).to.equal(flight));
+  // });
 });

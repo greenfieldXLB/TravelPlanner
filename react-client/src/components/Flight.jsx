@@ -15,7 +15,7 @@ const Flight = (props) => {
   }
 
   return (
-    <div onClick={() => (props.handleFlightClick(props.flight))}>
+    <div onClick={(e) => (props.handleFlightClick(props.flight, e))}>
       <div>
         <span>{props.flight.slice[0].segment[0].flight.carrier}</span>
         <span> {props.flight.slice[0].segment[0].leg[0].origin} - {props.flight.slice[0].segment[0].leg[0].destination}</span>

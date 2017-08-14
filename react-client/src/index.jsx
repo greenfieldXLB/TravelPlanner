@@ -118,14 +118,16 @@ class App extends React.Component {
         "request": {
             "passengers": { "adultCount": 1 },
             "slice": [{
-                "origin": depLocation, //airport code need to translate to this
-                "destination": arrLocation, //airport code
-                "date": departureDate // YYYY-MM-DD
+                "origin": depLocation,
+                "destination": arrLocation,
+                "date": departureDate,
+                "maxStops": 0 // YYYY-MM-DD
               },
               {
                 "origin": arrLocation,
                 "destination": depLocation,
-                "date": returnDate // YYYY-MM-DD
+                "date": returnDate,
+                "maxStops": 0 // YYYY-MM-DD
               }
             ],
             "solutions": 10,
@@ -133,6 +135,7 @@ class App extends React.Component {
         };
     var context = this;
     qpx.getInfo(body, function(error, data){
+      console.log(data.trips.tripOption);
       context.setState({
         flights: data.trips.tripOption
       })
@@ -181,12 +184,14 @@ class App extends React.Component {
         });
       })
       .then(() => {
-        context.retrieveFlights('2017-12-04', '2017-12-06', context.state.airportCodes.departLoc, context.state.airportCodes.arrivalLoc);
+        context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
       });
     });
   }
 
-  handleFlightClick(flight) {
+  handleFlightClick(flight, event) {
+    $(event.target).toggleClass('highlight');
+    console.log(event.target);
     var flight1 = flight.slice[0];
     var flight2 = flight.slice[1];
     var saved = {
