@@ -105,7 +105,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
+    this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
@@ -145,8 +145,8 @@ class App extends React.Component {
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
-        "APC-Auth": "ea0eb61a9e",
-        "APC-Auth-Secret": "4b35787cfc26306"
+        "APC-Auth": config.APCAuth,
+        "APC-Auth-Secret": config.APCSecret
       },
       method: "POST"
     })
