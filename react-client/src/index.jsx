@@ -231,7 +231,6 @@ class App extends React.Component {
     });
   }
 
-
   yelpAttrSearch(){
     console.log(this.state.arrivalLocation);
 
@@ -313,7 +312,6 @@ class App extends React.Component {
       }
     })
   }
-
 
   render () {
     return (
