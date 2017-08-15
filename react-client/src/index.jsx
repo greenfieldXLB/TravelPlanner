@@ -9,6 +9,7 @@ import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
 import Weather from './components/Weather.jsx';
 const FlightAPI = require('qpx-express');
+const SabreDevStudio = require('sabre-dev-studio');
 
 
 class App extends React.Component {
@@ -107,6 +108,8 @@ class App extends React.Component {
     }
    this.state.savedChoices[0].hotel = saved;
     }
+
+  componentDidMount() {
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
@@ -332,11 +335,14 @@ class App extends React.Component {
     console.log('the arrival location is: ', arrivalLocation);
     console.log('the departure date is: ', departureDate);
     console.log('the return date is: ', returnDate);
-    this.setState({
+    Promise.resolve(this.setState({
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
       returnDate: returnDate
+    }))
+    .then(() => {
+      // this.getAirportCodes(this.state.departureLocation, this.state.arrivalLocation);
     });
   }
 
