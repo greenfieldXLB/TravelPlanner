@@ -1,10 +1,25 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
+
+
+
 // var GooglePlaces = require('google-places');
 const items = require('../database-mongo');
 const request = require('request');
 const app = express();
 const hotel = require('./hotel/hotel')
+
+
+
+// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
+// var items = require('../database-mysql');
+
+const yelp = require('./yelp')
+
+
+
+// UNCOMMENT FOR REACT
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //       key:'AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI'
 //     }
 app.post('/attraction', function(req,res){
-  
+
   var searchCity = '';
 
   req.on('data', function(chunk){
