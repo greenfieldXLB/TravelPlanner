@@ -248,12 +248,12 @@ class App extends React.Component {
   }
 
 
-  handleAttrClick(attrItemEntry){
-    console.log('Attraction clicked :', attrItemEntry);
-    this.setState({
-      attrSelectOn: !this.state.attrSelectOn
-    })
-  }
+  // handleAttrClick(attrItemEntry){
+  //   console.log('Attraction clicked :', attrItemEntry);
+  //   this.setState({
+  //     attrSelectOn: !this.state.attrSelectOn
+  //   })
+  // }
 
 
   render () {
