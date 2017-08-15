@@ -15,18 +15,22 @@ const yelp = require('./yelp/yelp')
 
 
 var express = require('express');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 // var GooglePlaces = require('google-places');
 var items = require('../database-mongo');
 var request = require('request');
-var app = express();
+//var app = express();
 var hotel = require('./hotel/hotel')
 
+
 const express = require('express');
+
+//const express = require('express');
+
 const bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
-const items = require('../database-mongo');
+//const items = require('../database-mongo');
 
 const app = express();
 
@@ -67,25 +71,28 @@ app.get('/search', (req, res) => {
 
 app.post('/food', function (req, res){
 
-  let location = '';
+  let location = req.body.location;
 
-  req.on ('data', function(chunk){
-    location += chunk;
-  })
+  console.log(req.body);
 
-  req.on ('end', function(){
+  yelpfood.searchFood(location, function(foodresult){
 
-    yelpfood.searchFood(location, function(foodresult){
-
-      res.send(200, JSON.stringify(foodresult));
-
-    })
-
+    res.send(200, JSON.stringify(foodresult));
 
   })
+
+  // req.on ('data', function(chunk){
+  //   location += chunk;
+  // })
+
+  // req.on ('end', function(){
+
+
+
+
+  // })
 
 })
-
 
 
 app.get('/items', function (req, res) {
@@ -99,8 +106,12 @@ app.get('/items', function (req, res) {
 });
 
 
+
 var port = process.env.PORT;
 
+
+
+var port = 3000;
 
 app.listen(port, function() {
  console.log(`listening on port ${port}`)

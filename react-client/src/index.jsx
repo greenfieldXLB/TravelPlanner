@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
 import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 const FlightAPI = require('qpx-express');
+
+
+import Hotel from './components/hotel.jsx';
 
 
 import FoodList from './components/FoodList.jsx';
@@ -311,7 +315,7 @@ class App extends React.Component {
   searchFood(){
     $.ajax({
       url:'/food',
-      data: this.state.arrivalLocation,
+      data: { location: this.state.arrivalLocation },
       type: 'POST',
       success:(res) => {
         this.setState({
