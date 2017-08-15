@@ -53,7 +53,7 @@ class App extends React.Component {
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
       ],
 
-      hotels: []
+      hotels: [],
 
       attrItems: []
 
@@ -255,6 +255,7 @@ class App extends React.Component {
     this.yelpAttrSearch();
   }
 
+
   // componentDidMount() {
   //   $.ajax({
   //     url: '/items',
@@ -270,24 +271,25 @@ class App extends React.Component {
   // }
 
 
-  yelpAttrSearch(){
+  
+
+  yelpAttrSearch(){  
+    console.log(this.state.arrivalLocation); 
+
 
     $.ajax({
 
-      url: '/attraction',
+      url: '/attract',
       type: 'POST',
-      data: this.state.arrivalLocation,
-        success: (res) => {
-          //console.log('RESPONSE: ', res); --Y
+      data: { attraction: this.state.arrivalLocation },
+      success: (res) => {
+          //console.log('RESPONSE: ', res);
           //console.log(typeof JSON.parse(res));--Y
           //console.log(Array.isArray(JSON.parse(res))); --Y
-          this.setState({
-            attrItems: JSON.parse(res)
-          });
-        
         console.log('city being searched!');
-        //console.log(this.state.attrItems);
-      
+        this.setState({
+          attrItems: JSON.parse(res)
+        });  
       },
       error: function(data) {    
       }
@@ -307,7 +309,6 @@ class App extends React.Component {
 
         <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
 
-
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
@@ -319,6 +320,7 @@ class App extends React.Component {
       </div>
     )
   }
+
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));

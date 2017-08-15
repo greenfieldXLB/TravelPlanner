@@ -1,5 +1,12 @@
 
+
 const express = require('express');
+
+var express = require('express');
+var request = require('request');
+var hotel = require('./hotel/hotel')
+
+
 const bodyParser = require('body-parser');
 
 // var GooglePlaces = require('google-places');
@@ -19,10 +26,11 @@ const yelp = require('./yelp/yelp')
 const yelp = require('./yelp')
 
 
-// UNCOMMENT FOR REACT
+
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
+
 
 
 // UNCOMMENT FOR ANGULAR
@@ -50,36 +58,44 @@ var attrResultFromSearch;
 
 app.post('/attraction', function(req,res){
 
+
+app.post('/attract', function(req,res){
+
   var searchCity = '';
+  const attraction = req.body.attraction;
 
-  req.on('data', function(chunk){
-    searchCity += chunk;
+  yelp.searchAttr(attraction, function(attrResult){
+    res.send(200, JSON.stringify(attrResult));
+    //console.log('STRING RESULT: ',JSON.stringify(attrResult)) --Y;
+    //console.log('RESULT DATA: ', attrResult) -- Y;
+    //console.log(Array.isArray(attrResult)) --Y;
+    //console.log('GOT STH for POST!!!')
+
   })
 
-
-  req.on('end', function(searchCity){
-
-  })
-
-})
-
+  // req.on('data', function(chunk){
+  //   searchCity += chunk;
+  //   console.log('data');
+  // })
   
-  req.on('end', function(){
+  // req.on('end', function(){
+  //   console.log('CITY IS, ',searchCity)
     
-    yelp.searchAttr(searchCity, function(attrResult){
+  //   yelp.searchAttr(searchCity, function(attrResult){
 
-      res.send(200, JSON.stringify(attrResult));
-      //console.log('STRING RESULT: ',JSON.stringify(attrResult)) --Y;
-      //console.log('RESULT DATA: ', attrResult) -- Y;
-      //console.log(Array.isArray(attrResult)) --Y;
-      //console.log('GOT STH for POST!!!') -- Y
-    })
+  //     res.send(200, JSON.stringify(attrResult));
+  //     //console.log('STRING RESULT: ',JSON.stringify(attrResult)) --Y;
+  //     //console.log('RESULT DATA: ', attrResult) -- Y;
+  //     //console.log(Array.isArray(attrResult)) --Y;
+  //     //console.log('GOT STH for POST!!!')
+  //   })
+  // })
+})
 
 
 app.get('/search', (req, res) => {
 	console.log(req.query.city);
   // var city = req.query.city;
-
 
 
   hotel.hotel(req.query, (data) => {
@@ -92,25 +108,7 @@ app.get('/search', (req, res) => {
  //      console.log(body);
 	// })
 })
-app.get('/items', function (req, res) {
 
-})
-
-
-app.get('/attraction', function (req, res) {
-
-
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(5000);
-    } else {
-      res.json(data);
-    }
-  });
-
-  
-
-});
 
 
 var port = process.env.PORT;
@@ -121,4 +119,8 @@ app.listen(port, function() {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 
+
 });
+
+})
+
