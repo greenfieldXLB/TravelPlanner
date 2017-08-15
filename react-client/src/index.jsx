@@ -10,7 +10,6 @@ import Attraction from './components/Attraction.jsx';
 const FlightAPI = require('qpx-express');
 
 
-import Hotel from './components/hotel.jsx';
 
 
 import FoodList from './components/FoodList.jsx';
@@ -53,11 +52,15 @@ class App extends React.Component {
       hotels: [],
 
 
+
       attrItems: [],
 
       attrSelectOn: false,
 
       airportCodes: {}
+
+      airportCodes: {},
+
 
       savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
         {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
