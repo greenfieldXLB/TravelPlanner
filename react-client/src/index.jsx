@@ -6,6 +6,7 @@ import Flights from './components/Flights.jsx';
 import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 const FlightAPI = require('qpx-express');
+const SabreDevStudio = require('sabre-dev-studio');
 
 
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
       hotels: [],
       airportCodes: {}
     }
+    this.onSearch = this.onSearch.bind(this);
   }
 
   handleClick() {
@@ -106,7 +108,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
@@ -213,11 +214,14 @@ class App extends React.Component {
     console.log('the arrival location is: ', arrivalLocation);
     console.log('the departure date is: ', departureDate);
     console.log('the return date is: ', returnDate);
-    this.setState({
+    Promise.resolve(this.setState({
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
       returnDate: returnDate
+    }))
+    .then(() => {
+      // this.getAirportCodes(this.state.departureLocation, this.state.arrivalLocation);
     });
   }
 

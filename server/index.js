@@ -5,6 +5,7 @@ const items = require('../database-mongo');
 const request = require('request');
 const app = express();
 const hotel = require('./hotel/hotel')
+const flight = require('./flights.js');
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
