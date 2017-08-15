@@ -5,8 +5,11 @@ const express = require('express');
 var express = require('express');
 var request = require('request');
 var hotel = require('./hotel/hotel')
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> modified attraciton
 const bodyParser = require('body-parser');
 
 // var GooglePlaces = require('google-places');
@@ -62,34 +65,12 @@ app.post('/attraction', function(req,res){
 app.post('/attract', function(req,res){
 
   var searchCity = '';
-  const attraction = req.body.attraction;
+  const attrLocation = req.body.location;
 
-  yelp.searchAttr(attraction, function(attrResult){
+  yelp.searchAttr(attrLocation, function(attrResult){
     res.send(200, JSON.stringify(attrResult));
-    //console.log('STRING RESULT: ',JSON.stringify(attrResult)) --Y;
-    //console.log('RESULT DATA: ', attrResult) -- Y;
-    //console.log(Array.isArray(attrResult)) --Y;
-    //console.log('GOT STH for POST!!!')
-
   })
 
-  // req.on('data', function(chunk){
-  //   searchCity += chunk;
-  //   console.log('data');
-  // })
-  
-  // req.on('end', function(){
-  //   console.log('CITY IS, ',searchCity)
-    
-  //   yelp.searchAttr(searchCity, function(attrResult){
-
-  //     res.send(200, JSON.stringify(attrResult));
-  //     //console.log('STRING RESULT: ',JSON.stringify(attrResult)) --Y;
-  //     //console.log('RESULT DATA: ', attrResult) -- Y;
-  //     //console.log(Array.isArray(attrResult)) --Y;
-  //     //console.log('GOT STH for POST!!!')
-  //   })
-  // })
 })
 
 

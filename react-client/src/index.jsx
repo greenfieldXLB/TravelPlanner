@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-
-
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
 import config from '../../config.js';
 const FlightAPI = require('qpx-express');
 import SearchBar from './components/SearchBar.jsx';
 
+import Hotel from './components/hotel.jsx';
+// import ListItem from './ListItem.jsx';
 
-//import Attraction from './components/Attraction';
 
 import Attraction from './components/Attraction.jsx';
 
@@ -281,12 +280,8 @@ class App extends React.Component {
 
       url: '/attract',
       type: 'POST',
-      data: { attraction: this.state.arrivalLocation },
+      data: { location: this.state.arrivalLocation },
       success: (res) => {
-          //console.log('RESPONSE: ', res);
-          //console.log(typeof JSON.parse(res));--Y
-          //console.log(Array.isArray(JSON.parse(res))); --Y
-        console.log('city being searched!');
         this.setState({
           attrItems: JSON.parse(res)
         });  
