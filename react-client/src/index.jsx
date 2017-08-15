@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
-
-//import config from '../../config.js';
-//FlightAPI = require('qpx-express');
+import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
-
 import Attraction from './components/Attraction.jsx';
+const FlightAPI = require('qpx-express');
 
 
 
@@ -44,8 +42,7 @@ class App extends React.Component {
       //   {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
       //   {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
       //   {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
-      //   {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
-      // ],
+     // ],
 
       hotels: [],
 
@@ -55,6 +52,7 @@ class App extends React.Component {
 
     }
     this.onSearch = this.onSearch.bind(this);
+    this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
   }
 
   handleClick() {
@@ -212,12 +210,15 @@ class App extends React.Component {
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
       returnDate: returnDate
-    })
+    },function(){
+      this.yelpAttrSearch();
+      this.getAirportCodes(departureLocation, arrivalLocation);
+    });
   }
 
 
   componentDidMount(){
-    this.yelpAttrSearch();
+    //this.yelpAttrSearch();
   }
 
 
@@ -234,7 +235,7 @@ class App extends React.Component {
         // console.log(parsed);
 
         const addresses = this.state.addresses
-        .concat( parsed.map( responseToState('attraction') ) );
+        .concat( parsed.map( this.responseToSaveAddress('attraction') ) );
 
         this.setState({
           attrItems: JSON.parse(res),
@@ -247,12 +248,19 @@ class App extends React.Component {
     })
   }
 
-  // handleAttrClick(attrItemEntry){
-  //   console.log('Attraction clicked :', attrItemEntry);
-  //   this.setState({
-  //     attrSelectOn: !this.state.attrSelectOn
-  //   })
-  // }
+  responseToSaveAddress( category ){
+
+    return function( {name, location, coordinates} ){
+      const display_address = location.display_address;
+
+      return {
+        category,
+        name,
+        address: display_address.join(', '),
+        coordinates
+      };
+    }
+  }
 
   render () {
     return (
@@ -275,20 +283,7 @@ class App extends React.Component {
 
 }
 
-function responseToState( category ){
 
-  return function( {name, location, coordinates} ){
-    const display_address = location.display_address;
-
-    return {
-      category,
-      name,
-      address: display_address.join(', '),
-      coordinates
-    };
-  }
-
-}
 
 ReactDOM.render(<App />, document.getElementById('app'));
 

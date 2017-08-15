@@ -6,7 +6,7 @@ function Attraction ({attrItems}) {
  return(
       <div>
         <h4> Attraction List </h4>
-        { attrItems.map(item => <AttractionItem attrItemEntry = {item} />)}
+        { attrItems.map((item,index) => <AttractionItem attrItemEntry = {item} key = {index}/>)}
       </div>
     )
 }
