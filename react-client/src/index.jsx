@@ -327,6 +327,20 @@ class App extends React.Component {
     })
   }
 
+  onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
+    console.log('the departure location is: ', departureLocation);
+    console.log('the arrival location is: ', arrivalLocation);
+    console.log('the departure date is: ', departureDate);
+    console.log('the return date is: ', returnDate);
+    this.setState({
+      departureLocation: departureLocation,
+      arrivalLocation: arrivalLocation,
+      departureDate: departureDate,
+      returnDate: returnDate
+    });
+  }
+
+
   render () {
     return (
       <div>
