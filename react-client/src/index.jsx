@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
 import config from '../../config.js';
+import SearchBar from './components/SearchBar.jsx';
 const FlightAPI = require('qpx-express');
 
 
@@ -207,11 +208,26 @@ class App extends React.Component {
     this.state.savedChoices[0].flights = saved;
   }
 
+  onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
+    console.log('the departure location is: ', departureLocation);
+    console.log('the arrival location is: ', arrivalLocation);
+    console.log('the departure date is: ', departureDate);
+    console.log('the return date is: ', returnDate);
+    this.setState({
+      departureLocation: departureLocation,
+      arrivalLocation: arrivalLocation,
+      departureDate: departureDate,
+      returnDate: returnDate
+    });
+  }
+
+
   render () {
     return (
       <div>
         <h1>Trip Planner</h1>
-        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+         <SearchBar onSearch = {this.onSearch}/>
+         <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
