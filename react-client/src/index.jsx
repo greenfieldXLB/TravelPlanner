@@ -299,19 +299,6 @@ class App extends React.Component {
     this.searchFood();
   }
 
-  // componentDidMount() {
-  //   $.ajax({
-  //     url: '/items',
-  //     success: (data) => {
-  //       this.setState({
-  //         items: data
-  //       })
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
   searchFood(){
     $.ajax({
       url:'/food',
@@ -321,7 +308,6 @@ class App extends React.Component {
         this.setState({
           foodList: JSON.parse(res)
         })
-        //console.log('Food is searched!!');-- Y
         console.log(JSON.parse(res));
       },
       error: (err) => {

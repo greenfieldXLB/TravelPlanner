@@ -72,12 +72,11 @@ app.get('/search', (req, res) => {
 app.post('/food', function (req, res){
 
   let location = req.body.location;
-
   console.log(req.body);
 
   yelpfood.searchFood(location, function(foodresult){
-
     res.send(200, JSON.stringify(foodresult));
+
 
   })
 
@@ -91,6 +90,10 @@ app.post('/food', function (req, res){
 
 
   // })
+
+  })
+
+
 
 })
 
