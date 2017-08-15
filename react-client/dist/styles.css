@@ -118,3 +118,7 @@ body {
 .avoid-clicks {
   pointer-events: none;
 }
+
+.selected {
+  background-color: green;
+}

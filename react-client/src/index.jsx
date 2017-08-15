@@ -38,6 +38,7 @@ class App extends React.Component {
       }],
 
       airportCodes: {},
+      savedTrips: ['trip1', 'trip2', 'trip3'],
 
       hotels: [],
 
@@ -195,7 +196,7 @@ class App extends React.Component {
   }
 
   handleFlightClick(flight, event) {
-    $(event.target).toggleClass('highlight');
+    $(event.target).toggleClass('selected');
     console.log(event.target);
     var flight1 = flight.slice[0];
     var flight2 = flight.slice[1];
@@ -233,6 +234,11 @@ class App extends React.Component {
       this.requestWeather(arrivalLocation, departureDate);
     });
   }
+
+  componentDidMount(){
+    //this.yelpAttrSearch();
+  }
+
 
   yelpAttrSearch(){
     console.log(this.state.arrivalLocation);
