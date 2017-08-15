@@ -22,7 +22,7 @@ var searchAttr = function (searchCity, callback){
   client.search({
     term:'Attractions',
     location: searchCity,
-    limit: 10
+    limit: 12
   })
 
   .then(response => {
