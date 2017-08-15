@@ -58,7 +58,6 @@ class App extends React.Component {
       weather:[],
       weatherIcon: ''
     }
-
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
     this.requestWeather = this.requestWeather.bind(this);
@@ -168,8 +167,8 @@ class App extends React.Component {
       fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
         headers: {
           Accept: "application/json",
-          "APC-Auth": config.APCAuth,
-          "APC-Auth-Secret": config.APCSecret
+          "APC-Auth": "ea0eb61a9e",
+          "APC-Auth-Secret": "4b35787cfc26306"
         },
         method: "POST"
       })
@@ -212,8 +211,6 @@ class App extends React.Component {
     };
     this.state.savedChoices[0].flights = saved;
   }
-
-
 
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
     console.log('the departure location is: ', departureLocation);
@@ -322,11 +319,9 @@ class App extends React.Component {
     return (
       <div>
         <h1>Trip Planner</h1>
-
         <SearchBar onSearch = {this.onSearch}/>
         <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-        <Hotels hotels = {this.state.hotels} handleHotelClick={this.handleHotelClick.bind(this)}/>
-
+        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
