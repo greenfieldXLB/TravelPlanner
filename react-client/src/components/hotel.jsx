@@ -7,29 +7,34 @@ class Hotel extends React.Component {
   }
 
 
-  
+  // handleHotelClick(){
+  //   this.props.handleHotelClick()
+  // }
 
   render () {
 
     return (
       <div>
         <button onClick = {this.props.handleClick}>click me</button>
-        <ul>
+         {this.props.hotels.map(hotel => {
+           return (
+            <div onClick={(e) => (this.props.handleHotelClick(hotel, e))}>
 
-        {this.props.hotels.map(hotel => {
-           return (<ul>
-
-                    <li>{hotel.location.address1 + "       " + hotel.price}</li>
-              
-
-
-                  </ul>)
+            <ul>
+                <li>{hotel.location.address1} { hotel.location.city}  {hotel.location.zip_code}    {hotel.price}</li>
+                <li><img src={hotel.image_url} width="128" height="128" /></li>
+            </ul>
+            </div>)
         })}
-        </ul>
+
       </div>
     )
   }
 }
+              
+
+
+
 
           
 

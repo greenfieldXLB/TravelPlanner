@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
-<<<<<<< HEAD
 import config from '../../config.js';
-=======
 // import config from '../../config.js';
 const FlightAPI = require('qpx-express');
->>>>>>> rebased
+
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
