@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
+
 import config from '../../config.js';
 const FlightAPI = require('qpx-express');
 import SearchBar from './components/SearchBar.jsx';
@@ -11,8 +12,11 @@ import Hotel from './components/hotel.jsx';
 // import ListItem from './ListItem.jsx';
 
 
-import Attraction from './components/Attraction.jsx';
 
+//import config from '../../config.js';
+
+import Attraction from './components/Attraction.jsx';
+//const FlightAPI = require('qpx-express');
 
 
 class App extends React.Component {
@@ -26,13 +30,12 @@ class App extends React.Component {
       returnDate: '2017-12-15', // return to SF on 12/15/17
       addresses:[ // array of addresses of ALL QUERIED hotel, attractions, & restaurants
         {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK'},
-        {category: 'attraction', name: 'London Bridge', address: 'London SE1 9DD, UK'},
-        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK'},
         {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK'},
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK'}
       ],
 
       flights: [],
+
       savedChoices: [{
           flights: {},
           hotel: {},
@@ -40,17 +43,17 @@ class App extends React.Component {
           food: [],
           weather: {}
       }],
-      hotels: [],
-      airportCodes: {}
+    
+      airportCodes: {},
 
-      savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
-        {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
-        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
-        {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
-        {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
-      ],
+      // savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
+      //   {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
+      //   {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
+      //   {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
+      //   {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
+      //   {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
+      //   {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
+      // ],
 
       hotels: [],
 
@@ -61,33 +64,7 @@ class App extends React.Component {
   }
 
   handleClick() {
-    // console.log('I got clicked')
-    // var logResults = (json) => { console.log(11111,json)
-    // }
-    // var parameters = {
-    //   // method: 'GET',
-    //   // url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=hotel&key=AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI'
-    //   location: '-33.8670522,151.1957362',
-    //   radius: '500',
-    //   type: 'restaurant',
-    //   key:'AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI'
-    // }
 
-
-    // $.ajax({
-    //   url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json' ,
-    //   method: 'GET',
-    //   data: parameters,
-    //   dataType: 'jsonp',
-    //   jsonpCallback: 'logResults',
-    //   success: (data) => {
-    //     console.log('succuess!');
-    //   },
-    //   error: (error) => {
-    //     console.log(111111, error)
-    //   }
-
-    // })
      $.ajax({
       url: '/search',
       method: 'GET',
@@ -129,9 +106,6 @@ class App extends React.Component {
      })
   }
 
-  componentDidMount() {
-    // this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
-  }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
     var apiKey = config.flights;
@@ -209,7 +183,7 @@ class App extends React.Component {
         context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
       });
     });
-  }
+  }  
 
   handleFlightClick(flight, event) {
     $(event.target).toggleClass('highlight');
@@ -233,6 +207,7 @@ class App extends React.Component {
   }
 
 
+
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
     console.log('the departure location is: ', departureLocation);
     console.log('the arrival location is: ', arrivalLocation);
@@ -250,46 +225,48 @@ class App extends React.Component {
   // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson%3Flocation%3D-33.8670522%2C151.1957362%26radius%3D500%26type%3Drestaurant%26key%3DAIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
   // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson&location=-33.8670522%2C151.1957362&radius=500&type=restaurant&key=AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
 
+
   componentDidMount(){
     this.yelpAttrSearch();
   }
 
 
-  // componentDidMount() {
-  //   $.ajax({
-  //     url: '/items',
-  //     success: (data) => {
-  //       this.setState({
-  //         items: data
-  //       })
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
-
-
-  
-
   yelpAttrSearch(){  
     console.log(this.state.arrivalLocation); 
 
-
     $.ajax({
-
-      url: '/attract',
+      url: '/attraction',
       type: 'POST',
       data: { location: this.state.arrivalLocation },
       success: (res) => {
+
+        const parsed = JSON.parse( res );
+        // console.log(parsed);
+
+        const addresses = this.state.addresses
+        .concat( parsed.map( responseToState('attraction') ) );
+
         this.setState({
-          attrItems: JSON.parse(res)
+          attrItems: JSON.parse(res),
+          addresses: addresses
         });  
+
       },
       error: function(data) {    
       }
-
     })
+  }
+
+
+  handleAttrClick(attrItemEntry){
+    console.log('Attraction clicked :', attrItemEntry);
+
+    var savedAttrItem = {
+      name: attrItemEntry.name,
+      address: attrItemEntry.location.display_address.join(', '),
+      imageUrl: attrItemEntry.imgage_url
+    }
+
   }
 
 
@@ -310,7 +287,7 @@ class App extends React.Component {
         </div>
 
 
-        <Attraction attrItems = {this.state.attrItems}/>
+        <Attraction handleAttrClick={this.handleAttrClick.bind(this)} attrItems = {this.state.attrItems}/>
 
       </div>
     )
@@ -318,4 +295,21 @@ class App extends React.Component {
 
 }
 
+function responseToState( category ){
+
+  return function( {name, location, coordinates} ){
+    const display_address = location.display_address;
+
+    return {
+      category,
+      name,
+      address: display_address.join(', '),
+      coordinates
+    };    
+  }
+
+}
+
 ReactDOM.render(<App />, document.getElementById('app'));
+
+

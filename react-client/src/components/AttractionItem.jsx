@@ -1,11 +1,11 @@
 import React from 'react';
 
-function AttractionItem ({attrItemEntry}) {
+function AttractionItem ({attrItemEntry, handleAttrClick}) {
   
  return(
-      <div>
+      <div onClick = {()=>handleAttrClick(attrItemEntry)}>
         <div>{attrItemEntry.name}</div>
-        <div>{attrItemEntry.location.display_address}</div>
+        <div>{attrItemEntry.location.display_address.join(', ')}</div>
         <img src={attrItemEntry.image_url}  width="150"></img>
         <br></br>
       </div> 
