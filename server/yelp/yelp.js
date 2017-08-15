@@ -1,24 +1,24 @@
 const yelp = require('yelp-fusion');
+const yelpConfig = require('../../config.js');
 //const config = require('../config.js');
 
- 
+
 var searchAttr = function (searchCity, callback){
   var attrResult = {};
 
-  const clientId = '3GcYlGCJQgbIdH-g4wIgQA';
+  const clientId = yelpConfig.clientId;
 
-  const clientSecret = 'M7ohQo779fWVHpLxBl4va1v7NOqvRd2hKucOViD654E63wN7Mv6IZGnF45Hoxbzb';
+  const clientSecret = yelpConfig.clientSecret;
 
- 
   const token = yelp.accessToken(clientId, clientSecret).then(response => {
     //return response.jsonBody.access_token;
     console.log('TOKEN ', response.jsonBody.access_token);
   }).catch(e => {
     console.log('ERROR ', e);
   });
-  //'v2NdlEqwhnXc5yzlHQ6T6o5t0NmSperOsg7wmyMEpaIAV7_7CCx_jL41zskRGHKXJAgkrX8ocuvm6E39mbgdCH6F9W-ZijDrvkBfstXivjVVglGdvXi4_Nx9HwGKWXYx'
 
-  const client = yelp.client('v2NdlEqwhnXc5yzlHQ6T6o5t0NmSperOsg7wmyMEpaIAV7_7CCx_jL41zskRGHKXJAgkrX8ocuvm6E39mbgdCH6F9W-ZijDrvkBfstXivjVVglGdvXi4_Nx9HwGKWXYx');
+
+  const client = yelp.client(yelpConfig.yelpKey);
 
   client.search({
     term:'Attractions',
