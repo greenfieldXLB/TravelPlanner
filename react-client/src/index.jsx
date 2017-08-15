@@ -247,14 +247,12 @@ class App extends React.Component {
     })
   }
 
-
   // handleAttrClick(attrItemEntry){
   //   console.log('Attraction clicked :', attrItemEntry);
   //   this.setState({
   //     attrSelectOn: !this.state.attrSelectOn
   //   })
   // }
-
 
   render () {
     return (
@@ -269,7 +267,7 @@ class App extends React.Component {
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
-        <Attraction handleAttrClick={this.handleAttrClick.bind(this)} attrItems = {this.state.attrItems}/>
+        <Attraction attrItems = {this.state.attrItems}/>
 
       </div>
     )
