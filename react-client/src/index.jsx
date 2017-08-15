@@ -9,6 +9,7 @@ import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
 import Weather from './components/Weather.jsx'
 const FlightAPI = require('qpx-express');
+const SabreDevStudio = require('sabre-dev-studio');
 
 
 class App extends React.Component {
@@ -110,6 +111,8 @@ class App extends React.Component {
    console.log(11111, this.state.savedChoices[0].hotel)
    this.state.savedChoices[0].hotel = saved;
     }
+
+  componentDidMount() {
   }
 
 
