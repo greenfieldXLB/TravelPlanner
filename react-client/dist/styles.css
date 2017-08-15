@@ -122,3 +122,7 @@ body {
 .selected {
   background-color: green;
 }
+
+.avoid-clicks {
+  pointer-events: none;
+}

@@ -196,6 +196,8 @@ class App extends React.Component {
   }
 
   handleFlightClick(flight, event) {
+    // event.stopPropagation();
+    console.log(event.target);
     $(event.target).toggleClass('selected');
     console.log(event.target);
     var flight1 = flight.slice[0];
