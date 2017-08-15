@@ -1,7 +1,7 @@
 import React from 'react';
 import AttractionItem from './AttractionItem.jsx';
 
-function Attraction ({attrItems, handleAttrClick, attrBgColor}) {
+function Attraction ({attrItems}) {
 
  return(
       <div>
