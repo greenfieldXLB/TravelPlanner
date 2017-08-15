@@ -2,8 +2,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
-
 // var GooglePlaces = require('google-places');
 const items = require('../database-mongo');
 const request = require('request');
@@ -16,7 +14,6 @@ const hotel = require('./hotel/hotel')
 // var items = require('../database-mysql');
 
 const yelp = require('./yelp')
-
 
 
 // UNCOMMENT FOR REACT
