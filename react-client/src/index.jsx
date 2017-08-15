@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
 import Weather from './components/Weather.jsx';
+import SavedTrips from './components/SavedTrips.jsx';
 const FlightAPI = require('qpx-express');
 const SabreDevStudio = require('sabre-dev-studio');
 
@@ -362,7 +363,7 @@ class App extends React.Component {
         <Attraction attrItems = {this.state.attrItems}/>
 
         <FoodList foodlist = {this.state.foodList}/>
-
+        <SavedTrips trips={this.state.savedTrips}/>
       </div>
     )
   }
