@@ -23,7 +23,7 @@ app.post('/attraction', function(req,res){
 })
 
 
-app.get('/search', (req, res) => {
+app.get('/hotels', (req, res) => {
 	console.log(req.query.city);
   // var city = req.query.city;
 
