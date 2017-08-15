@@ -46,9 +46,28 @@ class App extends React.Component {
 
       hotels: [],
 
+
       attrItems: [],
 
-      attrSelectOn: false
+      attrSelectOn: false,
+
+      airportCodes: {}
+
+      savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
+        {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
+        {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
+        {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
+        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
+        {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
+        {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
+      ],
+
+      hotels: [],
+
+
+      foodList: []
+
+
 
     }
     this.onSearch = this.onSearch.bind(this);
@@ -248,6 +267,7 @@ class App extends React.Component {
     })
   }
 
+
   responseToSaveAddress( category ){
 
     return function( {name, location, coordinates} ){
@@ -261,6 +281,39 @@ class App extends React.Component {
       };
     }
   }
+
+
+
+  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson%3Flocation%3D-33.8670522%2C151.1957362%26radius%3D500%26type%3Drestaurant%26key%3DAIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
+  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson&location=-33.8670522%2C151.1957362&radius=500&type=restaurant&key=AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
+  // componentDidMount() {
+  //   $.ajax({
+  //     url: '/items',
+  //     success: (data) => {
+  //       this.setState({
+  //         items: data
+  //       })
+  //     },
+  //     error: (err) => {
+  //       console.log('err', err);
+  //     }
+  //   });
+  // }
+  searchFood(){
+    $.ajax({
+      url:'/food',
+      data: this.state.arrivalLocation;
+      type: 'POST',
+      success:(res) => {
+        console.log('Food is searched!!')
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    })
+  }
+
+
 
   render () {
     return (

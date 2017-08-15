@@ -41,6 +41,31 @@ app.get('/search', (req, res) => {
 })
 
 
+app.post('/food', function (req, res){
+
+  let location = '';
+
+  req.on ('data', function(chunk){
+    location += chunk;
+  })
+
+  req.on ('end', function(){
+
+  })
+
+})
+
+
+app.get('/items', function (req, res) {
+  items.selectAll(function(err, data) {
+    if(err) {
+      res.sendStatus(5000);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
 
 var port = process.env.PORT;
 
