@@ -10,24 +10,6 @@ class Attraction extends React.Component {
     }
   }
 
-  search(){
-
-    $.ajax({
-
-      url: '/attraction',
-      type: 'POST',
-      data: 'San Francisco',
-      success: (res) => {
-        console.log('city being searched!');
-        //this.setState{
-        //  items: res;
-        //}
-      },
-      error: function(data) {    
-      }
-
-    })
-  }
 
   render(){
 

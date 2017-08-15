@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
 import config from '../../config.js';
 const FlightAPI = require('qpx-express');
 import SearchBar from './components/SearchBar.jsx';
+
+
+//import Attraction from './components/Attraction';
 
 
 class App extends React.Component {
@@ -50,6 +54,7 @@ class App extends React.Component {
     //   type: 'restaurant',
     //   key:'AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI'
     // }
+
 
     // $.ajax({
     //   url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json' ,
@@ -209,6 +214,7 @@ class App extends React.Component {
     this.state.savedChoices[0].flights = saved;
   }
 
+
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
     console.log('the departure location is: ', departureLocation);
     console.log('the arrival location is: ', arrivalLocation);
@@ -221,6 +227,52 @@ class App extends React.Component {
       returnDate: returnDate
     })
   }
+
+
+  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson%3Flocation%3D-33.8670522%2C151.1957362%26radius%3D500%26type%3Drestaurant%26key%3DAIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
+  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson&location=-33.8670522%2C151.1957362&radius=500&type=restaurant&key=AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
+
+  componentDidMount(){
+    this.yelpAttrSearch();
+  }
+
+  // componentDidMount() {
+  //   $.ajax({
+  //     url: '/items',
+  //     success: (data) => {
+  //       this.setState({
+  //         items: data
+  //       })
+  //     },
+  //     error: (err) => {
+  //       console.log('err', err);
+  //     }
+  //   });
+  // }
+
+
+  yelpAttrSearch(){
+
+    $.ajax({
+
+      url: '/attraction',
+      type: 'POST',
+      data: 'san francisco, ca',
+      success: (res) => {
+        console.log(res);
+        //write an ajax get request
+
+        console.log('city being searched!');
+        //this.setState{
+        //  items: res;
+        //}
+      },
+      error: function(data) {    
+      }
+
+    })
+  }
+
 
   render () {
     return (

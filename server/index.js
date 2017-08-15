@@ -12,6 +12,11 @@ const hotel = require('./hotel/hotel')
 
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
+<<<<<<< HEAD
+=======
+const items = require('../database-mongo');
+const yelp = require('./yelp/yelp')
+>>>>>>> yelp attraction search works for POST
 
 const yelp = require('./yelp')
 
@@ -44,15 +49,27 @@ app.post('/attraction', function(req,res){
     searchCity += chunk;
   })
 
+
   req.on('end', function(searchCity){
 
   })
 
 })
 
+  
+  req.on('end', function(){
+    
+    yelp.searchAttr(searchCity, function(){
+      res.sendStatus(200);
+      res.end();
+      console.log('GOT STH for POST!!!')
+    })
+
+
 app.get('/search', (req, res) => {
 	console.log(req.query.city);
   // var city = req.query.city;
+
 
 
   hotel.hotel(req.query, (data) => {
@@ -66,6 +83,11 @@ app.get('/search', (req, res) => {
 	// })
 })
 app.get('/items', function (req, res) {
+
+})
+
+app.get('/attraction', function (req, res) {
+
   items.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(5000);
