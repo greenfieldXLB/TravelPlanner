@@ -103,3 +103,12 @@ body {
   display: table;
   clear: both;
 }
+
+
+.attrBackground{
+   background-color: white;
+}
+
+.activeAttr{
+  background-color: grey;
+}

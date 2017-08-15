@@ -4,19 +4,12 @@ import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
 
-import config from '../../config.js';
-const FlightAPI = require('qpx-express');
+//import config from '../../config.js';
+//FlightAPI = require('qpx-express');
 import SearchBar from './components/SearchBar.jsx';
 
-import Hotel from './components/hotel.jsx';
-// import ListItem from './ListItem.jsx';
-
-
-
-//import config from '../../config.js';
-
 import Attraction from './components/Attraction.jsx';
-//const FlightAPI = require('qpx-express');
+
 
 
 class App extends React.Component {
@@ -43,12 +36,11 @@ class App extends React.Component {
           food: [],
           weather: {}
       }],
-    
+
       airportCodes: {},
 
       // savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
       //   {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
-      //   {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
       //   {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
       //   {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
       //   {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
@@ -57,7 +49,9 @@ class App extends React.Component {
 
       hotels: [],
 
-      attrItems: []
+      attrItems: [],
+
+      attrSelectOn: false
 
     }
     this.onSearch = this.onSearch.bind(this);
@@ -183,7 +177,7 @@ class App extends React.Component {
         context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
       });
     });
-  }  
+  }
 
   handleFlightClick(flight, event) {
     $(event.target).toggleClass('highlight');
@@ -222,17 +216,13 @@ class App extends React.Component {
   }
 
 
-  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson%3Flocation%3D-33.8670522%2C151.1957362%26radius%3D500%26type%3Drestaurant%26key%3DAIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
-  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson&location=-33.8670522%2C151.1957362&radius=500&type=restaurant&key=AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
-
-
   componentDidMount(){
     this.yelpAttrSearch();
   }
 
 
-  yelpAttrSearch(){  
-    console.log(this.state.arrivalLocation); 
+  yelpAttrSearch(){
+    console.log(this.state.arrivalLocation);
 
     $.ajax({
       url: '/attraction',
@@ -249,10 +239,10 @@ class App extends React.Component {
         this.setState({
           attrItems: JSON.parse(res),
           addresses: addresses
-        });  
+        });
 
       },
-      error: function(data) {    
+      error: function(data) {
       }
     })
   }
@@ -260,13 +250,9 @@ class App extends React.Component {
 
   handleAttrClick(attrItemEntry){
     console.log('Attraction clicked :', attrItemEntry);
-
-    var savedAttrItem = {
-      name: attrItemEntry.name,
-      address: attrItemEntry.location.display_address.join(', '),
-      imageUrl: attrItemEntry.imgage_url
-    }
-
+    this.setState({
+      attrSelectOn: !this.state.attrSelectOn
+    })
   }
 
 
@@ -278,14 +264,10 @@ class App extends React.Component {
         <SearchBar onSearch = {this.onSearch}/>
         <Hotel handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
 
-
-        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
-
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
-
 
         <Attraction handleAttrClick={this.handleAttrClick.bind(this)} attrItems = {this.state.attrItems}/>
 
@@ -305,7 +287,7 @@ function responseToState( category ){
       name,
       address: display_address.join(', '),
       coordinates
-    };    
+    };
   }
 
 }
