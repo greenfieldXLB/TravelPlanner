@@ -1,18 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
 import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
-const FlightAPI = require('qpx-express');
-
-
-
-
 import FoodList from './components/FoodList.jsx';
+const FlightAPI = require('qpx-express');
 
 
 class App extends React.Component {
@@ -51,16 +46,9 @@ class App extends React.Component {
 
       hotels: [],
 
-
-
       attrItems: [],
 
-      attrSelectOn: false,
-
-      airportCodes: {}
-
       airportCodes: {},
-
 
       savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
         {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
@@ -73,12 +61,9 @@ class App extends React.Component {
 
       hotels: [],
 
-
       foodList: []
-
-
-
     }
+
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
   }
@@ -242,13 +227,9 @@ class App extends React.Component {
       returnDate: returnDate
     },function(){
       this.yelpAttrSearch();
+      this.searchFood();
       this.getAirportCodes(departureLocation, arrivalLocation);
     });
-  }
-
-
-  componentDidMount(){
-    //this.yelpAttrSearch();
   }
 
 
@@ -261,15 +242,14 @@ class App extends React.Component {
       data: { location: this.state.arrivalLocation },
       success: (res) => {
 
-        const parsed = JSON.parse( res );
-        // console.log(parsed);
+        const parsedAttr = JSON.parse( res );
 
-        const addresses = this.state.addresses
-        .concat( parsed.map( this.responseToSaveAddress('attraction') ) );
+        const addAttrAddress = this.state.addresses
+        .concat( parsedAttr.map( this.responseToSaveAddress( 'attraction' ) ) );
 
         this.setState({
-          attrItems: JSON.parse(res),
-          addresses: addresses
+          attrItems: parsedAttr,
+          addresses: addAttrAddress
         });
 
       },
@@ -294,31 +274,29 @@ class App extends React.Component {
   }
 
 
-
-  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson%3Flocation%3D-33.8670522%2C151.1957362%26radius%3D500%26type%3Drestaurant%26key%3DAIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
-  // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson&location=-33.8670522%2C151.1957362&radius=500&type=restaurant&key=AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
-
-  componentDidMount(){
-    this.searchFood();
-  }
-
   searchFood(){
     $.ajax({
       url:'/food',
       data: { location: this.state.arrivalLocation },
       type: 'POST',
       success:(res) => {
-        this.setState({
-          foodList: JSON.parse(res)
-        })
-        console.log(JSON.parse(res));
+
+          const parsedFood = JSON.parse( res );
+
+          const addFoodAddress = this.state.addresses
+          .concat( parsedFood.map( this.responseToSaveAddress( 'food' ) ) );
+
+          this.setState({
+            foodList: parsedFood,
+            addresses: addFoodAddress
+          });
       },
+
       error: (err) => {
         console.log('err', err);
       }
     })
   }
-
 
 
   render () {
@@ -329,26 +307,14 @@ class App extends React.Component {
         <SearchBar onSearch = {this.onSearch}/>
         <Hotel handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
 
-
-        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
-
-
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
-
-
         <Attraction attrItems = {this.state.attrItems}/>
 
-
         <FoodList foodlist = {this.state.foodList}/>
-
-
-        <FoodList foodlist = {this.state.foodList}/>
-
-
 
       </div>
     )
