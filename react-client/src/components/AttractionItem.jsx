@@ -31,20 +31,4 @@ class AttractionItem extends React.Component {
   }
 }
 
-
-
-
-function AttractionItem ({attrItemEntry}) {
-
- return(
-      <div>
-        <div>{attrItemEntry.name}</div>
-        <div>{attrItemEntry.location.display_address}</div>
-        <img src={attrItemEntry.image_url}  width="150"></img>
-        <br></br>
-      </div>
-    )
-}
-
-
 export default AttractionItem;
