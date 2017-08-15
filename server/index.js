@@ -4,7 +4,7 @@ const items = require('../database-mongo');
 const request = require('request');
 const app = express();
 const hotel = require('./hotel/hotel')
-const yelp = require('./yelp/yelp')
+const yelpattr = require('./yelpattraction/yelpattraction')
 const yelpfood = require('./yelpfood/yelpfood')
 
 
@@ -16,7 +16,7 @@ app.post('/attraction', function(req,res){
 
   const attrLocation = req.body.location;
 
-  yelp.searchAttr(attrLocation, function(attrResult){
+  yelpattr.searchAttr(attrLocation, function(attrResult){
     res.send(200, JSON.stringify(attrResult));
   })
 
@@ -43,7 +43,7 @@ app.get('/search', (req, res) => {
 app.post('/food', function (req, res){
 
   let location = req.body.location;
-  console.log(req.body);
+
 
   yelpfood.searchFood(location, function(foodresult){
     res.send(200, JSON.stringify(foodresult));
@@ -54,8 +54,6 @@ app.post('/food', function (req, res){
 
 
 var port = process.env.PORT;
-
-var port = 3000;
 
 app.listen(port, function() {
  console.log(`listening on port ${port}`)

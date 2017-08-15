@@ -251,26 +251,10 @@ class App extends React.Component {
           attrItems: parsedAttr,
           addresses: addAttrAddress
         });
-
       },
       error: function(data) {
       }
     })
-  }
-
-
-  responseToSaveAddress( category ){
-
-    return function( {name, location, coordinates} ){
-      const display_address = location.display_address;
-
-      return {
-        category,
-        name,
-        address: display_address.join(', '),
-        coordinates
-      };
-    }
   }
 
 
@@ -296,6 +280,20 @@ class App extends React.Component {
         console.log('err', err);
       }
     })
+  }
+
+
+  responseToSaveAddress( category ){
+    return function( {name, location, coordinates} ){
+      const display_address = location.display_address;
+
+      return {
+        category,
+        name,
+        address: display_address.join(', '),
+        coordinates
+      };
+    }
   }
 
 
