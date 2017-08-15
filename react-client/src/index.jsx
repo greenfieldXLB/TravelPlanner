@@ -336,7 +336,11 @@ class App extends React.Component {
         </div>
 
 
+
         <Attraction attrItems = {this.state.attrItems}/>
+
+
+        <FoodList foodlist = {this.state.foodList}/>
 
 
         <FoodList foodlist = {this.state.foodList}/>
