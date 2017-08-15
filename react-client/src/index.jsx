@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
-import config from '../../config.js';
-const FlightAPI = require('qpx-express');
+//import config from '../../config.js';
+//const FlightAPI = require('qpx-express');
+import SearchBar from './components/SearchBar.jsx';
 
 
 class App extends React.Component {
@@ -34,6 +35,7 @@ class App extends React.Component {
       hotels: [],
       airportCodes: {}
     }
+    this.onSearch = this.onSearch.bind(this);
   }
 
   handleClick() {
@@ -108,8 +110,22 @@ class App extends React.Component {
     // this.getAirportCodes('San Francisco', 'Hong Kong'); //once search is complete, get info from there
   }
 
+  onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
+   console.log('the departure location is: ', departureLocation);
+   console.log('the arrival location is: ', arrivalLocation);
+   console.log('the departure date is: ', departureDate);
+   console.log('the return date is: ', returnDate);
+   this.setState({
+     departureLocation: departureLocation,
+     arrivalLocation: arrivalLocation,
+     departureDate: departureDate,
+     returnDate: returnDate
+   })
+ }
+
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
-    var apiKey = config.flights;
+    //var apiKey = config.flights;
+    var apiKey = 'abc'
     var qpx = new FlightAPI(apiKey);
 
     var body = {
@@ -145,8 +161,8 @@ class App extends React.Component {
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
-        "APC-Auth": config.APCAuth,
-        "APC-Auth-Secret": config.APCSecret
+        "APC-Auth": "ea0eb61a9e",
+        "APC-Auth-Secret": "4b35787cfc26306"
       },
       method: "POST"
     })
@@ -211,7 +227,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Trip Planner</h1>
-        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+        <SearchBar onSearch = {this.onSearch}/>
+        <Hotel handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
