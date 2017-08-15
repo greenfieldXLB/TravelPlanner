@@ -12,11 +12,9 @@ const hotel = require('./hotel/hotel')
 
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
-<<<<<<< HEAD
-=======
+
 const items = require('../database-mongo');
 const yelp = require('./yelp/yelp')
->>>>>>> yelp attraction search works for POST
 
 const yelp = require('./yelp')
 
@@ -26,14 +24,11 @@ const yelp = require('./yelp')
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-<<<<<<< HEAD
-=======
 
 // UNCOMMENT FOR ANGULAR
 // app.use(express.static(__dirname + '/../angular-client'));
 // app.use(express.static(__dirname + '/../node_modules'));
 
->>>>>>> rendered list of attractions
 // var places = new GooglePlaces('AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI');
 // places.search({keyword: 'Vermonster'}, function(err, response) {
 //   console.log("search: ", response.results);
@@ -72,7 +67,7 @@ app.post('/attraction', function(req,res){
   req.on('end', function(){
     
     yelp.searchAttr(searchCity, function(attrResult){
-      //res.sendStatus(200);
+
       res.send(200, JSON.stringify(attrResult));
       //console.log('STRING RESULT: ',JSON.stringify(attrResult)) --Y;
       //console.log('RESULT DATA: ', attrResult) -- Y;
@@ -101,6 +96,7 @@ app.get('/items', function (req, res) {
 
 })
 
+
 app.get('/attraction', function (req, res) {
 
 
@@ -116,7 +112,13 @@ app.get('/attraction', function (req, res) {
 
 });
 
+
 var port = process.env.PORT;
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
+
+
+app.listen(3000, function() {
+  console.log('listening on port 3000!');
+
 });

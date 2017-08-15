@@ -6,7 +6,7 @@ function AttractionItem ({attrItemEntry}) {
       <div>
         <div>{attrItemEntry.name}</div>
         <div>{attrItemEntry.location.display_address}</div>
-        <img src={attrItemEntry.image_url}  width="130"></img>
+        <img src={attrItemEntry.image_url}  width="150"></img>
       </div>  
     )  
 }

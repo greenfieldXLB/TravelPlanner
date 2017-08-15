@@ -276,7 +276,7 @@ class App extends React.Component {
 
       url: '/attraction',
       type: 'POST',
-      data: 'san francisco, ca',
+      data: this.state.arrivalLocation,
         success: (res) => {
           //console.log('RESPONSE: ', res); --Y
           //console.log(typeof JSON.parse(res));--Y
