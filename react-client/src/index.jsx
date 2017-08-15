@@ -9,6 +9,8 @@ import Attraction from './components/Attraction.jsx';
 const FlightAPI = require('qpx-express');
 
 
+import FoodList from './components/FoodList.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -73,6 +75,7 @@ class App extends React.Component {
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
   }
+
 
   handleClick() {
 
@@ -286,6 +289,11 @@ class App extends React.Component {
 
   // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson%3Flocation%3D-33.8670522%2C151.1957362%26radius%3D500%26type%3Drestaurant%26key%3DAIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
   // http://127.0.0.1:3000/search?method=GET&url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fnearbysearch%2Fjson&location=-33.8670522%2C151.1957362&radius=500&type=restaurant&key=AIzaSyDM-RnDOk60Kj_ZJ2xUx29RrZKnutnI2UI
+
+  componentDidMount(){
+    this.searchFood();
+  }
+
   // componentDidMount() {
   //   $.ajax({
   //     url: '/items',
@@ -302,10 +310,14 @@ class App extends React.Component {
   searchFood(){
     $.ajax({
       url:'/food',
-      data: this.state.arrivalLocation;
+      data: this.state.arrivalLocation,
       type: 'POST',
       success:(res) => {
-        console.log('Food is searched!!')
+        this.setState({
+          foodList: JSON.parse(res)
+        })
+        //console.log('Food is searched!!');-- Y
+        console.log(JSON.parse(res));
       },
       error: (err) => {
         console.log('err', err);
@@ -323,12 +335,22 @@ class App extends React.Component {
         <SearchBar onSearch = {this.onSearch}/>
         <Hotel handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
 
+
+        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+
+
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
+
         <Attraction attrItems = {this.state.attrItems}/>
+
+
+        <FoodList foodlist = {this.state.foodList}/>
+
+
 
       </div>
     )
