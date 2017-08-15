@@ -1,4 +1,5 @@
 import React from 'react';
+
 import classnames from 'classnames';
 
 
@@ -28,6 +29,21 @@ class AttractionItem extends React.Component {
       </div>
     )
   }
+}
+
+
+
+
+function AttractionItem ({attrItemEntry}) {
+
+ return(
+      <div>
+        <div>{attrItemEntry.name}</div>
+        <div>{attrItemEntry.location.display_address}</div>
+        <img src={attrItemEntry.image_url}  width="150"></img>
+        <br></br>
+      </div>
+    )
 }
 
 
