@@ -335,7 +335,7 @@ class App extends React.Component {
     console.log('the arrival location is: ', arrivalLocation);
     console.log('the departure date is: ', departureDate);
     console.log('the return date is: ', returnDate);
-    Promise.resolve(this.setState({
+    this.setState({
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
