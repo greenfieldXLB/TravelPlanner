@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+
 import Hotel from './components/hotel.jsx'
 import Flights from './components/Flights.jsx';
 import config from '../../config.js';
@@ -10,6 +11,9 @@ import SearchBar from './components/SearchBar.jsx';
 
 
 //import Attraction from './components/Attraction';
+
+import Attraction from './components/Attraction.jsx';
+
 
 
 class App extends React.Component {
@@ -28,6 +32,7 @@ class App extends React.Component {
         {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK'},
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK'}
       ],
+
       flights: [],
       savedChoices: [{
           flights: {},
@@ -38,6 +43,20 @@ class App extends React.Component {
       }],
       hotels: [],
       airportCodes: {}
+
+      savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
+        {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
+        {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
+        {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
+        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
+        {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
+        {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
+      ],
+
+      hotels: []
+
+      attrItems: []
+
     }
     this.onSearch = this.onSearch.bind(this);
   }
@@ -258,14 +277,17 @@ class App extends React.Component {
       url: '/attraction',
       type: 'POST',
       data: 'san francisco, ca',
-      success: (res) => {
-        console.log(res);
-        //write an ajax get request
-
+        success: (res) => {
+          //console.log('RESPONSE: ', res); --Y
+          //console.log(typeof JSON.parse(res));--Y
+          //console.log(Array.isArray(JSON.parse(res))); --Y
+          this.setState({
+            attrItems: JSON.parse(res)
+          });
+        
         console.log('city being searched!');
-        //this.setState{
-        //  items: res;
-        //}
+        //console.log(this.state.attrItems);
+      
       },
       error: function(data) {    
       }
@@ -278,12 +300,22 @@ class App extends React.Component {
     return (
       <div>
         <h1>Trip Planner</h1>
+
         <SearchBar onSearch = {this.onSearch}/>
         <Hotel handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+
+
+        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+
+
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
+
+
+        <Attraction attrItems = {this.state.attrItems}/>
+
       </div>
     )
   }

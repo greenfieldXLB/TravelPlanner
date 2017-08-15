@@ -1,7 +1,9 @@
 const yelp = require('yelp-fusion');
 //const config = require('../config.js');
+
  
 var searchAttr = function (searchCity, callback){
+  var attrResult = {};
 
   const clientId = '3GcYlGCJQgbIdH-g4wIgQA';
 
@@ -26,8 +28,9 @@ var searchAttr = function (searchCity, callback){
 
   .then(response => {
     console.log('YELP RES ', response.jsonBody.businesses[0]);
-    console.log('LIMIT IS ', response.jsonBody.businesses.length);
-    callback(response.jsonBody.businesses);
+    attrResult = response.jsonBody.businesses;
+    //console.log(Array.isArray(attrResult));
+    callback(attrResult);
   })
 
   .catch(e => {

@@ -1,26 +1,14 @@
 import React from 'react';
 import AttractionItem from './AttractionItem.jsx';
 
-class Attraction extends React.Component {
+function Attraction ({attrItems}) {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      items: []
-    }
-  }
-
-
-  render(){
-
-    return (
+ return(
       <div>
         <h4> Attraction List </h4>
-        There are { props.items.length } items.
-        {props.items.map(item => <AttractionItem item = {item}/>)}
-      </div>
-    )
-  }
+        { attrItems.map(item => <AttractionItem attrItemEntry = {item}/>)}
+      </div>  
+    ) 
   
 }
 
