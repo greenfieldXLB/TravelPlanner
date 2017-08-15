@@ -14,7 +14,6 @@
     "server-dev": "nodemon server/index.js",
     "start": "npm run react-dev & npm run server-dev",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register **/*Spec.jsx"
-
   },
   "dependencies": {
     "body-parser": "^1.17.2",
