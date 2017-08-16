@@ -24,19 +24,11 @@ app.post('/attraction', function(req,res){
 
 
 app.get('/hotels', (req, res) => {
-	// console.log(req.query.city);
-  // var city = req.query.city;
 
 
   hotel.hotel(req.query, (data) => {
     res.end(JSON.stringify(data))
   })
-	// var query = req.query;
-	// request(req.query, (err, res, body) => {
- //      // let result = JSON.parse(body)
- //      // console.log(result.results[0].photos)
- //      console.log(body);
-	// })
 })
 
 
