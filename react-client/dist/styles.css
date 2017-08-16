@@ -104,11 +104,25 @@ body {
   clear: both;
 }
 
-
+.hotelHighlight{
+  background-color: #00a9e7;
+}
 .attrBackground{
    background-color: white;
 }
 
 .activeAttr{
-  background-color: green;
+  background-color: #b3ffda;
+}
+
+.avoid-clicks {
+  pointer-events: none;
+}
+
+.flightHighlight {
+  background-color: #00a9e7;
+}
+
+.avoid-clicks {
+  pointer-events: none;
 }

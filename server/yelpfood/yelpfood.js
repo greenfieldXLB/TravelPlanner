@@ -1,16 +1,29 @@
 const yelp = require('yelp-fusion');
-const request = require('request');
-const hotelConfig = require('../../config.js');
+const yelpConfig = require('../../config.js');
 
-var hotel = function (info, callback){
-  const key = hotelConfig.key
-  const client = yelp.client(key);
+var searchFood = function (searchCity, callback){
+
+
+  var foodResult = [];
+
+  const clientId = yelpConfig.clientId;
+
+  const clientSecret = yelpConfig.clientSecret;
+
+
+  const token = yelp.accessToken(clientId, clientSecret).then(response => {
+    console.log('TOKEN ', response.jsonBody.access_token);
+  }).catch(e => {
+    console.log('ERROR ', e);
+  });
+
+  const client = yelp.client(yelpConfig.yelpKey);
 
   var p1 = new Promise(
     (resolve,reject) => {
       client.search({
-        term:'hotels',
-        location: info.city,
+        term:'Restaurant',
+        location: searchCity,
         limit: 4,
         price: "1"
       }).then( ( response )=>resolve( response ) );
@@ -20,8 +33,8 @@ var hotel = function (info, callback){
   var p2 = new Promise(
     (resolve,reject) => {
       client.search({
-        term:'hotels',
-        location: info.city,
+        term:'Restaurant',
+        location: searchCity,
         limit: 4,
         price: "2"
       }).then( ( response )=>resolve( response ) );
@@ -32,7 +45,7 @@ var hotel = function (info, callback){
     (resolve,reject) => {
       client.search({
         term:'Restaurant',
-        location: info.city,
+        location: searchCity,
         limit: 4,
         price: "3"
       }).then( ( response )=>resolve( response ))
@@ -49,35 +62,12 @@ var hotel = function (info, callback){
 
     callback(foodResult);
 
-<<<<<<< HEAD
-  const token = yelp.accessToken(clientId, clientSecret)
-  .then(response => {
-    return response.jsonBody.access_token;
-  })
-  .then((data) => {
-  	return yelp.client(data)
-  })
-  .then(data => {
-  	// console.log(data);
-   return data.search({
-   	term:'hotel',
-    location: info.city,
-    price: info.price,
-    limit: 4
-  	})
-  })
-  .then(response => {
-    // console.log(response.jsonBody.businesses)
-    callback(response.jsonBody.businesses)
-  })
-  .then(data =>{
-    // console.log(1111, data)
-=======
->>>>>>> f13a3f096864b770b2027f7b80dfe25fb5a7b3f7
   })
   .catch(e => {
     console.log(e);
   });
+
 }
 
-module.exports.hotel = hotel;
+module.exports.searchFood = searchFood;
+

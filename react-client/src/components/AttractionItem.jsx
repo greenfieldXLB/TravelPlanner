@@ -1,4 +1,5 @@
 import React from 'react';
+
 import classnames from 'classnames';
 
 
@@ -29,6 +30,5 @@ class AttractionItem extends React.Component {
     )
   }
 }
-
 
 export default AttractionItem;
