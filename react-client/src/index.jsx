@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import Hotel from './components/hotel.jsx'
+import Hotels from './components/hotels.jsx'
 import Flights from './components/Flights.jsx';
 import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
 const FlightAPI = require('qpx-express');
+
 
 
 class App extends React.Component {
@@ -37,13 +38,6 @@ class App extends React.Component {
 
       airportCodes: {},
 
-      // savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
-      //   {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
-      //   {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
-      //   {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
-      //   {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
-     // ],
-
       hotels: [],
 
       attrItems: [],
@@ -70,47 +64,51 @@ class App extends React.Component {
 
 
 
-  handleClick() {
+  hotelsSearch() {
 
      $.ajax({
-      url: '/search',
+      url: '/hotels',
       method: 'GET',
-      data: {city: 'San Francisco', price:1 },
-      success: (data) => {
-         this.setState({
-            hotels: this.state.hotels.concat(JSON.parse(data))
-          });
-          $.ajax({
-      url: '/search',
-      method: 'GET',
-      data: {city: 'San Francisco', price:2 },
-      success: (data) => {
-         this.setState({
-            hotels: this.state.hotels.concat(JSON.parse(data))
-          });
-          $.ajax({
-      url: '/search',
-      method: 'GET',
-      data: {city: 'San Francisco', price:3 },
-      success: (data) => {
-         this.setState({
-            hotels: this.state.hotels.concat(JSON.parse(data))
-          });
+      data: {city: this.state.arrivalLocation},
+      success: (res) => {
+
+        const parsedAttr = JSON.parse( res );
+
+        const addAttrAddress = this.state.addresses
+        .concat( parsedAttr.map( this.responseToSaveAddress( 'hotel' ) ) );
+
+        this.setState({
+          hotels: parsedAttr,
+          addresses: addAttrAddress
+        });
+        console.log(this.state.addresses)
       },
       error: (err) => {
         console.log('error !')
       }
      })
-      },
-      error: (err) => {
-        console.log('error !')
-      }
-     })
-      },
-      error: (err) => {
-        console.log('error !')
-      }
-     })
+  }
+  handleHotelClick(hotel, event){
+   var elems = document.querySelectorAll('.hotelHighlight');
+    elems.forEach(ele => {
+      ele.classList.remove('hotelHighlight');
+    });
+    if (this.state.selectedHotelId === hotel.id) {
+      this.state.savedChoices[0].hotel = {};
+      delete this.state.selectedHotelId;
+    } else {
+      this.setState({
+        selectedHotelId: hotel.id
+      });
+    $(event.target).toggleClass('hotelHighlight');
+    var saved = {
+      name: hotel.name,
+      address: hotel.location.display_address,
+      price: hotel.prices
+    }
+   console.log(11111, this.state.savedChoices[0].hotel)
+   this.state.savedChoices[0].hotel = saved;
+    }
   }
 
 
@@ -229,6 +227,7 @@ class App extends React.Component {
       this.yelpAttrSearch();
       this.searchFood();
       this.getAirportCodes(departureLocation, arrivalLocation);
+      this.hotelsSearch(arrivalLocation);
     });
   }
 
@@ -303,7 +302,7 @@ class App extends React.Component {
         <h1>Trip Planner</h1>
 
         <SearchBar onSearch = {this.onSearch}/>
-        <Hotel handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+        <Hotels hotels = {this.state.hotels} handleHotelClick={this.handleHotelClick.bind(this)}/>
 
         <div>
           <h2>Flights</h2>
@@ -323,5 +322,3 @@ class App extends React.Component {
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-

@@ -1,5 +1,5 @@
 {
-  "name": "Travel Planner",
+  "name": "TravelPlanner",
   "version": "1.0.0",
   "description": "Hack Reactor Greenfield Project",
   "author": "",
@@ -58,4 +58,4 @@
       "es2015"
     ]
   }
-
+}
