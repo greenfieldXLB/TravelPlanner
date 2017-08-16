@@ -7,8 +7,8 @@ import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
+import Weather from './components/Weather.jsx'
 const FlightAPI = require('qpx-express');
-
 
 
 class App extends React.Component {
@@ -54,12 +54,14 @@ class App extends React.Component {
       ],
 
       hotels: [],
-
-      foodList: []
+      foodList: [],
+      weather:[],
+      weatherIcon: ''
     }
 
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
+    this.requestWeather = this.requestWeather.bind(this);
   }
 
 
@@ -228,6 +230,7 @@ class App extends React.Component {
       this.searchFood();
       this.getAirportCodes(departureLocation, arrivalLocation);
       this.hotelsSearch(arrivalLocation);
+      this.requestWeather(arrivalLocation, departureDate);
     });
   }
 
@@ -295,6 +298,25 @@ class App extends React.Component {
     }
   }
 
+  requestWeather(city, date) {
+    var context = this;
+    $.ajax({
+      method: "POST",
+      url: "/weather",
+      data: {location: city, date: date},
+      success: function(data) {
+        var parsedData = JSON.parse(data);
+        context.setState({
+          weather: [parsedData],
+          weatherIcon: parsedData.icon
+        })
+      },
+      error: function(err) {
+          console.log('error in requesting data.')
+      }
+    })
+  }
+
 
   render () {
     return (
@@ -302,6 +324,7 @@ class App extends React.Component {
         <h1>Trip Planner</h1>
 
         <SearchBar onSearch = {this.onSearch}/>
+        <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
         <Hotels hotels = {this.state.hotels} handleHotelClick={this.handleHotelClick.bind(this)}/>
 
         <div>
