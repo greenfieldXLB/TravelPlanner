@@ -118,3 +118,11 @@ body {
 .avoid-clicks {
   pointer-events: none;
 }
+
+.flightHighlight {
+  background-color: #00a9e7;
+}
+
+.avoid-clicks {
+  pointer-events: none;
+}

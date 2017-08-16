@@ -8,6 +8,8 @@ var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:
       console.log ('Succeeded connected to: ' + uristring);
     }
   });
+var itemSchema = mongoose.Schema({
+});
 
 var db = mongoose.connection;
 
@@ -17,7 +19,4 @@ db.on('error', function() {
 
 db.once('open', function() {
   console.log('mongoose connected successfully');
-});
-
-var itemSchema = mongoose.Schema({
 });

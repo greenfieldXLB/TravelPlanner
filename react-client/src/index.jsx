@@ -7,7 +7,7 @@ import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
-import Weather from './components/Weather.jsx'
+import Weather from './components/Weather.jsx';
 const FlightAPI = require('qpx-express');
 
 
@@ -37,6 +37,7 @@ class App extends React.Component {
       }],
 
       airportCodes: {},
+      savedTrips: ['trip1', 'trip2', 'trip3'],
 
       hotels: [],
 
@@ -58,16 +59,12 @@ class App extends React.Component {
       weather:[],
       weatherIcon: ''
     }
-
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
     this.requestWeather = this.requestWeather.bind(this);
   }
 
-
-
   hotelsSearch() {
-
      $.ajax({
       url: '/hotels',
       method: 'GET',
@@ -108,35 +105,33 @@ class App extends React.Component {
       address: hotel.location.display_address,
       price: hotel.prices
     }
-   console.log(11111, this.state.savedChoices[0].hotel)
    this.state.savedChoices[0].hotel = saved;
     }
   }
 
-
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
-    var apiKey = config.flights;
+    var apiKey = process.env.QPX_API || config.flights;
     var qpx = new FlightAPI(apiKey);
 
     var body = {
-        "request": {
-            "passengers": { "adultCount": 1 },
-            "slice": [{
-                "origin": depLocation,
-                "destination": arrLocation,
-                "date": departureDate,
-                "maxStops": 0
-              },
-              {
-                "origin": arrLocation,
-                "destination": depLocation,
-                "date": returnDate, // YYYY-MM-DD
-                "maxStops": 0
-              }
-            ],
-            "solutions": 10,
+      "request": {
+        "passengers": { "adultCount": 1 },
+        "slice": [{
+          "origin": depLocation,
+          "destination": arrLocation,
+          "date": departureDate,
+          "maxStops": 0
+          },
+          {
+            "origin": arrLocation,
+            "destination": depLocation,
+            "date": returnDate, // YYYY-MM-DD
+            "maxStops": 0
           }
-        };
+        ],
+        "solutions": 10,
+      }
+    };
     var context = this;
     qpx.getInfo(body, function(error, data){
       context.setState({
@@ -148,11 +143,13 @@ class App extends React.Component {
   getAirportCodes(departLoc, arrivalLoc) {
     var context = this;
     var codes = {};
+    var APCAuth = process.env.APCAuth || config.APCAuth;
+    var APCSecret = process.env.APCSecret || config.APCSecret;
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
-        "APC-Auth": config.APCAuth,
-        "APC-Auth-Secret": config.APCSecret
+        "APC-Auth": APCAuth,
+        "APC-Auth-Secret": APCSecret
       },
       method: "POST"
     })
@@ -168,8 +165,8 @@ class App extends React.Component {
       fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
         headers: {
           Accept: "application/json",
-          "APC-Auth": config.APCAuth,
-          "APC-Auth-Secret": config.APCSecret
+          "APC-Auth": APCAuth,
+          "APC-Auth-Secret": APCSecret
         },
         method: "POST"
       })
@@ -193,27 +190,36 @@ class App extends React.Component {
   }
 
   handleFlightClick(flight, event) {
-    $(event.target).toggleClass('highlight');
-    console.log(event.target);
-    var flight1 = flight.slice[0];
-    var flight2 = flight.slice[1];
-    var saved = {
-      saletotal: flight.saleTotal,
-      goingDuration: flight1.duration,
-      goingOrigin: flight1.segment[0].leg[0].origin,
-      goingDestination: flight1.segment[0].leg[0].destination,
-      goingArrivalTime: flight1.segment[0].leg[0].arrivalTime,
-      goingCarrier: flight1.segment[0].flight.carrier,
-      returnDuration: flight2.duration,
-      returnOrigin: flight2.segment[0].leg[0].origin,
-      returnDestination: flight2.segment[0].leg[0].destination,
-      returnArrivalTime: flight2.segment[0].leg[0].arrivalTime,
-      returnCarrier: flight2.segment[0].flight.carrier
-    };
-    this.state.savedChoices[0].flights = saved;
+    var elems = document.querySelectorAll('.flightHighlight');
+    elems.forEach(ele => {
+      ele.classList.remove('flightHighlight');
+    });
+    if (this.state.selectedFlightId === flight.id) {
+      this.state.savedChoices[0].flights = {};
+      delete this.state.selectedFlightId;
+    } else {
+      this.setState({
+        selectedFlightId: flight.id
+      });
+      $(event.target).toggleClass('flightHighlight');
+      var flight1 = flight.slice[0];
+      var flight2 = flight.slice[1];
+      var saved = {
+        saletotal: flight.saleTotal,
+        goingDuration: flight1.duration,
+        goingOrigin: flight1.segment[0].leg[0].origin,
+        goingDestination: flight1.segment[0].leg[0].destination,
+        goingArrivalTime: flight1.segment[0].leg[0].arrivalTime,
+        goingCarrier: flight1.segment[0].flight.carrier,
+        returnDuration: flight2.duration,
+        returnOrigin: flight2.segment[0].leg[0].origin,
+        returnDestination: flight2.segment[0].leg[0].destination,
+        returnArrivalTime: flight2.segment[0].leg[0].arrivalTime,
+        returnCarrier: flight2.segment[0].flight.carrier
+      };
+      this.state.savedChoices[0].flights = saved;
+    }
   }
-
-
 
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
     console.log('the departure location is: ', departureLocation);
@@ -232,6 +238,10 @@ class App extends React.Component {
       this.hotelsSearch(arrivalLocation);
       this.requestWeather(arrivalLocation, departureDate);
     });
+  }
+
+  componentDidMount(){
+    //this.yelpAttrSearch();
   }
 
 
@@ -317,16 +327,13 @@ class App extends React.Component {
     })
   }
 
-
   render () {
     return (
       <div>
         <h1>Trip Planner</h1>
-
         <SearchBar onSearch = {this.onSearch}/>
         <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-        <Hotels hotels = {this.state.hotels} handleHotelClick={this.handleHotelClick.bind(this)}/>
-
+        <Hotels handleHotelClick={this.handleHotelClick.bind(this)} hotels = {this.state.hotels} />
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
@@ -341,7 +348,5 @@ class App extends React.Component {
   }
 
 }
-
-
 
 ReactDOM.render(<App />, document.getElementById('app'));
