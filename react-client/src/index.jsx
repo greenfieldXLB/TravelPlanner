@@ -303,8 +303,7 @@ class App extends React.Component {
     $.ajax({
       method: "POST",
       url: "/weather",
-      //data: JSON.stringify({location: this.state.arrivalLocation, date: this.state.arrivalDate }),
-      data: {location: "Iceland", date: "2016-12-01" },
+      data: {location: city, date: date},
       success: function(data) {
         var parsedData = JSON.parse(data);
         context.setState({
