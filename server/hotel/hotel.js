@@ -4,7 +4,7 @@ const hotelConfig = require('../../config.js');
 
 
 var hotel = function (info, callback){
-  const key = hotelConfig.key
+  const key = process.env.HOTEL_API || hotelConfig.key;
   const client = yelp.client(key);
 
   var p1 = new Promise(

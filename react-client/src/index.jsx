@@ -189,11 +189,15 @@ class App extends React.Component {
     });
   }
 
-  handleFlightClick(flight, event) {
-    var elems = document.querySelectorAll('.flightHighlight');
+  removeClass(classname) {
+    var elems = document.querySelectorAll(`.${classname}`);
     elems.forEach(ele => {
-      ele.classList.remove('flightHighlight');
+      ele.classList.remove(classname);
     });
+  }
+
+  handleFlightClick(flight, event) {
+    this.removeClass('flightHighlight');
     if (this.state.selectedFlightId === flight.id) {
       this.state.savedChoices[0].flights = {};
       delete this.state.selectedFlightId;
@@ -268,7 +272,6 @@ class App extends React.Component {
       }
     })
   }
-
 
   searchFood(){
     $.ajax({
