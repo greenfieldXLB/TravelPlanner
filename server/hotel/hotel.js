@@ -2,6 +2,7 @@ const yelp = require('yelp-fusion');
 const request = require('request');
 const hotelConfig = require('../../config.js');
 
+
 var hotel = function (info, callback){
   const key = hotelConfig.key
   const client = yelp.client(key);
@@ -49,31 +50,6 @@ var hotel = function (info, callback){
 
     callback(foodResult);
 
-<<<<<<< HEAD
-  const token = yelp.accessToken(clientId, clientSecret)
-  .then(response => {
-    return response.jsonBody.access_token;
-  })
-  .then((data) => {
-  	return yelp.client(data)
-  })
-  .then(data => {
-  	// console.log(data);
-   return data.search({
-   	term:'hotel',
-    location: info.city,
-    price: info.price,
-    limit: 4
-  	})
-  })
-  .then(response => {
-    // console.log(response.jsonBody.businesses)
-    callback(response.jsonBody.businesses)
-  })
-  .then(data =>{
-    // console.log(1111, data)
-=======
->>>>>>> f13a3f096864b770b2027f7b80dfe25fb5a7b3f7
   })
   .catch(e => {
     console.log(e);
