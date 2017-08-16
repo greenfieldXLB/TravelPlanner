@@ -76,10 +76,13 @@ class App extends React.Component {
       data: {city: this.state.arrivalLocation},
       success: (res) => {
 
+
         const parsedAttr = JSON.parse( res );
 
         const addAttrAddress = this.state.addresses
         .concat( parsedAttr.map( this.responseToSaveAddress( 'hotel' ) ) );
+
+  handleClick() {
 
         this.setState({
           hotels: parsedAttr,
@@ -337,6 +340,10 @@ class App extends React.Component {
     this.updateSavedChoices( 'attractions', e.props.attrItemEntry, e.state.selected );
   }
 
+  handleFoodItemState(e){
+    this.updateSavedChoices( 'food', e.props.attrItemEntry, e.state.selected );
+  }
+
   updateSavedChoices( categoryName, itemData, selected ){
     const list = this.state.savedChoices[0][ categoryName ];
     if( list === undefined ){
@@ -377,7 +384,7 @@ class App extends React.Component {
 
         <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)}/>
 
-        <FoodList foodlist = {this.state.foodList}/>
+        <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)}/>
 
       </div>
     )
