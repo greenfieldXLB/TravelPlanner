@@ -341,7 +341,7 @@ class App extends React.Component {
   }
 
   handleFoodItemState(e){
-    this.updateSavedChoices( 'food', e.props.attrItemEntry, e.state.selected );
+    this.updateSavedChoices( 'food', e.props.fooditem, e.state.selected );
   }
 
   updateSavedChoices( categoryName, itemData, selected ){
