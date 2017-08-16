@@ -57,7 +57,7 @@ class App extends React.Component {
       hotels: [],
       foodList: [],
       weather:[],
-      weatherIcon: ''
+      weatherIcon: '',
 
       foodList: []
 
@@ -76,17 +76,14 @@ class App extends React.Component {
       data: {city: this.state.arrivalLocation},
       success: (res) => {
 
+        const parsedHotel = JSON.parse( res );
 
-        const parsedAttr = JSON.parse( res );
-
-        const addAttrAddress = this.state.addresses
-        .concat( parsedAttr.map( this.responseToSaveAddress( 'hotel' ) ) );
-
-  handleClick() {
+        const addHotelAddress = this.state.addresses
+        .concat( parsedHotel.map( this.responseToSaveAddress( 'hotel' ) ) );
 
         this.setState({
-          hotels: parsedAttr,
-          addresses: addAttrAddress
+          hotels: parsedHotel,
+          addresses: addHotelAddress
         });
         console.log(this.state.addresses)
       },
@@ -95,6 +92,7 @@ class App extends React.Component {
       }
      })
   }
+
   handleHotelClick(hotel, event){
    var elems = document.querySelectorAll('.hotelHighlight');
     elems.forEach(ele => {
@@ -335,6 +333,7 @@ class App extends React.Component {
           console.log('error in requesting data.')
       }
     })
+  }
 
   handleAttrItemState(e){
     this.updateSavedChoices( 'attractions', e.props.attrItemEntry, e.state.selected );
