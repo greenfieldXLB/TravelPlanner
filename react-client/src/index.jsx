@@ -198,34 +198,27 @@ class App extends React.Component {
   }
 
   handleFlightClick(flight, event) {
-    if (this.state.selectedFlightId === flight.id) {
-      this.state.savedChoices[0].flights = {};
-      delete this.state.selectedFlightId;
-      $(event.target).toggleClass('selected');
-    } else if (!this.state.selectedFlightId){
-      this.setState({
-        selectedFlightId: flight.id
-      });
-      $(event.target).toggleClass('selected');
-      var flight1 = flight.slice[0];
-      var flight2 = flight.slice[1];
-      var saved = {
-        saletotal: flight.saleTotal,
-        goingDuration: flight1.duration,
-        goingOrigin: flight1.segment[0].leg[0].origin,
-        goingDestination: flight1.segment[0].leg[0].destination,
-        goingArrivalTime: flight1.segment[0].leg[0].arrivalTime,
-        goingCarrier: flight1.segment[0].flight.carrier,
-        returnDuration: flight2.duration,
-        returnOrigin: flight2.segment[0].leg[0].origin,
-        returnDestination: flight2.segment[0].leg[0].destination,
-        returnArrivalTime: flight2.segment[0].leg[0].arrivalTime,
-        returnCarrier: flight2.segment[0].flight.carrier
-      };
-      this.state.savedChoices[0].flights = saved;
-    } else {
-      alert("Please uncheck the previous flight before selecting a new one");
-    }
+    var elems = document.querySelectorAll(".selected");
+    [].forEach.call(elems, function(el) {
+        el.classList.remove("selected");
+    });
+    $(event.target).toggleClass('selected');
+    var flight1 = flight.slice[0];
+    var flight2 = flight.slice[1];
+    var saved = {
+      saletotal: flight.saleTotal,
+      goingDuration: flight1.duration,
+      goingOrigin: flight1.segment[0].leg[0].origin,
+      goingDestination: flight1.segment[0].leg[0].destination,
+      goingArrivalTime: flight1.segment[0].leg[0].arrivalTime,
+      goingCarrier: flight1.segment[0].flight.carrier,
+      returnDuration: flight2.duration,
+      returnOrigin: flight2.segment[0].leg[0].origin,
+      returnDestination: flight2.segment[0].leg[0].destination,
+      returnArrivalTime: flight2.segment[0].leg[0].arrivalTime,
+      returnCarrier: flight2.segment[0].flight.carrier
+    };
+    this.state.savedChoices[0].flights = saved;
   }
 
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
