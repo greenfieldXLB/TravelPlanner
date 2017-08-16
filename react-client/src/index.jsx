@@ -37,7 +37,7 @@ class App extends React.Component {
       }],
 
       airportCodes: {},
-      
+
       hotels: [],
 
       attrItems: [],
@@ -322,5 +322,3 @@ class App extends React.Component {
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
