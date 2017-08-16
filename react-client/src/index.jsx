@@ -10,7 +10,6 @@ import FoodList from './components/FoodList.jsx';
 import Weather from './components/Weather.jsx';
 import SavedTrips from './components/SavedTrips.jsx';
 const FlightAPI = require('qpx-express');
-const SabreDevStudio = require('sabre-dev-studio');
 
 
 class App extends React.Component {
@@ -109,8 +108,6 @@ class App extends React.Component {
     }
    this.state.savedChoices[0].hotel = saved;
     }
-
-  componentDidMount() {
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
@@ -245,7 +242,6 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    //this.yelpAttrSearch();
   }
 
 
@@ -332,20 +328,23 @@ class App extends React.Component {
   }
 
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
-    console.log('the departure location is: ', departureLocation);
-    console.log('the arrival location is: ', arrivalLocation);
-    console.log('the departure date is: ', departureDate);
-    console.log('the return date is: ', returnDate);
-    this.setState({
-      departureLocation: departureLocation,
-      arrivalLocation: arrivalLocation,
-      departureDate: departureDate,
-      returnDate: returnDate
-    }))
-    .then(() => {
-      // this.getAirportCodes(this.state.departureLocation, this.state.arrivalLocation);
-    });
-  }
+      console.log('the departure location is: ', departureLocation);
+      console.log('the arrival location is: ', arrivalLocation);
+      console.log('the departure date is: ', departureDate);
+      console.log('the return date is: ', returnDate);
+      this.setState({
+        departureLocation: departureLocation,
+        arrivalLocation: arrivalLocation,
+        departureDate: departureDate,
+        returnDate: returnDate
+      },function(){
+        this.yelpAttrSearch();
+        this.searchFood();
+        this.getAirportCodes(departureLocation, arrivalLocation);
+        this.hotelsSearch(arrivalLocation);
+        this.requestWeather(arrivalLocation, departureDate);
+      });
+    }
 
 
   render () {
