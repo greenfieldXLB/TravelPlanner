@@ -1,21 +1,23 @@
 import React from 'react';
-
 import classnames from 'classnames';
-
 
 class AttractionItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: false
+      selected: false,
     }
   }
 
   handleAttrClick(){
-    console.log('CLICKED')
+    console.log('CLICKED');
+
     this.setState({
-      selected: !this.state.selected
-    })
+      selected: !this.state.selected,
+      //selectedArry: currentArr
+    }, ()=>{
+      this.props.handleAttrItemState( this );
+    });
   }
 
   render(){

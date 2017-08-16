@@ -29,12 +29,14 @@ class App extends React.Component {
       flights: [],
 
       savedChoices: [{
-          flights: {},
-          hotel: {},
-          attractions: [],
-          food: [],
-          weather: {}
+        flights: {},
+        hotel: {},
+        attractions: [],
+        food: [],
+        weather: {}
       }],
+
+      savedAttractions: [],
 
       airportCodes: {},
       savedTrips: ['trip1', 'trip2', 'trip3'],
@@ -45,14 +47,14 @@ class App extends React.Component {
 
       airportCodes: {},
 
-      savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
-        {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
-        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
-        {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
-        {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
-      ],
+      // savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
+      //   {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
+      //   {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
+      //   {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
+      //   {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
+      //   {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
+      //   {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
+      // ],
 
       hotels: [],
       foodList: [],
@@ -61,7 +63,13 @@ class App extends React.Component {
     }
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
+<<<<<<< HEAD
     this.requestWeather = this.requestWeather.bind(this);
+=======
+
+
+
+>>>>>>> saved selected attraction items
   }
 
   hotelsSearch() {
@@ -308,6 +316,7 @@ class App extends React.Component {
     }
   }
 
+<<<<<<< HEAD
   requestWeather(city, date) {
     var context = this;
     $.ajax({
@@ -325,6 +334,31 @@ class App extends React.Component {
           console.log('error in requesting data.')
       }
     })
+=======
+  handleAttrItemState(e){
+    this.updateSavedChoices( 'savedAttractions', e.props.attrItemEntry, e.state.selected );
+  }
+
+  updateSavedChoices( stateName, itemData, selected ){
+    const list = this.state[ stateName ];
+    if( list === undefined ){
+      return;
+    }
+
+    if( selected ){
+      list.push( itemData );
+    }
+    else{
+      const index = list.indexOf( itemData );
+      if( index >= 0 ){
+        list.splice( index, 1 );
+      }
+    }
+
+    this.setState({
+      [stateName] : list
+    });
+>>>>>>> saved selected attraction items
   }
 
   render () {
@@ -339,7 +373,7 @@ class App extends React.Component {
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
-        <Attraction attrItems = {this.state.attrItems}/>
+        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)}/>
 
         <FoodList foodlist = {this.state.foodList}/>
 
