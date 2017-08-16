@@ -87,8 +87,6 @@ class App extends React.Component {
       }
      })
   }
-<<<<<<< HEAD
-=======
   handleHotelClick(hotel, event){
    var elems = document.querySelectorAll('.hotelHighlight');
     elems.forEach(ele => {
@@ -110,7 +108,6 @@ class App extends React.Component {
    this.state.savedChoices[0].hotel = saved;
     }
   }
->>>>>>> f13a3f096864b770b2027f7b80dfe25fb5a7b3f7
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
     var apiKey = process.env.QPX_API || config.flights;
@@ -168,13 +165,8 @@ class App extends React.Component {
       fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
         headers: {
           Accept: "application/json",
-<<<<<<< HEAD
-          "APC-Auth": "ea0eb61a9e",
-          "APC-Auth-Secret": "4b35787cfc26306"
-=======
           "APC-Auth": APCAuth,
           "APC-Auth-Secret": APCSecret
->>>>>>> f13a3f096864b770b2027f7b80dfe25fb5a7b3f7
         },
         method: "POST"
       })
@@ -340,23 +332,16 @@ class App extends React.Component {
       <div>
         <h1>Trip Planner</h1>
         <SearchBar onSearch = {this.onSearch}/>
-<<<<<<< HEAD
-        <Hotel handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
-=======
         <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
         <Hotels handleHotelClick={this.handleHotelClick.bind(this)} hotels = {this.state.hotels} />
->>>>>>> f13a3f096864b770b2027f7b80dfe25fb5a7b3f7
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
         <Attraction attrItems = {this.state.attrItems}/>
-<<<<<<< HEAD
-=======
 
         <FoodList foodlist = {this.state.foodList}/>
 
->>>>>>> f13a3f096864b770b2027f7b80dfe25fb5a7b3f7
       </div>
     )
   }
