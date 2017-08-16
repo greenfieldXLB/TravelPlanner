@@ -1,11 +1,6 @@
-
 bundle.js
 node_modules/
 config.js
-
-
-### node etc ###
-
 
 # Logs
 logs
@@ -28,11 +23,9 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 
-
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
-
 
 .DS_Store
 react-client/.DS_Store

@@ -1,5 +1,5 @@
 {
-  "name": "travelplan",
+  "name": "Travel Planner",
   "version": "1.0.0",
   "description": "Hack Reactor Greenfield Project",
   "author": "",
@@ -57,13 +57,5 @@
       "react",
       "es2015"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/novyQ/TravelPlanner.git"
-  },
-  "bugs": {
-    "url": "https://github.com/novyQ/TravelPlanner/issues"
-  },
-  "homepage": "https://github.com/novyQ/TravelPlanner#readme"
-}
+  }
+
