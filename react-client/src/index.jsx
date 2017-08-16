@@ -89,10 +89,7 @@ class App extends React.Component {
      })
   }
   handleHotelClick(hotel, event){
-   var elems = document.querySelectorAll('.hotelHighlight');
-    elems.forEach(ele => {
-      ele.classList.remove('hotelHighlight');
-    });
+    this.removeClass('hotelHighlight');
     if (this.state.selectedHotelId === hotel.id) {
       this.state.savedChoices[0].hotel = {};
       delete this.state.selectedHotelId;
@@ -190,11 +187,15 @@ class App extends React.Component {
     });
   }
 
-  handleFlightClick(flight, event) {
-    var elems = document.querySelectorAll('.flightHighlight');
+  removeClass(classname) {
+    var elems = document.querySelectorAll(`.${classname}`);
     elems.forEach(ele => {
-      ele.classList.remove('flightHighlight');
+      ele.classList.remove(classname);
     });
+  }
+
+  handleFlightClick(flight, event) {
+    this.removeClass('flightHighlight');
     if (this.state.selectedFlightId === flight.id) {
       this.state.savedChoices[0].flights = {};
       delete this.state.selectedFlightId;
@@ -227,6 +228,10 @@ class App extends React.Component {
     console.log('the arrival location is: ', arrivalLocation);
     console.log('the departure date is: ', departureDate);
     console.log('the return date is: ', returnDate);
+    this.removeClass('flightHighlight');
+    this.removeClass('hotelHighlight');
+    this.state.savedChoices[0].flights = {};
+    this.state.savedChoices[0].hotel = {};
     this.setState({
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
@@ -326,26 +331,6 @@ class App extends React.Component {
       }
     })
   }
-
-  onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
-      console.log('the departure location is: ', departureLocation);
-      console.log('the arrival location is: ', arrivalLocation);
-      console.log('the departure date is: ', departureDate);
-      console.log('the return date is: ', returnDate);
-      this.setState({
-        departureLocation: departureLocation,
-        arrivalLocation: arrivalLocation,
-        departureDate: departureDate,
-        returnDate: returnDate
-      },function(){
-        this.yelpAttrSearch();
-        this.searchFood();
-        this.getAirportCodes(departureLocation, arrivalLocation);
-        this.hotelsSearch(arrivalLocation);
-        this.requestWeather(arrivalLocation, departureDate);
-      });
-    }
-
 
   render () {
     return (
