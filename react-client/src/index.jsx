@@ -65,10 +65,7 @@ class App extends React.Component {
     this.requestWeather = this.requestWeather.bind(this);
   }
 
-
-
   hotelsSearch() {
-
      $.ajax({
       url: '/hotels',
       method: 'GET',
@@ -226,7 +223,6 @@ class App extends React.Component {
         returnCarrier: flight2.segment[0].flight.carrier
       };
       this.state.savedChoices[0].flights = saved;
-      console.log(this.state.savedChoices[0].flights);
     }
   }
 
