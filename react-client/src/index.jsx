@@ -37,8 +37,6 @@ class App extends React.Component {
         weather: {}
       }],
 
-      savedAttractions: [],
-
       airportCodes: {},
       savedTrips: ['trip1', 'trip2', 'trip3'],
 
@@ -61,16 +59,15 @@ class App extends React.Component {
       foodList: [],
       weather:[],
       weatherIcon: ''
+
+      foodList: []
+
     }
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
-<<<<<<< HEAD
+
     this.requestWeather = this.requestWeather.bind(this);
-=======
 
-
-
->>>>>>> saved selected attraction items
   }
 
   hotelsSearch() {
@@ -231,6 +228,7 @@ class App extends React.Component {
     }
   }
 
+
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
     console.log('the departure location is: ', departureLocation);
     console.log('the arrival location is: ', arrivalLocation);
@@ -321,7 +319,7 @@ class App extends React.Component {
     }
   }
 
-<<<<<<< HEAD
+
   requestWeather(city, date) {
     var context = this;
     $.ajax({
@@ -339,13 +337,13 @@ class App extends React.Component {
           console.log('error in requesting data.')
       }
     })
-=======
+
   handleAttrItemState(e){
-    this.updateSavedChoices( 'savedAttractions', e.props.attrItemEntry, e.state.selected );
+    this.updateSavedChoices( 'attractions', e.props.attrItemEntry, e.state.selected );
   }
 
-  updateSavedChoices( stateName, itemData, selected ){
-    const list = this.state[ stateName ];
+  updateSavedChoices( categoryName, itemData, selected ){
+    const list = this.state.savedChoices[0][ categoryName ];
     if( list === undefined ){
       return;
     }
@@ -360,10 +358,14 @@ class App extends React.Component {
       }
     }
 
+
     this.setState({
       [stateName] : list
     });
->>>>>>> saved selected attraction items
+
+    this.state.savedChoices[0][ categoryName ] = list;
+    console.log(this.state.savedChoices[0]);
+
   }
 
   render () {
