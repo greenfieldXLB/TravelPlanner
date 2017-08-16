@@ -89,9 +89,9 @@ class App extends React.Component {
      })
   }
   handleHotelClick(hotel, event){
-   var elems = document.querySelectorAll('.highlight');
+   var elems = document.querySelectorAll('.hotelHighlight');
     elems.forEach(ele => {
-      ele.classList.remove('highlight');
+      ele.classList.remove('hotelHighlight');
     });
     if (this.state.selectedHotelId === hotel.id) {
       this.state.savedChoices[0].hotel = {};
@@ -100,7 +100,7 @@ class App extends React.Component {
       this.setState({
         selectedHotelId: hotel.id
       });
-    $(event.target).toggleClass('highlight');
+    $(event.target).toggleClass('hotelHighlight');
     var saved = {
       name: hotel.name,
       address: hotel.location.display_address,
@@ -224,9 +224,9 @@ class App extends React.Component {
       departureDate: departureDate,
       returnDate: returnDate
     },function(){
-      // this.yelpAttrSearch();
-      // this.searchFood();
-      // this.getAirportCodes(departureLocation, arrivalLocation);
+      this.yelpAttrSearch();
+      this.searchFood();
+      this.getAirportCodes(departureLocation, arrivalLocation);
       this.hotelsSearch(arrivalLocation);
     });
   }
