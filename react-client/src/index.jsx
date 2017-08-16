@@ -7,9 +7,8 @@ import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
-import Weather from './components/Weather.jsx'
+import Weather from './components/Weather.jsx';
 const FlightAPI = require('qpx-express');
-const SabreDevStudio = require('sabre-dev-studio');
 
 
 class App extends React.Component {
@@ -106,13 +105,9 @@ class App extends React.Component {
       address: hotel.location.display_address,
       price: hotel.prices
     }
-   console.log(11111, this.state.savedChoices[0].hotel)
    this.state.savedChoices[0].hotel = saved;
     }
-
-  componentDidMount() {
   }
-
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
     var apiKey = process.env.QPX_API || config.flights;
@@ -338,7 +333,7 @@ class App extends React.Component {
         <h1>Trip Planner</h1>
         <SearchBar onSearch = {this.onSearch}/>
         <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-        <Hotel  handleClick={this.handleClick.bind(this)} hotels = {this.state.hotels} />
+        <Hotels handleHotelClick={this.handleHotelClick.bind(this)} hotels = {this.state.hotels} />
         <div>
           <h2>Flights</h2>
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>

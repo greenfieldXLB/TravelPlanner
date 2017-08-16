@@ -4,12 +4,10 @@ const items = require('../database-mongo');
 const request = require('request');
 const app = express();
 const hotel = require('./hotel/hotel')
-<<<<<<< HEAD
 const yelpattr = require('./yelpattraction/yelpattraction')
 const yelpfood = require('./yelpfood/yelpfood')
 const weather = require('./weatherAPI/weather.js');
 const geolocation = require('./geolocationAPI/geolocation.js');
-const flight = require('./flights.js');
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -49,28 +49,6 @@ var hotel = function (info, callback){
 
     callback(foodResult);
 
-  const token = yelp.accessToken(clientId, clientSecret)
-  .then(response => {
-    return response.jsonBody.access_token;
-  })
-  .then((data) => {
-  	return yelp.client(data)
-  })
-  .then(data => {
-  	// console.log(data);
-   return data.search({
-   	term:'hotel',
-    location: info.city,
-    price: info.price,
-    limit: 4
-  	})
-  })
-  .then(response => {
-    // console.log(response.jsonBody.businesses)
-    callback(response.jsonBody.businesses)
-  })
-  .then(data =>{
-    // console.log(1111, data)
   })
   .catch(e => {
     console.log(e);
