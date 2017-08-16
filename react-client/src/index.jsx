@@ -6,8 +6,8 @@ import Flights from './components/Flights.jsx';
 import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
+import FoodList from './components/FoodList.jsx';
 const FlightAPI = require('qpx-express');
-
 
 
 class App extends React.Component {
@@ -48,12 +48,27 @@ class App extends React.Component {
 
       attrItems: [],
 
-      attrSelectOn: false
+      airportCodes: {},
 
+      savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
+        {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
+        {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
+        {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
+        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
+        {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
+        {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
+      ],
+
+      hotels: [],
+
+      foodList: []
     }
+
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
   }
+
+
 
   handleClick() {
 
@@ -212,13 +227,9 @@ class App extends React.Component {
       returnDate: returnDate
     },function(){
       this.yelpAttrSearch();
+      this.searchFood();
       this.getAirportCodes(departureLocation, arrivalLocation);
     });
-  }
-
-
-  componentDidMount(){
-    //this.yelpAttrSearch();
   }
 
 
@@ -231,25 +242,48 @@ class App extends React.Component {
       data: { location: this.state.arrivalLocation },
       success: (res) => {
 
-        const parsed = JSON.parse( res );
-        // console.log(parsed);
+        const parsedAttr = JSON.parse( res );
 
-        const addresses = this.state.addresses
-        .concat( parsed.map( this.responseToSaveAddress('attraction') ) );
+        const addAttrAddress = this.state.addresses
+        .concat( parsedAttr.map( this.responseToSaveAddress( 'attraction' ) ) );
 
         this.setState({
-          attrItems: JSON.parse(res),
-          addresses: addresses
+          attrItems: parsedAttr,
+          addresses: addAttrAddress
         });
-
       },
       error: function(data) {
       }
     })
   }
 
-  responseToSaveAddress( category ){
 
+  searchFood(){
+    $.ajax({
+      url:'/food',
+      data: { location: this.state.arrivalLocation },
+      type: 'POST',
+      success:(res) => {
+
+          const parsedFood = JSON.parse( res );
+
+          const addFoodAddress = this.state.addresses
+          .concat( parsedFood.map( this.responseToSaveAddress( 'food' ) ) );
+
+          this.setState({
+            foodList: parsedFood,
+            addresses: addFoodAddress
+          });
+      },
+
+      error: (err) => {
+        console.log('err', err);
+      }
+    })
+  }
+
+
+  responseToSaveAddress( category ){
     return function( {name, location, coordinates} ){
       const display_address = location.display_address;
 
@@ -261,6 +295,7 @@ class App extends React.Component {
       };
     }
   }
+
 
   render () {
     return (
@@ -276,6 +311,8 @@ class App extends React.Component {
         </div>
 
         <Attraction attrItems = {this.state.attrItems}/>
+
+        <FoodList foodlist = {this.state.foodList}/>
 
       </div>
     )

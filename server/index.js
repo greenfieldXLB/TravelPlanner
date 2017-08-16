@@ -1,12 +1,11 @@
-
+const express = require('express');
+const bodyParser = require('body-parser');
 const items = require('../database-mongo');
 const request = require('request');
-const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const hotel = require('./hotel/hotel')
-const yelp = require('./yelp/yelp')
-
+const yelpattr = require('./yelpattraction/yelpattraction')
+const yelpfood = require('./yelpfood/yelpfood')
 
 
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -17,7 +16,7 @@ app.post('/attraction', function(req,res){
 
   const attrLocation = req.body.location;
 
-  yelp.searchAttr(attrLocation, function(attrResult){
+  yelpattr.searchAttr(attrLocation, function(attrResult){
     res.send(200, JSON.stringify(attrResult));
   })
 
@@ -41,9 +40,20 @@ app.get('/search', (req, res) => {
 })
 
 
+app.post('/food', function (req, res){
+
+  let location = req.body.location;
+
+
+  yelpfood.searchFood(location, function(foodresult){
+    res.send(200, JSON.stringify(foodresult));
+
+  });
+
+});
+
 
 var port = process.env.PORT;
-
 
 app.listen(port, function() {
  console.log(`listening on port ${port}`)
