@@ -122,24 +122,24 @@ class App extends React.Component {
     var qpx = new FlightAPI(apiKey);
 
     var body = {
-        "request": {
-            "passengers": { "adultCount": 1 },
-            "slice": [{
-                "origin": depLocation,
-                "destination": arrLocation,
-                "date": departureDate,
-                "maxStops": 0
-              },
-              {
-                "origin": arrLocation,
-                "destination": depLocation,
-                "date": returnDate, // YYYY-MM-DD
-                "maxStops": 0
-              }
-            ],
-            "solutions": 10,
+      "request": {
+        "passengers": { "adultCount": 1 },
+        "slice": [{
+          "origin": depLocation,
+          "destination": arrLocation,
+          "date": departureDate,
+          "maxStops": 0
+          },
+          {
+            "origin": arrLocation,
+            "destination": depLocation,
+            "date": returnDate, // YYYY-MM-DD
+            "maxStops": 0
           }
-        };
+        ],
+        "solutions": 10,
+      }
+    };
     var context = this;
     qpx.getInfo(body, function(error, data){
       context.setState({
