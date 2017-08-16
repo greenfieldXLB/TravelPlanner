@@ -16,9 +16,21 @@ var searchAttr = function (searchCity, callback){
     console.log('ERROR ', e);
   });
 
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+=======
+<<<<<<< HEAD
+>>>>>>> formatting in progress
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
+||||||| merged common ancestors
+
+  const client = yelp.client(yelpConfig.yelpKey);
+=======
+
+  const client = yelp.client(yelpConfig.yelpkey);
+>>>>>>> formatting in progress
 
 
 

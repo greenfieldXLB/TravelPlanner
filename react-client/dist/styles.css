@@ -3,6 +3,7 @@
 }
 
 body {
+
   padding: 2em;
   font-family: Arial, sans-serif;
   font-weight: normal;
@@ -123,3 +124,22 @@ body {
   background-color: #00a9e7;
 }
 
+
+.nav {
+  display: block;
+  width:90%;
+}
+
+.search {
+  display: inline-block;
+  width:80%;
+}
+
+.weather {
+  display: inline-block;
+  text-align: center;
+  width:20%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+}
