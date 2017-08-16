@@ -119,7 +119,7 @@ body {
   pointer-events: none;
 }
 
-.selected {
+.flightHighlight {
   background-color: #00a9e7;
 }
 

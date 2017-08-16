@@ -195,9 +195,9 @@ class App extends React.Component {
   }
 
   handleFlightClick(flight, event) {
-    var elems = document.querySelectorAll('.selected');
+    var elems = document.querySelectorAll('.flightHighlight');
     elems.forEach(ele => {
-      ele.classList.remove('selected');
+      ele.classList.remove('flightHighlight');
     });
     if (this.state.selectedFlightId === flight.id) {
       this.state.savedChoices[0].flights = {};
@@ -206,7 +206,7 @@ class App extends React.Component {
       this.setState({
         selectedFlightId: flight.id
       });
-      $(event.target).toggleClass('selected');
+      $(event.target).toggleClass('flightHighlight');
       var flight1 = flight.slice[0];
       var flight2 = flight.slice[1];
       var saved = {
