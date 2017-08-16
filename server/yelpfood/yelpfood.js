@@ -17,7 +17,7 @@ var searchFood = function (searchCity, callback){
     console.log('ERROR ', e);
   });
 
-  const client = yelp.client(yelpConfig.yelpKey);
+  const client = yelp.client(yelpConfig.yelpkey);
 
   var p1 = new Promise(
     (resolve,reject) => {

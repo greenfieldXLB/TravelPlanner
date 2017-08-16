@@ -17,7 +17,7 @@ var searchAttr = function (searchCity, callback){
   });
 
 
-  const client = yelp.client(yelpConfig.yelpKey);
+  const client = yelp.client(yelpConfig.yelpkey);
 
   client.search({
     term:'Attractions',
