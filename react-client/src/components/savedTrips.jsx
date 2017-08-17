@@ -2,15 +2,22 @@ import React from 'react';
 import SavedTrip from './savedTrip.jsx';
 
 const SavedTrips = (props) => {
-  console.log(props);
-  return (
-    <div>
-      <h3>Saved Trips</h3>
-      {props.trips.map(trip => (
-        <SavedTrip trip={trip}/>
-      ))}
-    </div>
-  )
+  if (props.trips.length > 0) {
+    console.log(props);
+    return (
+      <div>
+        {props.trips.map(trip => (
+          <SavedTrip trip={trip}/>
+        ))}
+      </div>
+    )
+  } else {
+    return(
+        <div className = "glyphicon glyphicon-heart"></div>
+    )
+
+  }
+
 }
 
 export default SavedTrips;

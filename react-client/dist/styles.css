@@ -8,6 +8,11 @@ body {
   font-family: Arial, sans-serif;
   font-weight: normal;
   color: #333;
+  background: url("backpack.jpg") no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
 }
 
 .search-wrapper {
@@ -131,16 +136,25 @@ body {
 }
 
 .search {
+  position: relative;
   display: inline-block;
   width:80%;
   padding-bottom: 50px;
 }
 
 .weather {
+  position: relative;
   display: inline-block;
   text-align: center;
   width:20%;
+  height:150px;
+  margin-top: 20px;
   margin-right: 0px;
-  padding: 20px;
   border: 1px solid black;
+}
+
+td {
+  border-left: 3px solid #EDECEC;
+  border-right: 3px solid #EDECEC;
+  border-bottom: 3px solid #EDECEC;
 }

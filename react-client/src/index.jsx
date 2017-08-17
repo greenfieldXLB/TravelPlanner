@@ -38,7 +38,7 @@ class App extends React.Component {
       }],
 
       airportCodes: {},
-      savedTrips: ['trip1', 'trip2', 'trip3'],
+      savedTrips: [],
 
       attrItems: [],
 
@@ -364,10 +364,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>Trip Planner</h1>
-        <div className = 'nav'>
+
           <SearchBar onSearch = {this.onSearch}/>
           <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-        </div>
+        
 
 
         <table className='table'>

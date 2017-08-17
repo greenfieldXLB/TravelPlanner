@@ -29,9 +29,9 @@ class AttractionItem extends React.Component {
     return(
       <div className = {classes} onClick = {this.handleAttrClick.bind(this)} >
         <div> <br></br></div>
-        <div> <br></br></div>
         <div><b>{this.props.attrItemEntry.name}</b></div>
         <div>{this.props.attrItemEntry.location.display_address.join(', ')}</div>
+        <div> <br></br></div>
         <img src={this.props.attrItemEntry.image_url}  width="150" height="150"></img>
         <br></br>
       </div>

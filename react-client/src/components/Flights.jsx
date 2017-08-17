@@ -12,7 +12,7 @@ const Flights = (props) => {
     )
   } else {
     return (
-      <div>Your flights will be here soon!</div>
+      <div className = "glyphicon glyphicon-plane"></div>
     )
   }
 }
