@@ -47,14 +47,6 @@ app.post('/weather', function(req,res) {
     })
   });
 })
-
-
-var port = process.env.PORT;
-
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
-
-
 app.post('/save', (req, res) => {
 	var data = req.body[0]
 	items.saveToDatabase(data, (data) =>{
@@ -64,4 +56,12 @@ app.post('/save', (req, res) => {
 
 app.get('/getAll', (req, res) => {
 	items.selectAll((results) =>{res.end(JSON.stringify(results))});
+});
+
+
+var port = process.env.PORT;
+
+app.listen(port, function() {
+  console.log(`listening on port ${port}`);
 })
+

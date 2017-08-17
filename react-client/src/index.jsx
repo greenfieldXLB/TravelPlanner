@@ -242,7 +242,7 @@ class App extends React.Component {
   }
 
 
-  yelpAttrSearch(){
+   yelpAttrSearch(){
     console.log(this.state.arrivalLocation);
 
     $.ajax({
@@ -268,6 +268,8 @@ class App extends React.Component {
   }
 
 
+
+  
   searchFood(){
     $.ajax({
       url:'/food',
@@ -284,10 +286,15 @@ class App extends React.Component {
             foodList: parsedFood,
             addresses: addFoodAddress
           });
+      },
 
-  componentDidMount() {
-   
+      error: (err) => {
+        console.log('err', err);
+      }
+    })
   }
+
+ 
   handleClick(){
     $.ajax({
       url: '/getAll',
@@ -301,8 +308,7 @@ class App extends React.Component {
       }
     })
   }
-
-
+  
   responseToSaveAddress( category ){
     return function( {name, location, coordinates} ){
       const display_address = location.display_address;
@@ -336,7 +342,7 @@ class App extends React.Component {
     })
   }
 
-  handleAttrItemState(e){
+handleAttrItemState(e){
     this.updateSavedChoices( 'attractions', e.props.attrItemEntry, e.state.selected );
   }
 
