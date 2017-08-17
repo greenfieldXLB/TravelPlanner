@@ -28,9 +28,11 @@ class AttractionItem extends React.Component {
     let classes = classnames('attrBackground', {activeAttr: this.state.selected} );
     return(
       <div className = {classes} onClick = {this.handleAttrClick.bind(this)} >
-        <div>{this.props.attrItemEntry.name}</div>
+        <div> <br></br></div>
+        <div> <br></br></div>
+        <div><b>{this.props.attrItemEntry.name}</b></div>
         <div>{this.props.attrItemEntry.location.display_address.join(', ')}</div>
-        <img src={this.props.attrItemEntry.image_url}  width="150"></img>
+        <img src={this.props.attrItemEntry.image_url}  width="150" height="150"></img>
         <br></br>
       </div>
     )
