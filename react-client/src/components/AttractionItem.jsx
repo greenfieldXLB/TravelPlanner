@@ -21,11 +21,7 @@ class AttractionItem extends React.Component {
     });
   }
 
-   // if (this.props.searchClicked){
-    //   this.setState({
-    //     selected: false
-    //   })
-    // }
+
 
   render(){
 

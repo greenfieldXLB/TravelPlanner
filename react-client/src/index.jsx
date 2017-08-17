@@ -47,13 +47,11 @@ class App extends React.Component {
       hotels: [],
       foodList: [],
       weather:[],
-      weatherIcon: '',
-      searchClicked: false
+      weatherIcon: ''
     }
 
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
-
     this.requestWeather = this.requestWeather.bind(this);
 
   }
@@ -74,7 +72,6 @@ class App extends React.Component {
           hotels: parsedHotel,
           addresses: addHotelAddress
         });
-        console.log(this.state.addresses)
       },
       error: (err) => {
         console.log('error !')
@@ -224,14 +221,22 @@ class App extends React.Component {
     console.log('the return date is: ', returnDate);
     this.removeClass('flightHighlight');
     this.removeClass('hotelHighlight');
-    this.state.savedChoices[0].flights = {};
-    this.state.savedChoices[0].hotel = {};
     this.setState({
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
       returnDate: returnDate,
-      searchClicked: true
+      attrItems: [],
+      foodList: [],
+      addresses: [],
+      savedChoices: [{
+        flights: {},
+        hotel: {},
+        attractions: [],
+        food: [],
+        weather: {}
+      }]
+
     },function(){
       this.yelpAttrSearch();
       this.searchFood();
@@ -239,6 +244,7 @@ class App extends React.Component {
       this.hotelsSearch(arrivalLocation);
       this.requestWeather(arrivalLocation, departureDate);
     });
+
   }
 
 
@@ -355,6 +361,7 @@ class App extends React.Component {
 
   }
 
+
   render () {
     return (
       <div>
@@ -367,7 +374,7 @@ class App extends React.Component {
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
-        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} searchClicked={this.state.searchClicked}/>
+        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} />
 
         <SavedTrips trips={this.state.savedTrips}/>
 
