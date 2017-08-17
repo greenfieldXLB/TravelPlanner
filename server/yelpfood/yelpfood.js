@@ -22,11 +22,6 @@ var searchFood = function (searchCity, callback){
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
 
-  const client = yelp.client(yelpConfig.yelpkey);
-
-  var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
-  const client = yelp.client(yelpKey);
-
 
   var p1 = new Promise(
     (resolve,reject) => {

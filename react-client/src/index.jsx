@@ -44,15 +44,6 @@ class App extends React.Component {
 
       airportCodes: {},
 
-      // savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
-      //   {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
-      //   {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
-      //   {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
-      //   {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
-      //   {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
-      //   {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
-      // ],
-
       hotels: [],
       foodList: [],
       weather:[],
@@ -242,7 +233,6 @@ class App extends React.Component {
       returnDate: returnDate,
       searchClicked: true
     },function(){
-      //this.removeSavedChoices();
       this.yelpAttrSearch();
       this.searchFood();
       this.getAirportCodes(departureLocation, arrivalLocation);
@@ -365,13 +355,6 @@ class App extends React.Component {
 
   }
 
-
-  // setSelectToFalse(e){
-  //   if(e.state.selected){
-  //     e.state.selected === false;
-  //   }
-  // }
-
   render () {
     return (
       <div>
@@ -386,11 +369,7 @@ class App extends React.Component {
 
         <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} searchClicked={this.state.searchClicked}/>
 
-
-        <FoodList foodlist = {this.state.foodList}/>
         <SavedTrips trips={this.state.savedTrips}/>
-
-        <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)}/>
 
         <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
 
