@@ -5,7 +5,7 @@ class AttractionItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: false,
+      selected: false
     }
   }
 
