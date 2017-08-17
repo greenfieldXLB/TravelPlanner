@@ -7,19 +7,21 @@ class FoodItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedfood: false
+      selected: false
     }
   }
 
   handleFoodClick(){
     console.log('FOOD CLICKED')
     this.setState({
-      selectedfood: !this.state.selectedfood
+      selected: !this.state.selected
+    }, ()=>{
+      this.props.handleFoodItemState( this );
     })
   }
 
   render(){
-    let foodclasses = classnames('attrBackground', {activeAttr: this.state.selectedfood} );
+    let foodclasses = classnames('attrBackground', {activeAttr: this.state.selected} );
     return(
       <div className = {foodclasses} onClick = {this.handleFoodClick.bind(this)}>
         <div>
