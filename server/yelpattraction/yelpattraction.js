@@ -27,9 +27,7 @@ var searchAttr = function (searchCity, callback){
   })
 
   .then(response => {
-    console.log('YELP RES ', response.jsonBody.businesses[0]);
     attrResult = response.jsonBody.businesses;
-    console.log(Array.isArray(attrResult));
     callback(attrResult);
   })
 

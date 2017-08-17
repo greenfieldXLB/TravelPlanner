@@ -247,8 +247,6 @@ class App extends React.Component {
 
 
   yelpAttrSearch(){
-    console.log(this.state.arrivalLocation);
-
     $.ajax({
       url: '/attraction',
       type: 'POST',
@@ -354,8 +352,6 @@ class App extends React.Component {
     }
 
     this.state.savedChoices[0][ categoryName ] = list;
-    console.log(this.state.savedChoices[0]);
-
   }
 
 

@@ -3,7 +3,6 @@ import SavedTrip from './savedTrip.jsx';
 
 const SavedTrips = (props) => {
   if (props.trips.length > 0) {
-    console.log(props);
     return (
       <div>
         {props.trips.map(trip => (
