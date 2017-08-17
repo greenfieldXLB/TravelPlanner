@@ -127,19 +127,20 @@ body {
 
 .nav {
   display: block;
-  width:90%;
+  width:100%;
 }
 
 .search {
   display: inline-block;
   width:80%;
+  padding-bottom: 50px;
 }
 
 .weather {
   display: inline-block;
   text-align: center;
   width:20%;
-  margin: auto;
+  margin-right: 0px;
   padding: 20px;
   border: 1px solid black;
 }
