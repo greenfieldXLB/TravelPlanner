@@ -32,7 +32,7 @@ const Flight = (props) => {
         <div className="avoid-clicks"> Arrival: {getTime(props.flight.slice[1].segment[0].leg[0].arrivalTime)}</div>
       </div>
       <br className="avoid-clicks"></br>
-      <div className="avoid-clicks">{props.flight.saleTotal.slice(0, 3) + ' ' + props.flight.saleTotal.slice(3)} per person</div>
+      <div className="avoid-clicks">{'$' + props.flight.saleTotal.slice(3)} per person</div>
     </div>
   )
 }
