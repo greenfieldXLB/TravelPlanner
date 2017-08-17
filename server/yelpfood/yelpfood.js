@@ -1,5 +1,5 @@
 const yelp = require('yelp-fusion');
-// const yelpConfig = require('../../config.js');
+const yelpConfig = require('../../config.js');
 
 var searchFood = function (searchCity, callback){
 
