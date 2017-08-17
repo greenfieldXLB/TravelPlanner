@@ -21,7 +21,7 @@ class HotelEntry extends React.Component {
           <div className='avoid-clicks'><b>{this.props.hotel.name}</b></div>
           <div className='avoid-clicks'>{this.props.hotel.location.display_address.join(', ')}</div>
           <div className='avoid-clicks'> {this.props.hotel.price}</div>
-          <img className='avoid-clicks' src={this.props.hotel.image_url}  width="150" height = "150"></img>
+          <img className='avoid-clicks' src={this.props.hotel.image_url} width="150" height = "150"></img>
           </div>
       </div>
     )

@@ -166,7 +166,9 @@ td {
   border: 2px solid grey;
   padding: 20px;
   width: 250px;
-  height: auto;
+  height: 300px;
+  box-shadow: 10px 10px 5px rgba(45, 45, 45, .2);
+  margin-bottom:10px;
 }
 
 #itemBorder {
@@ -174,5 +176,11 @@ td {
   border: 2px solid grey;
   padding: 20px;
   width: 250px;
-  height: auto;
+  height: 300px;
+  box-shadow: 10px 10px 5px rgba(45, 45, 45, .2);
+  margin-bottom:10px;
+}
+
+img {
+  box-shadow: 10px 10px 5px rgba(45, 45, 45, .2);
 }

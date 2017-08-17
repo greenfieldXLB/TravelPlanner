@@ -118,7 +118,7 @@ class App extends React.Component {
             "maxStops": 0
           }
         ],
-        "solutions": 10,
+        "solutions": 12,
       }
     };
     var context = this;

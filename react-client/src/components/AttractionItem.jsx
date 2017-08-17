@@ -11,7 +11,6 @@ class AttractionItem extends React.Component {
 
 
   handleAttrClick(){
-    console.log('CLICKED');
 
     this.setState({
       selected: !this.state.selected,
