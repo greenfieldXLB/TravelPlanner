@@ -365,17 +365,6 @@ class App extends React.Component {
 
   }
 
-  // removeSavedChoices(){
-  //   this.setState({
-  //     savedChoices: [{
-  //       flights: {},
-  //       hotel: {},
-  //       attractions: [],
-  //       food: [],
-  //       weather: {}
-  //     }]
-  //   })
-  // }
 
   // setSelectToFalse(e){
   //   if(e.state.selected){
