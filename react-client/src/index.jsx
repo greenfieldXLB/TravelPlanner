@@ -367,7 +367,7 @@ class App extends React.Component {
 
           <SearchBar onSearch = {this.onSearch}/>
           <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-        
+
 
 
         <table className='table'>
@@ -407,19 +407,3 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
-/*
-
-<Hotels handleHotelClick={this.handleHotelClick.bind(this)} hotels = {this.state.hotels} />
-<div>
-  <h2>Flights</h2>
-  <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
-</div>
-
-<Attraction attrItems = {this.state.attrItems}/>
-
-<FoodList foodlist = {this.state.foodList}/>
-
-
-*/
