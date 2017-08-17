@@ -47,13 +47,11 @@ class App extends React.Component {
       hotels: [],
       foodList: [],
       weather:[],
-      weatherIcon: '',
-      searchClicked: false
+      weatherIcon: ''
     }
 
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
-
     this.requestWeather = this.requestWeather.bind(this);
 
   }
@@ -230,8 +228,7 @@ class App extends React.Component {
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
-      returnDate: returnDate,
-      searchClicked: true
+      returnDate: returnDate
     },function(){
       this.yelpAttrSearch();
       this.searchFood();
@@ -239,6 +236,18 @@ class App extends React.Component {
       this.hotelsSearch(arrivalLocation);
       this.requestWeather(arrivalLocation, departureDate);
     });
+
+    this.setState({
+      attrItems: [],
+      foodList: [],
+      savedChoices: [{
+        flights: {},
+        hotel: {},
+        attractions: [],
+        food: [],
+        weather: {}
+      }]
+    })
   }
 
 
@@ -355,6 +364,7 @@ class App extends React.Component {
 
   }
 
+
   render () {
     return (
       <div>
@@ -367,7 +377,7 @@ class App extends React.Component {
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
-        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} searchClicked={this.state.searchClicked}/>
+        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} />
 
         <SavedTrips trips={this.state.savedTrips}/>
 
