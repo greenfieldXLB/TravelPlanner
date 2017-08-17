@@ -1,12 +1,11 @@
 import React from 'react';
 import AttractionItem from './AttractionItem.jsx';
 
-function Attraction ({attrItems}) {
+function Attraction ({attrItems, handleAttrItemState, searchClicked}) {
 
  return(
       <div>
-        <h4> Attraction List </h4>
-        { attrItems.map((item,index) => <AttractionItem attrItemEntry = {item} key = {index}/>)}
+        { attrItems.map((item,index) => <AttractionItem attrItemEntry = {item} key = {index} handleAttrItemState={handleAttrItemState} searchClicked={searchClicked}/>)}
       </div>
     )
 }

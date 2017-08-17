@@ -30,39 +30,32 @@ class App extends React.Component {
       flights: [],
 
       savedChoices: [{
-          flights: {},
-          hotel: {},
-          attractions: [],
-          food: [],
-          weather: {}
+        flights: {},
+        hotel: {},
+        attractions: [],
+        food: [],
+        weather: {}
       }],
 
       airportCodes: {},
       savedTrips: ['trip1', 'trip2', 'trip3'],
 
-      hotels: [],
-
       attrItems: [],
 
       airportCodes: {},
 
-      savedChoices: [ // array of SAVED flight, hotel, attractions, & restaurants
-        {category: 'flight', type: 'departure', airport: 'SFO', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'flight', type: 'arrival', airport: 'LGW', airline: 'British Airways', date: '', time: '', price: ''},
-        {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK', checkInDate: '', checkOutDate:'', price: '', imageUrl: ''},
-        {category: 'attraction', name: 'Buckingham Palace', address: 'Westminster, London SW1A 1AA, UK', imageUrl: ''},
-        {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK', price: '', imageUrl: ''},
-        {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK', price: '', imageUrl: ''}
-      ],
-
       hotels: [],
       foodList: [],
       weather:[],
-      weatherIcon: ''
+      weatherIcon: '',
+      searchClicked: false
     }
+
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
+
     this.requestWeather = this.requestWeather.bind(this);
+
   }
 
   hotelsSearch() {
@@ -72,14 +65,14 @@ class App extends React.Component {
       data: {city: this.state.arrivalLocation},
       success: (res) => {
 
-        const parsedAttr = JSON.parse( res );
+        const parsedHotel = JSON.parse( res );
 
-        const addAttrAddress = this.state.addresses
-        .concat( parsedAttr.map( this.responseToSaveAddress( 'hotel' ) ) );
+        const addHotelAddress = this.state.addresses
+        .concat( parsedHotel.map( this.responseToSaveAddress( 'hotel' ) ) );
 
         this.setState({
-          hotels: parsedAttr,
-          addresses: addAttrAddress
+          hotels: parsedHotel,
+          addresses: addHotelAddress
         });
         console.log(this.state.addresses)
       },
@@ -88,6 +81,7 @@ class App extends React.Component {
       }
      })
   }
+
   handleHotelClick(hotel, event){
     this.removeClass('hotelHighlight');
     if (this.state.selectedHotelId === hotel.id) {
@@ -236,7 +230,8 @@ class App extends React.Component {
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
-      returnDate: returnDate
+      returnDate: returnDate,
+      searchClicked: true
     },function(){
       this.yelpAttrSearch();
       this.searchFood();
@@ -244,9 +239,6 @@ class App extends React.Component {
       this.hotelsSearch(arrivalLocation);
       this.requestWeather(arrivalLocation, departureDate);
     });
-  }
-
-  componentDidMount(){
   }
 
 
@@ -267,6 +259,7 @@ class App extends React.Component {
         this.setState({
           attrItems: parsedAttr,
           addresses: addAttrAddress
+
         });
       },
       error: function(data) {
@@ -313,6 +306,7 @@ class App extends React.Component {
     }
   }
 
+
   requestWeather(city, date) {
     var context = this;
     $.ajax({
@@ -332,6 +326,35 @@ class App extends React.Component {
     })
   }
 
+  handleAttrItemState(e){
+    this.updateSavedChoices( 'attractions', e.props.attrItemEntry, e.state.selected );
+  }
+
+  handleFoodItemState(e){
+    this.updateSavedChoices( 'food', e.props.fooditem, e.state.selected );
+  }
+
+  updateSavedChoices( categoryName, itemData, selected ){
+    let list = this.state.savedChoices[0][ categoryName ];
+    if( list === undefined ){
+      return;
+    }
+
+    if( selected ){
+      list.push( itemData );
+    }
+    else{
+      let index = list.indexOf( itemData );
+      if( index >= 0 ){
+        list.splice( index, 1 );
+      }
+    }
+
+    this.state.savedChoices[0][ categoryName ] = list;
+    console.log(this.state.savedChoices[0]);
+
+  }
+
   render () {
     return (
       <div>
@@ -344,10 +367,12 @@ class App extends React.Component {
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
-        <Attraction attrItems = {this.state.attrItems}/>
+        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} searchClicked={this.state.searchClicked}/>
 
-        <FoodList foodlist = {this.state.foodList}/>
         <SavedTrips trips={this.state.savedTrips}/>
+
+        <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
+
       </div>
     )
   }

@@ -1,7 +1,5 @@
 import React from 'react';
-
 import classnames from 'classnames';
-
 
 class AttractionItem extends React.Component {
   constructor(props) {
@@ -11,17 +9,29 @@ class AttractionItem extends React.Component {
     }
   }
 
+
   handleAttrClick(){
-    console.log('CLICKED')
+    console.log('CLICKED');
+
     this.setState({
-      selected: !this.state.selected
-    })
+      selected: !this.state.selected,
+      //selectedArry: currentArr
+    }, ()=>{
+      this.props.handleAttrItemState( this );
+    });
   }
 
+   // if (this.props.searchClicked){
+    //   this.setState({
+    //     selected: false
+    //   })
+    // }
+
   render(){
+
     let classes = classnames('attrBackground', {activeAttr: this.state.selected} );
     return(
-      <div className = {classes} onClick = {this.handleAttrClick.bind(this)}>
+      <div className = {classes} onClick = {this.handleAttrClick.bind(this)} >
         <div>{this.props.attrItemEntry.name}</div>
         <div>{this.props.attrItemEntry.location.display_address.join(', ')}</div>
         <img src={this.props.attrItemEntry.image_url}  width="150"></img>
