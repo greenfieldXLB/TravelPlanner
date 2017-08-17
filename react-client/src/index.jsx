@@ -40,8 +40,6 @@ class App extends React.Component {
       airportCodes: {},
       savedTrips: ['trip1', 'trip2', 'trip3'],
 
-      hotels: [],
-
       attrItems: [],
 
       airportCodes: {},
@@ -58,9 +56,7 @@ class App extends React.Component {
       hotels: [],
       foodList: [],
       weather:[],
-      weatherIcon: '',
-
-      foodList: []
+      weatherIcon: ''
 
     }
     this.onSearch = this.onSearch.bind(this);
@@ -363,11 +359,6 @@ class App extends React.Component {
         list.splice( index, 1 );
       }
     }
-
-
-    this.setState({
-      [stateName] : list
-    });
 
     this.state.savedChoices[0][ categoryName ] = list;
     console.log(this.state.savedChoices[0]);

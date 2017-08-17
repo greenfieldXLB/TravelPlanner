@@ -16,8 +16,13 @@ var searchAttr = function (searchCity, callback){
     console.log('ERROR ', e);
   });
 
+
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
+
+
+  const client = yelp.client(yelpConfig.yelpkey);
+
 
   client.search({
     term:'Attractions',
