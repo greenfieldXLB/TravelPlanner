@@ -53,4 +53,15 @@ var port = process.env.PORT;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
+
+
+app.post('/save', (req, res) => {
+	var data = req.body[0]
+	items.saveToDatabase(data, (data) =>{
+        res.end(data);
+	})
 });
+
+app.get('/getAll', (req, res) => {
+	items.selectAll((results) =>{res.end(JSON.stringify(results))});
+})

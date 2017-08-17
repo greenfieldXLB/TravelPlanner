@@ -1,6 +1,12 @@
+
 bundle.js
 node_modules/
 config.js
+
+### node etc ###
+config.js
+bundle.js
+
 
 # Logs
 logs

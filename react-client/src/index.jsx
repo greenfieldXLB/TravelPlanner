@@ -284,10 +284,20 @@ class App extends React.Component {
             foodList: parsedFood,
             addresses: addFoodAddress
           });
+
+  componentDidMount() {
+   
+  }
+  handleClick(){
+    $.ajax({
+      url: '/getAll',
+      method: 'GET',
+      success: (data) =>{
+        console.log(data);
       },
 
       error: (err) => {
-        console.log('err', err);
+        console.log(err);
       }
     })
   }
@@ -375,6 +385,14 @@ class App extends React.Component {
 
       </div>
     )
+  }
+
+  render () {
+    return (<div>
+      <h1>Item List</h1>
+      <button onClick={this.handleClick.bind(this)}>click me</button>
+      <List items={this.state.items}/>
+    </div>)
   }
 
 }
