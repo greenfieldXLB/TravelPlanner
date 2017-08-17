@@ -11,8 +11,8 @@ class HotelEntry extends React.Component {
 
   handleHotelClick(hotel, event){
     this.props.handleHotelClick(hotel, event);
-    
   }
+
   render () {
 
     return (
@@ -26,5 +26,5 @@ class HotelEntry extends React.Component {
       </div>
     )
   }
-}   
+}
 export default HotelEntry;

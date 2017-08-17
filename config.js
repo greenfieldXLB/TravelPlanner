@@ -1,6 +1,5 @@
 const clientId = '3GcYlGCJQgbIdH-g4wIgQA';
 const clientSecret = 'M7ohQo779fWVHpLxBl4va1v7NOqvRd2hKucOViD654E63wN7Mv6IZGnF45Hoxbzb';
-
 const googleMapAPI = 'AIzaSyB-j1k1E-e_Z7X4F-ZSQcPvTLR3V6_oLPY';
 const darkskyAPI = '053850fbd636dbb9267bd13fc145a22a';
 const geolocationAPI = 'AIzaSyBHX9MZGqPJG5YW4KGNQEdG-ZwkscWBQJE';
