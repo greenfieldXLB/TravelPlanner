@@ -46,11 +46,11 @@ class Weather extends React.Component {
 
 
       return(
-        <div>
+        <div className = 'weather' >
           {data.map((item, index) =>
             <div key = {index}>
-              <h1 >{item.averageTemp} °F</h1>
-              <h3 ><i>{item.description}</i></h3>
+              <h3 >{item.averageTemp} °F</h3>
+              <h5 ><i>{item.description}</i></h5>
             </div>
           )}
           <div>

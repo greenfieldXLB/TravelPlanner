@@ -50,7 +50,7 @@ class SearchBar extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className = 'search'>
         <form >
             <div className="search-wrapper group">
               <CitySearch handleChange = {this.handleDepartureText} description = "Departure City"/>

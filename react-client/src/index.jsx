@@ -38,7 +38,7 @@ class App extends React.Component {
       }],
 
       airportCodes: {},
-      savedTrips: ['trip1', 'trip2', 'trip3'],
+      savedTrips: [],
 
       attrItems: [],
 
@@ -236,7 +236,6 @@ class App extends React.Component {
         food: [],
         weather: {}
       }]
-
     },function(){
       this.yelpAttrSearch();
       this.searchFood();
@@ -244,7 +243,6 @@ class App extends React.Component {
       this.hotelsSearch(arrivalLocation);
       this.requestWeather(arrivalLocation, departureDate);
     });
-
   }
 
 
@@ -366,20 +364,42 @@ class App extends React.Component {
     return (
       <div>
         <h1>Trip Planner</h1>
-        <SearchBar onSearch = {this.onSearch}/>
-        <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-        <Hotels handleHotelClick={this.handleHotelClick.bind(this)} hotels = {this.state.hotels} />
-        <div>
-          <h2>Flights</h2>
-          <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
-        </div>
 
-        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} />
+          <SearchBar onSearch = {this.onSearch}/>
+          <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
 
-        <SavedTrips trips={this.state.savedTrips}/>
 
-        <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
 
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Flights</th>
+              <th>Lodging</th>
+              <th>Attractions</th>
+              <th>Restaurants</th>
+              <th>Saved</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
+              </td>
+              <td>
+                <Hotels handleHotelClick={this.handleHotelClick.bind(this)} hotels = {this.state.hotels} />
+              </td>
+              <td>
+                <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} />
+              </td>
+              <td>
+                <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
+              </td>
+              <td>
+                <SavedTrips trips={this.state.savedTrips}/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     )
   }
