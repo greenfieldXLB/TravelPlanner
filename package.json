@@ -40,7 +40,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "sabre-dev-studio": "^1.2.0",
-    "webpack": "^3.5.4",
+    "webpack": "^3.5.2",
     "yelp-fusion": "^1.0.3"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
-    "webpack": "^3.5.4",
+    "webpack": "^3.5.2",
     "nodemon": "^1.11.0",
     "mongoose": "^4.8.6",
     "chai": "^4.1.1",
@@ -68,4 +68,3 @@
     ]
   }
 }
-

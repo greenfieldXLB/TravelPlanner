@@ -393,14 +393,6 @@ handleAttrItemState(e){
     )
   }
 
-  render () {
-    return (<div>
-      <h1>Item List</h1>
-      <button onClick={this.handleClick.bind(this)}>click me</button>
-      <List items={this.state.items}/>
-    </div>)
-  }
-
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
