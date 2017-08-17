@@ -72,7 +72,6 @@ class App extends React.Component {
           hotels: parsedHotel,
           addresses: addHotelAddress
         });
-        console.log(this.state.addresses)
       },
       error: (err) => {
         console.log('error !')
@@ -222,13 +221,22 @@ class App extends React.Component {
     console.log('the return date is: ', returnDate);
     this.removeClass('flightHighlight');
     this.removeClass('hotelHighlight');
-    this.state.savedChoices[0].flights = {};
-    this.state.savedChoices[0].hotel = {};
     this.setState({
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
-      returnDate: returnDate
+      returnDate: returnDate,
+      attrItems: [],
+      foodList: [],
+      addresses: [],
+      savedChoices: [{
+        flights: {},
+        hotel: {},
+        attractions: [],
+        food: [],
+        weather: {}
+      }]
+
     },function(){
       this.yelpAttrSearch();
       this.searchFood();
@@ -237,17 +245,6 @@ class App extends React.Component {
       this.requestWeather(arrivalLocation, departureDate);
     });
 
-    this.setState({
-      attrItems: [],
-      foodList: [],
-      savedChoices: [{
-        flights: {},
-        hotel: {},
-        attractions: [],
-        food: [],
-        weather: {}
-      }]
-    })
   }
 
 
