@@ -1,6 +1,6 @@
 const yelp = require('yelp-fusion');
 const request = require('request');
-const hotelConfig = require('../../config.js');
+// const hotelConfig = require('../../config.js');
 
 
 var hotel = function (info, callback){
