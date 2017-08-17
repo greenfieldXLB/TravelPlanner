@@ -9,6 +9,7 @@ class AttractionItem extends React.Component {
     }
   }
 
+
   handleAttrClick(){
     console.log('CLICKED');
 
@@ -20,10 +21,17 @@ class AttractionItem extends React.Component {
     });
   }
 
+   // if (this.props.searchClicked){
+    //   this.setState({
+    //     selected: false
+    //   })
+    // }
+
   render(){
+
     let classes = classnames('attrBackground', {activeAttr: this.state.selected} );
     return(
-      <div className = {classes} onClick = {this.handleAttrClick.bind(this)}>
+      <div className = {classes} onClick = {this.handleAttrClick.bind(this)} >
         <div>{this.props.attrItemEntry.name}</div>
         <div>{this.props.attrItemEntry.location.display_address.join(', ')}</div>
         <img src={this.props.attrItemEntry.image_url}  width="150"></img>

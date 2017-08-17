@@ -56,9 +56,10 @@ class App extends React.Component {
       hotels: [],
       foodList: [],
       weather:[],
-      weatherIcon: ''
-
+      weatherIcon: '',
+      searchClicked: false
     }
+
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
 
@@ -225,7 +226,6 @@ class App extends React.Component {
     }
   }
 
-
   onSearch (departureLocation, arrivalLocation, departureDate, returnDate) {
     console.log('the departure location is: ', departureLocation);
     console.log('the arrival location is: ', arrivalLocation);
@@ -239,17 +239,16 @@ class App extends React.Component {
       departureLocation: departureLocation,
       arrivalLocation: arrivalLocation,
       departureDate: departureDate,
-      returnDate: returnDate
+      returnDate: returnDate,
+      searchClicked: true
     },function(){
+      //this.removeSavedChoices();
       this.yelpAttrSearch();
       this.searchFood();
       this.getAirportCodes(departureLocation, arrivalLocation);
       this.hotelsSearch(arrivalLocation);
       this.requestWeather(arrivalLocation, departureDate);
     });
-  }
-
-  componentDidMount(){
   }
 
 
@@ -270,6 +269,7 @@ class App extends React.Component {
         this.setState({
           attrItems: parsedAttr,
           addresses: addAttrAddress
+
         });
       },
       error: function(data) {
@@ -345,7 +345,7 @@ class App extends React.Component {
   }
 
   updateSavedChoices( categoryName, itemData, selected ){
-    const list = this.state.savedChoices[0][ categoryName ];
+    let list = this.state.savedChoices[0][ categoryName ];
     if( list === undefined ){
       return;
     }
@@ -354,7 +354,7 @@ class App extends React.Component {
       list.push( itemData );
     }
     else{
-      const index = list.indexOf( itemData );
+      let index = list.indexOf( itemData );
       if( index >= 0 ){
         list.splice( index, 1 );
       }
@@ -364,6 +364,24 @@ class App extends React.Component {
     console.log(this.state.savedChoices[0]);
 
   }
+
+  // removeSavedChoices(){
+  //   this.setState({
+  //     savedChoices: [{
+  //       flights: {},
+  //       hotel: {},
+  //       attractions: [],
+  //       food: [],
+  //       weather: {}
+  //     }]
+  //   })
+  // }
+
+  // setSelectToFalse(e){
+  //   if(e.state.selected){
+  //     e.state.selected === false;
+  //   }
+  // }
 
   render () {
     return (
@@ -377,13 +395,15 @@ class App extends React.Component {
           <Flights handleFlightClick={this.handleFlightClick.bind(this)} flights={this.state.flights}/>
         </div>
 
-        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)}/>
+        <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} searchClicked={this.state.searchClicked}/>
 
 
         <FoodList foodlist = {this.state.foodList}/>
         <SavedTrips trips={this.state.savedTrips}/>
 
         <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)}/>
+
+        <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
 
       </div>
     )
