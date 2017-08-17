@@ -8,7 +8,7 @@ import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
 import Weather from './components/Weather.jsx';
-import SavedTrips from './components/SavedTrips.jsx';
+import SavedTrips from './components/savedTrips.jsx';
 const FlightAPI = require('qpx-express');
 
 
