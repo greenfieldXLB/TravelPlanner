@@ -7,7 +7,6 @@ var hotel = function (info, callback){
 
 
   var yelpKey = process.env.HOTEL_API || yelpConfig.hotelkey;
-  //const hotelkey = yelpConfig.hotelkey
   var client = yelp.client(yelpKey);
 
   var p1 = new Promise(
@@ -35,7 +34,7 @@ var hotel = function (info, callback){
   var p3 = new Promise(
     (resolve,reject) => {
       client.search({
-        term:'Restaurant',
+        term:'hotels',
         location: info.city,
         limit: 4,
         price: "3"
@@ -44,7 +43,6 @@ var hotel = function (info, callback){
   );
 
   Promise.all([p1,p2,p3]).then(responses => {
-    //console.log(JSON.stringify(responses, null, 2 ) );
 
     foodResult = responses.reduce(function( businessList, response){
       businessList.push( ... response.jsonBody.businesses );

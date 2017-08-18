@@ -76,10 +76,12 @@ class App extends React.Component {
       error: (err) => {
         console.log('error !')
       }
-    });
+     })
   }
 
   handleHotelClick(hotel, event){
+    console.log(hotel.url);
+
     this.removeClass('hotelHighlight');
     if (this.state.selectedHotelId === hotel.id) {
       this.state.savedChoices[0].hotel = {};
@@ -92,9 +94,12 @@ class App extends React.Component {
     var saved = {
       name: hotel.name,
       address: hotel.location.display_address.join(', '),
-      price: hotel.price
-    }
+      price: hotel.price,
+      image_url: hotel.image_url
+    };
+    
    this.state.savedChoices[0].hotel = saved;
+   // console.log(this.state.savedChoices)
     }
   }
 
@@ -125,7 +130,7 @@ class App extends React.Component {
     qpx.getInfo(body, function(error, data){
       context.setState({
         flights: data.trips.tripOption
-      });
+      })
     });
   }
 
@@ -141,7 +146,7 @@ class App extends React.Component {
         "APC-Auth-Secret": APCSecret
       },
       method: "POST"
-    });
+    })
     .then((resp) => resp.json())
     .then(function(data) {
       if (data.airports[0].name.includes('All Airports')) {
@@ -149,7 +154,7 @@ class App extends React.Component {
       } else {
         codes.departLoc = data.airports[0].iata;
       }
-    });
+    })
     .then(() => {
       fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
         headers: {
@@ -158,7 +163,7 @@ class App extends React.Component {
           "APC-Auth-Secret": APCSecret
         },
         method: "POST"
-      });
+      })
       .then((resp) => resp.json())
       .then(function(data) {
         if (data.airports[0].name.includes('All Airports')) {
@@ -166,12 +171,12 @@ class App extends React.Component {
         } else {
           codes.arrivalLoc = data.airports[0].iata;
         }
-      });
+      })
       .then((codes) => {
         context.setState({
           airportCodes: codes
-        });
-      });
+        })
+      })
       .then(() => {
         context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
       });
@@ -246,7 +251,8 @@ class App extends React.Component {
   }
 
 
-  yelpAttrSearch(){
+   yelpAttrSearch(){
+    console.log(this.state.arrivalLocation);
     $.ajax({
       url: '/attraction',
       type: 'POST',
@@ -266,9 +272,12 @@ class App extends React.Component {
       },
       error: function(data) {
       }
-    });
+    })
   }
 
+
+
+  
   searchFood(){
     $.ajax({
       url:'/food',
@@ -290,10 +299,38 @@ class App extends React.Component {
       error: (err) => {
         console.log('err', err);
       }
-    });
+    })
   }
 
+ 
+  SaveToDatabase(){
+    var app = this;
+    $.ajax({
+      url: '/save',
+      method: 'post',
+      data: {data: JSON.stringify(this.state.savedChoices[0])},
+      success: (data) =>{
+        $.ajax({
+          url: '/getAll',
+          method: 'GET',
+          success: (data) => {
+            console.log(JSON.parse(data));
+            app.setState({
+              savedTrips: JSON.parse(data)
+            })
+          },
+          error: (data) => {
+            console.log(data);
+          }
+        })
+      },
 
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+  
   responseToSaveAddress( category ){
     return function( {name, location, coordinates} ){
       const display_address = location.display_address;
@@ -319,12 +356,12 @@ class App extends React.Component {
         context.setState({
           weather: [parsedData],
           weatherIcon: parsedData.icon
-        });
+        })
       },
       error: function(err) {
           console.log('error in requesting data.')
       }
-    });
+    })
   }
 
   handleAttrItemState(e){
@@ -353,11 +390,13 @@ class App extends React.Component {
     this.state.savedChoices[0][ categoryName ] = list;
   }
 
+
   render () {
     return (
       <div>
         <h1 id='title'>Trip Planner</h1>
           <span><SearchBar onSearch = {this.onSearch}/></span>
+          <button onClick={this.SaveToDatabase.bind(this)}>save</button>
           <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
         <table className='table'>
           <thead>

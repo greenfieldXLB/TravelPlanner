@@ -1,14 +1,12 @@
 var mongoose = require('mongoose');
-var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/TravelPlanner';
+var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/travelplanner';
 
-  mongoose.connect(uristring, function (err, res) {
-    if (err) {
-      console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-    } else {
-      console.log ('Succeeded connected to: ' + uristring);
-    }
-  });
-var itemSchema = mongoose.Schema({
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + uristring);
+  }
 });
 
 var db = mongoose.connection;
@@ -20,3 +18,55 @@ db.on('error', function() {
 db.once('open', function() {
   console.log('mongoose connected successfully');
 });
+
+var itemSchema = mongoose.Schema({
+  flights: Object,
+  hotel: Object,
+  attractions: Array,
+  food: Array,
+  weather: Object
+});
+
+var Item = mongoose.model('Item', itemSchema);
+
+var saveToDatabase = function(data,callback) {
+  Item.find({flights: data.flights, hotel: data.hotel, attractions: data.attractions, food: data.food, weather: data.weather}, (err, result) =>{
+     if(result.length === 0) {
+        var item = new Item;
+        item.flights = data.flights;
+        item.hotel = data.hotel;
+        item.attractions = data.attractions;
+        item.food = data.food;
+        item.weather = data.weather;
+        item.save();
+        callback(data);
+     } else {
+        callback(data);
+     }
+  })
+}
+      
+var deleteFromDatabase = function(id, callback){
+  Item.remove({_id: id}, function(err){
+     if(err) {
+       return handleError(err);
+     } else {
+       console.log('deleted from db');
+     }
+  });
+};
+
+
+var selectAll = function(callback) {
+  Item.find({}, function(err, items) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(items);
+    }
+  });
+};
+
+module.exports.selectAll = selectAll;
+module.exports.saveToDatabase =saveToDatabase;
+module.exports.deleteFromDatabase =deleteFromDatabase;
