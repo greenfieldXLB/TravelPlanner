@@ -50,19 +50,32 @@ app.post('/weather', function(req,res) {
 
 app.post('/save', (req, res) => {
   var data = JSON.parse(req.body.data);
-  items.saveToDatabase(data, (data) =>{
-        res.end('successed!');
+  items.saveToDatabase(data, function(err, result) {
+    if(err) {
+      console.log('server received database error when saving a record');
+    } else {
+      res.sendStatus(200);
+      console.log('server informing client of successful post request');
+    }
   })
-
 });
 
 app.post('/removeRecord', (req, res) => {
    var id = req.body.uniqueID;
    items.deleteFromDatabase(id);
+   res.sendStatus(200);
 });
 
 app.get('/getAll', (req, res) => {
-  items.selectAll((results) =>{res.end(JSON.stringify(results))});
+  //items.selectAll((results) => {res.end(JSON.stringify(results))});
+  items.selectAll(function(err, result) {
+    if(err) {
+      console.log('server received database error when retrieving records');
+    } else {
+      res.send(result);
+      console.log('server informing client of successfully retrieving records ', result);
+    }
+  })
 });
 
 

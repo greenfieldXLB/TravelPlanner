@@ -30,19 +30,28 @@ var itemSchema = mongoose.Schema({
 var Item = mongoose.model('Item', itemSchema);
 
 var saveToDatabase = function(data,callback) {
-  Item.find({flights: data.flights, hotel: data.hotel, attractions: data.attractions, food: data.food, weather: data.weather}, (err, result) =>{
-     if(result.length === 0) {
-        var item = new Item;
-        item.flights = data.flights;
-        item.hotel = data.hotel;
-        item.attractions = data.attractions;
-        item.food = data.food;
-        item.weather = data.weather;
-        item.save();
-        callback(data);
-     } else {
-        callback(data);
-     }
+  Item.find({flights: data.flights, hotel: data.hotel, attractions: data.attractions, food: data.food}, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      if(result.length === 0) {
+         var item = new Item;
+         item.flights = data.flights;
+         item.hotel = data.hotel;
+         item.attractions = data.attractions;
+         item.food = data.food;
+         item.weather = data.weather;
+         item.save(function(err, result) {
+           if(err) {
+             console.log('error saving to the db ', err);
+             callback(err, null);
+           } else {
+             console.log('successfully saved a new record to the db ')
+             callback(null, result);
+           }
+         })
+      }
+    }
   })
 }
 
@@ -62,7 +71,7 @@ var selectAll = function(callback) {
     if(err) {
       callback(err, null);
     } else {
-      callback(items);
+      callback(null, items);
     }
   });
 };

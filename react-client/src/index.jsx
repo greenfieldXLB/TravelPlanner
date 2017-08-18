@@ -26,9 +26,7 @@ class App extends React.Component {
         {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK'},
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK'}
       ],
-
       flights: [],
-
       savedChoices: [{
         flights: {},
         hotel: {},
@@ -36,14 +34,9 @@ class App extends React.Component {
         food: [],
         weather: {}
       }],
-
       airportCodes: {},
-      savedTrips: ['trip1', 'trip2', 'trip3'],
-
+      savedTrips: [],
       attrItems: [],
-
-      airportCodes: {},
-
       hotels: [],
       foodList: [],
       weather:[],
@@ -55,8 +48,13 @@ class App extends React.Component {
     this.requestWeather = this.requestWeather.bind(this);
     this.removeSingleDatabaseRecord = this.removeSingleDatabaseRecord.bind(this);
     this.saveToDatabase = this.saveToDatabase.bind(this);
+    this.retrieveFromDatabase = this.retrieveFromDatabase.bind(this);
 
   }
+  componentDidMount() {
+    this.retrieveFromDatabase();
+  }
+
 
   hotelsSearch() {
      $.ajax({
@@ -327,31 +325,15 @@ class App extends React.Component {
 
   saveToDatabase(){
     var app = this;
+    console.log('save to database function invoked');
     $.ajax({
       url: '/save',
       method: 'post',
-      data: {data: JSON.stringify(this.state.savedChoices[0])},
+      data: {data: JSON.stringify(app.state.savedChoices[0])},
       success: (data) =>{
         console.log("client - successfully saved to the database");
-        $.ajax({
-          url: '/getAll',
-          method: 'GET',
-          success: (data) => {
-            console.log("client - successfully retrieved saved data from the database");
-            console.log(JSON.parse(data));
-            app.setState({
-              savedTrips: JSON.parse(data)
-            }, function() {
-              console.log("client - set the state of saveTrips ", this.state.savedTrips);
-            })
-          },
-          error: (data) => {
-            console.log("client - error in retrieving saved data from the database");
-            console.log(data);
-          }
-        })
+        this.retrieveFromDatabase();
       },
-
       error: (err) => {
         console.log(err);
       }
@@ -426,15 +408,36 @@ class App extends React.Component {
     this.state.savedChoices[0][ categoryName ] = list;
   }
 
+  retrieveFromDatabase() {
+    var context = this;
+    $.ajax({
+      url: '/getAll',
+      method: 'GET',
+      success: (data) => {
+        console.log("client - successfully retrieved saved data from the database ");
+        context.setState({
+          savedTrips: data
+        }, function() {
+          console.log("client - set the state of saveTrips ", context.state.savedTrips);
+          debugger;
+        })
+      },
+      error: () => {
+        console.log("client - error in retrieving saved data from the database");
+
+      }
+    })
+  }
+
   removeSingleDatabaseRecord (uniqueID) {
+    var context = this;
     $.ajax ({
       method: "POST",
       url: "/removeRecord",
       data:{uniqueID: uniqueID},
       success: function() {
         console.log('client received an confirmation that item is removed from db');
-        //invoke the get ajax call and update the state of updateSavedChoices
-
+        context.retrieveFromDatabase();
       }, error: function() {
         console.log('client received an error when attempting to remove from db');
       }
@@ -447,7 +450,6 @@ class App extends React.Component {
 
         <h1 id='title'>Trip Planner</h1>
           <span><SearchBar onSearch = {this.onSearch}/></span>
-          <button onClick={this.saveToDatabase.bind(this)}>save</button>
           <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
 
         <table className='table'>
