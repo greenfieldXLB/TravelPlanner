@@ -139,6 +139,7 @@ class App extends React.Component {
     var codes = {};
     var APCAuth = process.env.APCAuth || config.APCAuth;
     var APCSecret = process.env.APCSecret || config.APCSecret;
+    console.log(APCAuth);
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
