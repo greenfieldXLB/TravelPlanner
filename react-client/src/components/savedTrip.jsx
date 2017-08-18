@@ -11,7 +11,8 @@ class SavedTrip extends React.Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-  handlePanelToggle () {
+  handlePanelToggle (event) {
+    event.preventDefault();
     this.setState({
       clicked: !this.state.clicked
     })
