@@ -20,13 +20,11 @@ app.post('/attraction', function(req,res){
   })
 })
 
-
 app.get('/hotels', (req, res) => {
   hotel.hotel(req.query, (data) => {
     res.end(JSON.stringify(data))
   })
 })
-
 
 app.post('/food', function (req, res){
   let location = req.body.location;
@@ -50,19 +48,29 @@ app.post('/weather', function(req,res) {
 
 app.post('/save', (req, res) => {
   var data = JSON.parse(req.body.data);
-  items.saveToDatabase(data, (data) =>{
-        res.end('successed!');
+  items.saveToDatabase(data, function(err, result) {
+    if(err) {
+      console.log('server received database error when saving a record');
+    } else {
+      res.sendStatus(200);
+    }
   })
-
 });
 
 app.post('/removeRecord', (req, res) => {
    var id = req.body.uniqueID;
    items.deleteFromDatabase(id);
+   res.sendStatus(200);
 });
 
 app.get('/getAll', (req, res) => {
-  items.selectAll((results) =>{res.end(JSON.stringify(results))});
+  items.selectAll(function(err, result) {
+    if(err) {
+      console.log('server received database error when retrieving records');
+    } else {
+      res.send(result);
+    }
+  })
 });
 
 

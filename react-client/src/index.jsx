@@ -16,19 +16,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      departureLocation: 'San Francisco', // depart SF
-      arrivalLocation: 'London', // arrive London
-      departureDate: '2017-12-01', // depart SF on 2017-12-01 YYYY-MM-DD
-      arrivalDate: '2017-12-02', // arrive London on 12/2/17
-      returnDate: '2017-12-15', // return to SF on 12/15/17
-      addresses:[ // array of addresses of ALL QUERIED hotel, attractions, & restaurants
+      departureLocation: '',
+      arrivalLocation: '',
+      departureDate: '',
+      arrivalDate: '',
+      returnDate: '',
+      addresses:[
         {category: 'hotel', name: 'London Hilton on Park Lane', address: '22 Park Ln, Mayfair, London W1K 1BE, UK'},
         {category: 'restaurant', name: 'Dinner by Heston Blumenthal', address: '66 Knightsbridge, London SW1X 7LA, UK'},
         {category: 'restaurant', name: 'Nobu London', address: 'Metropolitan by COMO, 19 Old Park Ln, Mayfair, London W1K 1LB, UK'}
       ],
-
       flights: [],
-
       savedChoices: [{
         flights: {},
         hotel: {},
@@ -36,24 +34,24 @@ class App extends React.Component {
         food: [],
         weather: {}
       }],
-
       airportCodes: {},
       savedTrips: [],
-
       attrItems: [],
-
-      airportCodes: {},
-
       hotels: [],
       foodList: [],
       weather:[],
       weatherIcon: ''
     }
-
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
     this.requestWeather = this.requestWeather.bind(this);
+    this.removeSingleDatabaseRecord = this.removeSingleDatabaseRecord.bind(this);
+    this.saveToDatabase = this.saveToDatabase.bind(this);
+    this.retrieveFromDatabase = this.retrieveFromDatabase.bind(this);
+  }
 
+  componentDidMount() {
+    this.retrieveFromDatabase();
   }
 
   hotelsSearch() {
@@ -62,9 +60,7 @@ class App extends React.Component {
       method: 'GET',
       data: {city: this.state.arrivalLocation},
       success: (res) => {
-
         const parsedHotel = JSON.parse( res );
-
         const addHotelAddress = this.state.addresses
         .concat( parsedHotel.map( this.responseToSaveAddress( 'hotel' ) ) );
 
@@ -90,16 +86,14 @@ class App extends React.Component {
       this.setState({
         selectedHotelId: hotel.id
       });
-    $(event.target).toggleClass('hotelHighlight');
-    var saved = {
-      name: hotel.name,
-      address: hotel.location.display_address.join(', '),
-      price: hotel.price,
-      image_url: hotel.image_url
-    };
-
-   this.state.savedChoices[0].hotel = saved;
-   // console.log(this.state.savedChoices)
+      $(event.target).toggleClass('hotelHighlight');
+      var saved = {
+        name: hotel.name,
+        address: hotel.location.display_address.join(', '),
+        price: hotel.price,
+        image_url: hotel.image_url
+      };
+     this.state.savedChoices[0].hotel = saved;
     }
   }
 
@@ -273,7 +267,6 @@ class App extends React.Component {
     });
   }
 
-
    yelpAttrSearch(){
     $.ajax({
       url: '/attraction',
@@ -296,9 +289,6 @@ class App extends React.Component {
       }
     })
   }
-
-
-
 
   searchFood(){
     $.ajax({
@@ -324,29 +314,15 @@ class App extends React.Component {
     })
   }
 
-
-  SaveToDatabase(){
+  saveToDatabase(){
     var app = this;
     $.ajax({
       url: '/save',
       method: 'post',
-      data: {data: JSON.stringify(this.state.savedChoices[0])},
+      data: {data: JSON.stringify(app.state.savedChoices[0])},
       success: (data) =>{
-        $.ajax({
-          url: '/getAll',
-          method: 'GET',
-          success: (data) => {
-            console.log(JSON.parse(data));
-            app.setState({
-              savedTrips: JSON.parse(data)
-            })
-          },
-          error: (data) => {
-            console.log(data);
-          }
-        })
+        this.retrieveFromDatabase();
       },
-
       error: (err) => {
         console.log(err);
       }
@@ -421,6 +397,36 @@ class App extends React.Component {
     this.state.savedChoices[0][ categoryName ] = list;
   }
 
+  retrieveFromDatabase() {
+    var context = this;
+    $.ajax({
+      url: '/getAll',
+      method: 'GET',
+      success: (data) => {
+        context.setState({
+          savedTrips: data
+        }, function() {
+        })
+      },
+      error: () => {
+        console.log("client - error in retrieving saved data from the database");
+      }
+    })
+  }
+
+  removeSingleDatabaseRecord (uniqueID) {
+    var context = this;
+    $.ajax ({
+      method: "POST",
+      url: "/removeRecord",
+      data:{uniqueID: uniqueID},
+      success: () => {
+        context.retrieveFromDatabase();
+      }, error: function() {
+        console.log('client received an error when attempting to remove from db');
+      }
+    })
+  }
 
   render () {
     return (
@@ -428,7 +434,6 @@ class App extends React.Component {
 
         <h1 id='title'>Trip Planner</h1>
           <span><SearchBar onSearch = {this.onSearch}/></span>
-          <button onClick={this.SaveToDatabase.bind(this)}>save</button>
           <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
 
         <table className='table'>
@@ -456,7 +461,7 @@ class App extends React.Component {
                 <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
               </td>
               <td>
-                <SavedTrips trips={this.state.savedTrips}/>
+                <SavedTrips trips={this.state.savedTrips} remove = {this.removeSingleDatabaseRecord} save = {this.saveToDatabase}/>
               </td>
             </tr>
           </tbody>
