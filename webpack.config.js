@@ -10,7 +10,7 @@ module.exports = {
     path: DIST_DIR
   },
   plugins: [
-    new webpack.new webpack.EnvironmentPlugin([
+    new webpack.EnvironmentPlugin([
     'QPX_API'
     ])
   ],
