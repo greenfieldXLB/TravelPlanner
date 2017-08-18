@@ -116,14 +116,14 @@ label {
 }
 
 .hotelHighlight{
-  background-color: rgba(0, 128, 96, 0.3);
+  background-color: rgba(0, 128, 96, 0.4);
 }
 .attrBackground{
   background-color: rgba(45, 45, 45, 0);
 }
 
 .activeAttr{
-  background-color: rgba(0, 128, 96, 0.3);
+  background-color: rgba(0, 128, 96, 0.4);
 }
 
 .avoid-clicks {
@@ -131,7 +131,7 @@ label {
 }
 
 .flightHighlight {
-  background-color: rgba(0, 128, 96, 0.3);
+  background-color: rgba(0, 128, 96, 0.4);
 }
 
 
@@ -202,4 +202,8 @@ img {
   font-size: 530%;
   text-align: center;
   color:rgba(45,45,45,0.9);
+}
+
+#foodtype {
+  margin-left: 7%;
 }

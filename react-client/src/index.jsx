@@ -97,7 +97,7 @@ class App extends React.Component {
       price: hotel.price,
       image_url: hotel.image_url
     };
-    
+
    this.state.savedChoices[0].hotel = saved;
    // console.log(this.state.savedChoices)
     }
@@ -175,6 +175,7 @@ class App extends React.Component {
       .then((codes) => {
         context.setState({
           airportCodes: codes
+
         })
       })
       .then(() => {
@@ -260,6 +261,7 @@ class App extends React.Component {
       success: (res) => {
 
         const parsedAttr = JSON.parse( res );
+        console.log(parsedAttr[0]);
 
         const addAttrAddress = this.state.addresses
         .concat( parsedAttr.map( this.responseToSaveAddress( 'attraction' ) ) );
@@ -277,7 +279,7 @@ class App extends React.Component {
 
 
 
-  
+
   searchFood(){
     $.ajax({
       url:'/food',
@@ -286,6 +288,7 @@ class App extends React.Component {
       success:(res) => {
 
           const parsedFood = JSON.parse( res );
+          console.log(parsedFood[0]);
 
           const addFoodAddress = this.state.addresses
           .concat( parsedFood.map( this.responseToSaveAddress( 'food' ) ) );
@@ -302,7 +305,7 @@ class App extends React.Component {
     })
   }
 
- 
+
   SaveToDatabase(){
     var app = this;
     $.ajax({
@@ -330,7 +333,7 @@ class App extends React.Component {
       }
     })
   }
-  
+
   responseToSaveAddress( category ){
     return function( {name, location, coordinates} ){
       const display_address = location.display_address;
@@ -377,11 +380,20 @@ class App extends React.Component {
     if( list === undefined ){
       return;
     }
+
+    var selectItem = {};
+
     if( selected ){
-      list.push( itemData );
+      selectItem.name = itemData.name;
+      selectItem.address = itemData.location.display_address.join(', ');
+      selectItem.price = itemData.price;
+      selectItem.image_url = itemData. image_url;
+      selectItem.category = itemData.categories[0].title;
+
+      list.push( selectItem );
     }
     else{
-      let index = list.indexOf( itemData );
+      let index = list.indexOf( selectItem );
       if( index >= 0 ){
         list.splice( index, 1 );
       }
@@ -394,10 +406,12 @@ class App extends React.Component {
   render () {
     return (
       <div>
+
         <h1 id='title'>Trip Planner</h1>
           <span><SearchBar onSearch = {this.onSearch}/></span>
           <button onClick={this.SaveToDatabase.bind(this)}>save</button>
           <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
+
         <table className='table'>
           <thead>
             <tr>
@@ -432,5 +446,6 @@ class App extends React.Component {
     )
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
