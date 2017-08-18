@@ -137,7 +137,6 @@ class App extends React.Component {
   getAirportCodes(departLoc, arrivalLoc) {
     var context = this;
     var codes = {};
-    console.log(process.env.QPX_API);
     var APCAuth = process.env.APC_AUTH || config.APCAuth;
     var APCSecret = process.env.APC_AUTH || config.APCSecret;
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
