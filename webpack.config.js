@@ -14,7 +14,7 @@ module.exports = {
       'QPX_API',
       'APC_AUTH',
       'APC_SECRET'
-    ]);
+    ])
   ],
   module : {
     loaders : [
