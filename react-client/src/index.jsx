@@ -175,7 +175,6 @@ class App extends React.Component {
       .then((codes) => {
         context.setState({
           airportCodes: codes
-
         })
       })
       .then(() => {
