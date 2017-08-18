@@ -53,6 +53,7 @@ class App extends React.Component {
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
     this.requestWeather = this.requestWeather.bind(this);
+    this.removeSingleDatabaseRecord = this.removeSingleDatabaseRecord.bind(this);
 
   }
 
@@ -419,6 +420,20 @@ class App extends React.Component {
     this.state.savedChoices[0][ categoryName ] = list;
   }
 
+  removeSingleDatabaseRecord (uniqueID) {
+    $.ajax ({
+      method: "POST",
+      url: "/removeRecord",
+      data:{uniqueID: uniqueID},
+      success: function() {
+        console.log('client received an confirmation that item is removed from db');
+        //invoke the get ajax call and update the state of updateSavedChoices
+
+      }, error: function() {
+        console.log('client received an error when attempting to remove from db');
+      }
+    })
+  }
 
   render () {
     return (
@@ -454,7 +469,7 @@ class App extends React.Component {
                 <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
               </td>
               <td>
-                <SavedTrips trips={this.state.savedTrips} />
+                <SavedTrips trips={this.state.savedTrips} remove = {this.removeSingleDatabaseRecord}/>
               </td>
             </tr>
           </tbody>

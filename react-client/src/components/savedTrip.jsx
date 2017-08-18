@@ -8,6 +8,7 @@ class SavedTrip extends React.Component {
       clicked: false
     }
     this.handlePanelToggle = this.handlePanelToggle.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   handlePanelToggle () {
@@ -16,22 +17,27 @@ class SavedTrip extends React.Component {
     })
   }
 
+  handleRemove() {
+    console.log('remove button clicked.  the unique id is ', this.props.trip.id);
+    this.props.remove(this.props.trip.id);
+  }
+
   render() {
     if(!this.state.clicked) {
       return (
-        <div onClick = {this.handlePanelToggle}>
-          <div>
-            <h4><a href = "#">My Saved Trip #{this.props.index + 1} <div className = "glyphicon glyphicon-triangle-bottom"></div></a></h4>
-            <span><div className = "glyphicon glyphicon-trash"></div></span>
+        <div >
+          <div >
+            <h4 className = "panelHeader">My Saved Trip #{this.props.index + 1} <a href = "#"><div className = "glyphicon glyphicon-triangle-bottom toggle" onClick = {this.handlePanelToggle}></div></a></h4>
+            <a href = "#"><div><h4 className = "glyphicon glyphicon-trash panelHeader trash" onClick = {this.handleRemove}></h4></div></a>
           </div>
         </div>
       )
     } else {
       return (
-        <div onClick = {this.handlePanelToggle}>
-          <div>
-            <h4><a href = "#">My Saved Trip #{this.props.index + 1}<div className = "glyphicon glyphicon-triangle-top"></div></a></h4>
-            <span>X</span>
+        <div >
+          <div >
+            <h4 className = "panelHeader">My Saved Trip #{this.props.index + 1} <a href = "#"><div className = "glyphicon glyphicon-triangle-top toggle" onClick = {this.handlePanelToggle}></div></a></h4>
+            <a href = "#"><div><h4 className = "glyphicon glyphicon-trash panelHeader trash" onClick = {this.handleRemove}></h4></div></a>
           </div>
           <SavedRecordPanel trip = {this.props.trip}/>
         </div>

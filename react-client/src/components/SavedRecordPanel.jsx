@@ -41,6 +41,7 @@ class SavedRecordPanel extends React.Component {
           <div><h5>SFO -> LAX</h5></div>
           <div><h6><b>Carrier: </b>Alaskan Airlines</h6></div>
           <div><h6><b>Arrival Time: </b>9:00 AM</h6></div>
+          <div><h6><b>Round Trip Price: </b>$500</h6></div>
           <br></br>
         </div>
 
@@ -57,7 +58,6 @@ class SavedRecordPanel extends React.Component {
               <div>
                 <div><h5>{attraction.name}</h5></div>
                 <div><h6>{attraction.address.join (" ")}</h6></div>
-                <div><h6>{attraction.image_url}</h6></div>
               </div>
             )}
             <br></br>
@@ -69,7 +69,6 @@ class SavedRecordPanel extends React.Component {
               <div>
                 <div><h5>{restaurant.name}</h5></div>
                 <div><h6>{restaurant.address.join (" ")}</h6></div>
-                <div><h6>{restaurant.image_url}</h6></div>
               </div>
             )}
         </div>

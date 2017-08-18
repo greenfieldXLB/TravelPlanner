@@ -207,3 +207,18 @@ img {
 #foodtype {
   margin-left: 7%;
 }
+
+.panelHeader {
+  display: inline-block;
+  color: black;
+}
+
+.trash {
+  float:right;
+  margin-top: -12%;
+  color: #0E6666;
+}
+
+.save, .toggle {
+  color: #0E6666;
+}
