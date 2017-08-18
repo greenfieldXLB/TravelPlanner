@@ -8,9 +8,6 @@ mongoose.connect(uristring, function (err, res) {
     console.log ('Succeeded connected to: ' + uristring);
   }
 });
-var itemSchema = mongoose.Schema({
-});
-mongoose.connect('mongodb://localhost/travelplanner' ,{useMongoClient: true});
 
 var db = mongoose.connection;
 
@@ -73,16 +70,3 @@ var selectAll = function(callback) {
 module.exports.selectAll = selectAll;
 module.exports.saveToDatabase =saveToDatabase;
 module.exports.deleteFromDatabase =deleteFromDatabase;
-// var sampledata = {
-//   flight: {depart: 'jfkfasf'},
-//   hotel: {name: 'motel'},
-//   attraction: [{name: 'abcd'}, {name: 'defghij'}],
-//   food:[{name: 'tacossdd'}, {name: 'buger'}],
-//   weather:{temperature: 30}
-// }
-
-// deleteFromDatabase("59964799b7a7e84d950982fe")
-
-// saveToDatabase(sampledata, console.log);
-
-// selectAll((items) => {console.log(1111, items)});
