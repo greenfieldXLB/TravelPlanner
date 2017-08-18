@@ -54,6 +54,7 @@ class App extends React.Component {
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
     this.requestWeather = this.requestWeather.bind(this);
     this.removeSingleDatabaseRecord = this.removeSingleDatabaseRecord.bind(this);
+    this.saveToDatabase = this.saveToDatabase.bind(this);
 
   }
 
@@ -324,23 +325,28 @@ class App extends React.Component {
   }
 
 
-  SaveToDatabase(){
+  saveToDatabase(){
     var app = this;
     $.ajax({
       url: '/save',
       method: 'post',
       data: {data: JSON.stringify(this.state.savedChoices[0])},
       success: (data) =>{
+        console.log("client - successfully saved to the database");
         $.ajax({
           url: '/getAll',
           method: 'GET',
           success: (data) => {
+            console.log("client - successfully retrieved saved data from the database");
             console.log(JSON.parse(data));
             app.setState({
               savedTrips: JSON.parse(data)
+            }, function() {
+              console.log("client - set the state of saveTrips ", this.state.savedTrips);
             })
           },
           error: (data) => {
+            console.log("client - error in retrieving saved data from the database");
             console.log(data);
           }
         })
@@ -441,7 +447,7 @@ class App extends React.Component {
 
         <h1 id='title'>Trip Planner</h1>
           <span><SearchBar onSearch = {this.onSearch}/></span>
-          <button onClick={this.SaveToDatabase.bind(this)}>save</button>
+          <button onClick={this.saveToDatabase.bind(this)}>save</button>
           <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
 
         <table className='table'>
@@ -469,7 +475,7 @@ class App extends React.Component {
                 <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
               </td>
               <td>
-                <SavedTrips trips={this.state.savedTrips} remove = {this.removeSingleDatabaseRecord}/>
+                <SavedTrips trips={this.state.savedTrips} remove = {this.removeSingleDatabaseRecord} save = {this.saveToDatabase}/>
               </td>
             </tr>
           </tbody>

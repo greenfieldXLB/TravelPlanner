@@ -6,7 +6,7 @@ class SavedTrips extends React.Component {
     if (this.props.trips.length > 0) {
       return (
         <div>
-          <a href ="#"><h3 className = "glyphicon glyphicon-heart save"></h3></a>
+          <a href ="#" onClick = {this.props.save}><h3 className = "glyphicon glyphicon-heart save"></h3></a>
           {this.props.trips.map((trip,index) => (
             <SavedTrip trip={trip} key = {index} index = {index} remove = {this.props.remove}/>
           ))}
