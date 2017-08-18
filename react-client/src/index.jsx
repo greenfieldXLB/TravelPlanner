@@ -8,7 +8,7 @@ import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
 import Weather from './components/Weather.jsx';
-import SavedTrips from './components/SavedTrips.jsx';
+import SavedTrips from './components/savedTrips.jsx';
 const FlightAPI = require('qpx-express');
 
 
@@ -123,7 +123,7 @@ class App extends React.Component {
             "maxStops": 0
           }
         ],
-        "solutions": 10,
+        "solutions": 12,
       }
     };
     var context = this;
@@ -203,7 +203,7 @@ class App extends React.Component {
       var flight1 = flight.slice[0];
       var flight2 = flight.slice[1];
       var saved = {
-        saletotal: flight.saleTotal,
+        saletotal: '$' + flight.saleTotal.slice(3),
         goingDuration: flight1.duration,
         goingOrigin: flight1.segment[0].leg[0].origin,
         goingDestination: flight1.segment[0].leg[0].destination,
@@ -244,16 +244,15 @@ class App extends React.Component {
     },function(){
       this.yelpAttrSearch();
       this.searchFood();
-      // this.getAirportCodes(departureLocation, arrivalLocation);
+      this.getAirportCodes(departureLocation, arrivalLocation);
       this.hotelsSearch(arrivalLocation);
-      // this.requestWeather(arrivalLocation, departureDate);
+      this.requestWeather(arrivalLocation, departureDate);
     });
   }
 
 
    yelpAttrSearch(){
     console.log(this.state.arrivalLocation);
-
     $.ajax({
       url: '/attraction',
       type: 'POST',
@@ -305,16 +304,11 @@ class App extends React.Component {
 
  
   SaveToDatabase(){
-    // console.log(555, this.state.savedChoices[0]);
     var app = this;
     $.ajax({
       url: '/save',
       method: 'post',
       data: {data: JSON.stringify(this.state.savedChoices[0])},
-    // $.ajax({
-    //   url: '/save',
-    //   method: 'post',
-    //   data: {data: this.state.savedChoices[0]},
       success: (data) =>{
         $.ajax({
           url: '/getAll',
@@ -370,7 +364,7 @@ class App extends React.Component {
     })
   }
 
-handleAttrItemState(e){
+  handleAttrItemState(e){
     this.updateSavedChoices( 'attractions', e.props.attrItemEntry, e.state.selected );
   }
 
@@ -383,27 +377,17 @@ handleAttrItemState(e){
     if( list === undefined ){
       return;
     }
-
-    var selectItem = {};
-
     if( selected ){
-      selectItem.name = itemData.name;
-      selectItem.address = itemData.location.display_address.join(', ');
-      selectItem.price = itemData.price;
-      selectItem.image_url = itemData. image_url;
-
-      list.push( selectItem );
+      list.push( itemData );
     }
     else{
-      let index = list.indexOf( selectItem );
+      let index = list.indexOf( itemData );
       if( index >= 0 ){
         list.splice( index, 1 );
       }
     }
 
     this.state.savedChoices[0][ categoryName ] = list;
-    console.log(this.state.savedChoices[0]);
-
   }
 
 
@@ -448,8 +432,5 @@ handleAttrItemState(e){
     )
   }
 }
-
-
-
 
 ReactDOM.render(<App />, document.getElementById('app'));
