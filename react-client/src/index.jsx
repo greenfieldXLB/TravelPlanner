@@ -404,10 +404,18 @@ class App extends React.Component {
   render () {
     return (
       <div>
+
         <h1 id='title'>Trip Planner</h1>
           <span><SearchBar onSearch = {this.onSearch}/></span>
           <button onClick={this.SaveToDatabase.bind(this)}>save</button>
           <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
+
+        <h2>Trip Planner</h2>
+
+          <SearchBar onSearch = {this.onSearch}/>
+          <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
+
+
         <table className='table'>
           <thead>
             <tr>
