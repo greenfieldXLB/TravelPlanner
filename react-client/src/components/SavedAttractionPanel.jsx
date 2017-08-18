@@ -17,8 +17,7 @@ class SavedAttractionPanel extends React.Component {
           <h4><div className = "glyphicon glyphicon-camera"></div> Attractions</h4>
             {this.props.trip.attractions.map((attraction, index) =>
               <div key = {index}>
-                <div><h5><span className = "glyphicon glyphicon-heart"></span> {attraction.name}</h5></div>
-                <div><h6>{attraction.address}</h6></div>
+                <div><h5><span className = "glyphicon glyphicon-heart"></span> {attraction.name} ({attraction.category})</h5></div>
                 <div><h6>{attraction.address}</h6></div>
               </div>
             )}

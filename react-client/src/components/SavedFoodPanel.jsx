@@ -20,7 +20,7 @@ class SavedFoodPanel extends React.Component {
               <div key = {index}>
                 <div><h5><span className = "glyphicon glyphicon-heart"></span> {restaurant.name} ({restaurant.category})</h5></div>
                 <div><h6>{restaurant.address}</h6></div>
-                <div><h6>{restaurant.address}</h6></div>
+                
               </div>
             )}
             <br></br>
