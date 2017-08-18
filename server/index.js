@@ -44,7 +44,7 @@ app.post('/weather', function(req,res) {
         var averageTemp = ((minTemp + maxTemp) / 2).toFixed(2);
         res.send(JSON.stringify({'averageTemp': averageTemp, 'description': parsedData.daily.data[0].summary, 'icon': parsedData.daily.data[0].icon}));
       });
-    });
+    }
   });
 })
 
