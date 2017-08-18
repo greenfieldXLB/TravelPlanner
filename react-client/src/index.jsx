@@ -137,12 +137,26 @@ class App extends React.Component {
   getAirportCodes(departLoc, arrivalLoc) {
     var context = this;
     var codes = {};
-    var APCAuth;
-    var APCSecret;
-    Promise.resolve(APCAuth = process.env.APC_AUTH || config.APCAuth)
-    .then(() => {APCSecret = process.env.APC_SECRET || config.APCSecret})
+    var APCAuth = process.env.APC_AUTH || config.APCAuth;
+    var APCSecret = process.env.APC_SECRET || config.APCSecret;
+    fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
+      headers: {
+        Accept: "application/json",
+        "APC-Auth": APCAuth,
+        "APC-Auth-Secret": APCSecret
+      },
+      method: "POST"
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      if (data.airports[0].name.includes('All Airports')) {
+        codes.departLoc = data.airports[1].iata;
+      } else {
+        codes.departLoc = data.airports[0].iata;
+      }
+    })
     .then(() => {
-      fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
+      fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
         headers: {
           Accept: "application/json",
           "APC-Auth": APCAuth,
@@ -152,11 +166,10 @@ class App extends React.Component {
       })
       .then((resp) => resp.json())
       .then(function(data) {
-        console.log(data);
         if (data.airports[0].name.includes('All Airports')) {
-          codes.departLoc = data.airports[1].iata;
+          codes.arrivalLoc = data.airports[1].iata;
         } else {
-          codes.departLoc = data.airports[0].iata;
+          codes.arrivalLoc = data.airports[0].iata;
         }
       })
       .then((codes) => {
@@ -189,7 +202,7 @@ class App extends React.Component {
         .then(() => {
           context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
         });
-      });
+      })
     });
   }
 
