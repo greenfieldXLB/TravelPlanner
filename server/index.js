@@ -48,14 +48,17 @@ app.post('/weather', function(req,res) {
   });
 })
 app.post('/save', (req, res) => {
-	var data = req.body[0]
-	items.saveToDatabase(data, (data) =>{
-        res.end(data);
-	})
+  // var data = Object.keys(req.body)[0]
+  var data = JSON.parse(req.body.data)
+  // console.log(data);
+  items.saveToDatabase(data, (data) =>{
+        res.end('successed!');
+  })
+  
 });
 
 app.get('/getAll', (req, res) => {
-	items.selectAll((results) =>{res.end(JSON.stringify(results))});
+  items.selectAll((results) =>{res.end(JSON.stringify(results))});
 });
 
 

@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/TravelPlanner';
 
-  mongoose.connect(uristring, function (err, res) {
-    if (err) {
-      console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-    } else {
-      console.log ('Succeeded connected to: ' + uristring);
-    }
-  });
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + uristring);
+  }
+});
 var itemSchema = mongoose.Schema({
 });
 mongoose.connect('mongodb://localhost/travelplanner' ,{useMongoClient: true});
@@ -23,9 +23,9 @@ db.once('open', function() {
 });
 
 var itemSchema = mongoose.Schema({
-  flight: Object,
+  flights: Object,
   hotel: Object,
-  attraction: Array,
+  attractions: Array,
   food: Array,
   weather: Object
 });
@@ -33,23 +33,25 @@ var itemSchema = mongoose.Schema({
 var Item = mongoose.model('Item', itemSchema);
 
 var saveToDatabase = function(data,callback) {
-  Item.find({flight: data.flight, hotel: data.hotel, attraction: data.attraction, food: data.food, weather: data.weather}, (err, result) =>{
+  Item.find({flights: data.flights, hotel: data.hotel, attractions: data.attractions, food: data.food, weather: data.weather}, (err, result) =>{
      if(result.length === 0) {
         var item = new Item;
-        item.flight = data.flight;
+        item.flights = data.flights;
         item.hotel = data.hotel;
-        item.attraction = data.attraction;
+        item.attractions = data.attractions;
         item.food = data.food;
         item.weather = data.weather;
-        item.save()
-        callback(data)
+        item.save();
+        callback(data);
      } else {
-        callback(data)
+        callback(data);
      }
   })
 }
       
-
+// var deleteFromDatabase(id){
+//    Item.remove(_id: id)
+// }
 
 
 var selectAll = function(callback) {
