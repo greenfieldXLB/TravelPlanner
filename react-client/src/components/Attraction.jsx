@@ -11,7 +11,7 @@ if (attrItems.length > 0) {
      )
 } else {
   return (
-    <div className = 'glyphicon glyphicon-camera'></div>
+    <h3 className = 'glyphicon glyphicon-camera'></h3>
   )
 }
 

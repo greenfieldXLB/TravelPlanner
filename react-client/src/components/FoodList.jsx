@@ -11,7 +11,7 @@ const FoodList = ({foodlist,handleFoodItemState}) => {
     )
   } else {
     return (
-      <div className = "glyphicon glyphicon-cutlery"></div>
+      <h3 className = "glyphicon glyphicon-cutlery"></h3>
     )
   }
 

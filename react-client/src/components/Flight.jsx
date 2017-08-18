@@ -27,6 +27,7 @@ const Flight = (props) => {
         </div>
       </div>
       <div className="avoid-clicks">
+        <br className="avoid-clicks"></br>
         <div className="avoid-clicks"><b>Return Flight:</b></div>
         <div className="avoid-clicks">
           <span className="avoid-clicks">{props.flight.slice[1].segment[0].flight.carrier}</span>

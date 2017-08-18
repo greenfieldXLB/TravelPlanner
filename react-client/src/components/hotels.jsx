@@ -18,7 +18,7 @@ class Hotel extends React.Component {
       )
     } else {
       return (
-        <div className = "glyphicon glyphicon-home"></div>
+        <h3 className = "glyphicon glyphicon-home"></h3>
       )
     }
 

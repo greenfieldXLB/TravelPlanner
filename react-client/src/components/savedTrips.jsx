@@ -12,7 +12,7 @@ const SavedTrips = (props) => {
     )
   } else {
     return(
-        <div className = "glyphicon glyphicon-heart"></div>
+        <h3 className = "glyphicon glyphicon-heart"></h3>
     )
 
   }
