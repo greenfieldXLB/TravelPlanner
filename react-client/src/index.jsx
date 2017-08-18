@@ -275,7 +275,6 @@ class App extends React.Component {
 
 
    yelpAttrSearch(){
-    console.log(this.state.arrivalLocation);
     $.ajax({
       url: '/attraction',
       type: 'POST',
@@ -283,7 +282,6 @@ class App extends React.Component {
       success: (res) => {
 
         const parsedAttr = JSON.parse( res );
-        console.log(parsedAttr[0]);
 
         const addAttrAddress = this.state.addresses
         .concat( parsedAttr.map( this.responseToSaveAddress( 'attraction' ) ) );
@@ -310,7 +308,6 @@ class App extends React.Component {
       success:(res) => {
 
           const parsedFood = JSON.parse( res );
-          console.log(parsedFood[0]);
 
           const addFoodAddress = this.state.addresses
           .concat( parsedFood.map( this.responseToSaveAddress( 'food' ) ) );

@@ -6,16 +6,16 @@ var searchFood = function (searchCity, callback){
 
   var foodResult = [];
 
-  // const clientId = yelpConfig.clientId;
-  //
-  // const clientSecret = yelpConfig.clientSecret;
-  //
-  //
-  // const token = yelp.accessToken(clientId, clientSecret).then(response => {
-  //   // console.log('TOKEN ', response.jsonBody.access_token);
-  // }).catch(e => {
-  //   console.log('ERROR ', e);
-  // });
+  const clientId = yelpConfig.clientId;
+
+  const clientSecret = yelpConfig.clientSecret;
+
+
+  const token = yelp.accessToken(clientId, clientSecret).then(response => {
+    // console.log('TOKEN ', response.jsonBody.access_token);
+  }).catch(e => {
+    console.log('ERROR ', e);
+  });
 
 
 
