@@ -3,7 +3,6 @@ import SavedTrip from './savedTrip.jsx';
 
 const SavedTrips = (props) => {
   if (props.trips.length > 0) {
-    console.log(props);
     return (
       <div>
         {props.trips.map(trip => (
@@ -13,7 +12,7 @@ const SavedTrips = (props) => {
     )
   } else {
     return(
-        <div className = "glyphicon glyphicon-heart"></div>
+        <h3 className = "glyphicon glyphicon-heart"></h3>
     )
 
   }

@@ -44,7 +44,6 @@ class SearchBar extends React.Component {
 
     handleSearchClick(e) {
       e.preventDefault();
-      console.log("clicked");
       this.props.onSearch(this.state.departureLocation, this.state.arrivalLocation, this.state.departureDate, this.state.returnDate);
     }
 

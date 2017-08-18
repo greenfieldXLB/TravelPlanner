@@ -8,7 +8,7 @@ import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
 import Weather from './components/Weather.jsx';
-import SavedTrips from './components/SavedTrips.jsx';
+import SavedTrips from './components/savedTrips.jsx';
 const FlightAPI = require('qpx-express');
 
 
@@ -76,7 +76,7 @@ class App extends React.Component {
       error: (err) => {
         console.log('error !')
       }
-     })
+    });
   }
 
   handleHotelClick(hotel, event){
@@ -91,8 +91,8 @@ class App extends React.Component {
     $(event.target).toggleClass('hotelHighlight');
     var saved = {
       name: hotel.name,
-      address: hotel.location.display_address,
-      price: hotel.prices
+      address: hotel.location.display_address.join(', '),
+      price: hotel.price
     }
    this.state.savedChoices[0].hotel = saved;
     }
@@ -118,14 +118,14 @@ class App extends React.Component {
             "maxStops": 0
           }
         ],
-        "solutions": 10,
+        "solutions": 12,
       }
     };
     var context = this;
     qpx.getInfo(body, function(error, data){
       context.setState({
         flights: data.trips.tripOption
-      })
+      });
     });
   }
 
@@ -141,7 +141,7 @@ class App extends React.Component {
         "APC-Auth-Secret": APCSecret
       },
       method: "POST"
-    })
+    });
     .then((resp) => resp.json())
     .then(function(data) {
       if (data.airports[0].name.includes('All Airports')) {
@@ -149,7 +149,7 @@ class App extends React.Component {
       } else {
         codes.departLoc = data.airports[0].iata;
       }
-    })
+    });
     .then(() => {
       fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
         headers: {
@@ -158,7 +158,7 @@ class App extends React.Component {
           "APC-Auth-Secret": APCSecret
         },
         method: "POST"
-      })
+      });
       .then((resp) => resp.json())
       .then(function(data) {
         if (data.airports[0].name.includes('All Airports')) {
@@ -166,12 +166,12 @@ class App extends React.Component {
         } else {
           codes.arrivalLoc = data.airports[0].iata;
         }
-      })
+      });
       .then((codes) => {
         context.setState({
           airportCodes: codes
         });
-      })
+      });
       .then(() => {
         context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
       });
@@ -198,7 +198,7 @@ class App extends React.Component {
       var flight1 = flight.slice[0];
       var flight2 = flight.slice[1];
       var saved = {
-        saletotal: flight.saleTotal,
+        saletotal: '$' + flight.saleTotal.slice(3),
         goingDuration: flight1.duration,
         goingOrigin: flight1.segment[0].leg[0].origin,
         goingDestination: flight1.segment[0].leg[0].destination,
@@ -247,8 +247,6 @@ class App extends React.Component {
 
 
   yelpAttrSearch(){
-    console.log(this.state.arrivalLocation);
-
     $.ajax({
       url: '/attraction',
       type: 'POST',
@@ -268,9 +266,8 @@ class App extends React.Component {
       },
       error: function(data) {
       }
-    })
+    });
   }
-
 
   searchFood(){
     $.ajax({
@@ -293,7 +290,7 @@ class App extends React.Component {
       error: (err) => {
         console.log('err', err);
       }
-    })
+    });
   }
 
 
@@ -322,12 +319,12 @@ class App extends React.Component {
         context.setState({
           weather: [parsedData],
           weatherIcon: parsedData.icon
-        })
+        });
       },
       error: function(err) {
           console.log('error in requesting data.')
       }
-    })
+    });
   }
 
   handleAttrItemState(e){
@@ -343,7 +340,6 @@ class App extends React.Component {
     if( list === undefined ){
       return;
     }
-
     if( selected ){
       list.push( itemData );
     }
@@ -355,21 +351,14 @@ class App extends React.Component {
     }
 
     this.state.savedChoices[0][ categoryName ] = list;
-    console.log(this.state.savedChoices[0]);
-
   }
-
 
   render () {
     return (
       <div>
-        <h1>Trip Planner</h1>
-
-          <SearchBar onSearch = {this.onSearch}/>
-          <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-
-
-
+        <h1 id='title'>Trip Planner</h1>
+          <span><SearchBar onSearch = {this.onSearch}/></span>
+          <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
         <table className='table'>
           <thead>
             <tr>
@@ -403,7 +392,6 @@ class App extends React.Component {
       </div>
     )
   }
-
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
