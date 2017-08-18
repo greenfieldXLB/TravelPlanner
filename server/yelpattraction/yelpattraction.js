@@ -20,8 +20,6 @@ var searchAttr = function (searchCity, callback){
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
 
-
-
   client.search({
     term:'Attractions',
     location: searchCity,
@@ -29,9 +27,7 @@ var searchAttr = function (searchCity, callback){
   })
 
   .then(response => {
-    console.log('YELP RES ', response.jsonBody.businesses[0]);
     attrResult = response.jsonBody.businesses;
-    console.log(Array.isArray(attrResult));
     callback(attrResult);
   })
 

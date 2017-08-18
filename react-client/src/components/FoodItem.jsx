@@ -12,7 +12,6 @@ class FoodItem extends React.Component {
   }
 
   handleFoodClick(){
-    console.log('FOOD CLICKED')
     this.setState({
       selected: !this.state.selected
     }, ()=>{
@@ -23,13 +22,13 @@ class FoodItem extends React.Component {
   render(){
     let foodclasses = classnames('attrBackground', {activeAttr: this.state.selected} );
     return(
-      <div className = {foodclasses} onClick = {this.handleFoodClick.bind(this)}>
+      <div className = {foodclasses} id="itemBorder" onClick = {this.handleFoodClick.bind(this)}>
         <div>
-          <div>{ this.props.fooditem.price }</div>
-          { this.props.fooditem.name }
+          <b>{ this.props.fooditem.name }</b>
         </div>
-        <div>{ this.props.fooditem.location.display_address}</div>
-        <img src={ this.props.fooditem.image_url } width='150'></img>
+        <div>{ this.props.fooditem.location.display_address.join(', ') }</div>
+        <div>{ this.props.fooditem.price }</div>
+        <img src={ this.props.fooditem.image_url } width='150' height = '150'></img>
       </div>
     )
   }

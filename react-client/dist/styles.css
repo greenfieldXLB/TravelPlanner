@@ -3,16 +3,23 @@
 }
 
 body {
+
   padding: 2em;
   font-family: Arial, sans-serif;
   font-weight: normal;
   color: #333;
+  background: url("backpack.jpg") no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
 }
 
 .search-wrapper {
-  background: #f0f0f0;
+  background: rgba(45, 45, 45, .2);
   padding: 1em 1em 0 1em;
   display: inline-block;
+  text-align: center;
 }
 
 .input-text {
@@ -31,6 +38,10 @@ body {
   -moz-box-shadow: none;
 }
 
+label {
+  color: black;
+  font-size: 14px;
+}
 .date-wrapper {
   position: relative;
   margin: 0 20px 10px 20px;
@@ -105,14 +116,14 @@ body {
 }
 
 .hotelHighlight{
-  background-color: #00a9e7;
+  background-color: rgba(0, 128, 96, 0.3);
 }
 .attrBackground{
-   background-color: white;
+  background-color: rgba(45, 45, 45, 0);
 }
 
 .activeAttr{
-  background-color: #b3ffda;
+  background-color: rgba(0, 128, 96, 0.3);
 }
 
 .avoid-clicks {
@@ -120,6 +131,75 @@ body {
 }
 
 .flightHighlight {
-  background-color: #00a9e7;
+  background-color: rgba(0, 128, 96, 0.3);
 }
 
+
+.nav {
+  display: block;
+  width:100%;
+}
+
+.search {
+  margin-left: 12%;
+  position: relative;
+  display: inline-block;
+  width:80%;
+  padding-bottom: 50px;
+}
+
+.weather {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width:10%;
+  height:100px;
+  float: left;
+  margin-top: -18%;
+  margin-right: 40px;
+  /*border: 1px solid black;*/
+}
+
+td {
+  background-color: rgba(45, 45, 45, .3);
+  width: 20%;
+  border-left: 3px solid #EDECEC;
+  border-right: 3px solid #EDECEC;
+  border-bottom: 3px solid #EDECEC;
+}
+
+th {
+  align: center;
+  color: rgba(45, 45, 45, .9);
+  font-size: 120%;
+}
+
+.itemBorder {
+  border-radius: 10px;
+  border: 1px solid grey;
+  padding: 20px;
+  width: 250px;
+  height: 300px;
+  margin-bottom:10px;
+}
+
+#itemBorder {
+  border-radius: 10px;
+  border: 1px solid grey;
+  padding: 20px;
+  width: 250px;
+  height: 300px;
+  margin-bottom:10px;
+}
+
+img {
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px rgba(45, 45, 45, .2);
+}
+
+#title {
+  font-family: 'Shrikhand', cursive;
+  font-size: 530%;
+  text-align: center;
+  color:rgba(45,45,45,0.9);
+}

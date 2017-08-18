@@ -44,13 +44,12 @@ class SearchBar extends React.Component {
 
     handleSearchClick(e) {
       e.preventDefault();
-      console.log("clicked");
       this.props.onSearch(this.state.departureLocation, this.state.arrivalLocation, this.state.departureDate, this.state.returnDate);
     }
 
   render() {
     return(
-      <div>
+      <div className = 'search'>
         <form >
             <div className="search-wrapper group">
               <CitySearch handleChange = {this.handleDepartureText} description = "Departure City"/>
