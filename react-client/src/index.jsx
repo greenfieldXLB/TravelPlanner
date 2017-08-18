@@ -40,7 +40,8 @@ class App extends React.Component {
       hotels: [],
       foodList: [],
       weather:[],
-      weatherIcon: ''
+      weatherIcon: '',
+      flightsAPI: [process.env.APC_AUTH, process.env.APC_SECRET, process.env.QPX_API]
     }
     this.onSearch = this.onSearch.bind(this);
     this.responseToSaveAddress = this.responseToSaveAddress.bind(this);
@@ -98,7 +99,7 @@ class App extends React.Component {
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
-    var apiKey = 'AIzaSyCDCZbj7Ath3p-jwi-ZmpAAEdWBmftH3r8' || config.flights;
+    var apiKey = this.state.flightsAPI[2] || config.flights;
     var qpx = new FlightAPI(apiKey);
 
     var body = {
@@ -131,8 +132,8 @@ class App extends React.Component {
   getAirportCodes(departLoc, arrivalLoc) {
     var context = this;
     var codes = {};
-    var APCAuth = 'ea0eb61a9e' || config.APCAuth;
-    var APCSecret = '4b35787cfc26306' || config.APCSecret;
+    var APCAuth = this.state.flightsAPI[0] || config.APCAuth;
+    var APCSecret = this.state.flightsAPI[1] || config.APCSecret;
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
