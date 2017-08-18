@@ -35,13 +35,15 @@ app.post('/food', function (req, res){
 
 app.post('/weather', function(req,res) {
   geolocation.requestGeolocation(req.body['location'], function(data){
-    geoCode = data.results[0].geometry.location;
-    weather.requestWeather(geoCode, req.body['date'], function(data) {
-      var parsedData = JSON.parse(data);
-      var minTemp = parsedData.daily.data[0].temperatureMin;
-      var maxTemp = parsedData.daily.data[0].temperatureMax;
-      var averageTemp = ((minTemp + maxTemp) / 2).toFixed(2);
-      res.send(JSON.stringify({'averageTemp': averageTemp, 'description': parsedData.daily.data[0].summary, 'icon': parsedData.daily.data[0].icon}));
+    if (data.results[0] {
+      geoCode = data.results[0].geometry.location;
+      weather.requestWeather(geoCode, req.body['date'], function(data) {
+        var parsedData = JSON.parse(data);
+        var minTemp = parsedData.daily.data[0].temperatureMin;
+        var maxTemp = parsedData.daily.data[0].temperatureMax;
+        var averageTemp = ((minTemp + maxTemp) / 2).toFixed(2);
+        res.send(JSON.stringify({'averageTemp': averageTemp, 'description': parsedData.daily.data[0].summary, 'icon': parsedData.daily.data[0].icon}));
+      });
     });
   });
 })
