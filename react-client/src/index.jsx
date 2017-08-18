@@ -263,6 +263,7 @@ class App extends React.Component {
       success: (res) => {
 
         const parsedAttr = JSON.parse( res );
+        console.log(parsedAttr[0]);
 
         const addAttrAddress = this.state.addresses
         .concat( parsedAttr.map( this.responseToSaveAddress( 'attraction' ) ) );
@@ -389,6 +390,7 @@ class App extends React.Component {
       selectItem.address = itemData.location.display_address.join(', ');
       selectItem.price = itemData.price;
       selectItem.image_url = itemData. image_url;
+      selectItem.category = itemData.categories[0].title;
 
       list.push( selectItem );
     }
