@@ -137,8 +137,8 @@ class App extends React.Component {
   getAirportCodes(departLoc, arrivalLoc) {
     var context = this;
     var codes = {};
-    var APCAuth = process.env.APC_AUTH || config.APCAuth;
-    var APCSecret = process.env.APC_SECRET || config.APCSecret;
+    var APCAuth = 'ea0eb61a9e' || config.APCAuth;
+    var APCSecret = '4b35787cfc26306' || config.APCSecret;
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
@@ -147,7 +147,7 @@ class App extends React.Component {
       },
       method: "POST"
     })
-    .then((resp) => resp.json())
+    .then((resp) => {resp.json(); console.log(resp);})
     .then(function(data) {
       if (data.airports[0].name.includes('All Airports')) {
         codes.departLoc = data.airports[1].iata;
