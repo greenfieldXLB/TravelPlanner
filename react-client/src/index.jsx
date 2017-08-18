@@ -449,9 +449,3 @@ class App extends React.Component {
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
-
-//<SearchBar onSearch = {this.onSearch}/>
-//<Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-
