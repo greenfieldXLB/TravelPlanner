@@ -177,8 +177,6 @@ class App extends React.Component {
           airportCodes: codes
 
         })
-        });
-
       })
       .then(() => {
         context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
@@ -452,7 +450,7 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
-ReactDOM.render(<App />, document.getElementById('app'));
+
 
 //<SearchBar onSearch = {this.onSearch}/>
 //<Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
