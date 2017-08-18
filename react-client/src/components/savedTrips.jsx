@@ -5,8 +5,8 @@ const SavedTrips = (props) => {
   if (props.trips.length > 0) {
     return (
       <div>
-        {props.trips.map(trip => (
-          <SavedTrip trip={trip}/>
+        {props.trips.map((trip,index) => (
+          <SavedTrip trip={trip} key = {index} index = {index}/>
         ))}
       </div>
     )

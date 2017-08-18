@@ -38,7 +38,7 @@ class App extends React.Component {
       }],
 
       airportCodes: {},
-      savedTrips: [],
+      savedTrips: ['trip1', 'trip2', 'trip3'],
 
       attrItems: [],
 
@@ -90,16 +90,14 @@ class App extends React.Component {
       this.setState({
         selectedHotelId: hotel.id
       });
-    $(event.target).toggleClass('hotelHighlight');
-    var saved = {
-      name: hotel.name,
-      address: hotel.location.display_address.join(', '),
-      price: hotel.price,
-      image_url: hotel.image_url
-    };
-
-   this.state.savedChoices[0].hotel = saved;
-   // console.log(this.state.savedChoices)
+      $(event.target).toggleClass('hotelHighlight');
+      var saved = {
+        name: hotel.name,
+        address: hotel.location.display_address.join(', '),
+        price: hotel.price,
+        image_url: hotel.image_url
+      };
+     this.state.savedChoices[0].hotel = saved;
     }
   }
 
@@ -456,7 +454,7 @@ class App extends React.Component {
                 <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
               </td>
               <td>
-                <SavedTrips trips={this.state.savedTrips}/>
+                <SavedTrips trips={this.state.savedTrips} />
               </td>
             </tr>
           </tbody>
