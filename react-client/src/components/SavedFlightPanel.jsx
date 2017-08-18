@@ -7,8 +7,6 @@ class SavedFlightPanel extends React.Component {
     this.state = {date: new Date()};
   }
 
-
-
   render() {
 
     if(this.props.trip.hasOwnProperty('flights') === false) {

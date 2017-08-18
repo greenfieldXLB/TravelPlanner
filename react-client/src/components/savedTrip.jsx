@@ -20,8 +20,6 @@ class SavedTrip extends React.Component {
 
   handleRemove(event) {
     event.preventDefault();
-    console.log('this.props.trip is ', this.props.trip._id);
-    console.log('remove button clicked.  the unique id is ', this.props.trip.id);
     this.props.remove(this.props.trip._id);
   }
 

@@ -6,9 +6,6 @@ class SavedHotelPanel extends React.Component {
     super(props);
     this.state = {date: new Date()};
   }
-
-
-
   render() {
     if(this.props.trip.hasOwnProperty('hotel') === false) {
       return (

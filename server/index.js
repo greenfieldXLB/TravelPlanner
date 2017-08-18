@@ -20,13 +20,11 @@ app.post('/attraction', function(req,res){
   })
 })
 
-
 app.get('/hotels', (req, res) => {
   hotel.hotel(req.query, (data) => {
     res.end(JSON.stringify(data))
   })
 })
-
 
 app.post('/food', function (req, res){
   let location = req.body.location;
@@ -55,7 +53,6 @@ app.post('/save', (req, res) => {
       console.log('server received database error when saving a record');
     } else {
       res.sendStatus(200);
-      console.log('server informing client of successful post request');
     }
   })
 });
@@ -67,13 +64,11 @@ app.post('/removeRecord', (req, res) => {
 });
 
 app.get('/getAll', (req, res) => {
-  //items.selectAll((results) => {res.end(JSON.stringify(results))});
   items.selectAll(function(err, result) {
     if(err) {
       console.log('server received database error when retrieving records');
     } else {
       res.send(result);
-      console.log('server informing client of successfully retrieving records ', result);
     }
   })
 });

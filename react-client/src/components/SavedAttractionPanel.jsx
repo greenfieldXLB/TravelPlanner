@@ -6,9 +6,6 @@ class SavedAttractionPanel extends React.Component {
     super(props);
     this.state = {date: new Date()};
   }
-
-
-
   render() {
     if(this.props.trip.attractions.length === 0) {
       return (
@@ -19,7 +16,7 @@ class SavedAttractionPanel extends React.Component {
         <div>
           <h4><div className = "glyphicon glyphicon-camera"></div> Attractions</h4>
             {this.props.trip.attractions.map((attraction, index) =>
-              <div>
+              <div key = {index}>
                 <div><h5><span className = "glyphicon glyphicon-heart"></span> {attraction.name}</h5></div>
                 <div><h6>{attraction.location.display_address[0]}</h6></div>
                 <div><h6>{attraction.location.display_address[1]}</h6></div>
