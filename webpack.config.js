@@ -10,13 +10,9 @@ module.exports = {
     path: DIST_DIR
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        AUTH: process.env.APC_AUTH,
-        SECRET: process.env.APC_AUTH,
-        QPX: process.env.QPX_API
-      },
-    })
+    new webpack.new webpack.EnvironmentPlugin([
+    'QPX_API'
+    ])
   ],
   module : {
     loaders : [
