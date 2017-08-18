@@ -97,7 +97,7 @@ class App extends React.Component {
       price: hotel.price,
       image_url: hotel.image_url
     };
-    
+
    this.state.savedChoices[0].hotel = saved;
    // console.log(this.state.savedChoices)
     }
@@ -175,7 +175,10 @@ class App extends React.Component {
       .then((codes) => {
         context.setState({
           airportCodes: codes
+
         })
+        });
+
       })
       .then(() => {
         context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
@@ -277,7 +280,7 @@ class App extends React.Component {
 
 
 
-  
+
   searchFood(){
     $.ajax({
       url:'/food',
@@ -286,6 +289,7 @@ class App extends React.Component {
       success:(res) => {
 
           const parsedFood = JSON.parse( res );
+          console.log(parsedFood[0]);
 
           const addFoodAddress = this.state.addresses
           .concat( parsedFood.map( this.responseToSaveAddress( 'food' ) ) );
@@ -302,7 +306,7 @@ class App extends React.Component {
     })
   }
 
- 
+
   SaveToDatabase(){
     var app = this;
     $.ajax({
@@ -330,7 +334,7 @@ class App extends React.Component {
       }
     })
   }
-  
+
   responseToSaveAddress( category ){
     return function( {name, location, coordinates} ){
       const display_address = location.display_address;
@@ -378,8 +382,6 @@ class App extends React.Component {
       return;
     }
 
-
-
     var selectItem = {};
 
     if( selected ){
@@ -409,12 +411,6 @@ class App extends React.Component {
           <span><SearchBar onSearch = {this.onSearch}/></span>
           <button onClick={this.SaveToDatabase.bind(this)}>save</button>
           <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
-
-        <h2>Trip Planner</h2>
-
-          <SearchBar onSearch = {this.onSearch}/>
-          <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-
 
         <table className='table'>
           <thead>
@@ -451,4 +447,11 @@ class App extends React.Component {
   }
 }
 
+
 ReactDOM.render(<App />, document.getElementById('app'));
+
+ReactDOM.render(<App />, document.getElementById('app'));
+
+//<SearchBar onSearch = {this.onSearch}/>
+//<Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
+

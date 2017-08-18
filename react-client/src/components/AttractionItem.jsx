@@ -21,7 +21,6 @@ class AttractionItem extends React.Component {
   }
 
 
-
   render(){
 
     let classes = classnames('attrBackground', {activeAttr: this.state.selected} );
