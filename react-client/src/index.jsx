@@ -99,7 +99,7 @@ class App extends React.Component {
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
     var apiKey = process.env.QPX_API || config.flights;
-    var qpx = new FlightAPI(apiKey);
+    var qpx = new FlightAPI(process.env.QPX_API);
 
     var body = {
       "request": {
@@ -136,8 +136,8 @@ class App extends React.Component {
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
-        "APC-Auth": APCAuth,
-        "APC-Auth-Secret": APCSecret
+        "APC-Auth": process.env.APC_AUTH,
+        "APC-Auth-Secret": process.env.APC_SECRET
       },
       method: "POST"
     })
