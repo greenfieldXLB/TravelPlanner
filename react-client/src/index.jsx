@@ -137,8 +137,8 @@ class App extends React.Component {
   getAirportCodes(departLoc, arrivalLoc) {
     var context = this;
     var codes = {};
-    var APCAuth = process.env.APCAuth || config.APCAuth;
-    var APCSecret = process.env.APCSecret || config.APCSecret;
+    var APCAuth = process.env.APC_AUTH || config.APCAuth;
+    var APCSecret = process.env.APC_SECRET || config.APCSecret;
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",
@@ -175,12 +175,34 @@ class App extends React.Component {
       .then((codes) => {
         context.setState({
           airportCodes: codes
-
         })
       })
       .then(() => {
-        context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
-      });
+        fetch(`https://www.air-port-codes.com/api/v1/multi?term=${arrivalLoc}`, {
+          headers: {
+            Accept: "application/json",
+            "APC-Auth": APCAuth,
+            "APC-Auth-Secret": APCSecret
+          },
+          method: "POST"
+        })
+        .then((resp) => resp.json())
+        .then(function(data) {
+          if (data.airports[0].name.includes('All Airports')) {
+            codes.arrivalLoc = data.airports[1].iata;
+          } else {
+            codes.arrivalLoc = data.airports[0].iata;
+          }
+        })
+        .then((codes) => {
+          context.setState({
+            airportCodes: codes
+          });
+        })
+        .then(() => {
+          context.retrieveFlights(context.state.departureDate, context.state.returnDate, codes.departLoc, codes.arrivalLoc);
+        });
+      })
     });
   }
 
@@ -253,7 +275,6 @@ class App extends React.Component {
 
 
    yelpAttrSearch(){
-    console.log(this.state.arrivalLocation);
     $.ajax({
       url: '/attraction',
       type: 'POST',
@@ -261,7 +282,6 @@ class App extends React.Component {
       success: (res) => {
 
         const parsedAttr = JSON.parse( res );
-        console.log(parsedAttr[0]);
 
         const addAttrAddress = this.state.addresses
         .concat( parsedAttr.map( this.responseToSaveAddress( 'attraction' ) ) );
@@ -288,7 +308,6 @@ class App extends React.Component {
       success:(res) => {
 
           const parsedFood = JSON.parse( res );
-          console.log(parsedFood[0]);
 
           const addFoodAddress = this.state.addresses
           .concat( parsedFood.map( this.responseToSaveAddress( 'food' ) ) );
