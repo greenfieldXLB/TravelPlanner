@@ -47,14 +47,18 @@ app.post('/weather', function(req,res) {
     })
   });
 })
+
 app.post('/save', (req, res) => {
-  // var data = Object.keys(req.body)[0]
-  var data = JSON.parse(req.body.data)
-  // console.log(data);
+  var data = JSON.parse(req.body.data);
   items.saveToDatabase(data, (data) =>{
         res.end('successed!');
   })
   
+});
+
+app.post('/removeRecord', (req, res) => {
+   var id = req.body.uniqueID;
+   items.deleteFromDatabase(id);
 });
 
 app.get('/getAll', (req, res) => {

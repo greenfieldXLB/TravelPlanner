@@ -93,7 +93,7 @@ class App extends React.Component {
     $(event.target).toggleClass('hotelHighlight');
     var saved = {
       name: hotel.name,
-      address: hotel.location.display_address,
+      address: hotel.location.display_address.join(', '),
       price: hotel.price,
       image_url: hotel.image_url
     };

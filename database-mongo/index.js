@@ -49,9 +49,15 @@ var saveToDatabase = function(data,callback) {
   })
 }
       
-// var deleteFromDatabase(id){
-//    Item.remove(_id: id)
-// }
+var deleteFromDatabase = function(id, callback){
+  Item.remove({_id: id}, function(err){
+     if(err) {
+       return handleError(err);
+     } else {
+       console.log('deleted from db');
+     }
+  });
+};
 
 
 var selectAll = function(callback) {
@@ -66,16 +72,16 @@ var selectAll = function(callback) {
 
 module.exports.selectAll = selectAll;
 module.exports.saveToDatabase =saveToDatabase;
+module.exports.deleteFromDatabase =deleteFromDatabase;
+// var sampledata = {
+//   flight: {depart: 'jfkfasf'},
+//   hotel: {name: 'motel'},
+//   attraction: [{name: 'abcd'}, {name: 'defghij'}],
+//   food:[{name: 'tacossdd'}, {name: 'buger'}],
+//   weather:{temperature: 30}
+// }
 
-var sampledata = {
-  flight: {depart: 'jfkfasf'},
-  hotel: {name: 'motel'},
-  attraction: [{name: 'abcd'}, {name: 'defghij'}],
-  food:[{name: 'tacossdd'}, {name: 'buger'}],
-  weather:{temperature: 30}
-}
-
-
+// deleteFromDatabase("59964799b7a7e84d950982fe")
 
 // saveToDatabase(sampledata, console.log);
 
