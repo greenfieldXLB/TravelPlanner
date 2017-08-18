@@ -45,7 +45,7 @@ var saveToDatabase = function(data,callback) {
      }
   })
 }
-      
+
 var deleteFromDatabase = function(id, callback){
   Item.remove({_id: id}, function(err){
      if(err) {
