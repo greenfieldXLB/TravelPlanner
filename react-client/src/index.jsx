@@ -377,11 +377,21 @@ class App extends React.Component {
     if( list === undefined ){
       return;
     }
+
+
+
+    var selectItem = {};
+
     if( selected ){
-      list.push( itemData );
+      selectItem.name = itemData.name;
+      selectItem.address = itemData.location.display_address.join(', ');
+      selectItem.price = itemData.price;
+      selectItem.image_url = itemData. image_url;
+
+      list.push( selectItem );
     }
     else{
-      let index = list.indexOf( itemData );
+      let index = list.indexOf( selectItem );
       if( index >= 0 ){
         list.splice( index, 1 );
       }
