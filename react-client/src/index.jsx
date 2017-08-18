@@ -150,8 +150,11 @@ class App extends React.Component {
         },
         method: "POST"
       })
-      .then((resp) => {console.log(resp); resp.json()})
-      .then(function(data) {
+      .then((resp) => resp.json())
+      .then((data) => {
+        return data;
+      })
+      .then((data) => {
         console.log(data)
         if (data.airports[0].name.includes('All Airports')) {
           codes.departLoc = data.airports[1].iata;
@@ -174,7 +177,11 @@ class App extends React.Component {
           method: "POST"
         })
         .then((resp) => resp.json())
-        .then(function(data) {
+        .then((data) => {
+          return data;
+        })
+        .then((data) => {
+          console.log(data);
           if (data.airports[0].name.includes('All Airports')) {
             codes.arrivalLoc = data.airports[1].iata;
           } else {
