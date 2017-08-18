@@ -35,7 +35,7 @@ app.post('/food', function (req, res){
 
 app.post('/weather', function(req,res) {
   geolocation.requestGeolocation(req.body['location'], function(data){
-    if (data.results[0] {
+    if (data.results[0]) {
       geoCode = data.results[0].geometry.location;
       weather.requestWeather(geoCode, req.body['date'], function(data) {
         var parsedData = JSON.parse(data);
