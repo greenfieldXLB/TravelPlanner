@@ -56,7 +56,7 @@ class SearchBar extends React.Component {
               <CitySearch handleChange = {this.handleArrivalText} description = "Arrival City"/>
               <Calendar handleChange = {this.handleDepartureDate} description = "Departure"/>
               <Calendar handleChange = {this.handleReturnDate} description = "Return"/>
-              <button type = 'submit' onClick = {this.handleSearchClick} >Search!</button>
+              <button type = 'submit' onClick = {this.handleSearchClick} >Search</button>
             </div>
         </form>
       </div>

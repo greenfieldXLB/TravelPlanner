@@ -16,7 +16,7 @@ class SavedHotelPanel extends React.Component {
         <div className = "hotel">
           <h4><div className = "glyphicon glyphicon-home"></div> Hotel</h4>
           <div><h5><span className = "glyphicon glyphicon-heart"></span> {this.props.trip.hotel.name}</h5></div>
-          <div><h6>{this.props.trip.hotel.address}</h6></div>
+          <div>{this.props.trip.hotel.address}</div>
           <br></br>
         </div>
       )
