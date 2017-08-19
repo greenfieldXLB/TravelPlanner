@@ -1,12 +1,11 @@
 const yelp = require('yelp-fusion');
 const request = require('request');
-const yelpConfig = require('../../config.js');
 
 
 var hotel = function (info, callback){
 
 
-  var yelpKey = process.env.HOTEL_API || yelpConfig.hotelkey;
+  var yelpKey = process.env.HOTEL_API;
   var client = yelp.client(yelpKey);
 
   var p1 = new Promise(

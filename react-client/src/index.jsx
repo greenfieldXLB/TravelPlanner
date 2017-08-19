@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Hotels from './components/hotels.jsx'
 import Flights from './components/Flights.jsx';
-import config from '../../config.js';
 import SearchBar from './components/SearchBar.jsx';
 import Attraction from './components/Attraction.jsx';
 import FoodList from './components/FoodList.jsx';
@@ -98,7 +97,7 @@ class App extends React.Component {
   }
 
   retrieveFlights(departureDate, returnDate, depLocation, arrLocation) {
-    var apiKey = process.env.QPX_API || config.flights;
+    var apiKey = process.env.QPX_API;
     var qpx = new FlightAPI(apiKey);
 
     var body = {
@@ -131,8 +130,8 @@ class App extends React.Component {
   getAirportCodes(departLoc, arrivalLoc) {
     var context = this;
     var codes = {};
-    var APCAuth = process.env.APC_AUTH || config.APCAuth;
-    var APCSecret = process.env.APC_SECRET || config.APCSecret;
+    var APCAuth = process.env.APC_AUTH;
+    var APCSecret = process.env.APC_SECRET;
     fetch(`https://www.air-port-codes.com/api/v1/multi?term=${departLoc}`, {
       headers: {
         Accept: "application/json",

@@ -1,25 +1,11 @@
 const yelp = require('yelp-fusion');
-const yelpConfig = require('../../config.js');
 
 var searchFood = function (searchCity, callback){
 
 
   var foodResult = [];
 
-  // const clientId = yelpConfig.clientId;
-  //
-  // const clientSecret = yelpConfig.clientSecret;
-  //
-  //
-  // const token = yelp.accessToken(clientId, clientSecret).then(response => {
-  //   // console.log('TOKEN ', response.jsonBody.access_token);
-  // }).catch(e => {
-  //   console.log('ERROR ', e);
-  // });
-
-
-
-  var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
+  var yelpKey = process.env.YELP_KEY;
   const client = yelp.client(yelpKey);
 
   var p1 = new Promise(
@@ -56,8 +42,6 @@ var searchFood = function (searchCity, callback){
   );
 
   Promise.all([p1,p2,p3]).then(responses => {
-    //console.log(JSON.stringify(responses, null, 2 ) );
-
     foodResult = responses.reduce(function( businessList, response){
       businessList.push( ... response.jsonBody.businesses );
       return businessList;

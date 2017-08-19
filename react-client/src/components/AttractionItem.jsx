@@ -14,7 +14,6 @@ class AttractionItem extends React.Component {
 
     this.setState({
       selected: !this.state.selected,
-      //selectedArry: currentArr
     }, ()=>{
       this.props.handleAttrItemState( this );
     });
