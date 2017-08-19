@@ -18,10 +18,10 @@ class SavedFlightPanel extends React.Component {
         <div className = "flights">
           <h4> <div className = "glyphicon glyphicon-plane"></div> Round-Trip Flight</h4>
           <div><h5><span className = "glyphicon glyphicon-heart"></span> <b>Outbound: </b>{this.props.trip.flights.goingOrigin} -> {this.props.trip.flights.goingDestination} ({this.props.trip.flights.goingCarrier})</h5></div>
-          <div><h6><b>Arrival: </b>{this.props.trip.flights.goingArrivalTime}</h6></div>
+          <div><b>Arrival: </b>{this.props.trip.flights.goingArrivalTime}</div>
           <div><h5><span className = "glyphicon glyphicon-heart"></span> <b>Inbound: </b>{this.props.trip.flights.returnOrigin} -> {this.props.trip.flights.returnDestination} ({this.props.trip.flights.returnCarrier})</h5></div>
-          <div><h6><b>Arrival: </b>{this.props.trip.flights.returnArrivalTime}</h6></div>
-          <div><h6><b>Round Trip: {this.props.trip.flights.saletotal} per person</b></h6></div>
+          <div><b>Arrival: </b>{this.props.trip.flights.returnArrivalTime}</div>
+          <div><b>Round Trip: {this.props.trip.flights.saletotal} per person</b></div>
           <br></br>
         </div>
       )

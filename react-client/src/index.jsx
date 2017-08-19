@@ -432,9 +432,9 @@ class App extends React.Component {
     return (
       <div>
 
-        <h1 id='title'>Trip Planner</h1>
+        <h1 id='title'>Wanderly</h1>
           <span><SearchBar onSearch = {this.onSearch}/></span>
-          <span><Weather information = {this.state.weather} icon = {this.state.weatherIcon}/></span>
+          <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
 
         <table className='table'>
           <thead>
@@ -460,7 +460,7 @@ class App extends React.Component {
               <td>
                 <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
               </td>
-              <td>
+              <td id = "savedTrips">
                 <SavedTrips trips={this.state.savedTrips} remove = {this.removeSingleDatabaseRecord} save = {this.saveToDatabase}/>
               </td>
             </tr>
