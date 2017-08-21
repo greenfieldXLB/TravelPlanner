@@ -20,7 +20,6 @@ They can also retrieve their saved trip records, and delete them if desired.
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
     1. [Tech Stack](#tech-stack)
 1. [Roadmap](#roadmap)
 1. [Contributing](#contributing)
