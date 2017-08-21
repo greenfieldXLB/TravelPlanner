@@ -46,7 +46,7 @@ Clone from your fork
 npm install
 
 - Database
-Install MongoDB (or brew install MongoDB) and start the Mongo service with MongoD
+Install MongoDB (or brew install MongoDB) and start the Mongo service with Mongod
 
 - Run the App
 npm start
