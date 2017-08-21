@@ -38,7 +38,7 @@ const Flight = (props) => {
         </div>
       </div>
       <br className="avoid-clicks"></br>
-      <div className="avoid-clicks"><b>{'$' + props.flight.saleTotal.slice(3)} per person</b></div>
+      <div className="avoid-clicks"><b>{props.flight.saleTotal.slice(0, 3)} {props.flight.saleTotal.slice(3)} per person</b></div>
       <br></br>
       <br></br>
     </div>

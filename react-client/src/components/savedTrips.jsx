@@ -25,5 +25,4 @@ class SavedTrips extends React.Component {
 }
 
 
-
 export default SavedTrips;
