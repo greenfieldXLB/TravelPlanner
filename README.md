@@ -55,7 +55,7 @@ They can also retrieve their saved trip records, and delete them if desired.
 
 
 #### Run the App
-npm start
+- npm start
 
 
 ### Tech Stack
