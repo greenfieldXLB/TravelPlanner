@@ -34,35 +34,38 @@ Wanderly is a travel app to give the user an all-in-one solution to find the fli
 
 ## Requirements
 
-- Node: "6.9.5",
-- npm: "5.3.0",
+- Node: "6.9.5"
+- npm: "5.3.0"
 - Mongo: "3.4.6"
 
 ## Development
 
-- Web App
-Fork the repo.
-Clone from your fork
-npm install
+#### Web App
+- Fork the repo
+- Clone from your fork
+- npm install
 
-- Database
-Install MongoDB (or brew install MongoDB) and start the Mongo service with Mongod
+#### Database
+- Install MongoDB (or brew install MongoDB) and start the Mongo service with Mongod
 
-- Run the App
+
+#### Run the App
 npm start
 
 
 ### Tech Stack
-- Front-end
-React, Bootstrap
+#### Front-end
+- React
+- Bootstrap
 
-- Back-end
-Express,
-MongoDB,
-Yelp API,
-Google Flights API,
-Dark Sky Weather API,
-GEOCoding API
+#### Back-end
+- Express
+- MongoDB
+- Yelp-fusion API
+- Google QPX API
+- Air-port-codes API
+- Dark Sky Weather API
+- Google Maps Geocoding API
 
 
 ### Roadmap
