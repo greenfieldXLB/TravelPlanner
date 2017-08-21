@@ -1,7 +1,6 @@
 import React from 'react';
 import SavedTrip from './savedTrip.jsx';
 
-<<<<<<< HEAD
 class SavedTrips extends React.Component {
   render() {
     if (this.props.trips.length > 0) {
@@ -22,25 +21,8 @@ class SavedTrips extends React.Component {
         </div>
       )
     }
-=======
-const SavedTrips = (props) => {
-  if (props.trips.length > 0) {
-    return (
-      <div>
-        {props.trips.map(trip => (
-          <SavedTrip trip={trip}/>
-        ))}
-      </div>
-    )
-  } else {
-    return(
-        <h3 className = "glyphicon glyphicon-heart" ></h3>
-    )
-
->>>>>>> save column styling
   }
 }
-
 
 
 export default SavedTrips;
