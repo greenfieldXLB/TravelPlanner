@@ -48,7 +48,7 @@ They can also retrieve their saved trip records, and delete them if desired.
 - Fork the repo
 - Clone from your fork
 - npm install
-- Update API keys in 'config.example.js' and change the file name to 'config.js'
+- Update API keys in 'config.example.js', and then change the file name to 'config.js'
 
 #### Database
 - Install MongoDB (or brew install MongoDB) and start the Mongo service with Mongod
