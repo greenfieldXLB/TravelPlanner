@@ -1,6 +1,11 @@
 # Project Name: Wanderly
 
-Wanderly is a travel app to give the user an all-in-one solution to find the flights, hotels, top-rated attractions, and popular local restaurants of their travel destination.  The user can select, save and retrieve their favorite trip ideas.
+Wanderly is a travel planning app that gives user the ability to search and find flights, hotels, top-rated attractions, popular local restaurants and weather condition of their travel destination.
+
+The user can view and select their favorite trip preferences.
+
+They can also retrieve their saved trip records, and delete them if desired.
+
 
 
 ## Team
