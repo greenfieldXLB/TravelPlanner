@@ -29,6 +29,18 @@ class App extends React.Component {
     this.changePage = this.logIn.bind(this);
   }
 
+  logIn(user) {
+    this.setState({
+      user
+    });
+  }
+
+  changePage(page) {
+    this.setState({
+      page
+    });
+  }
+
   render () {
     return (
       <div>
