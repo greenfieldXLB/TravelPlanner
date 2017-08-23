@@ -87,7 +87,11 @@ var selectAll = function(callback) {
 };
 
 module.exports.selectAll = selectAll;
+<<<<<<< HEAD
 
 // module.exports.saveToDatabase =saveToDatabase;
 
+=======
+// module.exports.saveToDatabase =saveToDatabase;
+>>>>>>> (feat) Add SideDrawer
 module.exports.deleteFromDatabase =deleteFromDatabase;

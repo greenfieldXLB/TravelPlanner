@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import _ from 'lodash';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import CreateView from './components/CreateView/index.jsx';
 import Navbar from './components/Navbar.jsx';
+import SideDrawer from './components/SideDrawer.jsx';
+import CreateView from './components/CreateView/index.jsx';
 import LogIn from './components/LogIn.jsx';
 import Landing from './components/Landing.jsx';
 
@@ -18,9 +18,13 @@ class App extends React.Component {
     this.state = {
       user: null,
       page: pages.LANDING,
+      drawerIsOpen: false
     };
     this.logIn = this.logIn.bind(this);
     this.changePage = this.changePage.bind(this);
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
+    this.handleDrawerClose = this.handleDrawerClose.bind(this);
+    this.setDrawerState = this.setDrawerState.bind(this);
   }
 
   changePage(page) {
@@ -32,6 +36,25 @@ class App extends React.Component {
   logIn(user) {
     this.setState({
       user
+    });
+  }
+
+  handleDrawerToggle() {
+    this.setState({
+      drawerIsOpen: !this.state.drawerIsOpen
+    });
+  } 
+
+  handleDrawerClose() {
+    console.log('hello')
+    this.setState({
+      drawerIsOpen: false
+    });
+  } 
+
+  setDrawerState(status) {
+    this.setState({
+      drawerIsOpen: status
     });
   }
 
@@ -63,6 +86,16 @@ class App extends React.Component {
               { this.getMainComponent() }
             </div>
           }
+          <Navbar
+            changePage={this.changePage}
+            handleDrawerToggle={this.handleDrawerToggle}
+          />
+          <SideDrawer 
+            drawerIsOpen={this.state.drawerIsOpen}
+            handleDrawerClose={this.handleDrawerClose}
+            handleDrawerToggle={this.handleDrawerToggle}
+          />
+          { this.getMainComponent() }
         </div>
       </MuiThemeProvider>
     )
