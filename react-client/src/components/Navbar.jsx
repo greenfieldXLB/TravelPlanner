@@ -12,18 +12,20 @@ class Navbar extends React.Component {
   }
 
   render() {
+
     return ( 
+
       <Toolbar
         style={{
           backgroundColor: 'white',
           width: '100%',
-          paddingBottom: '35px'
+          paddingTop: '15px'
         }}
       >
         <ToolbarGroup firstChild={true}>
-          <div 
-            style={{paddingRight: '25px'}}
-          >
+          <div style={{
+            padding: '0 25px 0 30px'
+          }}>
             <img src="http://i.imgur.com/m2cZCRZ.png" 
               style={{
                 height: '50px',
@@ -50,17 +52,18 @@ class Navbar extends React.Component {
               }}
             />
           </div>
-          <div>
+          <div style={{paddingRight: '30px'}}>
             <Avatar 
               size={50} 
               src="http://i.imgur.com/YxcBaYL.png"
               style={{
-                boxShadow: '2px 2px 2px grey'
+                boxShadow: '2px 2px 2px grey',
               }} 
             />
           </div>
         </ToolbarGroup> 
       </Toolbar>
+
     );
   }
 }

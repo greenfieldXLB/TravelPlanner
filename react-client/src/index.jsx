@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import _ from 'lodash';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import CreateView from './components/CreateView/index.jsx';
 import Navbar from './components/Navbar.jsx';
 import LogIn from './components/LogIn.jsx';
 import Landing from './components/Landing.jsx';
@@ -15,21 +17,21 @@ class App extends React.Component {
     super(props);
     this.state = {
       user: null,
-      page: pages.LANDING
-    }
+      page: pages.LANDING,
+    };
     this.logIn = this.logIn.bind(this);
     this.changePage = this.changePage.bind(this);
-  }
-
-  logIn(user) {
-    this.setState({
-      user
-    });
   }
 
   changePage(page) {
     this.setState({
       page
+    });
+  }
+
+  logIn(user) {
+    this.setState({
+      user
     });
   }
 
