@@ -9,7 +9,6 @@ class AttractionItem extends React.Component {
     }
   }
 
-
   handleAttrClick(){
 
     this.setState({
