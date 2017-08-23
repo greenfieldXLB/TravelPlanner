@@ -10,9 +10,15 @@ class Destination extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: ''
+      searchText: '',
+      stepIndex: this.props.stepIndex
     };
+    this.handleRequest = this.handleRequest.bind(this);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
+  }
+
+  handleRequest() {
+    console.log('submitted: ', this.state.searchText)
   }
 
   handleUpdateInput(searchText) {
@@ -22,6 +28,8 @@ class Destination extends React.Component {
   };
 
   render() {
+
+    console.log(this.state.stepIndex);
 
     return (
 
@@ -41,6 +49,7 @@ class Destination extends React.Component {
           hintText="e.g. New York"
           searchText={this.state.searchText}
           onUpdateInput={this.handleUpdateInput}
+          onNewRequest={this.handleRequest}
           dataSource={cities}
           filter={AutoComplete.fuzzyFilter}
         />

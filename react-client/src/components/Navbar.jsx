@@ -18,7 +18,7 @@ class Navbar extends React.Component {
         style={{
           backgroundColor: 'white',
           width: '100%',
-          paddingTop: '15px'
+          paddingTop: '30px'
         }}
       >
         <ToolbarGroup firstChild={true}>

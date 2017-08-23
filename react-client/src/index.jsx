@@ -61,11 +61,11 @@ class App extends React.Component {
   render () {
     return (
       <MuiThemeProvider>
-        <div>
+        <div style={{height: '100%'}}>
           {
             this.state.user && this.state.page !== pages.LANDING ?
 
-            <div>
+            <div style={{height: '100%'}}>
               <Navbar
                 changePage={this.changePage}
                 handleDrawerToggle={this.handleDrawerToggle}
