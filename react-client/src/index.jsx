@@ -6,8 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import CreateView from './components/CreateView/index.jsx';
 import Navbar from './components/Navbar.jsx';
-
-import LogIn from './components/LogIn.jsx'
+import LogIn from './components/LogIn.jsx';
+import Landing from './components/Landing.jsx';
 
 import * as styles from './styles';
 import * as pages from './pages';
@@ -74,7 +74,7 @@ class App extends React.Component {
     }
     switch (this.state.page) {
       case pages.LANDING:
-        return <div style={{height: '100px'}}> Landing </div>
+        return <Landing changePage={this.changePage} />
       case pages.CREATE:
         return <div> Create </div>
       case pages.LIST:

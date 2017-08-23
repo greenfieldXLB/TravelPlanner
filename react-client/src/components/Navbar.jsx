@@ -65,6 +65,7 @@ class Navbar extends React.Component {
       </Toolbar>
 
     );
+    
   }
 }
 
