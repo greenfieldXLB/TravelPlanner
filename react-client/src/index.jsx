@@ -50,6 +50,7 @@ class App extends React.Component {
     return (
       <MuiThemeProvider>
         <Navbar />
+        { this.getMainComponent }
       </MuiThemeProvider>
     )
   }
