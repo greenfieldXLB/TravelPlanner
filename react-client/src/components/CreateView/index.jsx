@@ -20,7 +20,6 @@ class CreateView extends React.Component {
   }
 
   handleNext() {
-    // console.log(this.state.stepIndex);
     const stepIndex = this.state.stepIndex;
     this.setState({
       stepIndex: stepIndex + 1,
@@ -29,7 +28,6 @@ class CreateView extends React.Component {
   }
 
   handlePrev() {
-    // console.log(this.state.stepIndex);
     const stepIndex = this.state.stepIndex;
     if (stepIndex > 0) {
       this.setState({
@@ -41,7 +39,7 @@ class CreateView extends React.Component {
   getStepContent(stepIndex) {
     switch(stepIndex) {
       case 0:
-        return <Destination />
+        return <Destination stepIndex={this.state.stepIndex}/>
       case 1:
         return <Chooser />
       case 2:
@@ -58,7 +56,7 @@ class CreateView extends React.Component {
     return (
 
       <div id="view-body" style={{
-        height: '95%',
+        height: '92%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
