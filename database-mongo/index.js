@@ -87,5 +87,5 @@ var selectAll = function(callback) {
 };
 
 module.exports.selectAll = selectAll;
-module.exports.saveToDatabase =saveToDatabase;
+// module.exports.saveToDatabase =saveToDatabase;
 module.exports.deleteFromDatabase =deleteFromDatabase;
