@@ -2,6 +2,8 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
+import * as pages from '../pages';
+
 class Navbar extends React.Component {
 
   constructor(props) {
@@ -13,16 +15,25 @@ class Navbar extends React.Component {
 
   handleChange (event, index, value) {
     this.setState({value});
-  } 
+  }
 
   render() {
     return (
       <Toolbar>
         <ToolbarGroup>
-          <RaisedButton label="View Trips" />
+          <RaisedButton
+            label="View Trips"
+            onClick={()=>{
+              this.props.changePage(pages.LIST);
+            }}
+          />
           <ToolbarSeparator />
-          <RaisedButton label="Sign out" 
-            />
+          <RaisedButton
+            label="Create Trip"
+            onClick={()=>{
+              this.props.changePage(pages.CREATE);
+            }}
+          />
         </ToolbarGroup>
       </Toolbar>
     );
@@ -30,5 +41,3 @@ class Navbar extends React.Component {
 }
 
 export default Navbar;
-
-
