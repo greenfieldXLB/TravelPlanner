@@ -68,6 +68,11 @@ class App extends React.Component {
             <div>
               <Navbar
                 changePage={this.changePage}
+                handleDrawerToggle={this.handleDrawerToggle}
+              />
+              <SideDrawer 
+                drawerIsOpen={this.state.drawerIsOpen}
+                handleDrawerClose={this.handleDrawerClose}
               />
               { this.getMainComponent() }
             </div>
@@ -86,15 +91,6 @@ class App extends React.Component {
               { this.getMainComponent() }
             </div>
           }
-          <Navbar
-            changePage={this.changePage}
-            handleDrawerToggle={this.handleDrawerToggle}
-          />
-          <SideDrawer 
-            drawerIsOpen={this.state.drawerIsOpen}
-            handleDrawerClose={this.handleDrawerClose}
-          />
-          { this.getMainComponent() }
         </div>
       </MuiThemeProvider>
     )
@@ -108,7 +104,7 @@ class App extends React.Component {
       case pages.LANDING:
         return <Landing changePage={this.changePage} />
       case pages.CREATE:
-        return <div> Create </div>
+        return <CreateView />
       case pages.LIST:
         return <div> List </div>
     }
