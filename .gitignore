@@ -31,3 +31,6 @@ build/
 .DS_Store
 react-client/.DS_Store
 server/.DS_Store
+
+#database
+database-mongo/data

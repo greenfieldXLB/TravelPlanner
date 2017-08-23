@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Navbar from './components/Navbar.jsx';
 
 /*
 import Hotels from './components/hotels.jsx'
@@ -43,38 +45,9 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
-        <h1 id='title'>Wanderly</h1>
-          <span><SearchBar onSearch = {this.onSearch}/></span>
-          <Weather information = {this.state.weather} icon = {this.state.weatherIcon}/>
-
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Lodging</th>
-              <th>Attractions</th>
-              <th>Restaurants</th>
-              <th>Saved</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <Hotels handleHotelClick={this.handleHotelClick.bind(this)} hotels = {this.state.hotels} />
-              </td>
-              <td>
-                <Attraction attrItems = {this.state.attrItems} handleAttrItemState = {this.handleAttrItemState.bind(this)} />
-              </td>
-              <td>
-                <FoodList foodlist = {this.state.foodList} handleFoodItemState = {this.handleFoodItemState.bind(this)} />
-              </td>
-              <td id = "savedTrips">
-                <SavedTrips trips={this.state.savedTrips} remove = {this.removeSingleDatabaseRecord} save = {this.saveToDatabase}/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <MuiThemeProvider>
+        <Navbar />
+      </MuiThemeProvider>
     )
   }
 }
