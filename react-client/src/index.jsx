@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import _ from 'lodash';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import CreateView from './components/CreateView/index.jsx';
 import Navbar from './components/Navbar.jsx';
+import SideDrawer from './components/SideDrawer.jsx';
+import CreateView from './components/CreateView/index.jsx';
 import LogIn from './components/LogIn.jsx';
 import Landing from './components/Landing.jsx';
 
@@ -18,9 +18,13 @@ class App extends React.Component {
     this.state = {
       user: null,
       page: pages.LANDING,
+      drawerIsOpen: false
     };
     this.logIn = this.logIn.bind(this);
     this.changePage = this.changePage.bind(this);
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
+    this.handleDrawerClose = this.handleDrawerClose.bind(this);
+    this.setDrawerState = this.setDrawerState.bind(this);
   }
 
   changePage(page) {
@@ -35,6 +39,25 @@ class App extends React.Component {
     });
   }
 
+  handleDrawerToggle() {
+    this.setState({
+      drawerIsOpen: !this.state.drawerIsOpen
+    });
+  } 
+
+  handleDrawerClose() {
+    console.log('hello')
+    this.setState({
+      drawerIsOpen: false
+    });
+  } 
+
+  setDrawerState(status) {
+    this.setState({
+      drawerIsOpen: status
+    });
+  }
+
   render () {
     return (
       <MuiThemeProvider>
@@ -45,6 +68,11 @@ class App extends React.Component {
             <div>
               <Navbar
                 changePage={this.changePage}
+                handleDrawerToggle={this.handleDrawerToggle}
+              />
+              <SideDrawer 
+                drawerIsOpen={this.state.drawerIsOpen}
+                handleDrawerClose={this.handleDrawerClose}
               />
               { this.getMainComponent() }
             </div>
@@ -76,7 +104,7 @@ class App extends React.Component {
       case pages.LANDING:
         return <Landing changePage={this.changePage} />
       case pages.CREATE:
-        return <div> Create </div>
+        return <CreateView />
       case pages.LIST:
         return <div> List </div>
     }

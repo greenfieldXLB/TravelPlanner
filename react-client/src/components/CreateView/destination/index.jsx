@@ -42,7 +42,7 @@ class Destination extends React.Component {
           searchText={this.state.searchText}
           onUpdateInput={this.handleUpdateInput}
           dataSource={cities}
-          filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
+          filter={AutoComplete.fuzzyFilter}
         />
           
       </div>
