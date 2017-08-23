@@ -19,41 +19,51 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  flights: Object,
-  hotel: Object,
-  attractions: Array,
-  food: Array,
-  weather: Object
+var userSchema = mongoose.Schema({
+  name: String,
+  email: String,
+  facebookId: String,
+  trips: Array
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var User = mongoose.model('User', userSchema);
 
-var saveToDatabase = function(data,callback) {
-  Item.find({flights: data.flights, hotel: data.hotel, attractions: data.attractions, food: data.food}, (err, result) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      if(result.length === 0) {
-         var item = new Item;
-         item.flights = data.flights;
-         item.hotel = data.hotel;
-         item.attractions = data.attractions;
-         item.food = data.food;
-         item.weather = data.weather;
-         item.save(function(err, result) {
-           if(err) {
-             console.log('error saving to the db ', err);
-             callback(err, null);
-           } else {
-             console.log('successfully saved a new record to the db ')
-             callback(null, result);
-           }
-         })
-      }
-    }
-  })
-}
+var tripSchema = mongoose.Schema({
+  food: Array,
+  attractions: Array,
+  lodging: Array,
+  destination: String,
+  startDate: String,
+  endDate: String
+});
+
+var Trip = mongoose.model('Trip', tripSchema);
+
+// var saveToDatabase = function(data,callback) {
+//   Item.find({flights: data.flights, hotel: data.hotel, attractions: data.attractions, food: data.food}, (err, result) => {
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       if(result.length === 0) {
+//          var item = new Item;
+//          item.flights = data.flights;
+//          item.hotel = data.hotel;
+//          item.attractions = data.attractions;
+//          item.food = data.food;
+//          item.weather = data.weather;
+//          item.save(function(err, result) {
+//            if(err) {
+//              console.log('error saving to the db ', err);
+//              callback(err, null);
+//            } else {
+//              console.log('successfully saved a new record to the db ')
+//              callback(null, result);
+//            }
+//          })
+//       }
+//     }
+//   })
+// }
 
 var deleteFromDatabase = function(id, callback){
   Item.remove({_id: id}, function(err){
