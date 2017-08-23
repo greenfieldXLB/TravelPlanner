@@ -193,11 +193,6 @@ th {
   margin-bottom:10px;
 }
 
-img {
-  border-radius: 10px;
-  box-shadow: 10px 10px 5px rgba(45, 45, 45, .2);
-}
-
 #title {
   font-family: 'Shrikhand', cursive;
   font-size: 530%;
@@ -227,4 +222,3 @@ img {
 #savedTrips {
   background-color: rgba(255, 255, 255, .85);
 }
-
