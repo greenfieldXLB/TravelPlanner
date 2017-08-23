@@ -9,13 +9,6 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
-  plugins: [
-    new webpack.EnvironmentPlugin([
-      'QPX_API',
-      'APC_AUTH',
-      'APC_SECRET'
-    ])
-  ],
   module : {
     loaders : [
       {
