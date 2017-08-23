@@ -17,7 +17,6 @@ class SideDrawer extends React.Component {
           width={200}
           openSecondary={true}
           open={this.props.drawerIsOpen}
-
           onRequestChange={(open) => this.props.handleDrawerClose()}
         >
           <MenuItem onClick={this.props.handleDrawerClose}>Trip 1</MenuItem>

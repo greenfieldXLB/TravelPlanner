@@ -93,7 +93,6 @@ class App extends React.Component {
           <SideDrawer 
             drawerIsOpen={this.state.drawerIsOpen}
             handleDrawerClose={this.handleDrawerClose}
-            handleDrawerToggle={this.handleDrawerToggle}
           />
           { this.getMainComponent() }
         </div>
