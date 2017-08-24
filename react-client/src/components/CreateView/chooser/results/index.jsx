@@ -105,6 +105,7 @@ class Results extends React.Component {
           >
             {this.props.data.map((tile, i) => (
               <GridTile
+                onClick={() => this.props.handleTileClick(tile)}
                 key={i}
                 title={tile.name}
                 subtitle={
