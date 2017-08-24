@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Dollar from 'material-ui-community-icons/icons/currency-usd';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
+import StarRatingComponent from 'react-star-rating-component';
 
 
 const Results = (props) => (
@@ -33,7 +33,7 @@ const Results = (props) => (
         <TextField 
           hintText="Search..."
         />
-        <Dollar />
+        
       </div>
 
       <GridList
@@ -51,9 +51,63 @@ const Results = (props) => (
             title={tile.name}
             subtitle={
               tile.price ?
-                <span><b>Price: {tile.price} <br/> Star Rating: {tile.rating} </b></span>
+                <span>
+                  <b>Price: {tile.price} <br/> 
+                    <div style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'left'
+                    }}>
+                    Yelp Rating:  
+                      <div style={{
+                        fontSize: 14,
+                        paddingLeft: '3px'
+                      }}>
+                        <StarRatingComponent
+                          name="Rating"
+                          editing={false}
+                          starCount={5}
+                          value={tile.rating}
+                          renderStarIcon={(index, value) => {
+                            return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
+                          }}
+                          renderStarIconHalf={() => <span className="fa fa-star-half-full" />}
+                          starColor={'#ffb400'}
+                          emptyStarColor={'#ffb400'}
+                        />
+                      </div>
+                    </div>
+                  </b>
+                </span>
                 :
-                <span><b>Star Rating: {tile.rating} </b></span>
+                <span>
+                  <b>
+                    <div style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'left'
+                    }}>
+                    Yelp Rating:  
+                      <div style={{
+                        fontSize: 14,
+                        paddingLeft: '3px'
+                      }}>
+                        <StarRatingComponent
+                          name="Rating"
+                          editing={false}
+                          starCount={5}
+                          value={tile.rating}
+                          renderStarIcon={(index, value) => {
+                            return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
+                          }}
+                          renderStarIconHalf={() => <span className="fa fa-star-half-full" />}
+                          starColor={'#ffb400'}
+                          emptyStarColor={'#ffb400'}
+                        />
+                      </div>
+                    </div>
+                  </b>
+                </span>
             }
           >
             <img src={tile.image_url} />
@@ -66,3 +120,5 @@ const Results = (props) => (
 )
 
 export default Results;
+
+        
