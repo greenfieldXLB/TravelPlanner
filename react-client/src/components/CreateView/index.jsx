@@ -59,19 +59,20 @@ class CreateView extends React.Component {
   };
 
   leverageData(data) {
-    console.log(data.data);
-
-    if (this.state.loading) {
-      this.setState({
-        loading: false
-      });
-    }
+    console.log(data.tag, data.data);
 
     switch(data.tag) {
       case 'hotels':
-        this.setState({
-          hotels: data.data
-        });
+        if (this.state.loading) {
+          this.setState({
+            loading: false,
+            hotels: data.data
+          });
+        } else {
+          this.setState({
+            hotels: data.data
+          });
+        }
         break;
       case 'attractions':
         this.setState({
@@ -91,17 +92,32 @@ class CreateView extends React.Component {
       case 0:
         return <Destination 
                   leverageData={this.leverageData} 
-                  searchText={this.state.searchText} 
-                  updateSearch={this.handleUpdateInput}
-                  triggerLoading={this.triggerLoading}
                   loading={this.state.loading}
+                  searchText={this.state.searchText} 
+                  triggerLoading={this.triggerLoading}
+                  updateSearch={this.handleUpdateInput}
                />
       case 1:
-        return <Chooser leverageData={this.leverageData} data={this.state.hotels}/>
+        return <Chooser 
+                  data={this.state.hotels} 
+                  destination={this.state.searchText}
+                  index={this.state.stepIndex}
+                  leverageData={this.leverageData} 
+               />
       case 2:
-        return <Chooser leverageData={this.leverageData} data={this.state.attractions}/>
+        return <Chooser 
+                  data={this.state.attractions}
+                  destination={this.state.searchText}
+                  index={this.state.stepIndex}
+                  leverageData={this.leverageData} 
+               />
       case 3:
-        return <Chooser leverageData={this.leverageData} data={this.state.restaurants}/>
+        return <Chooser 
+                  data={this.state.restaurants}
+                  destination={this.state.searchText}
+                  index={this.state.stepIndex}
+                  leverageData={this.leverageData} 
+               />
     }
   }
 
