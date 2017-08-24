@@ -19,17 +19,33 @@ const Preview = (props) => (
         alignItems: 'center',
         backgroundColor: '#a6a6a6'
       }}>
+        <div>
         image
+        </div>
       </div>
       <div style={{
         width: '95%',
         height: '30%',
         backgroundColor: '#cccccc'
       }}>
-        Info
+        <div>
+          
+        </div>
+        <div>
+          
+        </div>
+
       </div>
   </div>
 
 )
 
 export default Preview;
+
+// {props.data[0].name}
+// "{props.data[0].image_url}"
+// {props.data[0].price}
+// Yelp Star Rating: {props.data[0].rating}
+// {props.data[0].location.displayAddress[0]}
+// {props.data[0].location.displayAddress[1]}
+

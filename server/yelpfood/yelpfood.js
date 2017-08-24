@@ -1,5 +1,5 @@
 const yelp = require('yelp-fusion');
-// const yelpConfig = require('../../config.js');
+const yelpConfig = require('../../config.js');
 
 var findRestaurants = function (input, callback){
 
@@ -27,7 +27,7 @@ var findRestaurants = function (input, callback){
       client.search({
         term:'Restaurant',
         location: input.location,
-        limit: 4,
+        limit: 7,
         price: "1"
       }).then( ( response )=>resolve( response ) );
     }
@@ -38,7 +38,7 @@ var findRestaurants = function (input, callback){
       client.search({
         term:'Restaurant',
         location: input.location,
-        limit: 4,
+        limit: 7,
         price: "2"
       }).then( ( response )=>resolve( response ) );
     }
@@ -49,7 +49,7 @@ var findRestaurants = function (input, callback){
       client.search({
         term:'Restaurant',
         location: input.location,
-        limit: 4,
+        limit: 7,
         price: "3"
       }).then( ( response )=>resolve( response ))
     }
