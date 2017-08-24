@@ -5,7 +5,7 @@ import Dollar from 'material-ui/svg-icons/editor/attach-money';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-
+import StarRatingComponent from 'react-star-rating-component';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
