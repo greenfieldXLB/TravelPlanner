@@ -34,6 +34,24 @@ class App extends React.Component {
   }
 
   logIn(user) {
+    let postData = JSON.stringify({
+      facebookId: user.id,
+      name: user.name,
+      email: user.email
+    });
+
+    console.log(postData);
+
+    $.ajax({
+      method: 'POST',
+      url: '/logIn',
+      data: postData,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).then((data) => {
+      console.log(data);
+    });
+
     this.setState({
       user
     });
