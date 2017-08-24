@@ -28,12 +28,6 @@ const Preview = (props) => (
         height: '30%',
         backgroundColor: '#cccccc'
       }}>
-        <div>
-          
-        </div>
-        <div>
-          
-        </div>
 
       </div>
   </div>

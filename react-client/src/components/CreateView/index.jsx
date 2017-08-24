@@ -13,8 +13,10 @@ class CreateView extends React.Component {
     super(props);
     this.state = {
       searchText: '',
+      submitted: false,
       stepIndex: 0,
       finished: false,
+      loading: false,
       hotels: {},
       attractions: {},
       restaurants: {}
@@ -23,6 +25,14 @@ class CreateView extends React.Component {
     this.handlePrev = this.handlePrev.bind(this);
     this.leverageData = this.leverageData.bind(this);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
+    this.triggerLoading = this.triggerLoading.bind(this);
+  }
+
+  triggerLoading() {
+    this.setState({
+      submitted: true,
+      loading: true
+    });
   }
 
   handleNext() {
@@ -49,6 +59,14 @@ class CreateView extends React.Component {
   };
 
   leverageData(data) {
+    console.log(data.data);
+
+    if (this.state.loading) {
+      this.setState({
+        loading: false
+      });
+    }
+
     switch(data.tag) {
       case 'hotels':
         this.setState({
@@ -75,6 +93,8 @@ class CreateView extends React.Component {
                   leverageData={this.leverageData} 
                   searchText={this.state.searchText} 
                   updateSearch={this.handleUpdateInput}
+                  triggerLoading={this.triggerLoading}
+                  loading={this.state.loading}
                />
       case 1:
         return <Chooser leverageData={this.leverageData} data={this.state.hotels}/>
@@ -87,7 +107,7 @@ class CreateView extends React.Component {
 
   render() {
 
-    const {finished, stepIndex, searchText} = this.state;
+    const {finished, stepIndex, searchText, loading, submitted} = this.state;
 
     return (
 
@@ -140,7 +160,7 @@ class CreateView extends React.Component {
                 />
                 <RaisedButton
                   label={stepIndex === 3 ? 'Finish' : 'Next'}
-                  disabled={searchText === ''}
+                  disabled={!submitted || loading}
                   primary={true}
                   onClick={this.handleNext}
                 />

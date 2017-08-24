@@ -3,6 +3,7 @@ import $ from 'jquery';
 
 import TextField from 'material-ui/TextField'
 import AutoComplete from 'material-ui/AutoComplete';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import cities from './cities.js';
 
@@ -15,7 +16,7 @@ class Destination extends React.Component {
   }
 
   handleRequest() {
-    console.log('submitted: ', this.props.searchText);
+    this.props.triggerLoading();
     const endpoints = ['/hotels', '/attractions', '/food'];
     for (var i = 0; i < endpoints.length; i++) {
       $.ajax({
@@ -46,7 +47,11 @@ class Destination extends React.Component {
       }}>
           
         <h1>Where would you like to go?</h1>
-        <span style={{height: '50px'}}></span>
+
+        { this.props.loading ?
+          <CircularProgress size={50}/> :
+          <span style={{height: '50px'}}></span>
+        }
         
         <AutoComplete
           hintText="e.g. New York"
@@ -56,6 +61,8 @@ class Destination extends React.Component {
           dataSource={cities}
           filter={AutoComplete.fuzzyFilter}
         />
+
+        
           
       </div>
 
