@@ -10,21 +10,18 @@ import cities from './cities.js';
 class Destination extends React.Component { 
   constructor(props) {
     super(props);
-    this.state = {
-      searchText: '',
-    };
+    this.state = {};
     this.handleRequest = this.handleRequest.bind(this);
-    this.handleUpdateInput = this.handleUpdateInput.bind(this);
   }
 
   handleRequest() {
-    console.log('submitted: ', this.state.searchText);
+    console.log('submitted: ', this.props.searchText);
     const endpoints = ['/hotels', '/attractions', '/food'];
     for (var i = 0; i < endpoints.length; i++) {
       $.ajax({
         url: endpoints[i],
         type: 'GET',
-        data: {location: this.state.searchText},
+        data: {location: this.props.searchText},
         success: (data) => {
           this.props.leverageData(data);
         },
@@ -34,12 +31,6 @@ class Destination extends React.Component {
       });
     }
   }
-
-  handleUpdateInput(searchText) {
-    this.setState({
-      searchText: searchText,
-    });
-  };
 
   render() {
 
@@ -59,9 +50,9 @@ class Destination extends React.Component {
         
         <AutoComplete
           hintText="e.g. New York"
-          searchText={this.state.searchText}
-          onUpdateInput={this.handleUpdateInput}
-          onNewRequest={this.handleRequest}
+          searchText={this.props.searchText}
+          onUpdateInput={this.props.updateSearch}
+          onNewRequest={ () => { this.handleRequest(this.props.searchText) } }
           dataSource={cities}
           filter={AutoComplete.fuzzyFilter}
         />

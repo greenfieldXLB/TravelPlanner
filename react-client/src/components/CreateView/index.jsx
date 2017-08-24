@@ -12,6 +12,7 @@ class CreateView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      searchText: '',
       stepIndex: 0,
       finished: false,
       hotels: {},
@@ -21,6 +22,7 @@ class CreateView extends React.Component {
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.leverageData = this.leverageData.bind(this);
+    this.handleUpdateInput = this.handleUpdateInput.bind(this);
   }
 
   handleNext() {
@@ -39,6 +41,12 @@ class CreateView extends React.Component {
       });
     }
   }
+
+  handleUpdateInput(searchText) {
+    this.setState({
+      searchText: searchText,
+    });
+  };
 
   leverageData(data) {
     switch(data.tag) {
@@ -63,7 +71,11 @@ class CreateView extends React.Component {
   getStepContent(stepIndex) {
     switch(stepIndex) {
       case 0:
-        return <Destination leverageData={this.leverageData}/>
+        return <Destination 
+                  leverageData={this.leverageData} 
+                  searchText={this.state.searchText} 
+                  updateSearch={this.handleUpdateInput}
+               />
       case 1:
         return <Chooser leverageData={this.leverageData} data={this.state.hotels}/>
       case 2:
@@ -75,7 +87,7 @@ class CreateView extends React.Component {
 
   render() {
 
-    const {finished, stepIndex} = this.state;
+    const {finished, stepIndex, searchText} = this.state;
 
     return (
 
@@ -128,6 +140,7 @@ class CreateView extends React.Component {
                 />
                 <RaisedButton
                   label={stepIndex === 3 ? 'Finish' : 'Next'}
+                  disabled={searchText === ''}
                   primary={true}
                   onClick={this.handleNext}
                 />
