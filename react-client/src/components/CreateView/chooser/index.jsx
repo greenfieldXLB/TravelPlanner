@@ -3,24 +3,46 @@ import React from 'react';
 import Preview from './preview/index.jsx';
 import Results from './results/index.jsx';
 
-const Chooser = (props) => (
+class Chooser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItem: 'hello'
+    };
+    this.selectGridItem = this.selectGridItem.bind(this);
+  }
 
-  <div id="selection-component" style={{
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    backgroundColor: '#cccccc'
-  }}>
-      
-      <Preview />
+  selectGridItem() {
+    console.log(target);
+    this.setState({
+      selectedItem: target
+    });
+  }
 
-      <Results results={props.data}/>
-      
-  </div>
+  render() {
+    return (
+      <div 
+        id="selection-component" 
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+          backgroundColor: '#cccccc'
+        }}>
+        <Preview 
+          data={this.state.selectedItem}
+        />
 
-)
+        <Results
+          data={this.props.data} 
+          selectGridItem={this.selectGridItem}
+        /> 
+      </div>
+    )
+  }
+}
 
 export default Chooser;

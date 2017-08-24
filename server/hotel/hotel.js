@@ -13,7 +13,7 @@ var findHotels = function (input, callback){
       client.search({
         term: 'hotels',
         location: input.location,
-        limit: 4,
+        limit: 7,
         price: "1"
       }).then( ( response )=>resolve( response ) );
     }
@@ -24,7 +24,7 @@ var findHotels = function (input, callback){
       client.search({
         term: 'hotels',
         location: input.location,
-        limit: 4,
+        limit: 7,
         price: "2"
       }).then( ( response )=>resolve( response ) );
     }
@@ -35,7 +35,7 @@ var findHotels = function (input, callback){
       client.search({
         term: 'hotels',
         location: input.location,
-        limit: 4,
+        limit: 7,
         price: "3"
       }).then( ( response )=>resolve( response ))
     }
