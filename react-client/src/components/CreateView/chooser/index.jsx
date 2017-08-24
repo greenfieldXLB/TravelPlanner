@@ -10,12 +10,20 @@ class Chooser extends React.Component {
       selectedItem: 'hello'
     };
     this.selectGridItem = this.selectGridItem.bind(this);
+    this.handleTileClick = this.handleTileClick.bind(this);
   }
 
   selectGridItem() {
     console.log(target);
     this.setState({
       selectedItem: target
+    });
+  }
+
+  handleTileClick(tile) {
+    console.log('tile', tile);
+    this.setState({
+      selectedItem: tile
     });
   }
 
@@ -39,6 +47,7 @@ class Chooser extends React.Component {
         <Results
           data={this.props.data} 
           selectGridItem={this.selectGridItem}
+          handleTileClick={this.handleTileClick}
         /> 
       </div>
     )
