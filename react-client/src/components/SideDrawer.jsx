@@ -19,9 +19,33 @@ class SideDrawer extends React.Component {
           open={this.props.drawerIsOpen}
           onRequestChange={(open) => this.props.handleDrawerClose()}
         >
-          <MenuItem onClick={this.props.handleDrawerClose}>Trip 1</MenuItem>
-          <MenuItem onClick={this.props.handleDrawerClose}>Trip 2</MenuItem>
-          <MenuItem onClick={this.props.handleDrawerClose}>Trip 3</MenuItem>
+          <MenuItem 
+            onClick={this.props.handleDrawerClose}>
+            Trip 1 <br/>
+            <small>
+              Hotel: a nice one<br/>
+              Attractions: fun shit <br/>
+              Food: good restaurants
+            </small>
+          </MenuItem>
+          <MenuItem 
+            onClick={this.props.handleDrawerClose}>
+            Trip 2 <br/>
+            <small>
+              Hotel: a nice one<br/>
+              Attractions: fun shit <br/>
+              Food: good restaurants
+            </small>
+          </MenuItem>
+          <MenuItem 
+            onClick={this.props.handleDrawerClose}>
+            Trip 3 <br/>
+            <small>
+              Hotel: a nice one<br/>
+              Attractions: fun shit <br/>
+              Food: good restaurants
+            </small>
+          </MenuItem>
         </Drawer>
       </div>
     );

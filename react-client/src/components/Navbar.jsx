@@ -35,7 +35,12 @@ class Navbar extends React.Component {
         </ToolbarGroup>
         <ToolbarGroup lastChild={true}>
           <div 
-            style={{paddingRight: '15px'}}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              paddingRight: '15px',
+              alignItems: 'center'
+            }}
           >
             <RaisedButton 
               label="View Trips"
@@ -62,8 +67,8 @@ class Navbar extends React.Component {
           </div>
           <div style={{paddingRight: '30px'}}>
             <Avatar 
-              size={50} 
-              src="http://i.imgur.com/YxcBaYL.png"
+              size={44} 
+              src={this.props.user.picture.data.url}
               style={{
                 boxShadow: '2px 2px 2px grey',
               }} 

@@ -87,6 +87,7 @@ class App extends React.Component {
               <Navbar
                 changePage={this.changePage}
                 handleDrawerToggle={this.handleDrawerToggle}
+                user={this.state.user}
               />
               <SideDrawer 
                 drawerIsOpen={this.state.drawerIsOpen}
