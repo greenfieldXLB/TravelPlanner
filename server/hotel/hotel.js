@@ -41,19 +41,46 @@ var findHotels = function (input, callback){
     }
   );
 
-  Promise.all([p1,p2,p3]).then(responses => {
+  var selectedPrice = new Promise(
+    (resolve, reject) => {
+      client.search({
+        term: 'hotels',
+        location: input.location,
+        limit: 21,
+        price: input.price
+      }).then( (response) => resolve(response))
+    }
+  );
 
-    hotelResult = responses.reduce(function( businessList, response){
-      businessList.push( ... response.jsonBody.businesses );
-      return businessList;
-    }, [] );
+  if (input.price) {
 
-    callback(hotelResult);
+    Promise.resolve(selectedPrice).then( response => {
 
-  })
-  .catch(e => {
-    console.log(e);
-  });
+      callback(response.jsonBody.businesses);
+
+    })
+    .catch(e => {
+      console.log(e);
+    });
+
+  } else {
+      
+    Promise.all([p1,p2,p3]).then(responses => {
+
+      hotelResult = responses.reduce(function( businessList, response) {
+        businessList.push( ... response.jsonBody.businesses );
+        return businessList;
+      }, []);
+
+      callback(hotelResult);
+
+    })
+    .catch(e => {
+      console.log(e);
+    });
+
+  }
+
 }
 
 module.exports.findHotels = findHotels;
