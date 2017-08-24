@@ -5,7 +5,7 @@ const yelpConfig = require('../../config.js');
 
 var findHotels = function (input, callback){
 
-  var yelpKey = process.env.HOTEL_API || yelpConfig.yelpKey;
+  var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   var client = yelp.client(yelpKey);
 
   var p1 = new Promise(

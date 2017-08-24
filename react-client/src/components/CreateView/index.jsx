@@ -77,8 +77,6 @@ class CreateView extends React.Component {
 
     const {finished, stepIndex} = this.state;
 
-    console.log(this.state);
-
     return (
 
       <div id="view-body" style={{

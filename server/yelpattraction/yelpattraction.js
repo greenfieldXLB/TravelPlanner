@@ -5,9 +5,9 @@ const yelpConfig = require('../../config.js');
 var findAttractions = function (input, callback){
   var attractions = {};
 
-  const clientId = yelpConfig.clientId;
+  const clientId = process.env.YELP_ID || yelpConfig.clientId;
 
-  const clientSecret = yelpConfig.clientSecret;
+  const clientSecret = process.env.YELP_SECRET || yelpConfig.clientSecret;
 
   const token = yelp.accessToken(clientId, clientSecret).then(response => {
     // console.log('TOKEN ', response.jsonBody.access_token);

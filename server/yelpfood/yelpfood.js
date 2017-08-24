@@ -6,9 +6,9 @@ var findRestaurants = function (input, callback){
 
   var restaurants = [];
 
-  const clientId = yelpConfig.clientId;
+  const clientId = process.env.YELP_ID || yelpConfig.clientId;
 
-  const clientSecret = yelpConfig.clientSecret;
+  const clientSecret = process.env.YELP_SECRET || yelpConfig.clientSecret;
 
 
   const token = yelp.accessToken(clientId, clientSecret).then(response => {
