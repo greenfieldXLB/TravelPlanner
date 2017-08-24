@@ -6,10 +6,11 @@ const app = express();
 const hotels = require('./hotel/hotel')
 const attractions = require('./yelpattraction/yelpattraction')
 const food = require('./yelpfood/yelpfood')
+const User = require('../database-mongo/users')
+const Trip = require('../database-mongo/trips')
 
 app.use(express.static(__dirname + '/../react-client/dist'));
-app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(bodyParser.json());
 
 app.get('/hotels', (req, res) => {
   hotels.findHotels(req.query, (hotels) => {
@@ -57,6 +58,15 @@ app.get('/getAll', (req, res) => {
   })
 });
 
+app.post('/logIn', (req, res) => {
+  User.findOrCreate(req.body)
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 var port = process.env.PORT || 3000;
 

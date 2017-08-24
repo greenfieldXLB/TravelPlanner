@@ -4,8 +4,7 @@ var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb:
 mongoose.connect(uristring, function (err, res) {
   if (err) {
     console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-  } else {
-    console.log ('Succeeded connected to: ' + uristring);
+  } else { console.log ('Succeeded connected to: ' + uristring);
   }
 });
 
@@ -18,26 +17,6 @@ db.on('error', function() {
 db.once('open', function() {
   console.log('mongoose connected successfully');
 });
-
-var userSchema = mongoose.Schema({
-  name: String,
-  email: String,
-  facebookId: String,
-  trips: Array
-});
-
-var User = mongoose.model('User', userSchema);
-
-var tripSchema = mongoose.Schema({
-  food: Array,
-  attractions: Array,
-  lodging: Array,
-  destination: String,
-  startDate: String,
-  endDate: String
-});
-
-var Trip = mongoose.model('Trip', tripSchema);
 
 // var saveToDatabase = function(data,callback) {
 //   Item.find({flights: data.flights, hotel: data.hotel, attractions: data.attractions, food: data.food}, (err, result) => {
@@ -88,4 +67,5 @@ var selectAll = function(callback) {
 
 module.exports.selectAll = selectAll;
 // module.exports.saveToDatabase =saveToDatabase;
-module.exports.deleteFromDatabase =deleteFromDatabase;
+
+module.exports.deleteFromDatabase = deleteFromDatabase;
