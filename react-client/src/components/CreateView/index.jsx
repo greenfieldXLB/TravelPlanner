@@ -13,10 +13,14 @@ class CreateView extends React.Component {
     super(props);
     this.state = {
       stepIndex: 0,
-      finished: false
+      finished: false,
+      hotels: {},
+      attractions: {},
+      restaurants: {}
     };
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
+    this.leverageData = this.leverageData.bind(this);
   }
 
   handleNext() {
@@ -36,22 +40,44 @@ class CreateView extends React.Component {
     }
   }
 
+  leverageData(data) {
+    switch(data.tag) {
+      case 'hotels':
+        this.setState({
+          hotels: data.data
+        });
+        break;
+      case 'attractions':
+        this.setState({
+          attractions: data.data
+        });
+        break;
+      case 'restaurants':
+        this.setState({
+          restaurants: data.data
+        });
+        break;
+    }
+  }
+
   getStepContent(stepIndex) {
     switch(stepIndex) {
       case 0:
-        return <Destination stepIndex={this.state.stepIndex}/>
+        return <Destination leverageData={this.leverageData}/>
       case 1:
-        return <Chooser />
+        return <Chooser leverageData={this.leverageData} data={this.state.hotels}/>
       case 2:
-        return <Chooser />
+        return <Chooser leverageData={this.leverageData} data={this.state.attractions}/>
       case 3:
-        return <Chooser />
+        return <Chooser leverageData={this.leverageData} data={this.state.restaurants}/>
     }
   }
 
   render() {
 
     const {finished, stepIndex} = this.state;
+
+    console.log(this.state);
 
     return (
 

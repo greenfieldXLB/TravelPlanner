@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 import TextField from 'material-ui/TextField'
 import AutoComplete from 'material-ui/AutoComplete';
@@ -11,14 +12,27 @@ class Destination extends React.Component {
     super(props);
     this.state = {
       searchText: '',
-      stepIndex: this.props.stepIndex
     };
     this.handleRequest = this.handleRequest.bind(this);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
   }
 
   handleRequest() {
-    console.log('submitted: ', this.state.searchText)
+    console.log('submitted: ', this.state.searchText);
+    const endpoints = ['/hotels', '/attractions', '/food'];
+    for (var i = 0; i < endpoints.length; i++) {
+      $.ajax({
+        url: endpoints[i],
+        type: 'GET',
+        data: {location: this.state.searchText},
+        success: (data) => {
+          this.props.leverageData(data);
+        },
+        error: (err) => {
+          console.log('error: ', err);
+        }
+      });
+    }
   }
 
   handleUpdateInput(searchText) {
@@ -28,8 +42,6 @@ class Destination extends React.Component {
   };
 
   render() {
-
-    console.log(this.state.stepIndex);
 
     return (
 

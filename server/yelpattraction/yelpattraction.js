@@ -2,8 +2,8 @@ const yelp = require('yelp-fusion');
 const yelpConfig = require('../../config.js');
 
 
-var searchAttr = function (searchCity, callback){
-  var attrResult = {};
+var findAttractions = function (input, callback){
+  var attractions = {};
 
   const clientId = yelpConfig.clientId;
 
@@ -21,13 +21,13 @@ var searchAttr = function (searchCity, callback){
 
   client.search({
     term:'Attractions',
-    location: searchCity,
+    location: input.location,
     limit: 12
   })
 
   .then(response => {
-    attrResult = response.jsonBody.businesses;
-    callback(attrResult);
+    attractions = response.jsonBody.businesses;
+    callback(attractions);
   })
 
   .catch(e => {
@@ -36,4 +36,4 @@ var searchAttr = function (searchCity, callback){
 
 }
 
-module.exports.searchAttr = searchAttr;
+module.exports.findAttractions = findAttractions;
