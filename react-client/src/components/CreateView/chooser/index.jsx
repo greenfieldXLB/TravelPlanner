@@ -3,14 +3,23 @@ import React from 'react';
 import Preview from './preview/index.jsx';
 import Results from './results/index.jsx';
 
+const MODES = {
+  GRID: 'GRID',
+  MAP: 'MAP'
+};
+
 class Chooser extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'hello'
+      selectedItem: 'hello',
+      mode: MODES.GRID
     };
+    this.MODES = MODES;
     this.selectGridItem = this.selectGridItem.bind(this);
     this.handleTileClick = this.handleTileClick.bind(this);
+    this.switchMode = this.switchMode.bind(this);
   }
 
   selectGridItem() {
@@ -18,6 +27,14 @@ class Chooser extends React.Component {
     this.setState({
       selectedItem: target
     });
+  }
+  
+  switchMode(mode) {
+    if (Object.values(this.MODES).includes(mode)) {
+      this.setState({ mode });
+    } else {
+      throw `Invalid mode: ${mode}`
+    }
   }
 
   handleTileClick(tile) {
@@ -53,5 +70,7 @@ class Chooser extends React.Component {
     )
   }
 }
+
+Chooser.MODES = MODES;
 
 export default Chooser;
