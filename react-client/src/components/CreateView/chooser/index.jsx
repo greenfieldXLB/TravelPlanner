@@ -17,7 +17,7 @@ const Chooser = (props) => (
       
       <Preview />
 
-      <Results />
+      <Results results={props.data}/>
       
   </div>
 

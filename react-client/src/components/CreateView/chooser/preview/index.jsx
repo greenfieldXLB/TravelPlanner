@@ -14,6 +14,9 @@ const Preview = (props) => (
       <div style={{
         width: '95%',
         height: '60%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#a6a6a6'
       }}>
         image

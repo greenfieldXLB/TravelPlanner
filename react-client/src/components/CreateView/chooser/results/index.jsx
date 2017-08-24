@@ -1,13 +1,17 @@
 import React from 'react';
 
-const Results = () => (
+import {GridList, GridTile} from 'material-ui/GridList';
+
+const Results = (props) => (
 
   <div id="results-component" style={{
     width:'48%',
     height: '95%',
+    display: 'flex',
+    flexWrap: 'wrap',
     backgroundColor: 'white'
   }}>
-    Grid List
+    Gridlist
   </div>
 
 )
