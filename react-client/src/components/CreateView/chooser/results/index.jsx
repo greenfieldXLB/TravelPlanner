@@ -9,6 +9,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
+import Map from './map.jsx';
 
 
 class Results extends React.Component { 
@@ -46,7 +47,6 @@ class Results extends React.Component {
   render() {
 
     return (
-
       <div id="results-component" style={{
         width:'48%',
         height: '95%',
@@ -91,7 +91,6 @@ class Results extends React.Component {
                 </Menu>
               </Popover>
             </div>
-
           </div>
 
           <GridList
@@ -109,38 +108,13 @@ class Results extends React.Component {
                 key={i}
                 title={tile.name}
                 subtitle={
-                  tile.price ?
-                  <span>
-                    <b>Price: {tile.price} <br/> 
-                      <div style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        justifyContent: 'left'
-                      }}>
-                      Yelp Rating:  
-                        <div style={{
-                          fontSize: 14,
-                          paddingLeft: '3px'
-                        }}>
-                          <StarRatingComponent
-                            name="Rating"
-                            editing={false}
-                            starCount={5}
-                            value={tile.rating}
-                            renderStarIcon={(index, value) => {
-                              return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
-                            }}
-                            renderStarIconHalf={() => <span className="fa fa-star-half-full" />}
-                            starColor={'#ffb400'}
-                            emptyStarColor={'#ffb400'}
-                          />
-                        </div>
-                      </div>
-                    </b>
-                  </span>
-                    :
                   <span>
                     <b>
+                      { 
+                        tile.price ? 
+                        <span> Price: {tile.price} <br/> </span> :
+                        null
+                      }
                       <div style={{
                         display: 'flex',
                         flexWrap: 'wrap',
@@ -175,7 +149,6 @@ class Results extends React.Component {
           </GridList>
         </div>
       </div>
-
     )
 
   }
