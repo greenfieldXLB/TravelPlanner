@@ -13,18 +13,21 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 
 app.get('/hotels', (req, res) => {
+  console.log('hotels', req.query);
   hotels.findHotels(req.query, (hotels) => {
     res.status(200).send({tag: 'hotels', data: hotels});
   });
 });
 
 app.get('/attractions', (req, res) => {
+  console.log('attractions:', req.query);
   attractions.findAttractions(req.query, (attractions) => {
     res.status(200).send({tag: 'attractions', data: attractions});
   });
 });
 
 app.get('/food', (req, res) => {
+  console.log('food', req.query);
   food.findRestaurants(req.query, (restaurants) => {
     res.status(200).send({tag: 'restaurants', data: restaurants});
   });
