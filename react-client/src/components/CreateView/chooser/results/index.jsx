@@ -1,124 +1,184 @@
 import React from 'react';
 
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Dollar from 'material-ui/svg-icons/editor/attach-money';
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
-import StarRatingComponent from 'react-star-rating-component';
 
 
-const Results = (props) => (
+class Results extends React.Component { 
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      anchorEl: {},
+      price: 0
+    };
+    this.handlePriceOpen = this.handlePriceOpen.bind(this);
+    this.handlePriceClose = this.handlePriceClose.bind(this);
+    this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
+  }
 
-  <div id="results-component" style={{
-    width:'48%',
-    height: '95%',
-    display: 'flex',
-    flexWrap: 'wrap',
-    backgroundColor: 'white'
-  }}>
+  handleMenuItemClick() {
+    console.log('menu clicked');
+  }
 
-    <div style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around'
-    }}>
+  handlePriceOpen(event) {
+    event.preventDefault();
+    console.log(event.currentTarget);
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+    });
+  }
 
-      <div style={{
-        width: '100%',
-        height: '12%',
+  handlePriceClose() {
+    this.setState({
+      open: false
+    });
+  }
+
+  render() {
+
+    return (
+
+      <div id="results-component" style={{
+        width:'48%',
+        height: '95%',
         display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-
+        flexWrap: 'wrap',
+        backgroundColor: 'white'
       }}>
-        <TextField 
-          hintText="Search..."
-        />
-        
+
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-around'
+        }}>
+
+          <div style={{
+            width: '100%',
+            height: '12%',
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+
+          }}>
+            <TextField 
+              hintText="Search..."
+            />
+
+            <div>
+              <FloatingActionButton mini={true} onClick={this.handlePriceOpen}>
+                <Dollar />
+              </FloatingActionButton>
+              <Popover 
+                open={this.state.open}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                onRequestClose={this.handlePriceClose}
+                animation={PopoverAnimationVertical}
+              >
+                <Menu style={{padding: '0 0 0 0'}}>
+                  <MenuItem primaryText="$" value={1} onClick={this.handleMenuItemClick}/>
+                  <MenuItem primaryText="$$" value={1} onClick={this.handleMenuItemClick}/>
+                  <MenuItem primaryText="$$$" value={1} onClick={this.handleMenuItemClick}/>
+                </Menu>
+              </Popover>
+            </div>
+
+          </div>
+
+          <GridList
+            cellHeight={180}
+            cols={3}
+            style={{
+              width: '100%',
+              height: '88%',
+              overflowY: 'scroll'
+            }}
+          >
+            {this.props.data.map((tile, i) => (
+              <GridTile
+                key={i}
+                title={tile.name}
+                subtitle={
+                  tile.price ?
+                  <span>
+                    <b>Price: {tile.price} <br/> 
+                      <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'left'
+                      }}>
+                      Yelp Rating:  
+                        <div style={{
+                          fontSize: 14,
+                          paddingLeft: '3px'
+                        }}>
+                          <StarRatingComponent
+                            name="Rating"
+                            editing={false}
+                            starCount={5}
+                            value={tile.rating}
+                            renderStarIcon={(index, value) => {
+                              return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
+                            }}
+                            renderStarIconHalf={() => <span className="fa fa-star-half-full" />}
+                            starColor={'#ffb400'}
+                            emptyStarColor={'#ffb400'}
+                          />
+                        </div>
+                      </div>
+                    </b>
+                  </span>
+                    :
+                  <span>
+                    <b>
+                      <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'left'
+                      }}>
+                      Yelp Rating:  
+                        <div style={{
+                          fontSize: 14,
+                          paddingLeft: '3px'
+                        }}>
+                          <StarRatingComponent
+                            name="Rating"
+                            editing={false}
+                            starCount={5}
+                            value={tile.rating}
+                            renderStarIcon={(index, value) => {
+                              return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
+                            }}
+                            renderStarIconHalf={() => <span className="fa fa-star-half-full" />}
+                            starColor={'#ffb400'}
+                            emptyStarColor={'#ffb400'}
+                          />
+                        </div>
+                      </div>
+                    </b>
+                  </span>
+                }
+              >
+                <img src={tile.image_url} />
+              </GridTile>
+            ))}
+          </GridList>
+        </div>
       </div>
 
-      <GridList
-        cellHeight={180}
-        cols={3}
-        style={{
-          width: '100%',
-          height: '88%',
-          overflowY: 'scroll'
-        }}
-      >
-        {props.data.map((tile, i) => (
-          <GridTile
-            key={i}
-            title={tile.name}
-            subtitle={
-              tile.price ?
-                <span>
-                  <b>Price: {tile.price} <br/> 
-                    <div style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      justifyContent: 'left'
-                    }}>
-                    Yelp Rating:  
-                      <div style={{
-                        fontSize: 14,
-                        paddingLeft: '3px'
-                      }}>
-                        <StarRatingComponent
-                          name="Rating"
-                          editing={false}
-                          starCount={5}
-                          value={tile.rating}
-                          renderStarIcon={(index, value) => {
-                            return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
-                          }}
-                          renderStarIconHalf={() => <span className="fa fa-star-half-full" />}
-                          starColor={'#ffb400'}
-                          emptyStarColor={'#ffb400'}
-                        />
-                      </div>
-                    </div>
-                  </b>
-                </span>
-                :
-                <span>
-                  <b>
-                    <div style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      justifyContent: 'left'
-                    }}>
-                    Yelp Rating:  
-                      <div style={{
-                        fontSize: 14,
-                        paddingLeft: '3px'
-                      }}>
-                        <StarRatingComponent
-                          name="Rating"
-                          editing={false}
-                          starCount={5}
-                          value={tile.rating}
-                          renderStarIcon={(index, value) => {
-                            return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
-                          }}
-                          renderStarIconHalf={() => <span className="fa fa-star-half-full" />}
-                          starColor={'#ffb400'}
-                          emptyStarColor={'#ffb400'}
-                        />
-                      </div>
-                    </div>
-                  </b>
-                </span>
-            }
-          >
-            <img src={tile.image_url} />
-          </GridTile>
-        ))}
-      </GridList>
-    </div>
-  </div>
+    )
 
-)
+  }
+
+}
 
 export default Results;
-
-        
