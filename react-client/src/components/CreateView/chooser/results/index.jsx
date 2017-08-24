@@ -11,7 +11,6 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
 import Map from './map.jsx';
-import StarRatingComponent from 'react-star-rating-component';
 
 
 class Results extends React.Component { 
