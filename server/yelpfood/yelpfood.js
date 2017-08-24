@@ -1,14 +1,14 @@
 const yelp = require('yelp-fusion');
 const yelpConfig = require('../../config.js');
 
-var searchFood = function (searchCity, callback){
+var findRestaurants = function (input, callback){
 
 
-  var foodResult = [];
+  var restaurants = [];
 
-  const clientId = yelpConfig.clientId;
+  const clientId = process.env.YELP_ID || yelpConfig.clientId;
 
-  const clientSecret = yelpConfig.clientSecret;
+  const clientSecret = process.env.YELP_SECRET || yelpConfig.clientSecret;
 
 
   const token = yelp.accessToken(clientId, clientSecret).then(response => {
@@ -26,7 +26,7 @@ var searchFood = function (searchCity, callback){
     (resolve,reject) => {
       client.search({
         term:'Restaurant',
-        location: searchCity,
+        location: input.location,
         limit: 4,
         price: "1"
       }).then( ( response )=>resolve( response ) );
@@ -37,7 +37,7 @@ var searchFood = function (searchCity, callback){
     (resolve,reject) => {
       client.search({
         term:'Restaurant',
-        location: searchCity,
+        location: input.location,
         limit: 4,
         price: "2"
       }).then( ( response )=>resolve( response ) );
@@ -48,7 +48,7 @@ var searchFood = function (searchCity, callback){
     (resolve,reject) => {
       client.search({
         term:'Restaurant',
-        location: searchCity,
+        location: input.location,
         limit: 4,
         price: "3"
       }).then( ( response )=>resolve( response ))
@@ -58,12 +58,12 @@ var searchFood = function (searchCity, callback){
   Promise.all([p1,p2,p3]).then(responses => {
     //console.log(JSON.stringify(responses, null, 2 ) );
 
-    foodResult = responses.reduce(function( businessList, response){
+    restaurants = responses.reduce(function( businessList, response){
       businessList.push( ... response.jsonBody.businesses );
       return businessList;
     }, [] );
 
-    callback(foodResult);
+    callback(restaurants);
 
   })
   .catch(e => {
@@ -72,4 +72,4 @@ var searchFood = function (searchCity, callback){
 
 }
 
-module.exports.searchFood = searchFood;
+module.exports.findRestaurants = findRestaurants;

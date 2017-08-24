@@ -3,17 +3,16 @@ const request = require('request');
 const yelpConfig = require('../../config.js');
 
 
-var hotel = function (info, callback){
+var findHotels = function (input, callback){
 
-
-  var yelpKey = process.env.HOTEL_API || yelpConfig.yelpKey;
+  var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   var client = yelp.client(yelpKey);
 
   var p1 = new Promise(
     (resolve,reject) => {
       client.search({
-        term:'hotels',
-        location: info.city,
+        term: 'hotels',
+        location: input.location,
         limit: 4,
         price: "1"
       }).then( ( response )=>resolve( response ) );
@@ -23,8 +22,8 @@ var hotel = function (info, callback){
   var p2 = new Promise(
     (resolve,reject) => {
       client.search({
-        term:'hotels',
-        location: info.city,
+        term: 'hotels',
+        location: input.location,
         limit: 4,
         price: "2"
       }).then( ( response )=>resolve( response ) );
@@ -34,8 +33,8 @@ var hotel = function (info, callback){
   var p3 = new Promise(
     (resolve,reject) => {
       client.search({
-        term:'hotels',
-        location: info.city,
+        term: 'hotels',
+        location: input.location,
         limit: 4,
         price: "3"
       }).then( ( response )=>resolve( response ))
@@ -44,12 +43,12 @@ var hotel = function (info, callback){
 
   Promise.all([p1,p2,p3]).then(responses => {
 
-    foodResult = responses.reduce(function( businessList, response){
+    hotelResult = responses.reduce(function( businessList, response){
       businessList.push( ... response.jsonBody.businesses );
       return businessList;
     }, [] );
 
-    callback(foodResult);
+    callback(hotelResult);
 
   })
   .catch(e => {
@@ -57,4 +56,4 @@ var hotel = function (info, callback){
   });
 }
 
-module.exports.hotel = hotel;
+module.exports.findHotels = findHotels;
