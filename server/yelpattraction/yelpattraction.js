@@ -15,25 +15,21 @@ var findAttractions = function (input, callback){
     console.log('ERROR ', e);
   });
 
-
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
 
   client.search({
     term:'Attractions',
     location: input.location,
-    limit: 21
+    limit: 30
   })
-
   .then(response => {
     attractions = response.jsonBody.businesses;
     callback(attractions);
   })
-
   .catch(e => {
     console.log(e);
   });
-
 }
 
 module.exports.findAttractions = findAttractions;
