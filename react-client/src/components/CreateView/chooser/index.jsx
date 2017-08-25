@@ -13,20 +13,12 @@ class Chooser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: 'hello',
+      selectedItem: '',
       mode: MODES.GRID
     };
     this.MODES = MODES;
-    this.selectGridItem = this.selectGridItem.bind(this);
     this.handleTileClick = this.handleTileClick.bind(this);
     this.switchMode = this.switchMode.bind(this);
-  }
-
-  selectGridItem() {
-    console.log(target);
-    this.setState({
-      selectedItem: target
-    });
   }
   
   switchMode(mode) {
