@@ -1,4 +1,4 @@
-module.exports.fakeFlight = {
+dmodule.exports.fakeFlight = {
  "kind": "qpxExpress#tripsSearch",
  "trips": {
   "kind": "qpxexpress#tripOptions",

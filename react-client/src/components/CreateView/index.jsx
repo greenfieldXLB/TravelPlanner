@@ -121,6 +121,20 @@ class CreateView extends React.Component {
         selectedItem={this.state.selectedItem}
         handleTileClick={this.handleTileClick}
       />
+    switch(stepIndex) {
+      case 0:
+        return <Destination 
+                  leverageData={this.leverageData} 
+                  searchText={this.state.searchText} 
+                  updateSearch={this.handleUpdateInput}
+                  triggerLoading={this.triggerLoading}
+                  loading={this.state.loading}/>
+      case 1:
+        return <Chooser leverageData={this.leverageData} data={this.state.hotels}/>
+      case 2:
+        return <Chooser leverageData={this.leverageData} data={this.state.attractions}/>
+      case 3:
+        return <Chooser leverageData={this.leverageData} data={this.state.restaurants}/>
     }
   }
 
@@ -175,16 +189,13 @@ class CreateView extends React.Component {
                   label="Back"
                   disabled={stepIndex === 0}
                   onClick={this.handlePrev}
-                  style={{marginRight: 12}}
-                />
+                  style={{marginRight: 12}}/>
                 <RaisedButton
                   label={stepIndex === 3 ? 'Finish' : 'Next'}
                   disabled={!submitted || loading}
                   primary={true}
-                  onClick={this.handleNext}
-                />
+                  onClick={this.handleNext}/>
               </div>
-
           </div>
       </div>
     )

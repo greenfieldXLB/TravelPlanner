@@ -45,6 +45,7 @@
     "react-test-renderer": "^15.6.1",
     "react-test-utils": "0.0.1",
     "request": "^2.81.0",
+    "request-promise": "^4.2.1",
     "sabre-dev-studio": "^1.2.0",
     "webpack": "^3.5.2",
     "yelp-fusion": "^1.0.3"
