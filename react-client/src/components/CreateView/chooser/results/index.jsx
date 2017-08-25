@@ -126,7 +126,7 @@ class Results extends React.Component {
                 onClick={this.handlePriceOpen}
                 style={{marginRight: '10px'}}
               >
-                <span style={{fontSize: '12px', color: 'white'}}>
+                <span style={{fontSize: '13px', color: 'white'}}>
                   {this.state.selectedItem}
                 </span>
               </FloatingActionButton>
