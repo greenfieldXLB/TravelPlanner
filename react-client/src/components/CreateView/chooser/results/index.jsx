@@ -18,7 +18,7 @@ import Map from './map.jsx';
 import Grid from './grid.jsx';
 
 
-class Results extends React.Component { 
+class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -106,7 +106,7 @@ class Results extends React.Component {
         flexWrap: 'wrap',
         backgroundColor: 'white'
       }}>
-      
+
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -114,7 +114,7 @@ class Results extends React.Component {
           flexBasis: '100%',
           flexDirection: 'column'
         }}>
-        
+
           <div style={{
             width: '100%',
             height: '12%',
@@ -122,14 +122,14 @@ class Results extends React.Component {
             justifyContent: 'space-around',
             alignItems: 'center',
           }}>
-          
-            <TextField 
+
+            <TextField
               hintText="Search..."
             />
 
             <div>
-              <FloatingActionButton 
-                mini={true} 
+              <FloatingActionButton
+                mini={true}
                 onClick={this.handlePriceOpen}
                 style={{marginRight: '10px'}}
                 disabled={this.props.index === 2}
@@ -139,23 +139,23 @@ class Results extends React.Component {
                   {this.state.selectedItem}
                 </span>
               </FloatingActionButton>
-              
-              <FloatingActionButton 
+
+              <FloatingActionButton
                 mini={true}
                 style={{marginRight: '10px'}}
                 onClick={() => this.props.changeMode('MAP')}
               >
-                <MapIcon />  
+                <MapIcon />
               </FloatingActionButton>
-              
-              <FloatingActionButton 
+
+              <FloatingActionButton
                 mini={true}
                 onClick={() => this.props.changeMode('GRID')}
               >
-                <GridIcon />  
+                <GridIcon />
               </FloatingActionButton>
-              
-              <Popover 
+
+              <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
@@ -168,27 +168,28 @@ class Results extends React.Component {
                   <MenuItem primaryText="$$$" value={3} />
                 </Menu>
               </Popover>
-              
+
             </div>
           </div>
-          { 
+          {
             this.props.mode === 'GRID' ?
-            <Grid 
-              data={this.props.data} 
+            <Grid
+              data={this.props.data}
               trip={this.props.trip}
               index={this.props.index}
               handleTileClick={this.props.handleTileClick}
               addToTrip={this.props.addToTrip}
               removeFromTrip={this.props.removeFromTrip}
-            /> : 
-            <Map />
+            /> :
+            <Map
+              data={this.props.data}
+              handleMarkerClick={this.props.handleTileClick}
+            />
           }
         </div>
       </div>
     )
-
   }
-
 }
 
 export default Results;
