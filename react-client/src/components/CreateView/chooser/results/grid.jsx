@@ -54,6 +54,7 @@ class Grid extends React.Component {
                 </b>
               </span>
             }
+            actionIcon={this.props.addToTrip()}
           >
             <img src={tile.image_url} />
           </GridTile>

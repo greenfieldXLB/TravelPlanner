@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
+import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Dollar from 'material-ui/svg-icons/editor/attach-money';
 import MapIcon from 'material-ui/svg-icons/maps/map';
@@ -8,8 +9,14 @@ import GridIcon from 'material-ui/svg-icons/navigation/apps';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+
+import StarRatingComponent from 'react-star-rating-component';
+import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
-import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import AddCircleFull from 'material-ui/svg-icons/content/add-circle';
+
 import Map from './map.jsx';
 import Grid from './grid.jsx';
 
@@ -27,6 +34,7 @@ class Results extends React.Component {
     this.handlePriceClose = this.handlePriceClose.bind(this);
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
     this.changeResults = this.changeResults.bind(this);
+    this.addToTrip = this.addToTrip.bind(this);
   }
 
   buildSymbol(value) {
@@ -92,6 +100,16 @@ class Results extends React.Component {
     });
   }
 
+  addToTrip() {
+
+    return (
+      <IconButton>
+        <AddCircleOutline color='white' />
+      </IconButton>
+    )
+
+  }
+
   render() {
     return (
       <div id="results-component" style={{
@@ -127,6 +145,8 @@ class Results extends React.Component {
                 mini={true} 
                 onClick={this.handlePriceOpen}
                 style={{marginRight: '10px'}}
+                disabled={this.props.index === 2}
+                disabledColor='white'
               >
                 <span style={{fontSize: '13px', color: 'white'}}>
                   {this.state.selectedItem}
@@ -168,7 +188,8 @@ class Results extends React.Component {
             this.props.mode === 'GRID' ?
             <Grid 
               data={this.props.data} 
-              handleTileClick={this.props.handleTileClick} 
+              handleTileClick={this.props.handleTileClick}
+              addToTrip={this.addToTrip} 
             /> : 
             <Map />
           }

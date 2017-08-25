@@ -48,7 +48,9 @@ class Chooser extends React.Component {
         />
 
         <Results
-          data={this.props.data} 
+          data={this.props.data}
+          destination={this.props.destination}
+          index={this.props.index}
           selectGridItem={this.props.selectGridItem}
           handleTileClick={this.props.handleTileClick}
           leverageData={this.props.leverageData}
