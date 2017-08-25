@@ -17,17 +17,59 @@ class CreateView extends React.Component {
       stepIndex: 0,
       finished: false,
       loading: false,
-      hotels: {},
-      attractions: {},
-      restaurants: {},
-      selectedItem: ''
+      hotels: [],
+      attractions: [],
+      restaurants: [],
+      selectedItem: '',
+      trip: {
+        hotels: [],
+        attractions: [],
+        restaurants: [],
+        name: '',
+        description: '',
+      }
     };
+    this.addToTrip = this.addToTrip.bind(this);
+    this.removeFromTrip = this.removeFromTrip.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.leverageData = this.leverageData.bind(this);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
     this.triggerLoading = this.triggerLoading.bind(this);
     this.handleTileClick = this.handleTileClick.bind(this);
+  }
+
+  copyObject(object) {
+    let tripData = {
+      1: 'hotels',
+      2: 'attractions',
+      3: 'restaurants'
+    };
+    var key = tripData[this.state.stepIndex];
+    var copy = JSON.stringify(object);
+    var newState = JSON.parse(copy);
+    return {key: key, state: newState};
+  }
+
+  removeFromTrip(item) {
+    const {key, state} = this.copyObject(this.state.trip);
+    for (var i = 0; i < state[key].length; i++) {
+      if (item.id === state[key][i].id) {
+        state[key].splice(i, 1);
+        break;
+      }
+    }
+    this.setState({
+      trip: state
+    });
+  }
+
+  addToTrip(item) {
+    const {key, state} = this.copyObject(this.state.trip);
+    state[key] = [...state[key]].concat(item);
+    this.setState({
+      trip: state
+    });
   }
 
   triggerLoading() {
@@ -38,7 +80,6 @@ class CreateView extends React.Component {
   }
 
   handleTileClick(tile) {
-    console.log('tile', tile);
     this.setState({
       selectedItem: tile
     });
@@ -118,6 +159,9 @@ class CreateView extends React.Component {
         data={dataMap[stepIndex]} 
         destination={this.state.searchText}
         index={this.state.stepIndex}
+        trip={this.state.trip}
+        addToTrip={this.addToTrip}
+        removeFromTrip={this.removeFromTrip}
         leverageData={this.leverageData} 
         selectedItem={this.state.selectedItem}
         handleTileClick={this.handleTileClick}

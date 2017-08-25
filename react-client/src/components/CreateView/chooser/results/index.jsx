@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
+import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Dollar from 'material-ui/svg-icons/editor/attach-money';
 import MapIcon from 'material-ui/svg-icons/maps/map';
@@ -8,8 +9,11 @@ import GridIcon from 'material-ui/svg-icons/navigation/apps';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+
+import StarRatingComponent from 'react-star-rating-component';
+import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
-import TextField from 'material-ui/TextField';
+
 import Map from './map.jsx';
 import Grid from './grid.jsx';
 
@@ -93,6 +97,7 @@ class Results extends React.Component {
   }
 
   render() {
+
     return (
       <div id="results-component" style={{
         width:'48%',
@@ -127,6 +132,8 @@ class Results extends React.Component {
                 mini={true} 
                 onClick={this.handlePriceOpen}
                 style={{marginRight: '10px'}}
+                disabled={this.props.index === 2}
+                disabledColor='white'
               >
                 <span style={{fontSize: '13px', color: 'white'}}>
                   {this.state.selectedItem}
@@ -168,7 +175,11 @@ class Results extends React.Component {
             this.props.mode === 'GRID' ?
             <Grid 
               data={this.props.data} 
-              handleTileClick={this.props.handleTileClick} 
+              trip={this.props.trip}
+              index={this.props.index}
+              handleTileClick={this.props.handleTileClick}
+              addToTrip={this.props.addToTrip}
+              removeFromTrip={this.props.removeFromTrip}
             /> : 
             <Map />
           }
