@@ -97,6 +97,7 @@ class Results extends React.Component {
   }
 
   render() {
+
     return (
       <div id="results-component" style={{
         width:'48%',
@@ -174,8 +175,11 @@ class Results extends React.Component {
             this.props.mode === 'GRID' ?
             <Grid 
               data={this.props.data} 
+              trip={this.props.trip}
+              index={this.props.index}
               handleTileClick={this.props.handleTileClick}
-              addToTrip={this.addToTrip} 
+              addToTrip={this.props.addToTrip}
+              removeFromTrip={this.props.removeFromTrip}
             /> : 
             <Map />
           }
