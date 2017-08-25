@@ -29,9 +29,7 @@ const Preview = (props) => (
             height: '100%'
           }}
         >
-          <GridTile
-
-          >
+          <GridTile>
             <img 
               src={props.data.image_url}
               style={{
