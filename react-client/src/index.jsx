@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Navbar from './components/Navbar.jsx';
 import SideDrawer from './components/SideDrawer.jsx';
 import CreateView from './components/CreateView/index.jsx';
+import ViewTrips from './components/ViewTrips/index.jsx';
 import LogIn from './components/LogIn.jsx';
 import Landing from './components/Landing.jsx';
 
@@ -125,7 +126,7 @@ class App extends React.Component {
       case pages.CREATE:
         return <CreateView />
       case pages.LIST:
-        return <div> List </div>
+        return <ViewTrips />
     }
   }
 }

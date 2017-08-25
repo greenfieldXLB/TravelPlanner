@@ -7,6 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Destination from './destination/index.jsx';
 import Chooser from './chooser/index.jsx';
 
+//CreateView component
 class CreateView extends React.Component {
   constructor(props) {
     super(props);

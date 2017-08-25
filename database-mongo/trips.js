@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const tripSchema = mongoose.Schema({
+  id: Number,
   food: Array,
   attractions: Array,
   lodging: Array,

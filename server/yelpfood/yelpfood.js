@@ -3,7 +3,6 @@ const yelpConfig = require('../../config.js');
 
 var findRestaurants = function (input, callback){
 
-
   var restaurants = [];
 
   const clientId = process.env.YELP_ID || yelpConfig.clientId;
