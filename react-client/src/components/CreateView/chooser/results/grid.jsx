@@ -2,7 +2,22 @@ import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import {GridList, GridTile} from 'material-ui/GridList';
 
+import IconButton from 'material-ui/IconButton';
+import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import AddCircleFull from 'material-ui/svg-icons/content/add-circle';
+
 class Grid extends React.Component {
+
+  addToTrip() {
+
+    return (
+      <IconButton>
+        <AddCircleOutline color='white' />
+      </IconButton>
+    )
+
+  }
+
   render() {
     return (
       <GridList
@@ -54,7 +69,7 @@ class Grid extends React.Component {
                 </b>
               </span>
             }
-            actionIcon={this.props.addToTrip()}
+            actionIcon={this.addToTrip()}
           >
             <img src={tile.image_url} />
           </GridTile>

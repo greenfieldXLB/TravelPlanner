@@ -13,9 +13,6 @@ import MenuItem from 'material-ui/MenuItem';
 import StarRatingComponent from 'react-star-rating-component';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
-import IconButton from 'material-ui/IconButton';
-import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
-import AddCircleFull from 'material-ui/svg-icons/content/add-circle';
 
 import Map from './map.jsx';
 import Grid from './grid.jsx';
@@ -34,7 +31,6 @@ class Results extends React.Component {
     this.handlePriceClose = this.handlePriceClose.bind(this);
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
     this.changeResults = this.changeResults.bind(this);
-    this.addToTrip = this.addToTrip.bind(this);
   }
 
   buildSymbol(value) {
@@ -98,16 +94,6 @@ class Results extends React.Component {
     this.setState({
       open: false
     });
-  }
-
-  addToTrip() {
-
-    return (
-      <IconButton>
-        <AddCircleOutline color='white' />
-      </IconButton>
-    )
-
   }
 
   render() {
