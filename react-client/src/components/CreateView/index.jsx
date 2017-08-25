@@ -200,11 +200,8 @@ class CreateView extends React.Component {
 
           </div>
       </div>
-
     )
-
   }
-
 }
 
 export default CreateView;
