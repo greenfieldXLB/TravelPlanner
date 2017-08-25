@@ -13,11 +13,9 @@ class Chooser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: '',
       mode: MODES.GRID
     };
     this.MODES = MODES;
-    this.handleTileClick = this.handleTileClick.bind(this);
     this.switchMode = this.switchMode.bind(this);
   }
   
@@ -27,13 +25,6 @@ class Chooser extends React.Component {
     } else {
       throw `Invalid mode: ${mode}`
     }
-  }
-
-  handleTileClick(tile) {
-    console.log('tile', tile);
-    this.setState({
-      selectedItem: tile
-    });
   }
 
   render() {
@@ -50,16 +41,13 @@ class Chooser extends React.Component {
           backgroundColor: '#cccccc'
         }}>
         <Preview 
-          data={this.state.selectedItem}
+          data={this.props.selectedItem}
         />
 
         <Results
-          data={this.props.data}
-          destination={this.props.destination}
-          index={this.props.index}
-          leverageData={this.props.leverageData}
+          data={this.props.data} 
           selectGridItem={this.selectGridItem}
-          handleTileClick={this.handleTileClick}
+          handleTileClick={this.props.handleTileClick}
         /> 
       </div>
     )

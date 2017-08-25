@@ -18,13 +18,15 @@ class CreateView extends React.Component {
       loading: false,
       hotels: {},
       attractions: {},
-      restaurants: {}
+      restaurants: {},
+      selectedItem: ''
     };
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.leverageData = this.leverageData.bind(this);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
     this.triggerLoading = this.triggerLoading.bind(this);
+    this.handleTileClick = this.handleTileClick.bind(this);
   }
 
   triggerLoading() {
@@ -34,11 +36,19 @@ class CreateView extends React.Component {
     });
   }
 
+  handleTileClick(tile) {
+    console.log('tile', tile);
+    this.setState({
+      selectedItem: tile
+    });
+  }
+
   handleNext() {
     const stepIndex = this.state.stepIndex;
     this.setState({
       stepIndex: stepIndex + 1,
-      finished: stepIndex >= 3
+      finished: stepIndex >= 3,
+      selectedItem: ''
     });
   }
 
@@ -46,7 +56,8 @@ class CreateView extends React.Component {
     const stepIndex = this.state.stepIndex;
     if (stepIndex > 0) {
       this.setState({
-        stepIndex: stepIndex - 1
+        stepIndex: stepIndex - 1,
+        selectedItem: ''
       });
     }
   }
@@ -102,6 +113,8 @@ class CreateView extends React.Component {
                   destination={this.state.searchText}
                   index={this.state.stepIndex}
                   leverageData={this.leverageData} 
+                  selectedItem={this.state.selectedItem}
+                  handleTileClick={this.handleTileClick}
                />
       case 2:
         return <Chooser 
@@ -109,13 +122,17 @@ class CreateView extends React.Component {
                   destination={this.state.searchText}
                   index={this.state.stepIndex}
                   leverageData={this.leverageData} 
+                  selectedItem={this.state.selectedItem}
+                  handleTileClick={this.handleTileClick}
                />
       case 3:
         return <Chooser 
                   data={this.state.restaurants}
                   destination={this.state.searchText}
                   index={this.state.stepIndex}
-                  leverageData={this.leverageData} 
+                  leverageData={this.leverageData}
+                  selectedItem={this.state.selectedItem} 
+                  handleTileClick={this.handleTileClick}
                />
     }
   }
