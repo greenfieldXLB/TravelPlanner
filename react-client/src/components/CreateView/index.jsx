@@ -160,8 +160,7 @@ class CreateView extends React.Component {
         loading={this.state.loading}
         searchText={this.state.searchText} 
         triggerLoading={this.triggerLoading}
-        updateSearch={this.handleUpdateInput}
-      />
+        updateSearch={this.handleUpdateInput}/>
     } else {
       let dataMap = {
         1: this.state.hotels,
@@ -183,7 +182,6 @@ class CreateView extends React.Component {
         handleDrawerClose={this.props.handleDrawerClose}
         drawerIsOpen={this.props.drawerIsOpen}
         trip={this.state.trip}
-      />
     }
   }
 
