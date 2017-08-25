@@ -21,6 +21,7 @@ class Chooser extends React.Component {
   }
   
   changeMode(mode) {
+    console.log(mode);
     if (Object.values(this.modes).includes(mode)) {
       this.setState({ mode });
     } else {
@@ -50,6 +51,8 @@ class Chooser extends React.Component {
           data={this.props.data} 
           selectGridItem={this.props.selectGridItem}
           handleTileClick={this.props.handleTileClick}
+          mode={this.state.mode}
+          changeMode={this.changeMode}
         /> 
       </div>
     )

@@ -105,7 +105,9 @@ class Results extends React.Component {
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
-          justifyContent: 'space-around'
+          justifyContent: 'space-around',
+          flexBasis: '100%',
+          flexDirection: 'column'
         }}>
         
           <div style={{
@@ -134,12 +136,14 @@ class Results extends React.Component {
               <FloatingActionButton 
                 mini={true}
                 style={{marginRight: '10px'}}
+                onClick={() => this.props.changeMode('MAP')}
               >
                 <MapIcon />  
               </FloatingActionButton>
               
               <FloatingActionButton 
                 mini={true}
+                onClick={() => this.props.changeMode('GRID')}
               >
                 <GridIcon />  
               </FloatingActionButton>
@@ -159,9 +163,15 @@ class Results extends React.Component {
               </Popover>
               
             </div>
-            
           </div>
-          <Grid data={this.props.data} handleTileClick={this.props.handleTileClick} />
+          { 
+            this.props.mode === 'GRID' ?
+            <Grid 
+              data={this.props.data} 
+              handleTileClick={this.props.handleTileClick} 
+            /> : 
+            <Map />
+          }
         </div>
       </div>
     )
