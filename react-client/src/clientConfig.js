@@ -1,1 +1,1 @@
-export const GOOGLE_API = 'https://legacy-project-nealfwilliams.c9users.io';
+export const GOOGLE_API = 'AIzaSyDoG5Ft8Qeds6HcBAtwXQXxpofejnvEdzM'

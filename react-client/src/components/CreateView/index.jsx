@@ -98,42 +98,29 @@ class CreateView extends React.Component {
   }
 
   getStepContent(stepIndex) {
-    switch(stepIndex) {
-      case 0:
-        return <Destination 
-                  leverageData={this.leverageData} 
-                  loading={this.state.loading}
-                  searchText={this.state.searchText} 
-                  triggerLoading={this.triggerLoading}
-                  updateSearch={this.handleUpdateInput}
-               />
-      case 1:
-        return <Chooser 
-                  data={this.state.hotels} 
-                  destination={this.state.searchText}
-                  index={this.state.stepIndex}
-                  leverageData={this.leverageData} 
-                  selectedItem={this.state.selectedItem}
-                  handleTileClick={this.handleTileClick}
-               />
-      case 2:
-        return <Chooser 
-                  data={this.state.attractions}
-                  destination={this.state.searchText}
-                  index={this.state.stepIndex}
-                  leverageData={this.leverageData} 
-                  selectedItem={this.state.selectedItem}
-                  handleTileClick={this.handleTileClick}
-               />
-      case 3:
-        return <Chooser 
-                  data={this.state.restaurants}
-                  destination={this.state.searchText}
-                  index={this.state.stepIndex}
-                  leverageData={this.leverageData}
-                  selectedItem={this.state.selectedItem} 
-                  handleTileClick={this.handleTileClick}
-               />
+    if (stepIndex === 0) {
+      return <Destination 
+        leverageData={this.leverageData} 
+        loading={this.state.loading}
+        searchText={this.state.searchText} 
+        triggerLoading={this.triggerLoading}
+        updateSearch={this.handleUpdateInput}
+      />
+    } else {
+      let dataMap = {
+        1: this.state.hotels,
+        2: this.state.attractions,
+        3: this.state.restaurants
+      }
+      
+      return <Chooser 
+        data={dataMap[stepIndex]} 
+        destination={this.state.searchText}
+        index={this.state.stepIndex}
+        leverageData={this.leverageData} 
+        selectedItem={this.state.selectedItem}
+        handleTileClick={this.handleTileClick}
+      />
     }
   }
 
