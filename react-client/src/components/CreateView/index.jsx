@@ -3,9 +3,14 @@ import React from 'react';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+import TextField from 'material-ui/TextField'
+import Divider from 'material-ui/Divider';
+
 
 import Destination from './destination/index.jsx';
 import Chooser from './chooser/index.jsx';
+import SaveBox from './chooser/saveBox.jsx';
 
 //CreateView component
 class CreateView extends React.Component {
@@ -14,19 +19,18 @@ class CreateView extends React.Component {
     this.state = {
       searchText: '',
       submitted: false,
+      saveBox: false,
       stepIndex: 0,
-      finished: false,
-      loading: false,
       hotels: [],
       attractions: [],
       restaurants: [],
       selectedItem: '',
+      name: '',
+      description: '',
       trip: {
         hotels: [],
         attractions: [],
         restaurants: [],
-        name: '',
-        description: '',
       }
     };
     this.addToTrip = this.addToTrip.bind(this);
@@ -37,6 +41,7 @@ class CreateView extends React.Component {
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
     this.triggerLoading = this.triggerLoading.bind(this);
     this.handleTileClick = this.handleTileClick.bind(this);
+    this.saveBox = this.saveBox.bind(this);
   }
 
   copyObject(object) {
@@ -72,6 +77,12 @@ class CreateView extends React.Component {
     });
   }
 
+  saveBox() {
+    this.setState({
+      saveBox: !this.state.saveBox
+    });
+  }
+
   triggerLoading() {
     this.setState({
       submitted: true,
@@ -86,12 +97,15 @@ class CreateView extends React.Component {
   }
 
   handleNext() {
-    const stepIndex = this.state.stepIndex;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 3,
-      selectedItem: ''
-    });
+    if (this.state.stepIndex === 3) {
+      this.saveBox();
+    } else {
+      const stepIndex = this.state.stepIndex;
+      this.setState({
+        stepIndex: stepIndex + 1,
+        selectedItem: ''
+      });
+    }
   }
 
   handlePrev() {
@@ -177,6 +191,20 @@ class CreateView extends React.Component {
 
     const {finished, stepIndex, searchText, loading, submitted} = this.state;
 
+    
+
+    let dialogBox = null;
+
+    if (this.state.saveBox) {
+      dialogBox = (
+        <SaveBox
+          open={this.state.saveBox}
+          toggle={this.saveBox}
+          trip={this.state.trip}
+        />
+      )
+    }
+
     return (
 
       <div id="view-body" style={{
@@ -227,7 +255,7 @@ class CreateView extends React.Component {
                   style={{marginRight: 12}}
                 />
                 <RaisedButton
-                  label={stepIndex === 3 ? 'Finish' : 'Next'}
+                  label={stepIndex === 3 ? 'Save' : 'Next'}
                   disabled={!submitted || loading}
                   primary={true}
                   onClick={this.handleNext}
@@ -235,6 +263,7 @@ class CreateView extends React.Component {
               </div>
 
           </div>
+          { dialogBox }
       </div>
     )
   }
