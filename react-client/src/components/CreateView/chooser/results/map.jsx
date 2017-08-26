@@ -7,25 +7,76 @@ const googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.27&libraries=pla
 const Map = withGoogleMap((props) => (
   <GoogleMap
     ref={props.onMapLoad}
-    defaultZoom={3}
-    defaultCenter={{ lat: -25.363882, lng: 131.044922 }}
+    defaultZoom={11}
+    defaultCenter={props.center}
     googleMapURL={googleMapURL}
-  />
+  >
+    { props.markers }
+  </GoogleMap>
 ));
 
-const MapContainer = (props) => (
-  <Map
-    containerElement={
-      <div style={{ 
-        width: '100%',
-        display: 'flex',
-        flexGrow: 1 
-      }} />
+const MapContainer = (props) => {
+  const getMarkers = () => {
+    return props.data.map((location, i) => {
+      return (
+        <Marker
+          key={i}
+          position={{
+            lat: location.coordinates.latitude,
+            lng: location.coordinates.longitude
+          }}
+          onClick={() => {
+            props.handleMarkerClick(location);
+          }}
+          onMouseEnter={() => {
+            props.handleMarkerClick(location);
+          }}
+
+        />
+      );
+    });
+  };
+
+  const getCenter = () => {
+    let minLat, maxLat, minLng, maxLng;
+
+    props.data.forEach((location, i) => {
+      if (i === 0) {
+        [minLat, maxLat, minLng, maxLng] = [
+          location.coordinates.latitude,
+          location.coordinates.latitude,
+          location.coordinates.longitude,
+          location.coordinates.longitude
+        ];
+      } else {
+        minLat = Math.min(minLat, location.coordinates.latitude);
+        maxLat = Math.max(maxLat, location.coordinates.latitude);
+        minLng = Math.min(minLng, location.coordinates.longitude);
+        maxLat = Math.max(maxLat, location.coordinates.longitude);
+      }
+    });
+    return {
+      lat: ( minLat + maxLat ) / 2,
+      lng: ( minLng + maxLng ) / 2
     }
-    mapElement={
-      <div style={{ width: '100%' }} />
-    } 
-  />
-);
+  };
+
+  return (
+    <Map
+      containerElement={
+        <div style={{
+          width: '100%',
+          display: 'flex',
+          flexGrow: 1
+        }} />
+      }
+      mapElement={
+        <div style={{ width: '100%' }} />
+      }
+      markers={getMarkers()}
+      center={getCenter()}
+    />
+  );
+};
 
 export default MapContainer;
