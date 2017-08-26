@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/travelplanner';
+var uristring = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/travelplanner';
 
 mongoose.connect(uristring, function (err, res) {
   if (err) {
