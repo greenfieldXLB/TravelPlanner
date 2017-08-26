@@ -15,17 +15,28 @@ class SaveBox extends React.Component {
     };
     this.updateTripName = this.updateTripName.bind(this);
     this.updateTripDesc = this.updateTripDesc.bind(this);
+    this.saveTrip = this.saveTrip.bind(this);
+  }
+
+  saveTrip() {
+    var tripItem = {
+      trip: this.props.trip,
+      name: this.state.name,
+      description: this.state.description,
+      stepIndex: 1,
+      edit: true,
+    }
+    console.log('saved: ', tripItem);
+    this.props.changePage('LIST');
   }
 
   updateTripName(event) {
-    console.log('ran');
     this.setState({
       name: event.target.value
     });
   }
 
   updateTripDesc(event) {
-    console.log('ran');
     this.setState({
       description: event.target.value
     });
@@ -42,7 +53,7 @@ class SaveBox extends React.Component {
       <RaisedButton
         label="Save"
         primary={true}
-        onClick={this.props.toggle}
+        onClick={this.saveTrip}
       />
     ];
 

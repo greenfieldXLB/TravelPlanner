@@ -125,6 +125,7 @@ class App extends React.Component {
         return <Landing changePage={this.changePage} />
       case pages.CREATE:
         return <CreateView 
+          changePage={this.changePage}
           handleDrawerToggle={this.handleDrawerToggle}
           handleDrawerClose={this.handleDrawerClose}
           drawerIsOpen={this.state.drawerIsOpen}
@@ -132,6 +133,7 @@ class App extends React.Component {
         />
       case pages.LIST:
         return <ViewTrips 
+          changePage={this.changePage}
           user={this.state.user}
           trips={this.state.trips}
         />

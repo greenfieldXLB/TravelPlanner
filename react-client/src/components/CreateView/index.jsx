@@ -19,6 +19,7 @@ class CreateView extends React.Component {
     super(props);
     this.state = {
       searchText: '',
+      edit: false,
       submitted: false,
       saveBox: false,
       stepIndex: 0,
@@ -26,8 +27,6 @@ class CreateView extends React.Component {
       attractions: [],
       restaurants: [],
       selectedItem: '',
-      name: '',
-      description: '',
       trip: {
         hotels: [],
         attractions: [],
@@ -259,6 +258,7 @@ class CreateView extends React.Component {
     if (this.state.saveBox) {
       dialogBox = (
         <SaveBox
+          changePage={this.props.changePage}
           open={this.state.saveBox}
           toggle={this.saveBox}
           trip={this.state.trip}
