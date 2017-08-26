@@ -34,8 +34,10 @@ app.get('/food', (req, res) => {
 });
 
 app.post('/save', (req, res) => {
-  console.log('the post request went through!!');
   var data = req.body;
+  console.log(data.id);
+  var facebookId = data.facebookId;
+  var tripId = data.id;
   let newTrip = new Trip;
   newTrip.id = data.id;
   newTrip.food = data.food;
@@ -47,27 +49,22 @@ app.post('/save', (req, res) => {
     throw err;
   } else {
     console.log('Data successfully saved');
-    res.send('The data was successfully saved to the database!');
     }
-  });
-  
+  }).then(() => {
+  User.findOne({facebookId})
+    .then((user) => {
+      return user.addTripId(tripId);
+    }).then((user) => {
+      res.send('Both database calls work!');
+    })
+  })
 })
 
+// When we want to find multiple values at once in Mongo, we can use the following command:
 
-// app.post('/removeFromCalendar', (req, res) => {
-//   let { week, day, meal, facebookId } = req.body;
-//   User.getUserById(facebookId)
-//     .then((user) => {
-//       return user.removeFromCalendar(week, day, meal);
-//     }).then((user) => {
-//       res.send('Recipe removed from calendar');
-//     });
-// });
-
-//When we want to find multiple values at once in Mongo, we can use the following command:
-//db.trips.find({"id" : {"$in" : [634827565, 14978997, 954501575]}})
-
-
+// To grab the trips array from the user, we can use code similar to the following:  
+//   db.users.findOne({facebookId: "3713212263907"}).trips
+//   db.trips.find({"id" : {"$in" : [634827565, 14978997, 954501575]}})
 
 app.post('/removeRecord', (req, res) => {
    var id = req.body.uniqueID;

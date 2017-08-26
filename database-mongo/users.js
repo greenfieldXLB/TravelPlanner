@@ -37,9 +37,10 @@ userSchema.statics.findOrCreate = (userData) => {
     });
 };
 
-userSchema.methods.addTrip = function(facebookId) {
-  this[trips] = this[trips].concat([facebookId]);
-  this.markModified(trips);
+userSchema.methods.addTripId = function(tripId) {
+  console.log('we made it to the users file!');
+  this.trips = this.trips.concat([tripId])
+  this.markModified('trips');
   return this.save();
 };
 
