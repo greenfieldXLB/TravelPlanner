@@ -1,5 +1,12 @@
 const yelp = require('yelp-fusion');
-const yelpConfig = require('../../config.js');
+
+let yelpConfig;
+try {
+  yelpConfig = require('../../config.js');
+} catch(e) {
+  yelpConfig = undefined;
+}
+
 const _ = require('lodash');
 
 var findRestaurants = function (input, callback){
