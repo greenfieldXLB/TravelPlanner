@@ -1,6 +1,7 @@
 const yelp = require('yelp-fusion');
 const request = require('request');
 const yelpConfig = require('../../config.js');
+const _ = require('lodash');
 
 
 var findHotels = function (input, callback){
@@ -13,8 +14,9 @@ var findHotels = function (input, callback){
       client.search({
         term: 'hotels',
         location: input.location,
-        limit: 7,
-        price: "1"
+        limit: 20,
+        price: "1",
+        sort_by: 'rating'
       }).then( (response) => resolve(response) );
     }
   );
@@ -24,8 +26,9 @@ var findHotels = function (input, callback){
       client.search({
         term: 'hotels',
         location: input.location,
-        limit: 7,
-        price: "2"
+        limit: 20,
+        price: "2",
+        sort_by: 'rating'
       }).then( (response) => resolve(response) );
     }
   );
@@ -35,8 +38,9 @@ var findHotels = function (input, callback){
       client.search({
         term: 'hotels',
         location: input.location,
-        limit: 7,
-        price: "3"
+        limit: 20,
+        price: "3",
+        sort_by: 'rating'
       }).then( (response) => resolve(response) );
     }
   );
@@ -46,8 +50,9 @@ var findHotels = function (input, callback){
       client.search({
         term: 'hotels',
         location: input.location,
-        limit: 21,
-        price: input.price
+        limit: 60,
+        price: input.price,
+        sort_by: 'rating'
       }).then( (response) => resolve(response) );
     }
   );
@@ -69,7 +74,7 @@ var findHotels = function (input, callback){
 
       hotelResult = responses.reduce( function(businessList, response) {
         businessList.push( ... response.jsonBody.businesses );
-        return businessList;
+        return _.shuffle(businessList);
       }, []);
 
       callback(hotelResult);
