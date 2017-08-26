@@ -45,10 +45,10 @@ var findHotels = function (input, callback){
     }
   );
 
-  var selectedPrice = new Promise(
+  var getFiltered = new Promise(
     (resolve, reject) => {
       client.search({
-        term: 'hotels',
+        term: 'hotels ' + input.search,
         location: input.location,
         limit: 60,
         price: input.price,
@@ -57,9 +57,9 @@ var findHotels = function (input, callback){
     }
   );
 
-  if (input.price) {
+  if (input.price || input.search) {
 
-    Promise.resolve(selectedPrice).then( response => {
+    getFiltered.then( response => {
 
       callback(response.jsonBody.businesses);
 
@@ -69,7 +69,7 @@ var findHotels = function (input, callback){
     });
 
   } else {
-      
+
     Promise.all([p1,p2,p3]).then( responses => {
 
       hotelResult = responses.reduce( function(businessList, response) {
