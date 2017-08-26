@@ -1,8 +1,15 @@
 const yelp = require('yelp-fusion');
 const request = require('request');
-const yelpConfig = require('../../config.js');
-const _ = require('lodash');
 
+let yelpConfig;
+
+try {
+  yelpConfig = require('../../config.js');
+} catch(e) {
+  yelpConfig = undefined;
+}
+
+const _ = require('lodash');
 
 var findHotels = function (input, callback){
 

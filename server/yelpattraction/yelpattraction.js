@@ -1,6 +1,11 @@
 const yelp = require('yelp-fusion');
-const yelpConfig = require('../../config.js');
 
+let yelpConfig;
+try {
+  yelpConfig = require('../../config.js');
+} catch(e) {
+  yelpConfig = undefined;
+}
 
 var findAttractions = function (input, callback){
   var attractions = {};
