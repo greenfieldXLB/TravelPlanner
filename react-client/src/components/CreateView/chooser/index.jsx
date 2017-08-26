@@ -13,7 +13,6 @@ class Chooser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: '',
       mode: modes.GRID
     };
     this.modes = modes;
@@ -44,7 +43,8 @@ class Chooser extends React.Component {
         }}
       >
         <Preview 
-          data={this.props.selectedItem}
+          selectedItem={this.props.selectedItem}
+          data={this.props.data}
         />
 
         <Results

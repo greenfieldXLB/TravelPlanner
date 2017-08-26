@@ -9,11 +9,8 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
-
     return ( 
-
       <Toolbar
         style={{
           backgroundColor: 'white',
@@ -76,7 +73,6 @@ class Navbar extends React.Component {
           </div>
         </ToolbarGroup> 
       </Toolbar>
-
     );
   }
 }
