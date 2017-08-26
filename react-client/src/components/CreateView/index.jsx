@@ -10,7 +10,11 @@ import Divider from 'material-ui/Divider';
 
 import Destination from './destination/index.jsx';
 import Chooser from './chooser/index.jsx';
+<<<<<<< HEAD
 import SaveBox from './chooser/saveBox.jsx';
+=======
+import $ from 'jquery';
+>>>>>>> Trips DB is populating. Now just need to get the UserDB populated
 
 //CreateView component
 class CreateView extends React.Component {
@@ -57,23 +61,41 @@ class CreateView extends React.Component {
   saveTriptoDB() {
     console.log('we made it here!');
     let postData = JSON.stringify({
-      id: randomId(),
+      id: this.randomId(),
       food: this.state.trip.restaurants,
       attractions: this.state.trip.attractions,
       lodging: this.state.trip.hotels,
-      destination: this.state.trip.destination
+      destination: this.state.trip.destination,
+      facebookId: this.props.userId
     });
-    console.log('the post data is ' + postData);
-    // $.ajax({
-    //   method: 'POST',
-    //   url: '/save',
-    //   data: postData,
-    //   contentType: 'application/json',
-    //   dataType: 'json'
-    // }).then((data) => {
-    //   console.log(data);
-    // });
+    // console.log(postData);
+    $.ajax({
+      url: '/save',
+      method: 'POST',
+      data: postData,
+      contentType: 'application/json',
+      success: (data) => {
+        console.log('the POST request went through!');
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
   }
+
+
+  //     url: '/items', 
+  //     method: 'POST',
+  //     data: category,
+  //     contentType: 'text/plain',
+  //     success: (data) => {
+  //       console.log('your playlist request was sent!');
+  //     },
+  //     error: (err) => {
+  //       console.log('err', err);
+  //     }
+  //   });
+  // }
 
   copyObject(object) {
     let tripData = {

@@ -19,7 +19,8 @@ class App extends React.Component {
       user: null,
       trips: [],
       page: pages.LANDING,
-      drawerIsOpen: false
+      drawerIsOpen: false,
+      facebookId: ''
     };
     this.logIn = this.logIn.bind(this);
     this.changePage = this.changePage.bind(this);
@@ -41,7 +42,9 @@ class App extends React.Component {
       email: user.email
     });
 
-    console.log(postData);
+    this.setState({
+      facebookId: user.id
+    });
 
     $.ajax({
       method: 'POST',
@@ -125,6 +128,7 @@ class App extends React.Component {
           handleDrawerToggle={this.handleDrawerToggle}
           handleDrawerClose={this.handleDrawerClose}
           drawerIsOpen={this.state.drawerIsOpen}
+          userId = {this.state.facebookId}
         />
       case pages.LIST:
         return <ViewTrips 

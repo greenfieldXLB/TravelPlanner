@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const items = require('../database-mongo');
+const db = require('../database-mongo');
 const request = require('request');
 const app = express();
 const hotels = require('./hotel/hotel')
@@ -34,25 +34,49 @@ app.get('/food', (req, res) => {
 });
 
 app.post('/save', (req, res) => {
-  console.log(req.body);
-  var data = JSON.parse(req.body.data);
-  items.saveToDatabase(data, function(err, result) {
-    if(err) {
-      console.log('server received database error when saving a record');
-    } else {
-      res.sendStatus(200);
+  console.log('the post request went through!!');
+  var data = req.body;
+  let newTrip = new Trip;
+  newTrip.id = data.id;
+  newTrip.food = data.food;
+  newTrip.attractions = data.attractions;
+  newTrip.lodging = data.lodging;
+  newTrip.destination = data.destination;
+  newTrip.save(err => {
+  if (err) {
+    throw err;
+  } else {
+    console.log('Data successfully saved');
+    res.send('The data was successfully saved to the database!');
     }
-  })
-});
+  });
+  
+})
+
+
+// app.post('/removeFromCalendar', (req, res) => {
+//   let { week, day, meal, facebookId } = req.body;
+//   User.getUserById(facebookId)
+//     .then((user) => {
+//       return user.removeFromCalendar(week, day, meal);
+//     }).then((user) => {
+//       res.send('Recipe removed from calendar');
+//     });
+// });
+
+//When we want to find multiple values at once in Mongo, we can use the following command:
+//db.trips.find({"id" : {"$in" : [634827565, 14978997, 954501575]}})
+
+
 
 app.post('/removeRecord', (req, res) => {
    var id = req.body.uniqueID;
-   items.deleteFromDatabase(id);
+   db.deleteFromDatabase(id);
    res.sendStatus(200);
 });
 
 app.get('/getAll', (req, res) => {
-  items.selectAll(function(err, result) {
+  db.selectAll(function(err, result) {
     if(err) {
       console.log('server received database error when retrieving records');
     } else {

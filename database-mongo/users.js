@@ -37,6 +37,12 @@ userSchema.statics.findOrCreate = (userData) => {
     });
 };
 
+userSchema.methods.addTrip = function(facebookId) {
+  this[trips] = this[trips].concat([facebookId]);
+  this.markModified(trips);
+  return this.save();
+};
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
