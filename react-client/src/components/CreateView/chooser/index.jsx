@@ -45,6 +45,10 @@ class Chooser extends React.Component {
         <Preview 
           selectedItem={this.props.selectedItem}
           data={this.props.data}
+          index={this.props.index}
+          trip={this.props.trip}
+          addToTrip={this.props.addToTrip}
+          removeFromTrip={this.props.removeFromTrip}
         />
 
         <Results
@@ -62,7 +66,6 @@ class Chooser extends React.Component {
           handleDrawerToggle={this.props.handleDrawerToggle}
           drawerIsOpen={this.props.drawerIsOpen}
           handleDrawerClose={this.props.handleDrawerClose}
-          trip={this.props.trip}
         /> 
       </div>
     )

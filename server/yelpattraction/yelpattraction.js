@@ -1,4 +1,5 @@
 const yelp = require('yelp-fusion');
+const _ = require('lodash');
 
 let yelpConfig;
 try {
@@ -30,7 +31,7 @@ var findAttractions = function (input, callback){
   })
   .then(response => {
     attractions = response.jsonBody.businesses;
-    callback(attractions);
+    callback(_.shuffle(attractions));
   })
   .catch(e => {
     console.log(e);

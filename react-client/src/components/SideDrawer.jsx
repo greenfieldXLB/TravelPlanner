@@ -25,62 +25,73 @@ class SideDrawer extends React.Component {
               fontWeight: 'bold',
               fontSize: '150%',
               textAlign: 'center',
-              paddingTop: '5px',
-              paddingBottom: '10px'
+              paddingTop: '8px',
+              paddingBottom: '12px',
+              paddingRight: '3px'
             }}>
               Current Trip <br/>
             </div>
             <div style={{
-              paddingLeft: '5px'
+              paddingLeft: '7px'
             }}>
-              <i 
-                className='fa fa-hotel'
-                style={{
-                  paddingRight: '3px'
-                }}
-              />
-              Lodging:<br/>
-              {
-                this.props.trip.hotels.map(hotel => 
-                  <small style={{
-                    paddingLeft: '15px'
-                  }}>
-                  {hotel.name} <br/>
-                  </small>
-                )
-              }
-              <i 
-                className='fa fa-gamepad'
-                style={{
-                  paddingRight: '3px'
-                }}
-              />
-              Attractions: <br/>
-              {
-                this.props.trip.attractions.map(attraction => 
-                  <small style={{
-                    paddingLeft: '15px'
-                  }}>
-                  {attraction.name} <br/>
-                  </small>
-                )
-              }
-              <i 
-                className='fa fa-cutlery'
-                style={{
-                  paddingRight: '3px'
-                }}
-              />
-              Food: <br/>
-              {
-                this.props.trip.restaurants.map(restaurant => 
-                  <small style={{
-                    paddingLeft: '15px'
-                  }}>
-                  {restaurant.name} <br/>
-                  </small>
-                )
-              } 
+              <div style={{paddingBottom: '10px'}}>
+                <i 
+                  className='fa fa-hotel'
+                  style={{
+                    paddingRight: '5px'
+                  }}
+                />
+                Lodging:<br/>
+                {
+                  this.props.trip.hotels.map((hotel, i) => 
+                    <small 
+                      style={{
+                        paddingLeft: '22px'
+                      }}
+                      key={i}
+                    >
+                    {hotel.name} <br/>
+                    </small>
+                  )
+                }
+              </div>
+              <div style={{paddingBottom: '8px'}}>
+                <i 
+                  className='fa fa-gamepad'
+                  style={{
+                    paddingRight: '5px'
+                  }}
+                />
+                Attractions: <br/>
+                {
+                  this.props.trip.attractions.map(attraction => 
+                    <small style={{
+                      paddingLeft: '22px'
+                    }}>
+                    {attraction.name} <br/>
+                    </small>
+                  )
+                }
+              </div>
+              <div style={{paddingBottom: '8px'}}>
+                <i 
+                  className='fa fa-cutlery'
+                  style={{
+                    paddingRight: '7px'
+                  }}
+                />
+              
+                Food: <br/>
+                {
+                  this.props.trip.restaurants.map(restaurant => 
+                    <small style={{
+                      paddingLeft: '22px'
+                    }}>
+                    {restaurant.name} <br/>
+                    </small>
+                  )
+                } 
+              </div>
             </div>
           </div>
         </Drawer>

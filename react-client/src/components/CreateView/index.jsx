@@ -244,7 +244,6 @@ class CreateView extends React.Component {
         handleDrawerToggle={this.props.handleDrawerToggle}
         handleDrawerClose={this.props.handleDrawerClose}
         drawerIsOpen={this.props.drawerIsOpen}
-        trip={this.state.trip}
       />
     }
   }
