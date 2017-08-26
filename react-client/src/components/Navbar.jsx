@@ -55,15 +55,6 @@ class Navbar extends React.Component {
                 this.props.changePage(pages.CREATE);
               }}
             />
-             <img
-                src="http://i.imgur.com/wGQWZN2.png"
-                style={{
-                  height: '35px',
-                  boxShadow: '0px 0px 0px',
-                  paddingLeft: '15px'
-                }}
-                onClick={this.props.handleDrawerToggle}
-              />
           </div>
           <div style={{paddingRight: '30px'}}>
             <Avatar 

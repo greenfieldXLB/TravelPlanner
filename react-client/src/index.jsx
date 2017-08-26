@@ -4,7 +4,6 @@ import $ from 'jquery';
 import _ from 'lodash';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Navbar from './components/Navbar.jsx';
-import SideDrawer from './components/SideDrawer.jsx';
 import CreateView from './components/CreateView/index.jsx';
 import ViewTrips from './components/ViewTrips/index.jsx';
 import LogIn from './components/LogIn.jsx';
@@ -87,12 +86,7 @@ class App extends React.Component {
             <div style={{height: '100%'}}>
               <Navbar
                 changePage={this.changePage}
-                handleDrawerToggle={this.handleDrawerToggle}
                 user={this.state.user}
-              />
-              <SideDrawer 
-                drawerIsOpen={this.state.drawerIsOpen}
-                handleDrawerClose={this.handleDrawerClose}
               />
               { this.getMainComponent() }
             </div>
@@ -124,7 +118,11 @@ class App extends React.Component {
       case pages.LANDING:
         return <Landing changePage={this.changePage} />
       case pages.CREATE:
-        return <CreateView />
+        return <CreateView 
+          handleDrawerToggle={this.handleDrawerToggle}
+          handleDrawerClose={this.handleDrawerClose}
+          drawerIsOpen={this.state.drawerIsOpen}
+        />
       case pages.LIST:
         return <ViewTrips />
     }

@@ -59,6 +59,10 @@ class Chooser extends React.Component {
           leverageData={this.props.leverageData}
           mode={this.state.mode}
           changeMode={this.changeMode}
+          handleDrawerToggle={this.props.handleDrawerToggle}
+          drawerIsOpen={this.props.drawerIsOpen}
+          handleDrawerClose={this.props.handleDrawerClose}
+          trip={this.props.trip}
         /> 
       </div>
     )
