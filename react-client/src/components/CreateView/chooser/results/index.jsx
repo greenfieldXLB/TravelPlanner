@@ -65,8 +65,8 @@ class Results extends React.Component {
   }
 
   changeResults({price, search}) {
-    price = price || this.state.price;
-    search = search || this.state.search;
+    price = price !== undefined ? price : this.state.price;
+    search = search !== undefined ? search : this.state.search;
 
     console.log('the destination: ', this.props.destination);
     console.log('current endpoint: ', this.chooseEndpoint(this.props.index));
@@ -122,8 +122,6 @@ class Results extends React.Component {
       <div id="results-component" style={{
         width:'48%',
         height: '95%',
-        display: 'flex',
-        flexWrap: 'wrap',
         backgroundColor: 'white'
       }}>
 
@@ -131,7 +129,7 @@ class Results extends React.Component {
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'space-around',
-          flexBasis: '100%',
+          height: '100%',
           flexDirection: 'column'
         }}>
 
@@ -214,7 +212,7 @@ class Results extends React.Component {
             />
           }
         </div>
-        <SideDrawer 
+        <SideDrawer
           drawerIsOpen={this.props.drawerIsOpen}
           handleDrawerClose={this.props.handleDrawerClose}
           trip={this.props.trip}

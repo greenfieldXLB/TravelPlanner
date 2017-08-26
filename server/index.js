@@ -33,7 +33,6 @@ app.get('/food', (req, res) => {
   });
 });
 
-
 app.post('/save', (req, res) => {
   var data = JSON.parse(req.body.data);
   items.saveToDatabase(data, function(err, result) {
