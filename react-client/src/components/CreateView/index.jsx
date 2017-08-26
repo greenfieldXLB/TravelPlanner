@@ -10,11 +10,8 @@ import Divider from 'material-ui/Divider';
 
 import Destination from './destination/index.jsx';
 import Chooser from './chooser/index.jsx';
-<<<<<<< HEAD
 import SaveBox from './chooser/saveBox.jsx';
-=======
 import $ from 'jquery';
->>>>>>> Trips DB is populating. Now just need to get the UserDB populated
 
 //CreateView component
 class CreateView extends React.Component {
