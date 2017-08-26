@@ -60,6 +60,7 @@ class Destination extends React.Component {
           onNewRequest={ () => { this.handleRequest(this.props.searchText) } }
           dataSource={cities}
           filter={AutoComplete.fuzzyFilter}
+          menuStyle={{height: '20vh', overflowY: 'scroll'}}
         />
 
         
