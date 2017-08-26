@@ -18,6 +18,7 @@ var findRestaurants = function (input, callback){
   }).catch(e => {
     console.log('ERROR ', e);
   });
+
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
 

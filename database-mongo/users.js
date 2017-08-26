@@ -37,6 +37,13 @@ userSchema.statics.findOrCreate = (userData) => {
     });
 };
 
+userSchema.methods.addTripId = function(tripId) {
+  console.log('we made it to the users file!');
+  this.trips = this.trips.concat([tripId])
+  this.markModified('trips');
+  return this.save();
+};
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

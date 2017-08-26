@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const items = require('../database-mongo');
+const db = require('../database-mongo');
 const request = require('request');
 const app = express();
 const hotels = require('./hotel/hotel')
@@ -34,24 +34,46 @@ app.get('/food', (req, res) => {
 });
 
 app.post('/save', (req, res) => {
-  var data = JSON.parse(req.body.data);
-  items.saveToDatabase(data, function(err, result) {
-    if(err) {
-      console.log('server received database error when saving a record');
-    } else {
-      res.sendStatus(200);
+  var data = req.body;
+  console.log(data.id);
+  var facebookId = data.facebookId;
+  var tripId = data.id;
+  let newTrip = new Trip;
+  newTrip.id = data.id;
+  newTrip.food = data.food;
+  newTrip.attractions = data.attractions;
+  newTrip.lodging = data.lodging;
+  newTrip.destination = data.destination;
+  newTrip.save(err => {
+  if (err) {
+    throw err;
+  } else {
+    console.log('Data successfully saved');
     }
+  }).then(() => {
+  User.findOne({facebookId})
+    .then((user) => {
+      return user.addTripId(tripId);
+    }).then((user) => {
+      res.send('Both database calls work!');
+    })
   })
-});
+})
+
+// When we want to find multiple values at once in Mongo, we can use the following command:
+
+// To grab the trips array from the user, we can use code similar to the following:  
+//   db.users.findOne({facebookId: "3713212263907"}).trips
+//   db.trips.find({"id" : {"$in" : [634827565, 14978997, 954501575]}})
 
 app.post('/removeRecord', (req, res) => {
    var id = req.body.uniqueID;
-   items.deleteFromDatabase(id);
+   db.deleteFromDatabase(id);
    res.sendStatus(200);
 });
 
 app.get('/getAll', (req, res) => {
-  items.selectAll(function(err, result) {
+  db.selectAll(function(err, result) {
     if(err) {
       console.log('server received database error when retrieving records');
     } else {

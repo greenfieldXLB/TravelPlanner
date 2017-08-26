@@ -5,9 +5,7 @@ const tripSchema = mongoose.Schema({
   food: Array,
   attractions: Array,
   lodging: Array,
-  destination: String,
-  startDate: String,
-  endDate: String
+  destination: String
 });
 
 const Trip = mongoose.model('Trip', tripSchema);
