@@ -57,6 +57,7 @@ class CreateView extends React.Component {
   }
 
   removeFromTrip(item) {
+    console.log(this.state.trip);
     const {key, state} = this.copyObject(this.state.trip);
     for (var i = 0; i < state[key].length; i++) {
       if (item.id === state[key][i].id) {
@@ -70,6 +71,7 @@ class CreateView extends React.Component {
   }
 
   addToTrip(item) {
+    console.log(this.state.trip);
     const {key, state} = this.copyObject(this.state.trip);
     state[key] = [...state[key]].concat(item);
     this.setState({
