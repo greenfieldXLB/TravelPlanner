@@ -1,5 +1,5 @@
 const yelp = require('yelp-fusion');
-<<<<<<< HEAD
+const _ = require('lodash');
 
 let yelpConfig;
 try {
@@ -7,10 +7,6 @@ try {
 } catch(e) {
   yelpConfig = undefined;
 }
-=======
-const yelpConfig = require('../../config.js');
-const _ = require('lodash');
->>>>>>> (feat) Put add/remove button on preview component
 
 var findAttractions = function (input, callback){
   var attractions = {};
