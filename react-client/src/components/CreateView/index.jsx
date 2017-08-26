@@ -142,7 +142,8 @@ class CreateView extends React.Component {
 
   handleTileClick(tile) {
     this.setState({
-      selectedItem: tile
+      selectedItem: tile,
+      defaultSelection: null
     });
   }
 
@@ -244,7 +245,11 @@ class CreateView extends React.Component {
         handleDrawerToggle={this.props.handleDrawerToggle}
         handleDrawerClose={this.props.handleDrawerClose}
         drawerIsOpen={this.props.drawerIsOpen}
+<<<<<<< HEAD
         trip={this.state.trip}
+=======
+      />
+>>>>>>> (feat) Put add/remove button on preview component
     }
   }
 

@@ -29,9 +29,7 @@ class Grid extends React.Component {
   }
 
   iconButtonHandler(tile) {
-
     this.findAdded(tile);
-    
     return (
       <IconButton>
         {
@@ -41,7 +39,6 @@ class Grid extends React.Component {
         }
       </IconButton>
     )
-
   }
 
   render() {

@@ -1,4 +1,5 @@
 const yelp = require('yelp-fusion');
+<<<<<<< HEAD
 
 let yelpConfig;
 try {
@@ -6,6 +7,10 @@ try {
 } catch(e) {
   yelpConfig = undefined;
 }
+=======
+const yelpConfig = require('../../config.js');
+const _ = require('lodash');
+>>>>>>> (feat) Put add/remove button on preview component
 
 var findAttractions = function (input, callback){
   var attractions = {};
@@ -30,7 +35,7 @@ var findAttractions = function (input, callback){
   })
   .then(response => {
     attractions = response.jsonBody.businesses;
-    callback(attractions);
+    callback(_.shuffle(attractions));
   })
   .catch(e => {
     console.log(e);
