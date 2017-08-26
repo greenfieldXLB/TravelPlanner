@@ -81,7 +81,7 @@ class CreateView extends React.Component {
   }
 
 
-  //     url: '/items', 
+  //     url: '/items',
   //     method: 'POST',
   //     data: category,
   //     contentType: 'text/plain',
@@ -218,10 +218,10 @@ class CreateView extends React.Component {
 
   getStepContent(stepIndex) {
     if (stepIndex === 0) {
-      return <Destination 
-        leverageData={this.leverageData} 
+      return <Destination
+        leverageData={this.leverageData}
         loading={this.state.loading}
-        searchText={this.state.searchText} 
+        searchText={this.state.searchText}
         triggerLoading={this.triggerLoading}
         updateSearch={this.handleUpdateInput}/>
     } else {
@@ -230,15 +230,15 @@ class CreateView extends React.Component {
         2: this.state.attractions,
         3: this.state.restaurants
       }
-      
-      return <Chooser 
-        data={dataMap[stepIndex]} 
+
+      return <Chooser
+        data={dataMap[stepIndex]}
         destination={this.state.searchText}
         index={this.state.stepIndex}
         trip={this.state.trip}
         addToTrip={this.addToTrip}
         removeFromTrip={this.removeFromTrip}
-        leverageData={this.leverageData} 
+        leverageData={this.leverageData}
         selectedItem={this.state.selectedItem}
         handleTileClick={this.handleTileClick}
         handleDrawerToggle={this.props.handleDrawerToggle}
@@ -252,7 +252,7 @@ class CreateView extends React.Component {
 
     const {finished, stepIndex, searchText, loading, submitted} = this.state;
 
-    
+
 
     let dialogBox = null;
 
