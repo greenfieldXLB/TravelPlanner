@@ -61,18 +61,18 @@ class Preview extends React.Component {
             >
               <GridTile>
               {
-                this.state.default ?
-                  <img 
-                    src={this.state.default.image_url}
-                    style={{
-                      'maxWidth': '100%',
-                      'height': '100%',
-                      align: 'center'
-                    }}
-                  />
-                :
+                this.props.selectedItem ?
                 <img 
                   src={this.props.selectedItem.image_url}
+                  style={{
+                    'maxWidth': '100%',
+                    'height': '100%',
+                    align: 'center'
+                  }}
+                />
+                :
+                <img 
+                  src={this.state.default.image_url}
                   style={{
                     'maxWidth': '100%',
                     'height': '100%',
