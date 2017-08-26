@@ -55,15 +55,15 @@ class CreateView extends React.Component {
   }
 
   saveTriptoDB() {
-    // let postData = JSON.stringify({
-    //   id: randomId(),
-    //   food: this.state.trip.restaurants,
-    //   attractions: this.state.trip.attractions,
-    //   lodging: this.state.trip.hotels,
-    //   destination: this.state.trip.destination
-    // });
-    console.log('The click trigger worked!');
-
+    console.log('we made it here!');
+    let postData = JSON.stringify({
+      id: randomId(),
+      food: this.state.trip.restaurants,
+      attractions: this.state.trip.attractions,
+      lodging: this.state.trip.hotels,
+      destination: this.state.trip.destination
+    });
+    console.log('the post data is ' + postData);
     // $.ajax({
     //   method: 'POST',
     //   url: '/save',
@@ -137,6 +137,16 @@ class CreateView extends React.Component {
         selectedItem: ''
       });
     }
+    // const stepIndex = this.state.stepIndex;
+    // if (stepIndex === 3) {
+    //   console.log('true');
+    //   this.saveTriptoDB;
+    // }
+    // this.setState({
+    //   stepIndex: stepIndex + 1,
+    //   finished: stepIndex >= 3,
+    //   selectedItem: ''
+    // });
   }
 
   handlePrev() {
