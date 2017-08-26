@@ -6,10 +6,11 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Dollar from 'material-ui/svg-icons/editor/attach-money';
 import MapIcon from 'material-ui/svg-icons/maps/map';
 import GridIcon from 'material-ui/svg-icons/navigation/apps';
+import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-
+import SideDrawer from '../../../SideDrawer.jsx';
 import StarRatingComponent from 'react-star-rating-component';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
@@ -151,10 +152,16 @@ class Results extends React.Component {
               <FloatingActionButton
                 mini={true}
                 onClick={() => this.props.changeMode('GRID')}
+                style={{marginRight: '10px'}}
               >
                 <GridIcon />
               </FloatingActionButton>
-
+              <FloatingActionButton
+                mini={true}
+                onClick={this.props.handleDrawerToggle}
+              >
+                <MenuIcon />
+              </FloatingActionButton>
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
@@ -187,6 +194,11 @@ class Results extends React.Component {
             />
           }
         </div>
+        <SideDrawer 
+          drawerIsOpen={this.props.drawerIsOpen}
+          handleDrawerClose={this.props.handleDrawerClose}
+          trip={this.props.trip}
+        />
       </div>
     )
   }

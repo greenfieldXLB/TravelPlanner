@@ -165,6 +165,10 @@ class CreateView extends React.Component {
         leverageData={this.leverageData} 
         selectedItem={this.state.selectedItem}
         handleTileClick={this.handleTileClick}
+        handleDrawerToggle={this.props.handleDrawerToggle}
+        handleDrawerClose={this.props.handleDrawerClose}
+        drawerIsOpen={this.props.drawerIsOpen}
+        trip={this.state.trip}
       />
     }
   }
@@ -196,7 +200,7 @@ class CreateView extends React.Component {
                   <StepLabel>Destination</StepLabel>
                 </Step>
                 <Step>
-                  <StepLabel>Hotel</StepLabel>
+                  <StepLabel>Lodging</StepLabel>
                 </Step>
                 <Step>
                   <StepLabel>Attractions</StepLabel>
