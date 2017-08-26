@@ -19,7 +19,7 @@ var findAttractions = function (input, callback){
   const client = yelp.client(yelpKey);
 
   client.search({
-    term:'Attractions',
+    term:'Attractions ' + (input.search || ''),
     location: input.location,
     limit: 30
   })

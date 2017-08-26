@@ -14,56 +14,40 @@ var findRestaurants = function (input, callback){
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
 
-  var p1 = new Promise(
-    (resolve,reject) => {
-      client.search({
-        term: 'Restaurant',
-        location: input.location,
-        limit: 20,
-        price: "1",
-        sort_by: 'rating'
-      }).then( (response) => resolve(response) );
-    }
-  );
+  let p1 = client.search({
+    term: 'Restaurant',
+    location: input.location,
+    limit: 20,
+    price: "1",
+    sort_by: 'rating'
+  });
 
-  var p2 = new Promise(
-    (resolve,reject) => {
-      client.search({
-        term: 'Restaurant',
-        location: input.location,
-        limit: 20,
-        price: "2",
-        sort_by: 'rating'
-      }).then( (response) => resolve(response) );
-    }
-  );
+  let p2 = client.search({
+    term: 'Restaurant',
+    location: input.location,
+    limit: 20,
+    price: "2",
+    sort_by: 'rating'
+  });
 
-  var p3 = new Promise(
-    (resolve,reject) => {
-      client.search({
-        term: 'Restaurant',
-        location: input.location,
-        limit: 20,
-        price: "3",
-        sort_by: 'rating'
-      }).then( (response) => resolve(response) );
-    }
-  );
+  let p3 = client.search({
+    term: 'Restaurant',
+    location: input.location,
+    limit: 20,
+    price: "3",
+    sort_by: 'rating'
+  });
 
-  var selectedPrice = new Promise(
-    (resolve, reject) => {
-      client.search({
-        term: 'Restaurant',
-        location: input.location,
-        limit: 60,
-        price: input.price,
-        sort_by: 'rating'
-      }).then( (response) => resolve(response) );
-    }
-  );
+  let getFiltered = client.search({
+    term: 'Restaurant ' + (input.search || ''),
+    location: input.location,
+    limit: 50,
+    price: input.price,
+    sort_by: 'rating'
+  });
 
-  if (input.price) {
-    Promise.resolve(selectedPrice).then( response => {
+  if (input.price || input.search) {
+    getFiltered.then( response => {
       callback(response.jsonBody.businesses);
     })
     .catch(e => {

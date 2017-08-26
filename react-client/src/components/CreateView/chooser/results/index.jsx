@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import $ from 'jquery';
 
 import TextField from 'material-ui/TextField';
@@ -25,12 +26,17 @@ class Results extends React.Component {
     this.state = {
       open: false,
       anchorEl: {},
-      selectedItem: '$',
-      price: 0
+      priceSymbol: '$',
+      price: 1,
+      search: ''
     };
     this.handlePriceOpen = this.handlePriceOpen.bind(this);
     this.handlePriceClose = this.handlePriceClose.bind(this);
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
+    this.updateSearch = _.debounce(
+      this.updateSearch.bind(this),
+      300
+    );
     this.changeResults = this.changeResults.bind(this);
   }
 
@@ -58,14 +64,21 @@ class Results extends React.Component {
     }
   }
 
-  changeResults(price) {
-    console.log('value on change results: ', price);
+  changeResults({price, search}) {
+    price = price !== undefined ? price : this.state.price;
+    search = search !== undefined ? search : this.state.search;
+
     console.log('the destination: ', this.props.destination);
     console.log('current endpoint: ', this.chooseEndpoint(this.props.index));
+
     $.ajax({
       url: this.chooseEndpoint(this.props.index),
       type: 'GET',
-      data: {location: this.props.destination, price: price},
+      data: {
+        location: this.props.destination,
+        price,
+        search
+      },
       success: (data) => {
         this.props.leverageData(data);
       },
@@ -76,11 +89,17 @@ class Results extends React.Component {
   }
 
   handleMenuItemClick(e, value) {
-    this.changeResults(value);
+    this.changeResults({price: value});
     this.setState({
-      selectedItem: this.buildSymbol(value)
+      price: value,
+      priceSymbol: this.buildSymbol(value)
     });
     this.handlePriceClose();
+  }
+
+  updateSearch(e, search){
+    this.changeResults({search});
+    this.setState({search});
   }
 
   handlePriceOpen(event) {
@@ -103,8 +122,6 @@ class Results extends React.Component {
       <div id="results-component" style={{
         width:'48%',
         height: '95%',
-        display: 'flex',
-        flexWrap: 'wrap',
         backgroundColor: 'white'
       }}>
 
@@ -112,7 +129,7 @@ class Results extends React.Component {
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'space-around',
-          flexBasis: '100%',
+          height: '100%',
           flexDirection: 'column'
         }}>
 
@@ -126,6 +143,7 @@ class Results extends React.Component {
 
             <TextField
               hintText="Search..."
+              onChange={this.updateSearch}
             />
 
             <div>
@@ -137,7 +155,7 @@ class Results extends React.Component {
                 disabledColor='white'
               >
                 <span style={{fontSize: '13px', color: 'white'}}>
-                  {this.state.selectedItem}
+                  {this.state.priceSymbol}
                 </span>
               </FloatingActionButton>
 
@@ -169,7 +187,7 @@ class Results extends React.Component {
                 onRequestClose={this.handlePriceClose}
                 animation={PopoverAnimationVertical}
               >
-                <Menu value={this.state.selectedItem} onChange={this.handleMenuItemClick}>
+                <Menu value={this.state.priceSymbol} onChange={this.handleMenuItemClick}>
                   <MenuItem primaryText="$" value={1} />
                   <MenuItem primaryText="$$" value={2} />
                   <MenuItem primaryText="$$$" value={3} />
@@ -194,7 +212,7 @@ class Results extends React.Component {
             />
           }
         </div>
-        <SideDrawer 
+        <SideDrawer
           drawerIsOpen={this.props.drawerIsOpen}
           handleDrawerClose={this.props.handleDrawerClose}
           trip={this.props.trip}

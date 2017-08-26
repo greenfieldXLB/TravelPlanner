@@ -28,10 +28,6 @@ const MapContainer = (props) => {
           onClick={() => {
             props.handleMarkerClick(location);
           }}
-          onMouseEnter={() => {
-            props.handleMarkerClick(location);
-          }}
-
         />
       );
     });
