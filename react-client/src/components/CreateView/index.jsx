@@ -142,8 +142,7 @@ class CreateView extends React.Component {
 
   handleTileClick(tile) {
     this.setState({
-      selectedItem: tile,
-      defaultSelection: null
+      selectedItem: tile
     });
   }
 
