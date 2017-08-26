@@ -14,7 +14,7 @@ class Preview extends React.Component {
 
   componentWillMount() {
     this.props.data.forEach(item => {
-      if (item.rating === 5) {
+      if (item.rating === 4.5) {
         this.setState({
           default: item
         });
@@ -22,15 +22,15 @@ class Preview extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    nextProps.data.forEach(item => {
-      if (item.rating === 5) {
-        this.setState({
-          default: item
-        });
-      }
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   nextProps.data.forEach(item => {
+  //     if (item.rating === 4.5) {
+  //       this.setState({
+  //         default: item
+  //       });
+  //     }
+  //   });
+  // }
 
   render() {
     return (

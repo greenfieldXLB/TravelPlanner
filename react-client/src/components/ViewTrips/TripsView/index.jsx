@@ -5,12 +5,12 @@ import TripsList from './tripslist/TripsList.jsx';
 class TripsView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedItem: 'hello'
-    };
   }
 
   render() {
+
+    console.log('User on TripsView: ', this.props.user);
+
     return (
       <div 
         id="selection-component" 
@@ -22,7 +22,7 @@ class TripsView extends React.Component {
           justifyContent: 'space-evenly',
           alignItems: 'center',
         }}>
-        <TripsList />
+        <TripsList trips={this.props.trips}/>
       </div>
     )
   }

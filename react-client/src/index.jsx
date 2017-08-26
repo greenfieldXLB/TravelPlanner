@@ -17,6 +17,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       user: null,
+      trips: [],
       page: pages.LANDING,
       drawerIsOpen: false
     };
@@ -49,12 +50,14 @@ class App extends React.Component {
       contentType: 'application/json',
       dataType: 'json'
     }).then((data) => {
-      console.log(data);
+      console.log('User with trips: ', data);
+      this.setState({
+        user,
+        trips: data.trips
+      });
     });
 
-    this.setState({
-      user
-    });
+
   }
 
   handleDrawerToggle() {
@@ -124,7 +127,10 @@ class App extends React.Component {
           drawerIsOpen={this.state.drawerIsOpen}
         />
       case pages.LIST:
-        return <ViewTrips />
+        return <ViewTrips 
+          user={this.state.user}
+          trips={this.state.trips}
+        />
     }
   }
 }

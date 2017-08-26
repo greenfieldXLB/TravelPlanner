@@ -3,11 +3,9 @@ import React from 'react';
 import TripsView from './TripsView/index.jsx';
 
 
-class CreateView extends React.Component {
+class ViewTrips extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
   }
 
   render() {
@@ -38,7 +36,7 @@ class CreateView extends React.Component {
             My Trips
           </div>
 
-          <TripsView />
+          <TripsView trips={this.props.trips}/>
 
         </div>
       </div>
@@ -49,4 +47,4 @@ class CreateView extends React.Component {
 
 }
 
-export default CreateView;
+export default ViewTrips;
