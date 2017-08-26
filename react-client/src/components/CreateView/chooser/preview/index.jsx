@@ -54,11 +54,11 @@ class Preview extends React.Component {
   iconButtonHandler(selection) {
     this.findAdded(selection);    
     return (
-      <IconButton iconStyle={{width: '48px', height: '48px'}} >
+      <IconButton iconStyle={{width: '48px', height: '48px'}} disableTouchRipple={true} >
         {
           this.findAdded(selection) ? 
-          <DeleteIcon color='#b3b3b3' hoverColor='red' onClick={() => this.props.removeFromTrip(selection)}/> :
-          <AddFullCircle color='#b3b3b3' hoverColor='#00bcd4' onClick={() => this.props.addToTrip(selection)}/>
+          <DeleteIcon color='#b3b3b3' hoverColor='red' onClick={() => this.props.removeFromTrip(selection)} /> :
+          <AddFullCircle color='#b3b3b3' hoverColor='#00bcd4' onClick={() => this.props.addToTrip(selection)} />
         }
       </IconButton>
     )
