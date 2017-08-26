@@ -31,6 +31,9 @@ class CreateView extends React.Component {
         hotels: [],
         attractions: [],
         restaurants: [],
+        destination: '',
+        name: '',
+        description: '',
       }
     };
     this.addToTrip = this.addToTrip.bind(this);
@@ -42,6 +45,34 @@ class CreateView extends React.Component {
     this.triggerLoading = this.triggerLoading.bind(this);
     this.handleTileClick = this.handleTileClick.bind(this);
     this.saveBox = this.saveBox.bind(this);
+  }
+
+  randomId() {
+    var a = Math.random(0, 1) * 1000000000
+    var b = a.toString();
+    var c = parseInt(b);
+    return c;
+  }
+
+  saveTriptoDB() {
+    // let postData = JSON.stringify({
+    //   id: randomId(),
+    //   food: this.state.trip.restaurants,
+    //   attractions: this.state.trip.attractions,
+    //   lodging: this.state.trip.hotels,
+    //   destination: this.state.trip.destination
+    // });
+    console.log('The click trigger worked!');
+
+    // $.ajax({
+    //   method: 'POST',
+    //   url: '/save',
+    //   data: postData,
+    //   contentType: 'application/json',
+    //   dataType: 'json'
+    // }).then((data) => {
+    //   console.log(data);
+    // });
   }
 
   copyObject(object) {
@@ -57,7 +88,6 @@ class CreateView extends React.Component {
   }
 
   removeFromTrip(item) {
-    console.log(this.state.trip);
     const {key, state} = this.copyObject(this.state.trip);
     for (var i = 0; i < state[key].length; i++) {
       if (item.id === state[key][i].id) {
@@ -71,7 +101,6 @@ class CreateView extends React.Component {
   }
 
   addToTrip(item) {
-    console.log(this.state.trip);
     const {key, state} = this.copyObject(this.state.trip);
     state[key] = [...state[key]].concat(item);
     this.setState({
@@ -121,8 +150,11 @@ class CreateView extends React.Component {
   }
 
   handleUpdateInput(searchText) {
+    let tripCopy = Object.assign({}, this.state.trip);
+    tripCopy.destination = searchText;
     this.setState({
       searchText: searchText,
+      trip: tripCopy
     });
   };
 
@@ -261,7 +293,6 @@ class CreateView extends React.Component {
                   onClick={this.handleNext}
                 />
               </div>
-
           </div>
           { dialogBox }
       </div>

@@ -34,6 +34,7 @@ app.get('/food', (req, res) => {
 });
 
 app.post('/save', (req, res) => {
+  console.log(req.body);
   var data = JSON.parse(req.body.data);
   items.saveToDatabase(data, function(err, result) {
     if(err) {
