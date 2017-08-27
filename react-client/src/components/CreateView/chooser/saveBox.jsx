@@ -43,6 +43,7 @@ class SaveBox extends React.Component {
       contentType: 'application/json',
       success: (data) => {
         console.log('the POST request went through! ', data);
+        this.props.changePage('VIEW');
       },
       error: (err) => {
         console.log('err', err);
@@ -84,6 +85,7 @@ class SaveBox extends React.Component {
         modal={false}
         open={this.props.open}
         onRequestClose={this.props.toggle}
+        title='Save this trip:'
         actionsContainerStyle={{
           display: 'flex',
           justifyContent: 'center',
