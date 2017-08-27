@@ -45,7 +45,7 @@ class SaveBox extends React.Component {
       contentType: 'application/json',
       success: (data) => {
         console.log('data returned from saved trip: ', data);
-        this.props.createToView(data.trips, 'LIST');
+        this.props.changePage('LIST', {trips: data.trips});
       },
       error: (err) => {
         console.log('err', err);
@@ -108,7 +108,7 @@ class SaveBox extends React.Component {
           flexDirection: 'column',
           justifyContent: 'center',
         }}>
-          <TextField 
+          <TextField
             hintText="Trip title..."
             fullWidth={true}
             underlineShow={false}
@@ -116,7 +116,7 @@ class SaveBox extends React.Component {
             onChange={this.updateTripName}
           />
           <Divider />
-          <TextField 
+          <TextField
             hintText="Trip Description"
             multiLine={true}
             fullWidth={true}
