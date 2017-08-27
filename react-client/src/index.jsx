@@ -23,9 +23,19 @@ class App extends React.Component {
     };
     this.logIn = this.logIn.bind(this);
     this.changePage = this.changePage.bind(this);
+    this.createToView = this.createToView.bind(this);
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
     this.setDrawerState = this.setDrawerState.bind(this);
+  }
+
+  createToView(trips, page) {
+    console.log('trips being sent: ', trips);
+    console.log('page being redirected: ', page);
+    this.setState({
+      trips: trips,
+      page: page
+    });
   }
 
   changePage(page) {
@@ -47,6 +57,7 @@ class App extends React.Component {
       contentType: 'application/json',
       dataType: 'json'
     }).then((data) => {
+      console.log('data from login: ', data.trips);
       this.setState({
         user,
         trips: data.trips
@@ -116,7 +127,7 @@ class App extends React.Component {
         return <Landing changePage={this.changePage} />
       case pages.CREATE:
         return <CreateView 
-          changePage={this.changePage}
+          createToView={this.createToView}
           handleDrawerToggle={this.handleDrawerToggle}
           handleDrawerClose={this.handleDrawerClose}
           drawerIsOpen={this.state.drawerIsOpen}

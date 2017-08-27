@@ -5,12 +5,20 @@ const tripSchema = mongoose.Schema({
   food: Array,
   attractions: Array,
   lodging: Array,
-  destination: String
+  destination: String,
+  name: String,
+  description: String
 });
 
-tripSchema.statics.getTrips = function(tripArray) {
+tripSchema.statics.getTrips = function(user, callback) {
   console.log('we made it to the trips schema!');
-  return this.find({"id": {"$in" : tripArray}})
+  this.find({
+    "id": {"$in" : user.trips}
+  })
+  .then( (trips) => {
+    user.trips = trips;
+    callback(user);
+  })
 };
 
 const Trip = mongoose.model('Trip', tripSchema);

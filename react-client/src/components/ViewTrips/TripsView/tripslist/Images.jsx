@@ -2,58 +2,22 @@ import React from 'react';
 
 import {GridList, GridTile} from 'material-ui/GridList';
 
+import exampleData from './exampleData.js';
+
 class Images extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
 
-    const tilesData = [
-      {
-        img: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161201115958-68-year-in-pictures-2016-restricted-super-169.jpg',
-        title: 'Breakfast',
-        author: 'jill111',
-      },
-      {
-        img: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161201161116-83-year-in-pictures-2016-restricted-super-169.jpg',
-        title: 'Tasty burger',
-        author: 'pashminu',
-      },
-      {
-        img: 'https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg',
-        title: 'Camera',
-        author: 'Danson67',
-      },
-      {
-        img: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161201115958-68-year-in-pictures-2016-restricted-super-169.jpg',
-        title: 'Breakfast',
-        author: 'jill111',
-      },
-      {
-        img: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161201161116-83-year-in-pictures-2016-restricted-super-169.jpg',
-        title: 'Tasty burger',
-        author: 'pashminu',
-      },
-      {
-        img: 'https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg',
-        title: 'Camera',
-        author: 'Danson67',
-      },
-      {
-        img: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161201115958-68-year-in-pictures-2016-restricted-super-169.jpg',
-        title: 'Breakfast',
-        author: 'jill111',
-      },
-      {
-        img: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161201161116-83-year-in-pictures-2016-restricted-super-169.jpg',
-        title: 'Tasty burger',
-        author: 'pashminu',
-      },
-      {
-        img: 'https://i.ytimg.com/vi/qh7LLydY8eo/maxresdefault.jpg',
-        title: 'Camera',
-        author: 'Danson67',
-      },
-    ];
+    const subtitles = {
+      lodging: 'Hotel',
+      attractions: 'Attraction',
+      food: 'Restaurant'
+    }
 
+    console.log('carosel data on trip: ', this.props.caroselData);
 
     return (
 
@@ -78,14 +42,18 @@ class Images extends React.Component {
         >
           {
             // mock data
-            tilesData.map( (tile, i) => (
+            this.props.caroselData.map( (tile, i) => (
               <GridTile
                 key={i}
-                title={tile.title}
-                subtitle={tile.author}
+                style={{
+                  height: '95%'
+                }}
+                title={tile.name}
+                titleStyle={{fontSize: '14px'}}
+                subtitle={subtitles[tile.subtitle]}
                 titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
               >
-                <img src={tile.img} />
+                <img src={tile.image_url} />
               </GridTile>
             ))
           }

@@ -33,7 +33,9 @@ class SaveBox extends React.Component {
       attractions: this.props.trip.attractions,
       lodging: this.props.trip.hotels,
       destination: this.props.destination,
-      facebookId: this.props.user.id
+      facebookId: this.props.user.id,
+      name: this.state.name,
+      description: this.state.description
     };
     console.log(postData);
     $.ajax({
@@ -42,7 +44,8 @@ class SaveBox extends React.Component {
       data: JSON.stringify(postData),
       contentType: 'application/json',
       success: (data) => {
-        console.log('the POST request went through! ', data);
+        console.log('data returned from saved trip: ', data);
+        this.props.createToView(data.trips, 'LIST');
       },
       error: (err) => {
         console.log('err', err);
@@ -84,6 +87,7 @@ class SaveBox extends React.Component {
         modal={false}
         open={this.props.open}
         onRequestClose={this.props.toggle}
+        title='Save this trip:'
         actionsContainerStyle={{
           display: 'flex',
           justifyContent: 'center',

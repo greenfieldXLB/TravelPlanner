@@ -9,7 +9,22 @@ class Trip extends React.Component {
     super(props);
   }
 
+  buildGridData(object) {
+    var array = [];
+    for (let category in object) {
+      if (Array.isArray(object[category])) {
+        for (var i = 0; i < object[category].length; i++) {
+          object[category][i].subtitle = category
+          array.push(object[category][i]);
+        }
+      }
+    }
+    return array;
+  }
+
   render() {
+
+    console.log('Trip created: ', this.props.trip);
 
     return (
 
@@ -48,8 +63,8 @@ class Trip extends React.Component {
               alignItems: 'center',
               backgroundColor: '#d9d9d9'
             }}>
-              <span style={{paddingLeft: '10px'}}>My Trip</span>
-              <span style={{paddingRight: '10px'}}>Destination</span>
+              <span style={{paddingLeft: '10px'}}>{this.props.trip.name}</span>
+              <span style={{paddingRight: '10px'}}>{this.props.trip.destination}</span>
             </div>
 
             <div id='trip-body-text-body' style={{
@@ -59,7 +74,12 @@ class Trip extends React.Component {
               flexDirection: 'row',
               backgroundColor: '#e6e6e6'
             }}>
-              <span style={{padding: '10px 0 0 10px'}}>Description</span>
+              <span style={{
+                padding: '10px 0 0 10px',
+                fontSize: '12px'
+              }}>
+                {this.props.trip.description}
+              </span>
             </div>
 
             <div id='view-edit-button' style={{
@@ -84,7 +104,7 @@ class Trip extends React.Component {
             display: 'flex',
             backgroundColor: '#f2f2f2'
           }}>
-            <Images />
+            <Images caroselData={this.buildGridData(this.props.trip)}/>
           </div>
 
         </div>
