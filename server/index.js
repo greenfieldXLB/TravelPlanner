@@ -55,10 +55,15 @@ app.post('/save', (req, res) => {
     .then((user) => {
       return user.addTripId(tripId);
     }).then((user) => {
-      res.send(user);
+      var tripArray = user.trips;
+      return Trip.getTrips(tripArray);
+    }).then((result) => {
+      res.send(result);
     })
   })
 })
+
+
 
 // When we want to find multiple values at once in Mongo, we can use the following command:
 
