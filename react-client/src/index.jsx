@@ -20,7 +20,6 @@ class App extends React.Component {
       trips: [],
       page: pages.LANDING,
       drawerIsOpen: false,
-      facebookId: ''
     };
     this.logIn = this.logIn.bind(this);
     this.changePage = this.changePage.bind(this);
@@ -41,11 +40,6 @@ class App extends React.Component {
       name: user.name,
       email: user.email
     });
-
-    this.setState({
-      facebookId: user.id
-    });
-
     $.ajax({
       method: 'POST',
       url: '/logIn',
@@ -53,14 +47,11 @@ class App extends React.Component {
       contentType: 'application/json',
       dataType: 'json'
     }).then((data) => {
-      console.log('User with trips: ', data);
       this.setState({
         user,
         trips: data.trips
       });
     });
-
-
   }
 
   handleDrawerToggle() {
@@ -129,7 +120,7 @@ class App extends React.Component {
           handleDrawerToggle={this.handleDrawerToggle}
           handleDrawerClose={this.handleDrawerClose}
           drawerIsOpen={this.state.drawerIsOpen}
-          userId = {this.state.facebookId}
+          user={this.state.user}
         />
       case pages.LIST:
         return <ViewTrips 
