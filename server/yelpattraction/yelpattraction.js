@@ -27,11 +27,17 @@ var findAttractions = function (input, callback){
   client.search({
     term:'Attractions ' + (input.search || ''),
     location: input.location,
-    limit: 30
+    limit: 50
   })
   .then(response => {
     attractions = response.jsonBody.businesses;
-    callback(_.shuffle(attractions));
+    let filteredResults = [];
+      attractions.forEach(attraction => {
+        if (attraction.rating > 3) {
+          filteredResults.push(attraction);
+        }
+      });
+    callback(_.shuffle(filteredResults));
   })
   .catch(e => {
     console.log(e);

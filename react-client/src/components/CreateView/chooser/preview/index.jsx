@@ -135,7 +135,7 @@ class Preview extends React.Component {
                 <div style={{
                   width: '80%',
                   height: '100%',
-                  overflowY: 'auto',
+                  overflowY: 'scroll',
                   display: 'flex'
                 }}>
                 {
