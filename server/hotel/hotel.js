@@ -49,9 +49,14 @@ var findHotels = function (input, callback){
   });
 
   if (input.price || input.search) {
+    let filteredResults = [];
     getFiltered.then( response => {
-
-      callback(response.jsonBody.businesses);
+      response.jsonBody.businesses.forEach(hotel => {
+        if (hotel.rating > 3) {
+          filteredResults.push(hotel);
+        }
+      });
+      callback(filteredResults);
 
     })
     .catch(e => {
@@ -61,13 +66,19 @@ var findHotels = function (input, callback){
   } else {
 
     Promise.all([p1, p2, p3]).then( responses => {
-
       let hotelResult = responses.reduce( function(businessList, response) {
         businessList.push( ... response.jsonBody.businesses );
         return _.shuffle(businessList);
       }, []);
 
-      callback(hotelResult);
+      let filteredResults = [];
+      hotelResult.forEach(hotel => {
+        if (hotel.rating > 3) {
+          filteredResults.push(hotel);
+        }
+      });
+
+      callback(filteredResults);
 
     })
     .catch(e => {
