@@ -9,19 +9,15 @@ class Images extends React.Component {
     super(props);
   }
 
-  buildGrid(object) {
-    var array = [];
-    for (let category in object) {
-      if (Array.isArray(category)) {
-        for (var i = 0; i < object[category].length - 1; i++) {
-          array.push(object[category][i]);
-        }
-      }
-    }
-    return array;
-  }
-
   render() {
+
+    const subtitles = {
+      lodging: 'Hotel',
+      attractions: 'Attraction',
+      food: 'Restaurant'
+    }
+
+    console.log('carosel data on trip: ', this.props.caroselData);
 
     return (
 
@@ -46,17 +42,18 @@ class Images extends React.Component {
         >
           {
             // mock data
-            this.buildGrid(exampleData).map( (tile, i) => (
+            this.props.caroselData.map( (tile, i) => (
               <GridTile
                 key={i}
                 style={{
                   height: '95%'
                 }}
-                title={tile.title}
-                subtitle={tile.author}
+                title={tile.name}
+                titleStyle={{fontSize: '14px'}}
+                subtitle={subtitles[tile.subtitle]}
                 titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
               >
-                <img src={tile.img} />
+                <img src={tile.image_url} />
               </GridTile>
             ))
           }
