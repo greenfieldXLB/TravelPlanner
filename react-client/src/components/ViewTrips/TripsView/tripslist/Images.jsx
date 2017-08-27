@@ -12,8 +12,10 @@ class Images extends React.Component {
   buildGrid(object) {
     var array = [];
     for (let category in object) {
-      for (var i = 0; i < object[category].length - 1; i++) {
-        array.push(object[category][i]);
+      if (Array.isArray(category)) {
+        for (var i = 0; i < object[category].length - 1; i++) {
+          array.push(object[category][i]);
+        }
       }
     }
     return array;

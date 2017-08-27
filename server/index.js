@@ -44,6 +44,8 @@ app.post('/save', (req, res) => {
   newTrip.attractions = data.attractions;
   newTrip.lodging = data.lodging;
   newTrip.destination = data.destination;
+  newTrip.name = data.name;
+  newTrip.description = data.description;
   newTrip.save(err => {
   if (err) {
     throw err;
@@ -55,13 +57,12 @@ app.post('/save', (req, res) => {
     .then((user) => {
       return user.addTripId(tripId);
     }).then((user) => {
-      var tripArray = user.trips;
-      return Trip.getTrips(tripArray);
-    }).then((result) => {
-      res.send(result);
-    })
-  })
-})
+      Trip.getTrips(user, (fullUser) => {
+        res.status(200).send(fullUser);
+      });
+    });
+  });
+});
 
 
 
@@ -90,7 +91,9 @@ app.get('/getAll', (req, res) => {
 app.post('/logIn', (req, res) => {
   User.findOrCreate(req.body)
     .then((user) => {
-      res.json(user);
+      Trip.getTrips(user, (fullUser) => {
+        res.json(fullUser);
+      });
     })
     .catch((err) => {
       console.log(err);

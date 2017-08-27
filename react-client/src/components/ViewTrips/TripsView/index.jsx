@@ -9,8 +9,6 @@ class TripsView extends React.Component {
 
   render() {
 
-    console.log('User on TripsView: ', this.props.user);
-
     return (
       <div 
         id="selection-component" 

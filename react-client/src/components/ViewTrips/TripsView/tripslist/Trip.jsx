@@ -11,6 +11,8 @@ class Trip extends React.Component {
 
   render() {
 
+    console.log('Trip created: ', this.props.trip);
+
     return (
 
       <div style={{

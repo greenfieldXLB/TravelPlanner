@@ -200,7 +200,7 @@ class CreateView extends React.Component {
       dialogBox = (
         <SaveBox
           destination={this.state.searchText}
-          changePage={this.props.changePage}
+          createToView={this.props.createToView}
           open={this.state.saveBox}
           toggle={this.saveBox}
           trip={this.state.trip}

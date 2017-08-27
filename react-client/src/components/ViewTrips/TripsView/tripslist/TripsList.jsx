@@ -10,6 +10,8 @@ class TripsList extends React.Component {
 
   render() {
 
+    console.log('trips on TripsList: ', this.props.trips);
+
     return (
 
       <div style={{
@@ -21,13 +23,11 @@ class TripsList extends React.Component {
         justifyContent: 'flex-start',
         alignItems: 'center',
       }}>
-        <Trip />
-        <Trip />
-        <Trip />
-        <Trip />
-        <Trip />
-        <Trip />
-        <Trip />
+        {
+          this.props.trips.map( (trip, i) => {
+            return <Trip key={i} trip={trip}/>
+          }) 
+        }
       </div>
 
     )
