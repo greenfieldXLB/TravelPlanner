@@ -46,6 +46,7 @@ app.post('/save', (req, res) => {
   newTrip.destination = data.destination;
   newTrip.name = data.name;
   newTrip.description = data.description;
+  newTrip.hidden = false;
   newTrip.save(err => {
   if (err) {
     throw err;
@@ -64,6 +65,9 @@ app.post('/save', (req, res) => {
   });
 });
 
+app.post('/remove', (req, res) => {
+  console.log('reached remove endpoint');
+})
 
 
 // When we want to find multiple values at once in Mongo, we can use the following command:

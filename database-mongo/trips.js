@@ -7,7 +7,8 @@ const tripSchema = mongoose.Schema({
   lodging: Array,
   destination: String,
   name: String,
-  description: String
+  description: String,
+  hidden: Boolean
 });
 
 tripSchema.statics.getTrips = function(user, callback) {

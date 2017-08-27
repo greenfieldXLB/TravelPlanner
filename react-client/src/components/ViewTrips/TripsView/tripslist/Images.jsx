@@ -17,8 +17,6 @@ class Images extends React.Component {
       food: 'Restaurant'
     }
 
-    console.log('carosel data on trip: ', this.props.caroselData);
-
     return (
 
       <div style={{

@@ -10,8 +10,6 @@ class TripsList extends React.Component {
 
   render() {
 
-    console.log('trips on TripsList: ', this.props.trips);
-
     return (
 
       <div style={{
@@ -25,6 +23,9 @@ class TripsList extends React.Component {
       }}>
         {
           this.props.trips.map( (trip, i) => {
+            // if trip.hidden property === true
+              // return nothing
+            // else return: 
             return <Trip key={i} trip={trip}/>
           }) 
         }

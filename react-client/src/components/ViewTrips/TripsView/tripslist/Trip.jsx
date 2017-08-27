@@ -1,12 +1,16 @@
 import React from 'react';
 
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
+
 
 import Images from './Images.jsx';
 
 class Trip extends React.Component {
   constructor(props) {
     super(props);
+    this.removeTrip = this.removeTrip.bind(this);
   }
 
   buildGridData(object) {
@@ -22,9 +26,12 @@ class Trip extends React.Component {
     return array;
   }
 
-  render() {
+  removeTrip() {
+    console.log('removed: ', this.props.trip.id);
+    // grab the facebook 
+  }
 
-    console.log('Trip created: ', this.props.trip);
+  render() {
 
     return (
 
@@ -82,18 +89,37 @@ class Trip extends React.Component {
               </span>
             </div>
 
-            <div id='view-edit-button' style={{
+            <div id='button-container' style={{
               width: '100%',
               height: '25%',
               display: 'flex',
+              flexDirection: 'row'
             }}>
-              <FlatButton 
-                label='View/Edit Trip'
-                fullWidth={true}
-                style={{
-                  height: '100%'
-                }}
-              />
+              <div id='view-edit-button' style={{
+                width: '50%',
+                height: '100%',
+                display: 'flex',
+              }}>
+                <FlatButton 
+                  label='View/Edit Trip'
+                  fullWidth={true}
+                  style={{
+                    height: '100%'
+                  }}
+                />
+              </div>
+
+              <div id='view-delete' style={{
+                width: '50%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                <IconButton onClick={this.removeTrip}>
+                  <DeleteIcon color='#b3b3b3' hoverColor='#333333'/>
+                </IconButton>
+              </div>
             </div>
 
           </div>

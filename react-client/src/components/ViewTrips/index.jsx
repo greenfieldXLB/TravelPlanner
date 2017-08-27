@@ -10,6 +10,8 @@ class ViewTrips extends React.Component {
 
   render() {
 
+    console.log(this.props.user);
+
     return (
 
       <div id="view-body" style={{
