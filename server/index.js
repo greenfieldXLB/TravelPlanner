@@ -55,7 +55,7 @@ app.post('/save', (req, res) => {
     .then((user) => {
       return user.addTripId(tripId);
     }).then((user) => {
-      res.send('Both database calls work!');
+      res.send(user);
     })
   })
 })

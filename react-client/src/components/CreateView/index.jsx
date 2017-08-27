@@ -19,6 +19,7 @@ class CreateView extends React.Component {
     super(props);
     this.state = {
       searchText: '',
+      edit: false,
       submitted: false,
       saveBox: false,
       stepIndex: 0,
@@ -26,15 +27,11 @@ class CreateView extends React.Component {
       attractions: [],
       restaurants: [],
       selectedItem: '',
-      name: '',
-      description: '',
       trip: {
         hotels: [],
         attractions: [],
         restaurants: [],
         destination: '',
-        name: '',
-        description: '',
       }
     };
     this.addToTrip = this.addToTrip.bind(this);
@@ -47,53 +44,7 @@ class CreateView extends React.Component {
     this.handleTileClick = this.handleTileClick.bind(this);
     this.saveBox = this.saveBox.bind(this);
   }
-
-  randomId() {
-    var a = Math.random(0, 1) * 1000000000
-    var b = a.toString();
-    var c = parseInt(b);
-    return c;
-  }
-
-  saveTriptoDB() {
-    console.log('we made it here!');
-    let postData = JSON.stringify({
-      id: this.randomId(),
-      food: this.state.trip.restaurants,
-      attractions: this.state.trip.attractions,
-      lodging: this.state.trip.hotels,
-      destination: this.state.trip.destination,
-      facebookId: this.props.userId
-    });
-    // console.log(postData);
-    $.ajax({
-      url: '/save',
-      method: 'POST',
-      data: postData,
-      contentType: 'application/json',
-      success: (data) => {
-        console.log('the POST request went through!');
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-  }
-
-
-  //     url: '/items',
-  //     method: 'POST',
-  //     data: category,
-  //     contentType: 'text/plain',
-  //     success: (data) => {
-  //       console.log('your playlist request was sent!');
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
-
+  
   copyObject(object) {
     let tripData = {
       1: 'hotels',
@@ -156,16 +107,6 @@ class CreateView extends React.Component {
         selectedItem: ''
       });
     }
-    // const stepIndex = this.state.stepIndex;
-    // if (stepIndex === 3) {
-    //   console.log('true');
-    //   this.saveTriptoDB;
-    // }
-    // this.setState({
-    //   stepIndex: stepIndex + 1,
-    //   finished: stepIndex >= 3,
-    //   selectedItem: ''
-    // });
   }
 
   handlePrev() {
@@ -223,7 +164,8 @@ class CreateView extends React.Component {
         loading={this.state.loading}
         searchText={this.state.searchText}
         triggerLoading={this.triggerLoading}
-        updateSearch={this.handleUpdateInput}/>
+        updateSearch={this.handleUpdateInput}
+      />
     } else {
       let dataMap = {
         1: this.state.hotels,
@@ -252,16 +194,17 @@ class CreateView extends React.Component {
 
     const {finished, stepIndex, searchText, loading, submitted} = this.state;
 
-
-
     let dialogBox = null;
 
     if (this.state.saveBox) {
       dialogBox = (
         <SaveBox
+          destination={this.state.searchText}
+          changePage={this.props.changePage}
           open={this.state.saveBox}
           toggle={this.saveBox}
           trip={this.state.trip}
+          user={this.props.user}
         />
       )
     }

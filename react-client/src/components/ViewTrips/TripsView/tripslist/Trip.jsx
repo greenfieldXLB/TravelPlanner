@@ -24,7 +24,7 @@ class Trip extends React.Component {
 
         <div id='trip-body' style={{
           width: '100%',
-          height: '100%',
+          height: '96%',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-evenly',
@@ -33,7 +33,7 @@ class Trip extends React.Component {
 
           <div id='trip-body-text' style={{
             width: '38%',
-            height: '96%',
+            height: '100%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -80,7 +80,7 @@ class Trip extends React.Component {
 
           <div id='trip-body-images' style={{
             width: '58%',
-            height: '96%',
+            height: '100%',
             display: 'flex',
             backgroundColor: '#f2f2f2'
           }}>

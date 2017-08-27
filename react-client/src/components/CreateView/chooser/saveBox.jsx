@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -15,17 +16,47 @@ class SaveBox extends React.Component {
     };
     this.updateTripName = this.updateTripName.bind(this);
     this.updateTripDesc = this.updateTripDesc.bind(this);
+    this.saveTriptoDB = this.saveTriptoDB.bind(this);
+  }
+
+  randomId() {
+    var a = Math.random(0, 1) * 1000000000
+    var b = a.toString();
+    var c = parseInt(b);
+    return c;
+  }
+
+  saveTriptoDB() {
+    let postData = {
+      id: this.randomId(),
+      food: this.props.trip.restaurants,
+      attractions: this.props.trip.attractions,
+      lodging: this.props.trip.hotels,
+      destination: this.props.destination,
+      facebookId: this.props.user.id
+    };
+    console.log(postData);
+    $.ajax({
+      url: '/save',
+      method: 'POST',
+      data: JSON.stringify(postData),
+      contentType: 'application/json',
+      success: (data) => {
+        console.log('the POST request went through! ', data);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
   }
 
   updateTripName(event) {
-    console.log('ran');
     this.setState({
       name: event.target.value
     });
   }
 
   updateTripDesc(event) {
-    console.log('ran');
     this.setState({
       description: event.target.value
     });
@@ -42,7 +73,7 @@ class SaveBox extends React.Component {
       <RaisedButton
         label="Save"
         primary={true}
-        onClick={this.props.toggle}
+        onClick={this.saveTriptoDB}
       />
     ];
 
