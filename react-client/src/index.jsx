@@ -98,6 +98,7 @@ class App extends React.Component {
               <Navbar
                 changePage={this.changePage}
                 user={this.state.user}
+                page={this.state.page}
               />
               { this.getMainComponent() }
             </div>

@@ -9,6 +9,50 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  getNavButtons() {
+    let toggled = this.props.page === 'LIST';
+    return (
+      <div style={{paddingRight: '8px'}}>
+      {
+        toggled ?
+          <div>
+            <RaisedButton 
+            label="View Trips"
+            onClick={()=>{
+              this.props.changePage(pages.LIST);
+            }}
+            style={{marginRight: '3px'}}
+            primary={true}
+          />
+          <RaisedButton
+            label="Create Trip"
+            onClick={()=>{
+              this.props.changePage(pages.CREATE);
+            }}
+          /> 
+        </div> :
+        <div>
+          <RaisedButton 
+            label="View Trips"
+            onClick={()=>{
+              this.props.changePage(pages.LIST);
+            }}
+            style={{marginRight: '3px'}}
+          />
+          <RaisedButton
+            label="Create Trip"
+            primary={true}
+            onClick={()=>{
+              this.props.changePage(pages.CREATE);
+            }}
+          /> 
+        </div>
+      }
+      </div>
+    )
+  }
+
   render() {
     return ( 
       <Toolbar
@@ -31,28 +75,7 @@ class Navbar extends React.Component {
           </div> 
         </ToolbarGroup>
         <ToolbarGroup lastChild={true}>
-          <div 
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              paddingRight: '15px',
-              alignItems: 'center'
-            }}
-          >
-            <RaisedButton 
-              label="View Trips"
-              onClick={()=>{
-                this.props.changePage(pages.LIST);
-              }}
-              style={{marginRight: '3px'}}
-            />
-            <RaisedButton
-              label="Create Trip"
-              onClick={()=>{
-                this.props.changePage(pages.CREATE);
-              }}
-            />
-          </div>
+          {this.getNavButtons()}
           <div style={{paddingRight: '30px'}}>
             <Avatar 
               size={44} 
