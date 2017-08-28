@@ -83,8 +83,7 @@ class Trip extends React.Component {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
-              alignItems: 'center',
-              backgroundColor: '#d9d9d9'
+              alignItems: 'center'
             }}>
               <span style={{paddingLeft: '10px'}}>{this.props.trip.name}</span>
               <span style={{paddingRight: '10px'}}>{this.props.trip.destination}</span>
