@@ -4,6 +4,7 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import StarRatingComponent from 'react-star-rating-component';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import AddFullCircle from 'material-ui/svg-icons/content/add-circle';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
@@ -17,7 +18,7 @@ class Preview extends React.Component {
 
   componentWillMount() {
     this.props.data.forEach(item => {
-      if ((item.rating === 5 && item.review_count > 1) || (item.rating === 4.5 && item.review_count > 1)) {
+      if ((item.rating > 4 && item.review_count > 1)) {
         this.setState({
           default: item
         });
@@ -27,7 +28,7 @@ class Preview extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     nextProps.data.forEach(item => {
-      if ((item.rating === 5 && item.review_count > 1) || (item.rating === 4.5 && item.review_count > 1)) {
+      if ((item.rating > 4 && item.review_count > 1)) {
         this.setState({
           default: item
         });
@@ -42,7 +43,7 @@ class Preview extends React.Component {
       3: 'restaurants'
     };
     var inTrip = false;
-    var currentData = this.props.trip[tripData[this.props.index]];
+    let currentData = this.props.trip[tripData[this.props.index]];
     currentData.forEach(item => {
       if (item.id === selection.id) {
         inTrip = true;
@@ -54,13 +55,13 @@ class Preview extends React.Component {
   iconButtonHandler(selection) {
     this.findAdded(selection);    
     return (
-      <IconButton iconStyle={{width: '48px', height: '48px'}} disableTouchRipple={true} >
+      <FloatingActionButton mini={true} >
         {
           this.findAdded(selection) ? 
-          <DeleteIcon color='#b3b3b3' hoverColor='red' onClick={() => this.props.removeFromTrip(selection)} /> :
-          <AddFullCircle color='#b3b3b3' hoverColor='#00bcd4' onClick={() => this.props.addToTrip(selection)} />
+          <DeleteIcon style={{width: '100%', height: '100%', backgroundColor: 'red'}} onClick={() => this.props.removeFromTrip(selection)} /> :
+          <AddFullCircle style={{width: '100%', height: '100%'}} hoverColor='#00bcd4' onClick={() => this.props.addToTrip(selection)} />
         }
-      </IconButton>
+      </FloatingActionButton>
     )
   }
 
@@ -130,12 +131,14 @@ class Preview extends React.Component {
               }}
             >
               <div style={{
-                display: 'flex'
+                display: 'flex',
+                width: '100%',
+                height: '100%'
               }}>
                 <div style={{
                   width: '80%',
                   height: '100%',
-                  overflowY: 'scroll',
+                  overflowY: 'auto',
                   display: 'flex'
                 }}>
                 {
@@ -267,17 +270,17 @@ class Preview extends React.Component {
                     </div>
                   }
                 </div>
-                  <div style={{
-                    width: '20%',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    paddingTop: '5%'
-                  }}>
-                    {
-                      this.props.selectedItem ? this.iconButtonHandler(this.props.selectedItem) : this.iconButtonHandler(this.state.default)
-                    }
-                  </div>
+                <div style={{
+                  width: '20%',
+                  height: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                  {
+                    this.props.selectedItem ? this.iconButtonHandler(this.props.selectedItem) : this.iconButtonHandler(this.state.default)
+                  }
+                </div>
               </div>
             </Paper>
           </div>

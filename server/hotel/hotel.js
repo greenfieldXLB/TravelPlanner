@@ -19,7 +19,7 @@ var findHotels = function (input, callback){
   let p1 = client.search({
     term: 'hotels',
     location: input.location,
-    limit: 20,
+    limit: 25,
     price: "1",
     sort_by: 'rating'
   })
@@ -27,7 +27,7 @@ var findHotels = function (input, callback){
   let p2 = client.search({
     term: 'hotels',
     location: input.location,
-    limit: 20,
+    limit: 25,
     price: "2",
     sort_by: 'rating'
   })
@@ -35,7 +35,7 @@ var findHotels = function (input, callback){
   let p3 = client.search({
     term: 'hotels',
     location: input.location,
-    limit: 20,
+    limit: 25,
     price: "3",
     sort_by: 'rating'
   })
@@ -52,7 +52,7 @@ var findHotels = function (input, callback){
     let filteredResults = [];
     getFiltered.then( response => {
       response.jsonBody.businesses.forEach(hotel => {
-        if (hotel.rating > 3) {
+        if (hotel.rating > 3 && hotel.review_count > 5) {
           filteredResults.push(hotel);
         }
       });
@@ -73,7 +73,7 @@ var findHotels = function (input, callback){
 
       let filteredResults = [];
       hotelResult.forEach(hotel => {
-        if (hotel.rating > 3) {
+        if (hotel.rating > 3 && hotel.review_count > 5) {
           filteredResults.push(hotel);
         }
       });
