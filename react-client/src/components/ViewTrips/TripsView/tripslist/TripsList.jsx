@@ -23,24 +23,15 @@ class TripsList extends React.Component {
       }}>
         {
           this.props.trips.map( (trip, i) => {
-<<<<<<< HEAD
             if (!trip.hidden) {
-              return <Trip 
-                       key={i} 
-                       trip={trip} 
-                       user={this.props.user} 
+              return <Trip
+                       key={i}
+                       trip={trip}
+                       user={this.props.user}
                        changePage={this.props.changePage}
                      />
             }
-          }) 
-=======
-            return <Trip
-              key={i}
-              trip={trip}
-              changePage={this.props.changePage}
-            />
           })
->>>>>>> Enable trip editing via CreateView
         }
       </div>
 
