@@ -10,8 +10,6 @@ class TripsList extends React.Component {
 
   render() {
 
-    console.log('trips on TripsList: ', this.props.trips);
-
     return (
 
       <div style={{
@@ -25,7 +23,14 @@ class TripsList extends React.Component {
       }}>
         {
           this.props.trips.map( (trip, i) => {
-            return <Trip key={i} trip={trip}/>
+            if (!trip.hidden) {
+              return <Trip 
+                       key={i} 
+                       trip={trip} 
+                       user={this.props.user} 
+                       changePage={this.props.changePage}
+                     />
+            }
           }) 
         }
       </div>

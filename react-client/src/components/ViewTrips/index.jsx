@@ -36,7 +36,11 @@ class ViewTrips extends React.Component {
             My Trips
           </div>
 
-          <TripsView trips={this.props.trips}/>
+          <TripsView 
+            trips={this.props.trips} 
+            user={this.props.user} 
+            changePage={this.props.changePage}
+          />
 
         </div>
       </div>

@@ -46,6 +46,7 @@ app.post('/save', (req, res) => {
   newTrip.destination = data.destination;
   newTrip.name = data.name;
   newTrip.description = data.description;
+  newTrip.hidden = false;
   newTrip.save(err => {
   if (err) {
     throw err;
@@ -58,12 +59,25 @@ app.post('/save', (req, res) => {
       return user.addTripId(tripId);
     }).then((user) => {
       Trip.getTrips(user, (fullUser) => {
-        res.status(200).send(fullUser);
+        res.status(201).send(fullUser);
       });
     });
   });
 });
 
+app.post('/removeTrip', (req, res) => {
+
+  Trip.update({id: req.body.tripID}, {hidden: true})
+    .then( (result) => {
+      User.findOne({facebookId: req.body.facebookID})
+      .then( (user) => {
+        Trip.getTrips(user, (fullUser) => {
+          res.status(201).send(fullUser);
+        });
+      });
+    });
+
+});
 
 
 // When we want to find multiple values at once in Mongo, we can use the following command:

@@ -20,7 +20,11 @@ class TripsView extends React.Component {
           justifyContent: 'space-evenly',
           alignItems: 'center',
         }}>
-        <TripsList trips={this.props.trips}/>
+        <TripsList 
+          trips={this.props.trips} 
+          user={this.props.user}
+          changePage={this.props.changePage}
+        />
       </div>
     )
   }
