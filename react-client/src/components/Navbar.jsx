@@ -17,9 +17,8 @@ class Navbar extends React.Component {
       {
         toggled ?
           <div>
-            <RaisedButton 
-            label="View Trips"
-            onClick={()=>{
+            <RaisedButton
+            label="View Trips" onClick={()=>{
               this.props.changePage(pages.LIST);
             }}
             style={{marginRight: '3px'}}
@@ -28,12 +27,12 @@ class Navbar extends React.Component {
           <RaisedButton
             label="Create Trip"
             onClick={()=>{
-              this.props.changePage(pages.CREATE);
+              this.props.changePage(pages.CREATE, {editing: 'NEW'});
             }}
-          /> 
+          />
         </div> :
         <div>
-          <RaisedButton 
+          <RaisedButton
             label="View Trips"
             onClick={()=>{
               this.props.changePage(pages.LIST);
@@ -43,12 +42,10 @@ class Navbar extends React.Component {
           <RaisedButton
             label="Create Trip"
             primary={true}
-            onClick={()=>{
-              this.props.changePage(pages.CREATE);
+            onClick={()=>{ this.props.changePage(pages.CREATE, {editing: 'NEW'});
             }}
-          /> 
-        </div>
-      }
+          />
+        </div> }
       </div>
     )
   }
@@ -75,32 +72,7 @@ class Navbar extends React.Component {
           </div>
         </ToolbarGroup>
         <ToolbarGroup lastChild={true}>
-<<<<<<< HEAD
           {this.getNavButtons()}
-=======
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              paddingRight: '15px',
-              alignItems: 'center'
-            }}
-          >
-            <RaisedButton
-              label="View Trips"
-              onClick={()=>{
-                this.props.changePage(pages.LIST);
-              }}
-              style={{marginRight: '3px'}}
-            />
-            <RaisedButton
-              label="Create Trip"
-              onClick={()=>{
-                this.props.changePage(pages.CREATE, {editing: 'NEW'});
-              }}
-            />
-          </div>
->>>>>>> Enable trip editing via CreateView
           <div style={{paddingRight: '30px'}}>
             <Avatar
               size={44}
