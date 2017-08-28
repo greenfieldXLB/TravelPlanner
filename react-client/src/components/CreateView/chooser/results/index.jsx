@@ -68,9 +68,6 @@ class Results extends React.Component {
     price = price !== undefined ? price : this.state.price;
     search = search !== undefined ? search : this.state.search;
 
-    console.log('the destination: ', this.props.destination);
-    console.log('current endpoint: ', this.chooseEndpoint(this.props.index));
-
     $.ajax({
       url: this.chooseEndpoint(this.props.index),
       type: 'GET',

@@ -54,7 +54,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    return ( 
+    return (
       <Toolbar
         style={{
           backgroundColor: 'white',
@@ -66,26 +66,51 @@ class Navbar extends React.Component {
           <div style={{
             padding: '0 25px 0 30px'
           }}>
-            <img src="http://i.imgur.com/m2cZCRZ.png" 
+            <img src="http://i.imgur.com/m2cZCRZ.png"
               style={{
                 height: '50px',
                 boxShadow: '0px 0px 0px'
               }}
             />
-          </div> 
+          </div>
         </ToolbarGroup>
         <ToolbarGroup lastChild={true}>
+<<<<<<< HEAD
           {this.getNavButtons()}
+=======
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              paddingRight: '15px',
+              alignItems: 'center'
+            }}
+          >
+            <RaisedButton
+              label="View Trips"
+              onClick={()=>{
+                this.props.changePage(pages.LIST);
+              }}
+              style={{marginRight: '3px'}}
+            />
+            <RaisedButton
+              label="Create Trip"
+              onClick={()=>{
+                this.props.changePage(pages.CREATE, {editing: 'NEW'});
+              }}
+            />
+          </div>
+>>>>>>> Enable trip editing via CreateView
           <div style={{paddingRight: '30px'}}>
-            <Avatar 
-              size={44} 
+            <Avatar
+              size={44}
               src={this.props.user.picture.data.url}
               style={{
                 boxShadow: '2px 2px 2px grey',
-              }} 
+              }}
             />
           </div>
-        </ToolbarGroup> 
+        </ToolbarGroup>
       </Toolbar>
     );
   }

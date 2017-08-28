@@ -10,8 +10,8 @@ class TripsView extends React.Component {
   render() {
 
     return (
-      <div 
-        id="selection-component" 
+      <div
+        id="selection-component"
         style={{
           width: '100%',
           height: '95%',
@@ -20,8 +20,8 @@ class TripsView extends React.Component {
           justifyContent: 'space-evenly',
           alignItems: 'center',
         }}>
-        <TripsList 
-          trips={this.props.trips} 
+        <TripsList
+          trips={this.props.trips}
           user={this.props.user}
           changePage={this.props.changePage}
         />

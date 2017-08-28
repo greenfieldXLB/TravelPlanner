@@ -116,12 +116,16 @@ class Trip extends React.Component {
                 height: '100%',
                 display: 'flex',
               }}>
-                <FlatButton 
+                <FlatButton
                   label='View/Edit Trip'
                   fullWidth={true}
                   style={{
                     height: '100%'
                   }}
+                  onClick={() => this.props.changePage(
+                    'CREATE',
+                    {editing: this.props.trip}
+                  )}
                 />
               </div>
 

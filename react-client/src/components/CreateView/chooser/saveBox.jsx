@@ -11,8 +11,8 @@ class SaveBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      description: ''
+      name: props.trip.name || '',
+      description: props.trip.description || ''
     };
     this.updateTripName = this.updateTripName.bind(this);
     this.updateTripDesc = this.updateTripDesc.bind(this);
@@ -28,7 +28,7 @@ class SaveBox extends React.Component {
 
   saveTriptoDB() {
     let postData = {
-      id: this.randomId(),
+      id: this.props.trip.id || this.randomId(),
       food: this.props.trip.restaurants,
       attractions: this.props.trip.attractions,
       lodging: this.props.trip.hotels,
@@ -38,14 +38,13 @@ class SaveBox extends React.Component {
       description: this.state.description,
       hidden: false
     };
-    console.log(postData);
+
     $.ajax({
       url: '/save',
       method: 'POST',
       data: JSON.stringify(postData),
       contentType: 'application/json',
       success: (data) => {
-        console.log('data returned from saved trip: ', data);
         this.props.changePage('LIST', {trips: data.trips});
       },
       error: (err) => {

@@ -36,9 +36,14 @@ class ViewTrips extends React.Component {
             My Trips
           </div>
 
+<<<<<<< HEAD
           <TripsView 
             trips={this.props.trips} 
             user={this.props.user} 
+=======
+          <TripsView
+            trips={this.props.trips}
+>>>>>>> Enable trip editing via CreateView
             changePage={this.props.changePage}
           />
 

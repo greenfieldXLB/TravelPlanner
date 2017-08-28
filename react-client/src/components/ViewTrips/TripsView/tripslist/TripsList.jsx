@@ -23,6 +23,7 @@ class TripsList extends React.Component {
       }}>
         {
           this.props.trips.map( (trip, i) => {
+<<<<<<< HEAD
             if (!trip.hidden) {
               return <Trip 
                        key={i} 
@@ -32,6 +33,14 @@ class TripsList extends React.Component {
                      />
             }
           }) 
+=======
+            return <Trip
+              key={i}
+              trip={trip}
+              changePage={this.props.changePage}
+            />
+          })
+>>>>>>> Enable trip editing via CreateView
         }
       </div>
 

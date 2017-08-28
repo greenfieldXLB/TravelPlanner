@@ -7,7 +7,7 @@ const Landing = (props) => {
     <div style={{height: '100px'}}>
       <FlatButton
         label="Create Trip"
-        onClick={() => props.changePage(pages.CREATE)}
+        onClick={() => props.changePage(pages.CREATE, {editing: 'NEW'})}
       />
 
       <FlatButton

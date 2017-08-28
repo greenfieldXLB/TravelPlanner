@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       user: null,
       trips: [],
+      editing: 'NEW',
       page: pages.LANDING,
       drawerIsOpen: false,
     };
@@ -82,8 +83,7 @@ class App extends React.Component {
   }
 
   setDrawerState(status) {
-    this.setState({
-      drawerIsOpen: status
+    this.setState({ drawerIsOpen: status
     });
   }
 
@@ -136,6 +136,7 @@ class App extends React.Component {
           handleDrawerClose={this.handleDrawerClose}
           drawerIsOpen={this.state.drawerIsOpen}
           user={this.state.user}
+          editing={this.state.editing}
         />
       case pages.LIST:
         return <ViewTrips

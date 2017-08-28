@@ -9,7 +9,7 @@ const modes = {
 };
 
 class Chooser extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,9 +18,8 @@ class Chooser extends React.Component {
     this.modes = modes;
     this.changeMode = this.changeMode.bind(this);
   }
-  
+
   changeMode(mode) {
-    console.log(mode);
     if (Object.values(this.modes).includes(mode)) {
       this.setState({ mode });
     } else {
@@ -30,8 +29,8 @@ class Chooser extends React.Component {
 
   render() {
     return (
-      <div 
-        id="selection-component" 
+      <div
+        id="selection-component"
         style={{
           width: '100%',
           height: '100%',
@@ -42,7 +41,7 @@ class Chooser extends React.Component {
           backgroundColor: '#cccccc'
         }}
       >
-        <Preview 
+        <Preview
           selectedItem={this.props.selectedItem}
           data={this.props.data}
           index={this.props.index}
@@ -66,7 +65,7 @@ class Chooser extends React.Component {
           handleDrawerToggle={this.props.handleDrawerToggle}
           drawerIsOpen={this.props.drawerIsOpen}
           handleDrawerClose={this.props.handleDrawerClose}
-        /> 
+        />
       </div>
     )
   }
