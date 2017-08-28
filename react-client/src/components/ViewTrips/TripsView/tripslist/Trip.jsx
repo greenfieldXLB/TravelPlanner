@@ -75,6 +75,7 @@ class Trip extends React.Component {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
+            backgroundColor: '#d9d9d9'
           }}>
 
             <div id='trip-body-text-header' style={{
@@ -83,7 +84,7 @@ class Trip extends React.Component {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
-              alignItems: 'center'
+              alignItems: 'center',
             }}>
               <span style={{paddingLeft: '10px'}}>{this.props.trip.name}</span>
               <span style={{paddingRight: '10px'}}>{this.props.trip.destination}</span>
