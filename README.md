@@ -1,6 +1,6 @@
-# Project Name: Wanderly
+# Project Name: Vagabondly
 
-Wanderly is a travel planning app that gives user the ability to search and find flights, hotels, top-rated attractions, popular local restaurants and weather condition of their travel destination.
+Vagabondly is a travel planning app that gives user the ability to search and find flights, hotels, top-rated attractions, popular local restaurants and weather condition of their travel destination.
 
 The user can view and select their favorite trip preferences.
 
@@ -10,10 +10,10 @@ They can also retrieve their saved trip records, and delete them if desired.
 
 ## Team
 
-  - Greg Susko
-  - Tiffany Choy
-  - Chao Zeng
-  - Nova Qiu
+  - Miles Sorce
+  - James Critelli
+  - Neal Williams
+  - Tommy Cosby
 
 ## Table of Contents
 

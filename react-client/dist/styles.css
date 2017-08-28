@@ -8,7 +8,6 @@ body {
   font-family: Arial, sans-serif;
   font-weight: normal;
   color: #333;
-  background: url("backpack.jpg") no-repeat center center fixed;
  -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;
@@ -194,11 +193,6 @@ th {
   margin-bottom:10px;
 }
 
-img {
-  border-radius: 10px;
-  box-shadow: 10px 10px 5px rgba(45, 45, 45, .2);
-}
-
 #title {
   font-family: 'Shrikhand', cursive;
   font-size: 530%;
@@ -228,4 +222,3 @@ img {
 #savedTrips {
   background-color: rgba(255, 255, 255, .85);
 }
-

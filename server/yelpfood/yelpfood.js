@@ -1,75 +1,78 @@
 const yelp = require('yelp-fusion');
-const yelpConfig = require('../../config.js');
 
-var searchFood = function (searchCity, callback){
+let yelpConfig;
+try {
+  yelpConfig = require('../../config.js');
+} catch(e) {
+  yelpConfig = undefined;
+}
 
+const _ = require('lodash');
 
-  var foodResult = [];
-
-  const clientId = yelpConfig.clientId;
-
-  const clientSecret = yelpConfig.clientSecret;
-
-
+var findRestaurants = function (input, callback){
+  var restaurants = [];
+  const clientId = process.env.YELP_ID || yelpConfig.clientId;
+  const clientSecret = process.env.YELP_SECRET || yelpConfig.clientSecret;
   const token = yelp.accessToken(clientId, clientSecret).then(response => {
     // console.log('TOKEN ', response.jsonBody.access_token);
   }).catch(e => {
     console.log('ERROR ', e);
   });
 
-
-
   var yelpKey = process.env.YELP_KEY || yelpConfig.yelpKey;
   const client = yelp.client(yelpKey);
 
-  var p1 = new Promise(
-    (resolve,reject) => {
-      client.search({
-        term:'Restaurant',
-        location: searchCity,
-        limit: 4,
-        price: "1"
-      }).then( ( response )=>resolve( response ) );
-    }
-  );
-
-  var p2 = new Promise(
-    (resolve,reject) => {
-      client.search({
-        term:'Restaurant',
-        location: searchCity,
-        limit: 4,
-        price: "2"
-      }).then( ( response )=>resolve( response ) );
-    }
-  );
-
-  var p3 = new Promise(
-    (resolve,reject) => {
-      client.search({
-        term:'Restaurant',
-        location: searchCity,
-        limit: 4,
-        price: "3"
-      }).then( ( response )=>resolve( response ))
-    }
-  );
-
-  Promise.all([p1,p2,p3]).then(responses => {
-    //console.log(JSON.stringify(responses, null, 2 ) );
-
-    foodResult = responses.reduce(function( businessList, response){
-      businessList.push( ... response.jsonBody.businesses );
-      return businessList;
-    }, [] );
-
-    callback(foodResult);
-
-  })
-  .catch(e => {
-    console.log(e);
+  let p1 = client.search({
+    term: 'Restaurant',
+    location: input.location,
+    limit: 20,
+    price: "1",
+    sort_by: 'rating'
   });
 
+  let p2 = client.search({
+    term: 'Restaurant',
+    location: input.location,
+    limit: 20,
+    price: "2",
+    sort_by: 'rating'
+  });
+
+  let p3 = client.search({
+    term: 'Restaurant',
+    location: input.location,
+    limit: 20,
+    price: "3",
+    sort_by: 'rating'
+  });
+
+  let getFiltered = client.search({
+    term: 'Restaurant ' + (input.search || ''),
+    location: input.location,
+    limit: 50,
+    price: input.price,
+    sort_by: 'rating'
+  });
+
+  if (input.price || input.search) {
+    getFiltered.then( response => {
+      callback(response.jsonBody.businesses);
+    })
+    .catch(e => {
+      console.log(e);
+    })
+  } else {
+    Promise.all([p1,p2,p3]).then(responses => {
+      restaurants = responses.reduce( function(businessList, response) {
+        businessList.push( ... response.jsonBody.businesses );
+        return _.shuffle(businessList);
+      }, []);
+      callback(restaurants);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
 }
 
-module.exports.searchFood = searchFood;
+module.exports.findRestaurants = findRestaurants;

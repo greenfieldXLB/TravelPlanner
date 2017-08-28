@@ -5,17 +5,11 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
+  devtool: 'source-map',
   output: {
     filename: 'bundle.js',
     path: DIST_DIR
   },
-  plugins: [
-    new webpack.EnvironmentPlugin([
-      'QPX_API',
-      'APC_AUTH',
-      'APC_SECRET'
-    ])
-  ],
   module : {
     loaders : [
       {
