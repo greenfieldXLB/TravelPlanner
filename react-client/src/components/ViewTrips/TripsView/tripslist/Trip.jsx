@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
@@ -27,8 +28,23 @@ class Trip extends React.Component {
   }
 
   removeTrip() {
-    console.log('removed: ', this.props.trip.id);
-    // grab the facebook 
+    console.log('tripID: ', this.props.trip.id);
+    console.log('facebookID: ', this.props.user.id);
+    $.ajax({
+      url: '/removeTrip',
+      method: 'POST',
+      data: JSON.stringify({
+        tripID: this.props.trip.id,
+        facebookID: this.props.user.id
+      }),
+      contentType: 'application/json',
+      success: (data) => {
+        this.props.changePage('LIST', {trips: data.trips})
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
   }
 
   render() {

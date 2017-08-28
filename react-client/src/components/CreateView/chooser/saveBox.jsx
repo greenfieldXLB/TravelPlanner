@@ -35,7 +35,8 @@ class SaveBox extends React.Component {
       destination: this.props.destination,
       facebookId: this.props.user.id,
       name: this.state.name,
-      description: this.state.description
+      description: this.state.description,
+      hidden: false
     };
     console.log(postData);
     $.ajax({

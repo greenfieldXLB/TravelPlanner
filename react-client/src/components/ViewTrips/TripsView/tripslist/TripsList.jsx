@@ -23,10 +23,14 @@ class TripsList extends React.Component {
       }}>
         {
           this.props.trips.map( (trip, i) => {
-            // if trip.hidden property === true
-              // return nothing
-            // else return: 
-            return <Trip key={i} trip={trip}/>
+            if (!trip.hidden) {
+              return <Trip 
+                       key={i} 
+                       trip={trip} 
+                       user={this.props.user} 
+                       changePage={this.props.changePage}
+                     />
+            }
           }) 
         }
       </div>
