@@ -1,3 +1,4 @@
+const newrelic = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const items = require('../database-mongo');
@@ -76,7 +77,7 @@ app.get('/getAll', (req, res) => {
 });
 
 
-var port = process.env.PORT;
+var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
